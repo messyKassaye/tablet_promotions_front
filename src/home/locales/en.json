@@ -1,0 +1,63 @@
+{
+  "en": {
+    "app_name": "Tablet Promotions",
+    "title": "Welcome to table promotions",
+    "Home": "Home",
+    "About": "About",
+    "Contact": "Contact",
+    "Pricing": "Pricing",
+    "Login": "Login",
+    "Sign up": "Sign up",
+    "start_button": "Start now!",
+    "advertiser": "Advertise your companies product and increase your income",
+    "driver": "Start Tablet promotion on your taxi or on your bus  & get additional income",
+    "advertiser_engineer": "Are you naturally gifted of good voice. Then work as advertise engineer now",
+    "designed_for": "Designed for Organizations, Drivers and Advert engineers.",
+    "signup": {
+      "label": {
+        "first_name": "first name",
+        "last_name": "last name",
+        "email": "email address",
+        "phone": "phone number",
+        "register_me": "Could you select your registration type",
+        "password": "Password",
+        "repeatPassword": "repeat your password",
+        "register_me_as": {
+          "label": "Register me as:",
+          "translation": {
+            "Driver": "Driver",
+            "Advertiser": "Advertiser",
+            "Advertiser Engineer": "Advertiser engineer"
+          }
+        },
+        "button": "Sign up"
+      },
+      "errors": {
+        "first_name": "Please enter  first name",
+        "last_name": "Please enter last name",
+        "email": "Please enter email address",
+        "phone": "Please enter Phone number",
+        "email": "Please enter email address",
+        "isEmail": "Incorrect email address",
+        "passwordNotMatched": "password is not matched"
+      }
+    },
+    "signup_message": "Sign up",
+    "login_message": "Login",
+    "login": {
+      "label": {
+        "email": "Email address",
+        "password": "Password",
+        "button": "Login",
+        "not_registered": "I'm not registered",
+        "forgot_password": "Forgot password"
+      },
+      "errors": {
+        "email": "Please enter your email address",
+        "password": "Please enter your password",
+        "Unauthorized_user_incorrect_email_or_password_is_used": "Unauthorized user. Incorrect email or password is used"
+      }
+    },
+    "registered": "I'm already registered"
+  }
+}

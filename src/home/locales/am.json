@@ -1,0 +1,65 @@
+{
+  "am": {
+    "app_name": "ታብሌት ማስታዎቂያ",
+    "title": "እንኳን ወደ ታብሌት ፕሮሞሽን በሰላም መጡ",
+    "Home": "ወደ ዋናው",
+    "About": "ስለኛ",
+    "Contact": "ያግኙን",
+    "Pricing": "ስለ ክፍያ",
+    "Login": "መግቢያ",
+    "Sign up": "መመዝገቢያ",
+    "start_button": "ዛሬውን ይጀምሩ",
+    "advertiser": "የድርጅትዎን ምርት ዛሬውኑ ማስትዋወቅ  ይጀምሩ እና ገቢዎን ይጨምሩ",
+    "driver": "የታክሲ ወይም የአውቶብስ ሾፌር ነዎት እንግዲያውስ የታብሌት ማስታዎቂያ አባል በመሆን ተጨማሪ ገቢ ያግኙ",
+    "advertiser_engineer": "አሪፍ ድምጽና ጥሩ የአኒሜሽን ችሎታ አለዎት። ካለዎት ለድርጅቶች ማስታዎቂያ በመስራት ገቢዎን ይጨምሩ",
+    "designed_for": "ታብሌት ማስታዎቂያ የተዘጋጀው ለድርጅቶት ፤ ለሾፌሮች እና ለማስታዎቂያ ባለሙያዎች ነው።",
+    "signup": {
+      "label": {
+        "first_name": "ስምዎን ያስገቡ",
+        "last_name": "የአባትዎን ስም ያስገቡ",
+        "email": "ኢሜይል አድራሻዎን ያስገቡ",
+        "phone": "ስልክ ቁጥርዎን ያስገቡ",
+        "register_me": "በምን መልክ መመዝገብ እንደሚፈልጉ ይምረጡ",
+        "password": "የይለፍ ቃል",
+        "repeatPassword": "የይለፍ ቃልዎን እንደገና ያስገቡ",
+        "register_me_as": {
+          "label": "በምን ዘርፍ መመዝግብ ይፈልጋሉ:",
+          "translation": {
+            "Driver": "ሾፌር",
+            "Advertiser": "ለማስተዋወቅ",
+            "Advertiser Engineer": "የማስታወቂያ ባለሙያ"
+          }
+        },
+        "button": "መዝግብ"
+      },
+      "errors": {
+        "first_name": "እባክዎ ስምዎን ያስገቡ",
+        "last_name": "እባክዎ የአባትዎን ስም ያስገቡ",
+        "phone": "እባክዎ ስልክ ቁጥርዎን ያስገቡ",
+        "email": "እባክዎ የኢሜይል አድራሻዎን ያስገቡ",
+        "isEmail": "እያስገቡ ያሉት ትክክለኛ ኢሜይል አድራሻ አይደለም። ለምሳሌ abebe@organazationname.com መሆን አለበት",
+        "password": "እባክዎ የይለፍ ቃልዎን ያስገቡ",
+        "passwordNotMatched": "የይለፍ ቃልዎን ቀድመው ካስገቡት ጋር እኩል አይደለም"
+      }
+    },
+
+    "signup_message": "መመዝገቢያ ፎርም",
+    "login_message": "መግቢያ",
+    "login": {
+      "label": {
+        "email": "ኢሜይል አድራሻ",
+        "password": "የይልፈ ቃል",
+        "button": "ግባ",
+        "not_registered": "አልተመዘገብኩም ወደ ",
+        "forgot_password": "የይለፍ ቃሌን ረሳውት"
+      },
+      "errors": {
+        "email": "እባክዎ የኢሜይል አድራሻዎን ያስገቡ",
+        "password": "እባክዎ የይለፍ ቃልዎን ያስገቡ",
+        "Unauthorized_user_incorrect_email_or_password_is_used": "ያልተፈቀደለት ተጠቃሚ፤ የተሳሳተ ኢሜይል ወይም የይለፍ ቃል ተጠቅመው ሊሆነ ስለሚችል እባክዎ እንደገና ይሞክሩ"
+
+      }
+    },
+    "registered": "ተመዝግቢያለሁ ወደ"
+  }
+}
