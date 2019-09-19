@@ -16,6 +16,8 @@ import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import {signUp} from '../../state/action/authenticationAction'
+import LoadingButton from "./widgets/LoadingButton";
+import Typography from "@material-ui/core/Typography";
 
  class Signup extends React.Component{
 
@@ -31,7 +33,9 @@ import {signUp} from '../../state/action/authenticationAction'
                  'password': '',
                  'repeatPassword':''
              },
-             submitted: false
+             submitted:false,
+             loading:false,
+             finished:false
          }
          this.handleChange = this.handleChange.bind(this)
          this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,6 +62,15 @@ import {signUp} from '../../state/action/authenticationAction'
          // remove rule when it is not needed
          ValidatorForm.removeValidationRule('isPasswordMatch');
      }
+     componentWillReceiveProps(nextProps, nextContext){
+         if(nextProps.authenticationError){
+             this.setState({
+                 loading:false,
+                 finished:true,
+                 submitted:false
+             })
+         }
+     }
 
      handleChange(e){
         const {formData} = this.state
@@ -73,11 +86,21 @@ import {signUp} from '../../state/action/authenticationAction'
      handleSubmit(){
          const {formData} = this.state
          const data = JSON.stringify(formData)
+         this.setState({
+             submitted:true,
+             loading:true
+         })
          this.props.signUp(data)
      }
      render() {
          const { t } = this.props
          const {classes} =this.props
+         const {formData} = this.state
+         const { loading } = this.state;
+         const finished = this.props.authenticationError.status
+         const setLoading = !finished && loading;
+         const isEnabled = formData.first_name.length>0&&formData.last_name.length>0 && formData.phone.length>0&&
+             formData.email.length>0&&formData.role_id>0&&formData.password.length>0&&formData.repeatPassword.length>0
          return (
              <div>
                  <div className={classes.jumbotron}>
@@ -89,6 +112,11 @@ import {signUp} from '../../state/action/authenticationAction'
                              <ValidatorForm
                                  onSubmit={this.handleSubmit}
                              >
+                                 {
+                                     <Typography component='p' className={classes.errors}>
+                                         {this.props.authenticationError.message?t(`home.signup.errors.${this.props.authenticationError.message.toLowerCase().split(' ').join('_').split('.').join('_')}`):''}
+                                     </Typography>
+                                 }
                                  <TextValidator
                                      className={classes.text_input}
                                      label={t('home.signup.label.first_name')}
@@ -169,18 +197,20 @@ import {signUp} from '../../state/action/authenticationAction'
 
 
                                      <div className={classes.submit_division}>
-                                         <Button
+                                         <LoadingButton
                                              className={classes.signup_button}
                                              color="primary"
                                              variant="contained"
                                              type="submit"
-                                             disabled={this.state.submitted}
+                                             loading={setLoading}
+                                             done={finished}
+                                             text={t('home.signup.label.button')}
+                                             disabled={!isEnabled ||this.state.submitted}
                                          >
                                              {
-                                                 (this.state.submitted && 'Your form is submitted!')
-                                                 || (!this.state.submitted && t('home.signup.label.button'))
+                                                 t('home.signup.label.button')
                                              }
-                                         </Button>
+                                         </LoadingButton>
                                          <div className={classes.registered}>
                                              <span style={{marginRight:10}}>{t('home.registered')}</span>
                                              <Link to='/login'>{t('home.Login')}</Link>
@@ -197,7 +227,8 @@ import {signUp} from '../../state/action/authenticationAction'
 
      const  mapStateToProps = state=>(
          {
-             roles:state.role.roles
+             roles:state.role.roles,
+             authenticationError: state.auth.authenticationError
          }
      )
 

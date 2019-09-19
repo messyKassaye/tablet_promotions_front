@@ -22,10 +22,20 @@ class Login extends React.Component{
             },
             submitted:false,
             loading:false,
-            finished:false
+            finished:false,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps, nextContext){
+        if(nextProps.authenticationError){
+            this.setState({
+                loading:false,
+                finished:false,
+                submitted:false,
+            })
+        }
     }
     handleChange(e){
         const {formData}=this.state
@@ -36,9 +46,7 @@ class Login extends React.Component{
     handleSubmit(){
         const {formData} = this.state
         const data = JSON.stringify(formData)
-        this.setState({
-            submitted:true
-        })
+
         this.setState({
             submitted:true,
             loading:true
@@ -66,7 +74,7 @@ class Login extends React.Component{
                                 onSubmit={this.handleSubmit}
                             >
                                 <Typography component='p' className={classes.errors}>
-                                    {this.props.authenticated.message?t(`home.login.errors.${this.props.authenticated.message.split(' ').join('_').split('.').join('_')}`):''}
+                                    {this.props.authenticationError.message?t(`home.login.errors.${this.props.authenticationError.message.split(' ').join('_').split('.').join('_')}`):''}
                                 </Typography>
                                 <TextValidator
                                     className={classes.text_input}
@@ -126,7 +134,8 @@ class Login extends React.Component{
 }
 const  mapStateToProps = state=>(
     {
-        authenticated:state.auth.authenticated
+        authenticated:state.auth.authenticated,
+        authenticationError: state.auth.authenticationError
     }
 )
 export default withStyles(signup)(connect(mapStateToProps,{login})(translate('common')(Login)))

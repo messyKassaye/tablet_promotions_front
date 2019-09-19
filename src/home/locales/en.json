@@ -39,7 +39,9 @@
         "phone": "Please enter Phone number",
         "email": "Please enter email address",
         "isEmail": "Incorrect email address",
-        "passwordNotMatched": "password is not matched"
+        "passwordNotMatched": "password is not matched",
+        "Some_one_already_registered_by_this_email_address": "Some one already registered by this email address",
+        "some_one_already_registered_by_this_phone_number": "Some one already registered by this Phone number. please try another one"
       }
     },
     "signup_message": "Sign up",

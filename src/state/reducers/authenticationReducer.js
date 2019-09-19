@@ -1,7 +1,8 @@
-import {LOGIN, SIGN_UP} from "../stateConstants/actionConstants";
+import {AUTHENTICATION_ERROR, LOGIN, SIGN_UP} from "../stateConstants/actionConstants";
 
 const initialState={
-    authenticated:{}
+    authenticated:{},
+    authenticationError:{}
 }
 
 export default function (state=initialState,action) {
@@ -15,6 +16,11 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 authenticated: action.payload
+            }
+        case AUTHENTICATION_ERROR:
+            return {
+                ...state,
+                authenticationError: action.payload
             }
         default:
             return state

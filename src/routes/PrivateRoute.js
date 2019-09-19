@@ -3,16 +3,17 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HomeBar from "../home/components/HomeBar";
-import {isLogin} from "../authenticationService";
+import {get,isExpired} from "../TokenService";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={props =>
         {
-            if(isLogin()){
-                return (<Component {...props} />
-                )
+            if(get()){
+
+                return ( <Component {...props} />)
+
             }else {
                 return (<HomeBar/>)
             }
