@@ -9,6 +9,14 @@ export const get = () => {
     return localStorage.getItem(TOKEN)
 }
 
+export const setRole = (role)=>{
+    localStorage.setItem('role',role)
+}
+
+export const getRole = ()=>{
+    return localStorage.getItem('role')
+}
+
 export const isExpired = ()=>{
     const decodedToken=jwt.verify()
     const dateNow = new Date();

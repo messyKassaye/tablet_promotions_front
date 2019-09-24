@@ -70,11 +70,53 @@
         font-size: 2em;
         margin-bottom: 20px;
       }
+      blockquote {
+        font-size: 1.5em;
+        line-height: 1.5em;
+        display: flex;
+        justify-content: start;
+      }
+
+      blockquote:before {
+        content: open-quote;
+      }
+
+      blockquote:after {
+        content: close-quote;
+      }
+
+      blockquote:before,
+      blockquote:after {
+        display: inline-block;
+        vertical-align: bottom;
+        color: #FE545B;
+        font-size: 3em;
+        top: .2em;
+        position: relative;
+      }
       @media (max-width: 766px) {
         .each-fade h2{
           font-size: 1.2em;
         }
+        blockquote {
+          font-size: 1.2em;
+          line-height: 1.2em;
+          display: flex;
+          text-align: justify;
+          text-justify: inter-word;
+        }
+        blockquote:before,
+        blockquote:after {
+          display: flex;
+          color: #FE545B;
+          font-size: 2em;
+          top: .1em;
+          position: relative;
+        }
+
       }
+
+
     </style>
   </head>
   <body>

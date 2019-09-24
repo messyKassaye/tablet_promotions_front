@@ -1,14 +1,14 @@
 import React from 'react';
-import {BrowserRouter as Router,Switch} from 'react-router-dom'
-import PrivateRoute from "./routes/PrivateRoute";
-import Authenticated from "./authentication/Authenticated";
-import HomeBar from "./home/components/HomeBar";
-function App() {
-  return (
-    <Router>
-        <HomeBar/>
-    </Router>
-  );
-}
+import {get} from "./TokenService";
+import LazyLoad from "./LazyLoad";
 
+
+class App extends React.Component{
+
+    render() {
+        return (
+            <LazyLoad/>
+        );
+    }
+}
 export default App;

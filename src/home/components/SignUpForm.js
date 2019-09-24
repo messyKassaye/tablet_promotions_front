@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {fetchRole} from "../../state/action/roleActions";
+import {fetchRole} from "../state/action/roleActions";
 import PropTypes from 'prop-types'
 
 class SignUpForm extends React.Component{

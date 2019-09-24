@@ -10,16 +10,22 @@ import * as serviceWorker from './serviceWorker';
 import {CssBaseline} from "@material-ui/core";
 import {Provider} from "react-redux";
 import store from "./store";
+import Interceptor from "./interceptors/Interceptor";
+import AppProvider from "./context/AppProvider";
+import Notifications from "./home/components/widgets/Notifications";
 ReactDOM.render(
+    <AppProvider>
     <Provider store={store}>
         <MuiThemeProvider theme={theme}>
             <I18nextProvider i18n={i18n}>
                 <CssBaseline>
+                    <Interceptor/>
                     <App />
                 </CssBaseline>
             </I18nextProvider>
         </MuiThemeProvider>
     </Provider>
+    </AppProvider>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

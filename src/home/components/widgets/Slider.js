@@ -17,7 +17,7 @@ const Slider =({t})=>{
                 {
                     slide.map((item,index)=>(
                         <div key={item.name} className="each-fade">
-                            <h2>{t(`home.${item.name}`)}</h2>
+                            <h2 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.${item.name}`)}</h2>
                         </div>
                     ))
                 }

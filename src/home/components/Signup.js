@@ -1,24 +1,26 @@
-import React,{useEffect,useRef} from 'react'
+import React from 'react'
 import Container from "@material-ui/core/Container";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import {Card, CardContent} from "@material-ui/core";
-import {Button} from "@material-ui/core";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import {fetchRole} from '../../state/action/roleActions'
+import {fetchRole} from '../state/action/roleActions'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import withStyles from "@material-ui/core/styles/withStyles";
 import signup from '../../styles/signup_style'
 import {Link} from 'react-router-dom'
-import Grid from "@material-ui/core/Grid";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import {signUp} from '../../state/action/authenticationAction'
+import {signUp} from '../state/action/authenticationAction'
 import LoadingButton from "./widgets/LoadingButton";
+import AppConsumer from "../../context/AppConsumer";
 import Typography from "@material-ui/core/Typography";
-
+import axios from "axios";
+import {API_AUTH_URL} from "../../constants/constants";
+import {set, setRole} from "../../TokenService";
+import Skeleton from "@material-ui/lab/Skeleton";
  class Signup extends React.Component{
 
      constructor(props){
@@ -35,7 +37,6 @@ import Typography from "@material-ui/core/Typography";
              },
              submitted:false,
              loading:false,
-             finished:false
          }
          this.handleChange = this.handleChange.bind(this)
          this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,15 +63,7 @@ import Typography from "@material-ui/core/Typography";
          // remove rule when it is not needed
          ValidatorForm.removeValidationRule('isPasswordMatch');
      }
-     componentWillReceiveProps(nextProps, nextContext){
-         if(nextProps.authenticationError){
-             this.setState({
-                 loading:false,
-                 finished:true,
-                 submitted:false
-             })
-         }
-     }
+
 
      handleChange(e){
         const {formData} = this.state
@@ -85,19 +78,43 @@ import Typography from "@material-ui/core/Typography";
      }
      handleSubmit(){
          const {formData} = this.state
-         const data = JSON.stringify(formData)
          this.setState({
              submitted:true,
              loading:true
          })
-         this.props.signUp(data)
+         axios.post(`${API_AUTH_URL}signup`,formData,{
+             headers:{
+                 'content-type':'Application/json'
+             }
+         })
+             .then((res)=>res.data)
+             .then((response)=> {
+                 set(response.token)
+                 setRole(JSON.stringify(response.role))
+                 this.props.go('Authenticated')
+             })
+             .catch(onerror=>{
+                 if(!onerror.status){
+                     this.setState({errorMessage:'networkError'})
+                 }else {
+                     let code = onerror.response.status
+                     if(code===409){
+                         this.setState({errorMessage:onerror.response.data.message})
+                     }
+                     this.setState({
+                         loading:false,
+                         finished:true,
+                         submitted:false
+                     })
+                 }
+             })
      }
      render() {
          const { t } = this.props
          const {classes} =this.props
          const {formData} = this.state
          const { loading } = this.state;
-         const finished = this.props.authenticationError.status
+         const finished = false
          const setLoading = !finished && loading;
          const isEnabled = formData.first_name.length>0&&formData.last_name.length>0 && formData.phone.length>0&&
              formData.email.length>0&&formData.role_id>0&&formData.password.length>0&&formData.repeatPassword.length>0
@@ -114,7 +131,7 @@ import Typography from "@material-ui/core/Typography";
                              >
                                  {
                                      <Typography component='p' className={classes.errors}>
-                                         {this.props.authenticationError.message?t(`home.signup.errors.${this.props.authenticationError.message.toLowerCase().split(' ').join('_').split('.').join('_')}`):''}
+                                         {this.state.errorMessage?t(`home.signup.errors.${this.state.errorMessage.toLowerCase().split(' ').join('_').split('.').join('_')}`):''}
                                      </Typography>
                                  }
                                  <TextValidator
@@ -164,13 +181,14 @@ import Typography from "@material-ui/core/Typography";
                                          name="role_id"
                                          onChange={this.handleRadionButton}>
                                          {
-                                             this.props.roles.map(item=>(
+                                            this.props.roles ?this.props.roles.map(item=>(
                                                  <FormControlLabel
                                                      key={item.name}
                                                      value={item.name}
                                                      control={<Radio />}
                                                      label={t(`home.signup.label.register_me_as.translation.${item.name}`)} />
-                                             ))
+                                             )):  <Skeleton variant="rect" width='100%' height={100} />
+
                                          }
                                      </RadioGroup>
                                  </FormControl>
@@ -232,4 +250,4 @@ import Typography from "@material-ui/core/Typography";
          }
      )
 
-export default  withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole,signUp})(Signup)))
+export default  AppConsumer(withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole,signUp})(Signup))))

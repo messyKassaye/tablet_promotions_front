@@ -3,65 +3,93 @@ import {translate} from "react-i18next";
 import Container from "@material-ui/core/Container";
 import withStyles from "@material-ui/core/styles/withStyles";
 import signup from '../../styles/signup_style'
-import {Button, Card, CardContent} from "@material-ui/core";
+import {Card, CardContent} from "@material-ui/core";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import {login} from '../../state/action/authenticationAction'
+import {login,showNotifications} from '../state/action/authenticationAction'
 import {connect} from "react-redux";
 import LoadingButton from "./widgets/LoadingButton";
 import Typography from "@material-ui/core/Typography";
-class Login extends React.Component{
+import axios from "axios";
+import AppConsumer from "../../context/AppConsumer";
+import {API_AUTH_URL} from "../../constants/constants";
+import {set, setRole} from "../../TokenService";
 
-    constructor(props){
+class Login extends React.Component {
+
+    constructor(props) {
         super(props)
         this.state = {
-            formData:{
-                "email":'',
-                "password":''
+            formData: {
+                "email": '',
+                "password": ''
             },
-            submitted:false,
-            loading:false,
-            finished:false,
+            submitted: false,
+            loading: false,
+            finished: false,
+            errorMessage: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
-    componentWillReceiveProps(nextProps, nextContext){
-        if(nextProps.authenticationError){
-            this.setState({
-                loading:false,
-                finished:false,
-                submitted:false,
-            })
-        }
-    }
-    handleChange(e){
-        const {formData}=this.state
-        formData[e.target.name]=e.target.value
+
+    handleChange(e) {
+        const {formData} = this.state
+        formData[e.target.name] = e.target.value
         this.setState(formData)
     }
 
-    handleSubmit(){
+    handleSubmit() {
         const {formData} = this.state
-        const data = JSON.stringify(formData)
-
         this.setState({
-            submitted:true,
-            loading:true
+            submitted: true,
+            loading: true
         })
-        this.props.login(data)
+        axios.post(`${API_AUTH_URL}login`, formData, {
+            headers: {
+                'content-type': 'Application/json'
+            },
+            timeout:1000*5,
+        })
+            .then((res) => res.data)
+            .then((response) => {
+                set(response.token)
+                setRole(JSON.stringify(response.role))
+                this.props.go('Authenticated')
+            })
+            .catch(onerror=>{
+                if(!onerror.status){
+                    this.setState({errorMessage:'networkError'})
+                    this.setState({
+                        loading: false,
+                        finished: false,
+                        submitted: false,
+                    })
+                }else {
+                    let code = onerror.response.status
+                    if(code===403){
+                        this.setState({errorMessage:'Unauthorized user'})
+                    }
+                    this.setState({
+                        loading: false,
+                        finished: false,
+                        submitted: false,
+                    })
+                }
+
+            })
     }
 
     render() {
         const {classes} = this.props
         const {t} = this.props
-        const {formData}= this.state
-        const { loading } = this.state;
+        const {formData} = this.state
+        const {loading} = this.state;
         const {finished} = this.state
         const setLoading = !finished && loading;
-        const isEnabled = formData.email.length >0 && formData.password.length>0
+        const isEnabled = formData.email.length > 0 && formData.password.length > 0
         return (
             <div>
                 <div className={classes.jumbotron}>
@@ -73,9 +101,11 @@ class Login extends React.Component{
                             <ValidatorForm
                                 onSubmit={this.handleSubmit}
                             >
-                                <Typography component='p' className={classes.errors}>
-                                    {this.props.authenticationError.message?t(`home.login.errors.${this.props.authenticationError.message.split(' ').join('_').split('.').join('_')}`):''}
-                                </Typography>
+                                {
+                                    <Typography component='p' className={classes.errors}>
+                                    {this.state.errorMessage ? t(`home.login.errors.${this.state.errorMessage}`) : ''}
+                                    </Typography>
+                                }
                                 <TextValidator
                                     className={classes.text_input}
                                     label={t('home.login.label.email')}
@@ -83,8 +113,8 @@ class Login extends React.Component{
                                     name="email"
                                     type='email'
                                     value={this.state.formData.email}
-                                    validators={['required','isEmail']}
-                                    errorMessages={[t('home.login.errors.email'),'is not valid email']}
+                                    validators={['required', 'isEmail']}
+                                    errorMessages={[t('home.login.errors.email'), 'is not valid email']}
                                 />
 
                                 <TextValidator
@@ -113,16 +143,18 @@ class Login extends React.Component{
                                         }
                                     </LoadingButton>
                                     <div className={classes.registered}>
-                                        <span style={{marginRight:10}}>{t('home.login.label.not_registered')}</span>
-                                        <Link style={{marginRight:10}} to='/signup'>{t('home.Sign up')}</Link>
+                                        <span style={{marginRight: 10}}>{t('home.login.label.not_registered')}</span>
+                                        <Link style={{marginRight: 10}} to='/signup'>{t('home.Sign up')}</Link>
                                         <div className={classes.forgetters}>
-                                            <Divider orientation='vertical' style={{height:20,padding:1,marginRight:10}}/>
-                                            <Link style={{marginRight:10}} to='/signup'>{t('home.login.label.forgot_password')}</Link>
+                                            <Divider orientation='vertical'
+                                                     style={{height: 20, padding: 1, marginRight: 10}}/>
+                                            <Link style={{marginRight: 10}}
+                                                  to='/signup'>{t('home.login.label.forgot_password')}</Link>
                                         </div>
                                     </div>
                                 </div>
                                 <div className={classes.smallers}>
-                                    <Link  to='/signup'>{t('home.login.label.forgot_password')}</Link>
+                                    <Link to='/signup'>{t('home.login.label.forgot_password')}</Link>
                                 </div>
                             </ValidatorForm>
                         </CardContent>
@@ -132,10 +164,11 @@ class Login extends React.Component{
         )
     }
 }
-const  mapStateToProps = state=>(
+
+const mapStateToProps = state => (
     {
-        authenticated:state.auth.authenticated,
+        authenticated: state.auth.authenticated,
         authenticationError: state.auth.authenticationError
     }
 )
-export default withStyles(signup)(connect(mapStateToProps,{login})(translate('common')(Login)))
+export default AppConsumer(withStyles(signup)(translate('common')(Login)))

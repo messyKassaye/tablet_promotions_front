@@ -15,13 +15,13 @@
     "designed_for": "Designed for Organizations, Drivers and Advert engineers.",
     "signup": {
       "label": {
-        "first_name": "first name",
-        "last_name": "last name",
-        "email": "email address",
-        "phone": "phone number",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "email": "Email address",
+        "phone": "Phone number",
         "register_me": "Could you select your registration type",
         "password": "Password",
-        "repeatPassword": "repeat your password",
+        "repeatPassword": "Repeat your password",
         "register_me_as": {
           "label": "Register me as:",
           "translation": {
@@ -40,7 +40,8 @@
         "email": "Please enter email address",
         "isEmail": "Incorrect email address",
         "passwordNotMatched": "password is not matched",
-        "Some_one_already_registered_by_this_email_address": "Some one already registered by this email address",
+        "networkError": "Something is not wright.Please check your network",
+        "some_one_already_registered_by_this_email_address": "Some one already registered by this email address",
         "some_one_already_registered_by_this_phone_number": "Some one already registered by this Phone number. please try another one"
       }
     },
@@ -57,9 +58,14 @@
       "errors": {
         "email": "Please enter your email address",
         "password": "Please enter your password",
-        "Unauthorized_user_incorrect_email_or_password_is_used": "Unauthorized user. Incorrect email or password is used"
+        "Unauthorized user": "Unauthorized user. Incorrect email or password is used",
+        "networkError": "Something is not wright.Please check your network"
       }
     },
-    "registered": "I'm already registered"
+    "registered": "I'm already registered",
+    "what_is_tablet_promotion": {
+        "title": "What is Tablet promotions",
+        "description_1": ""
+    }
   }
 }

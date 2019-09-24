@@ -1,8 +1,17 @@
-import {AUTHENTICATION_ERROR, LOGIN, SIGN_UP} from "../stateConstants/actionConstants";
+import {
+    AUTHENTICATION_ERROR,
+    LOGIN,
+    SHOW_NOTIFICATION,
+    SIGN_UP
+} from "../stateConstants/actionConstants";
 
 const initialState={
     authenticated:{},
-    authenticationError:{}
+    authenticationError:{},
+    notification:{
+        isShow:false,
+        message:''
+    }
 }
 
 export default function (state=initialState,action) {
@@ -21,6 +30,11 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 authenticationError: action.payload
+            }
+        case SHOW_NOTIFICATION:
+            return {
+                ...state,
+                notification: action.payload
             }
         default:
             return state

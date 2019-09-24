@@ -27,6 +27,8 @@ import Collapse from "@material-ui/core/Collapse";
 import Flag from 'react-world-flags'
 import i18next from "i18next";
 import {translate} from "react-i18next";
+import Footer from "./footer";
+import NotFound from "../../errors/NotFound";
 
 function HomeBar({t}) {
    const  classes = useStyles();
@@ -111,104 +113,110 @@ function HomeBar({t}) {
        </SwipeableDrawer>
    )
     return (
-        <div className={classes.grow}>
-            <AppBar position='fixed' color='primary'>
-                <Toolbar>
-                    <Link to='/'>
-                    <img
-                     alt='Tablet Promotions'
-                     src={logo}
-                     width='62' height='55'
-                     className={classes.brandIcon}/>
-                    </Link>
-                    <div>
-                    <IconButton
+    <div>
+        <main>
+            {<div className={classes.grow}>
+                <AppBar position='fixed' color='primary'>
+                    <Toolbar>
+                        <Link to='/'>
+                            <img
+                                alt='Tablet Promotions'
+                                src={logo}
+                                width='62' height='55'
+                                className={classes.brandIcon}/>
+                        </Link>
+                        <div>
+                            <IconButton
+                                color='inherit'
+                                edge='start'
+                                className={classes.menuButton}
+                                onClick={handleToggle(true)}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                        </div>
+                        <h3>{t('home.app_name')}</h3>
+                        <div className={classes.grow}/>
+
+                        <IconButton
                             color='inherit'
                             edge='start'
-                            className={classes.menuButton}
-                            onClick={handleToggle(true)}
+                            aria-controls='language-menu'
+                            aria-haspopup='true'
+                            onClick={handleMenu}
                         >
-                            <MenuIcon/>
+                            <Language/>
                         </IconButton>
-                    </div>
-                    <h3>{t('home.app_name')}</h3>
-                    <div className={classes.grow}/>
-
-                    <IconButton
-                        color='inherit'
-                        edge='start'
-                        aria-controls='language-menu'
-                        aria-haspopup='true'
-                        onClick={handleMenu}
-                    >
-                        <Language/>
-                    </IconButton>
-                    <Menu
-                        id='language-menu'
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={closeMenu}
-                    >
-                        <List
-                            component='nav'
-                            aria-labelledby='nested-menu'
-                            subheader={
-                                <ListSubheader>Choose your language</ListSubheader>
-                            }
+                        <Menu
+                            id='language-menu'
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={closeMenu}
                         >
+                            <List
+                                component='nav'
+                                aria-labelledby='nested-menu'
+                                subheader={
+                                    <ListSubheader>Choose your language</ListSubheader>
+                                }
+                            >
+                                {
+                                    Languages.map((item,index)=>(
+                                        <div key={item.name}>
+                                            <ListItem button style={{backgroundColor:'transparent'}}>
+                                                <Flag code={item.code} height='48' width='48' className={classes.flags}/>
+                                                <ListItemText primary={item.name}/>
+                                            </ListItem>
+                                            {
+                                                item.language.map((language,index)=>(
+                                                    <Collapse key={language.name} in={languageMenuOpen}>
+                                                        <List component="div" disablePadding>
+                                                            <ListItem button className={classes.nested} onClick={event=>handleListSelectedItem(event,language)}>
+                                                                <ListItemText primary={language.name} />
+                                                            </ListItem>
+                                                        </List>
+                                                    </Collapse>
+                                                ))
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </List>
+                        </Menu>
+                        <span className={classes.language}>{selectedLanguage}</span>
+                        <div className={classes.showOnDesktop}>
                             {
-                                Languages.map((item,index)=>(
-                                    <div key={item.name}>
-                                        <ListItem button style={{backgroundColor:'transparent'}}>
-                                            <Flag code={item.code} height='48' width='48' className={classes.flags}/>
-                                            <ListItemText primary={item.name}/>
-                                        </ListItem>
-                                        {
-                                            item.language.map((language,index)=>(
-                                                <Collapse key={language.name} in={languageMenuOpen}>
-                                                    <List component="div" disablePadding>
-                                                        <ListItem button className={classes.nested} onClick={event=>handleListSelectedItem(event,language)}>
-                                                            <ListItemText primary={language.name} />
-                                                        </ListItem>
-                                                    </List>
-                                                </Collapse>
-                                            ))
+                                Menus.map((items,index)=>{
+                                        if(items.name!=='Home'){
+                                            return (
+                                                <Button key={items.name} variant={items.name==='Sign up'?'outlined':'text'} component={Link} to={items.to} className={classes.buttons} color='inherit'>{t(`home.${items.name}`)}</Button>
+                                            )
                                         }
-                                    </div>
-                                ))
+                                    }
+                                )
                             }
-                        </List>
-                    </Menu>
-                    <span className={classes.language}>{selectedLanguage}</span>
-                    <div className={classes.showOnDesktop}>
-                       {
-                            Menus.map((items,index)=>{
-                                if(items.name!=='Home'){
-                                    return (
-                                        <Button key={items.name} variant={items.name==='Sign up'?'outlined':'text'} component={Link} to={items.to} className={classes.buttons} color='inherit'>{t(`home.${items.name}`)}</Button>
-                                    )
-                                }
-                                }
-                            )
-                        }
-                    </div>
-                </Toolbar>
-            </AppBar>
-            {
-                drawer
-            }
-            <div className={classes.router}>
-                <Switch>
-                    <Route path='/' component={Home} exact/>
-                    <Route path='/about' component={About}/>
-                    <Route path='/contact' component={Contact}/>
-                    <Route path='/pricing' component={Pricing}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path='/signup' component={Signup}/>
-                </Switch>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+                {
+                    drawer
+                }
+                <div className={classes.router}>
+                    <Switch>
+                        <Route path='/' component={Home} exact/>
+                        <Route path='/about' component={About}/>
+                        <Route path='/contact' component={Contact}/>
+                        <Route path='/pricing' component={Pricing}/>
+                        <Route path='/login' component={Login}/>
+                        <Route path='/signup' component={Signup}/>
+                        <Route path='*' component={NotFound}/>
+                    </Switch>
+                </div>
             </div>
-        </div>
+            }
+        </main>
+    </div>
     )
 }
 
