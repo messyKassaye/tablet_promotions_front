@@ -13,7 +13,6 @@ import {Link} from 'react-router-dom'
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import {signUp} from '../state/action/authenticationAction'
 import LoadingButton from "./widgets/LoadingButton";
 import AppConsumer from "../../context/AppConsumer";
 import Typography from "@material-ui/core/Typography";
@@ -246,8 +245,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
      const  mapStateToProps = state=>(
          {
              roles:state.role.roles,
-             authenticationError: state.auth.authenticationError
          }
      )
 
-export default  AppConsumer(withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole,signUp})(Signup))))
+export default  AppConsumer(withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole})(Signup))))

@@ -1,14 +1,12 @@
 import React from "react";
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
-import DriversDashboard from "./components/DriversDashboadr";
-import NotFound from "../../errors/NotFound";
+import DriversDashboard from "./components/DriversDashboad";
 
 const DriverRoute = ()=>{
     return (
         <Router>
             <Switch>
-                <Route  path='/' component={DriversDashboard} name='drivers'/>
-                <Route path='*' component={NotFound}/>
+                <Route  path='/' component={DriversDashboard}/>
             </Switch>
         </Router>
     )

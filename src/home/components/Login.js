@@ -7,8 +7,6 @@ import {Card, CardContent} from "@material-ui/core";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import {login,showNotifications} from '../state/action/authenticationAction'
-import {connect} from "react-redux";
 import LoadingButton from "./widgets/LoadingButton";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
@@ -165,10 +163,4 @@ class Login extends React.Component {
     }
 }
 
-const mapStateToProps = state => (
-    {
-        authenticated: state.auth.authenticated,
-        authenticationError: state.auth.authenticationError
-    }
-)
 export default AppConsumer(withStyles(signup)(translate('common')(Login)))

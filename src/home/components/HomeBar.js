@@ -27,7 +27,6 @@ import Collapse from "@material-ui/core/Collapse";
 import Flag from 'react-world-flags'
 import i18next from "i18next";
 import {translate} from "react-i18next";
-import Footer from "./footer";
 import NotFound from "../../errors/NotFound";
 
 function HomeBar({t}) {

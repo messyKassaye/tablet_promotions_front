@@ -12,7 +12,6 @@ import {Provider} from "react-redux";
 import store from "./store";
 import Interceptor from "./interceptors/Interceptor";
 import AppProvider from "./context/AppProvider";
-import Notifications from "./home/components/widgets/Notifications";
 ReactDOM.render(
     <AppProvider>
     <Provider store={store}>

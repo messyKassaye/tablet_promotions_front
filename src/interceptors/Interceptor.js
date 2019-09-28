@@ -1,14 +1,12 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import {connect, useSelector} from "react-redux";
-import {get} from "../TokenService";
-import {showNotifications} from "../home/state/action/authenticationAction";
+import {get, removeToken, set} from "../TokenService";
+import {API_AUTH_URL} from "../constants/constants";
 
 
 function Interceptor() {
     const [errorInterceptor, setErrorInterceptor] = useState(undefined)
     const [authInterceptor, setAuthInterceptor] = useState(undefined)
-    const  actions = showNotifications()
     const addAuthInterceptor = () => {
         const authInterceptor = axios.interceptors.request.use(
             config => {
@@ -39,12 +37,18 @@ function Interceptor() {
                 return response
             },
             error => {
-                console.log(error.response)
                 if (error.response) {
                     const code = error.response.status
+                    let originalRequest = error.config;
                     if (code === 401) {
-                        console.log(code)
-                        //this.props.promptToSignIn()
+                            return issueToken().then((response) => {
+                                console.log(response)
+                                removeToken()
+                                set(response.data.token)
+                                originalRequest['Authorization'] = 'Bearer ' + get();
+                                return Promise.resolve(originalRequest);
+                            });
+                        return originalRequest;
                     } else {
                         let message = 'Something went wrong.'
                         if (code === 403) {
@@ -61,6 +65,16 @@ function Interceptor() {
             },
         )
         setErrorInterceptor(errorInterceptor)
+    }
+
+    const issueToken = ()=>{
+        return new Promise((resolve, reject) => {
+            return axios.post(`${API_AUTH_URL}refresh`).then((response) => {
+                resolve(response);
+            }).catch((err) => {
+                reject(err);
+            });
+        });
     }
 
     const removeErrorInterceptor = () => {

@@ -1,0 +1,103 @@
+import React from "react";
+import {connect} from "react-redux";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
+import {Menu} from "@material-ui/core";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import withStyles from "@material-ui/core/styles/withStyles";
+import {me} from "../drivers/state/actions/usersActions";
+import authstyle from "../auth_style";
+import Skeleton from "@material-ui/lab/Skeleton";
+ class DrawerProfile extends React.Component{
+     constructor(props) {
+         super(props);
+
+         this.state = {
+             anchorEl:null
+         }
+         this.handleOpenProfileSetting = this.handleOpenProfileSetting.bind(this)
+         this.closeMenu = this.closeMenu.bind(this)
+     }
+
+     handleOpenProfileSetting = (event)=>{
+         this.setState({anchorEl:event.currentTarget})
+     }
+
+     closeMenu = (event)=>{
+         this.setState({
+             anchorEl:null
+         })
+     }
+
+     componentDidMount() {
+         this.props.me()
+     }
+
+     render() {
+         const {classes} = this.props;
+         return (
+             <div>
+                 {
+                  this.props.loading ? this.props.user.map(items=>(
+                         <div key={items.type} className={classes.avatarLayout}>
+                             {
+                                 items.attribute.avator==='letter'?
+                                     <Avatar className={classes.avatarImage}>{items.attribute.first_name[0]}</Avatar>:
+                                     <Avatar className={classes.avatarImage} alt='profile image' src={`${items.attribute.avator}`}>TP</Avatar>
+
+                             }
+                             {
+                                 <span>{`${items.attribute.first_name} ${items.attribute.last_name}`}</span>
+                             }
+                             <div style={{marginLeft:25,margin:0}}>
+                                 <IconButton
+                                     aria-controls='setting-profile'
+                                     aria-haspopup='true'
+                                     edge='end'
+                                     onClick={this.handleOpenProfileSetting}
+                                     color='inherit'>
+                                     <ArrowDropDown/>
+                                 </IconButton>
+                                 <Menu
+                                     id='setting-profile'
+                                     anchorEl={this.state.anchorEl}
+                                     keepMounted
+                                     open={Boolean(this.state.anchorEl)}
+                                     onClose={this.closeMenu}
+                                 >
+                                     <List
+                                         component='nav'
+                                         aria-labelledby='nested-menu'
+                                     >
+                                         <ListItem button>
+                                             <ListItemText primary='Setting'/>
+                                         </ListItem>
+
+                                         <ListItem button>
+                                             <ListItemText primary='Logout'/>
+                                         </ListItem>
+                                     </List>
+                                 </Menu>
+                             </div>
+
+                         </div>
+                     )):<React.Fragment>
+                      <Skeleton variant='circle' style={{backgroundColor:'white'}} width={40} height={40}/>
+                  </React.Fragment>
+                 }
+             </div>
+         );
+     }
+
+ }
+const mapStateToProps = state=> ({
+    user: state.userData.user,
+    loading:state.userData.loading
+})
+const  mapDispatchToProps = dispatch=>({
+    me: dispatch.me
+})
+ export default withStyles(authstyle)(connect(mapStateToProps,{me})(DrawerProfile))

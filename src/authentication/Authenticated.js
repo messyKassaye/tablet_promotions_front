@@ -24,7 +24,7 @@ class Authenticated extends React.Component{
         return (
             <Suspense fallback={<Loading/>}>
                 <Router>
-                    <Component {...this.props}/>
+                    <Component/>
                 </Router>
             </Suspense>
         )

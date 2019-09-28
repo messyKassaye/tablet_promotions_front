@@ -9,6 +9,10 @@ export const get = () => {
     return localStorage.getItem(TOKEN)
 }
 
+export const removeToken = ()=>{
+    localStorage.removeItem('token')
+}
+
 export const setRole = (role)=>{
     localStorage.setItem('role',role)
 }
