@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link,Redirect} from 'react-router-dom'
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
@@ -8,10 +9,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {me} from "../drivers/state/actions/usersActions";
+import {me} from "../state/actions/usersActions";
 import authstyle from "../auth_style";
 import Skeleton from "@material-ui/lab/Skeleton";
- class DrawerProfile extends React.Component{
+import {logout} from "../../TokenService";
+import AppConsumer from "../../context/AppConsumer";
+class DrawerProfile extends React.Component{
      constructor(props) {
          super(props);
 
@@ -20,6 +23,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
          }
          this.handleOpenProfileSetting = this.handleOpenProfileSetting.bind(this)
          this.closeMenu = this.closeMenu.bind(this)
+         this.logout = this.logout.bind(this)
      }
 
      handleOpenProfileSetting = (event)=>{
@@ -36,12 +40,21 @@ import Skeleton from "@material-ui/lab/Skeleton";
          this.props.me()
      }
 
+     logout = ()=>{
+         logout()
+         this.props.go('Home')
+     }
+
      render() {
          const {classes} = this.props;
          return (
              <div>
                  {
-                  this.props.loading ? this.props.user.map(items=>(
+                  this.props.loading ?
+                      <React.Fragment>
+                          <Skeleton variant='circle' style={{backgroundColor:'white'}} width={40} height={40}/>
+                      </React.Fragment>
+                      :this.props.user.map(items=>(
                          <div key={items.type} className={classes.avatarLayout}>
                              {
                                  items.attribute.avator==='letter'?
@@ -72,21 +85,18 @@ import Skeleton from "@material-ui/lab/Skeleton";
                                          component='nav'
                                          aria-labelledby='nested-menu'
                                      >
-                                         <ListItem button>
+                                         <ListItem button component={Link} to='/settings'>
                                              <ListItemText primary='Setting'/>
                                          </ListItem>
 
-                                         <ListItem button>
+                                         <ListItem button onClick={event=>this.logout(event)} >
                                              <ListItemText primary='Logout'/>
                                          </ListItem>
                                      </List>
                                  </Menu>
                              </div>
-
                          </div>
-                     )):<React.Fragment>
-                      <Skeleton variant='circle' style={{backgroundColor:'white'}} width={40} height={40}/>
-                  </React.Fragment>
+                     ))
                  }
              </div>
          );
@@ -97,7 +107,5 @@ const mapStateToProps = state=> ({
     user: state.userData.user,
     loading:state.userData.loading
 })
-const  mapDispatchToProps = dispatch=>({
-    me: dispatch.me
-})
- export default withStyles(authstyle)(connect(mapStateToProps,{me})(DrawerProfile))
+
+ export default AppConsumer(withStyles(authstyle)(connect(mapStateToProps,{me})(DrawerProfile)))

@@ -33,6 +33,8 @@ class TotalAdvertedMedia extends React.Component{
             <div>
                 {
                     this.props.loading?
+                        <Skeleton variant='rect' width='100%' height={150}/>
+                        :
                         (
                             <Card  className={classes.card2}>
                                 <CardContent>
@@ -73,7 +75,6 @@ class TotalAdvertedMedia extends React.Component{
                                 </CardActions>
                             </Card>
                         )
-                        :<Skeleton variant='rect' width='100%' height={150}/>
                 }
             </div>
         );

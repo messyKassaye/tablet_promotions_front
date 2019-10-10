@@ -9,6 +9,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import AreaTinyWidget from "../../../commons/AreaTinyWidget";
 class TotalAdverts extends React.Component{
 
     constructor(props) {
@@ -43,6 +44,10 @@ class TotalAdverts extends React.Component{
           <div>
               {
                   this.props.loading?
+                      (
+                          <Skeleton variant='rect' width='100%' height={150}/>
+                      )
+                      :
                       (<Card className={classes.card1}>
                           <CardContent>
                               {
@@ -58,12 +63,12 @@ class TotalAdverts extends React.Component{
 
                           </CardContent>
                           <CardActions className={classes.cardActions}>
-                              <Button onClick={this.more.bind(this,this.props.user.map(items=>items.relations.cars))} style={{color:'white',textTransform:'capitalize'}}>
+                              <Button onClick={()=>this.more.bind(this,this.props.user.map(items=>items.relations.cars))} style={{color:'white',textTransform:'capitalize'}}>
                                   <span>More</span><ChevronRightIcon/>
                               </Button>
                           </CardActions>
                       </Card>)
-                      :<Skeleton variant='rect' width='100%' height={150}/>
+
 
               }
           </div>

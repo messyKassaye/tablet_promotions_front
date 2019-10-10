@@ -1,0 +1,14 @@
+{
+ "am": {
+   "title": "ሾፌር",
+   "drawer_menu": {
+     "Dashboard": "ወደ ዋናው",
+     "Adverts": "ማስታዎቂያዎች",
+     "My cars": "መኪኖቼ",
+     "My tablets": "ታብሌቶቼ",
+     "Finance": "ገንዘብ ነክ",
+     "Ekub": "እቁብ",
+     "Settings": "ማስተካከያ"
+   }
+ }
+}

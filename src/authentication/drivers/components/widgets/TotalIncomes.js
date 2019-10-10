@@ -9,6 +9,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CardActions from "@material-ui/core/CardActions";
 import {connect} from "react-redux";
 import {financeFetch} from "../../state/actions/financeActions";
+import {depositFetch} from "../../state/actions/depositActions";
 import Skeleton from "@material-ui/lab/Skeleton";
 class TotalIncomes extends React.Component{
 
@@ -18,7 +19,7 @@ class TotalIncomes extends React.Component{
     }
 
     componentDidMount() {
-        this.props.financeFetch()
+        this.props.depositFetch()
     }
 
     render() {
@@ -36,7 +37,7 @@ class TotalIncomes extends React.Component{
 
                                     {
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            {`${this.props.finance.deposit} ETB`}
+                                            {`${this.props.deposit.deposit} ETB`}
                                         </Typography>
                                     }
                                     <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
@@ -59,8 +60,8 @@ class TotalIncomes extends React.Component{
 }
 
 const mapStateToProps = state=>({
-    finance:state.financeData.finance,
-    loading:state.financeData.loading
+    deposit:state.authReducer.driversReducers.depositData.deposit,
+    loading:state.authReducer.driversReducers.depositData.loading
 })
 
-export default withStyles(authstyle)(connect(mapStateToProps,{financeFetch})(TotalIncomes))
+export default withStyles(authstyle)(connect(mapStateToProps,{depositFetch})(TotalIncomes))

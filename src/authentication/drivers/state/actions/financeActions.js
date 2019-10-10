@@ -1,4 +1,4 @@
-import {FINANCE_FETCH} from "../constants/authConstants";
+import {FINANCE_FETCH} from "../constants/driversConstants";
 import axios from 'axios'
 import {API_URL} from "../../../../constants/constants";
 

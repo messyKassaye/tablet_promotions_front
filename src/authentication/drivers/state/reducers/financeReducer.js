@@ -1,4 +1,4 @@
-import {FINANCE_FETCH} from "../constants/authConstants";
+import {FINANCE_FETCH} from "../constants/driversConstants";
 import flags from "react-world-flags/src/flags";
 
 const initialState = {

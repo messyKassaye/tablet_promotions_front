@@ -61,7 +61,7 @@ const  authstyle = theme=>({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        paddingTop: 20,
     },
     grow:{
         flexGrow: 1
@@ -105,6 +105,19 @@ const  authstyle = theme=>({
         justifyContent:"flex-end",
         alignItems:'center',
     },
+    logo:{
+        display:'flex',
+        [theme.breakpoints.down('xs')]:{
+            display:'none',
+        }
+    },
+    app_name:{
+        marginLeft: 10,
+        display:'flex',
+        [theme.breakpoints.down('xs')]:{
+            marginLeft:-20
+        }
+    }
 })
 
 export default authstyle

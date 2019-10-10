@@ -13,7 +13,7 @@ class RouteIndicator extends React.Component{
 
     render() {
         return (
-                <Card>
+                <Card style={{marginBottom:20}}>
                     <CardContent style={{display:'flex',flexDirection:'row',paddingBottom:10,paddingTop:10}}>
                         <Typography component='p' variant='h6'>{this.props.currentPage}</Typography>
                         <div style={{display:'flex',flexGrow:1}}/>

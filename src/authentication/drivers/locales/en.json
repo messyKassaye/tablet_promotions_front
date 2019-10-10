@@ -1,0 +1,14 @@
+{
+   "en": {
+     "title": "Driver",
+     "drawer_menu": {
+       "Dashboard": "Dashboard",
+       "Adverts": "Adverts",
+       "My cars": "My cars",
+       "My tablets": "My tablets",
+       "Finance": "Finance",
+       "Ekub": "Ekub",
+       "Settings": "Settings"
+     }
+   }
+}

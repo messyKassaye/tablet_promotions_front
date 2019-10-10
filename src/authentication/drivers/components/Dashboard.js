@@ -1,10 +1,13 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import theme from "../../../themes/app_theme";
 import TotalAdverts from "./widgets/TotalAdverts";
 import TotalAdvertedCompanies from "./widgets/TotalAdvertedMedia";
 import TotalIncomes from "./widgets/TotalIncomes";
-import Financings from "./widgets/Financings";
+import Cars from "./widgets/Cars";
+import dashboardStyle from "../style/dashboardStyle";
+import withStyles from "@material-ui/core/styles/withStyles";
+import TopAdvertedCompanies from "./widgets/TopAdvertedCompanies";
+import CreditAndWithdrawal from "./widgets/CreditAndWithdrawal";
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -13,9 +16,10 @@ class Dashboard extends React.Component{
     }
 
     render() {
+        const {classes} = this.props
         return (
             <div>
-                <Grid container spacing={2} style={{paddingTop:20}}>
+                <Grid container spacing={2} className={classes.cards}>
                     <Grid item md={3} sm={12}>
                        <TotalAdverts/>
                     </Grid>
@@ -28,8 +32,21 @@ class Dashboard extends React.Component{
                     </Grid>
 
                     <Grid item md={3} sm={12}>
-                        <Financings/>
+                        <CreditAndWithdrawal/>
                     </Grid>
+                </Grid>
+
+
+                <Grid container spacing={2} className={classes.status}>
+
+                    <Grid item md={6} sm={12}>
+                        <Cars show={false}/>
+                    </Grid>
+
+                    <Grid item md={6} sm={12}>
+                        <TopAdvertedCompanies/>
+                    </Grid>
+
                 </Grid>
             </div>
         );
@@ -38,4 +55,4 @@ class Dashboard extends React.Component{
 
 }
 
-export default Dashboard
+export default withStyles(dashboardStyle)(Dashboard)

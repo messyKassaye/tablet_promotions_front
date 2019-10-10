@@ -13,6 +13,13 @@ export const removeToken = ()=>{
     localStorage.removeItem('token')
 }
 
+export const logout = ()=>{
+    if(localStorage.clear()){
+        return true
+    }
+    return  false
+}
+
 export const setRole = (role)=>{
     localStorage.setItem('role',role)
 }

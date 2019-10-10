@@ -46,9 +46,8 @@ function Interceptor() {
                                 removeToken()
                                 set(response.data.token)
                                 originalRequest['Authorization'] = 'Bearer ' + get();
-                                return Promise.resolve(originalRequest);
+                                return originalRequest;
                             });
-                        return originalRequest;
                     } else {
                         let message = 'Something went wrong.'
                         if (code === 403) {

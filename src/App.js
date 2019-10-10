@@ -1,5 +1,4 @@
 import React from 'react';
-import {get} from "./TokenService";
 import LazyLoad from "./LazyLoad";
 
 

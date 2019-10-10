@@ -29,6 +29,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import RouteIndicator from "../../commons/RouteIndicator";
 import Dashboard from "./Dashboard";
+import logo_2 from '../../../assets/logo_2.png'
 
 
 class DriversDashboard extends React.Component {
@@ -78,7 +79,7 @@ class DriversDashboard extends React.Component {
                             onClick={this.handleDrawerToggle(false,item.name)}
                             className={classes.parent}>
                             <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.name}/>
+                            <ListItemText primary={t(`driver.drawer_menu.${item.name}`)}/>
                         </ListItem>
                     ))}
                 </List>
@@ -102,6 +103,14 @@ class DriversDashboard extends React.Component {
                         >
                             <MenuIcon/>
                         </IconButton>
+                        <Link to='/' className={classes.logo}>
+                            <img
+                                alt='Tablet Promotions'
+                                src={logo_2}
+                                width='32' height='32'
+                                className={classes.brandIcon}/>
+                        </Link>
+                        <Typography className={classes.app_name}>{t('home.app_name')}</Typography>
                         <div className={classes.grow}/>
                         <LanguageSetter/>
                         <Notifications/>
@@ -156,4 +165,4 @@ class DriversDashboard extends React.Component {
 
 }
 
-export default withStyles(authstyle)(translate('common')(DriversDashboard))
+export default translate('common')(withStyles(authstyle)(translate('common')(DriversDashboard)))
