@@ -3,6 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import authstyle from "../auth_style";
 import Badge from '@material-ui/core/Badge';
+import Skeleton from "@material-ui/lab/Skeleton";
+import {connect} from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Menu} from "@material-ui/core";
 import List from "@material-ui/core/List";
@@ -32,17 +34,32 @@ class Profile  extends React.Component{
     render() {
         const  classes = this.props
         return (
-            <div>
-                <IconButton
-                    color='inherit'
-                    aria-controls='profile-menu'
-                    aria-label='Profile menu'
-                    aria-haspopup='true'
-                    onClick={this.handleMenu}
-                  >
-                    <Avatar style={{margin:1,width:25,height:25}}>M</Avatar>
-                </IconButton>
-
+            <div >
+                {
+                    this.props.loading
+                    ?
+                        (<Skeleton variant='circle' width={40} height={40}/>)
+                    :
+                        (
+                            <IconButton
+                                color='inherit'
+                                aria-controls='profile-menu'
+                                aria-label='Profile menu'
+                                aria-haspopup='true'
+                                onClick={this.handleMenu}
+                            >
+                                {
+                                    this.props.user.map(user=>{
+                                        if(user.attribute.avator==='letter'){
+                                            return <Avatar key={user.attribute.id} style={{margin:1,width:25,height:25}}>{user.attribute.first_name[0]}</Avatar>
+                                        }else {
+                                           return <Avatar key={user.attribute.id} src={user.attribute.avator} style={{margin:1,width:30,height:30}}></Avatar>
+                                        }
+                                    })
+                                }
+                            </IconButton>
+                        )
+                }
                 <Menu
                  id='profile-menu'
                  anchorEl={this.state.anchorEl}
@@ -54,12 +71,14 @@ class Profile  extends React.Component{
                     component='nav'
                     aria-labelledby='nested menu'
                     >
-                        <ListItem
-                        button
-                        >
+                        <ListItem button>
                             <ListItemText primary='Setting'/>
-
                         </ListItem>
+
+                        <ListItem button>
+                            <ListItemText primary='Logout'/>
+                        </ListItem>
+
                     </List>
 
                 </Menu>
@@ -69,4 +88,9 @@ class Profile  extends React.Component{
 
 }
 
-export default withStyles(authstyle)(Profile)
+const mapStateToProps = state=> ({
+    user: state.userData.user,
+    loading:state.userData.loading
+})
+
+export default withStyles(authstyle)(connect(mapStateToProps)(Profile))

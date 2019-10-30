@@ -1,8 +1,9 @@
-import {ME} from "../authConstants/authConstants";
+import {ME, UPDATE_USER} from "../authConstants/authConstants";
 
 const  initialState = {
     loading:true,
-    user:{}
+    user:{},
+    update:{}
 }
 
 export default function (state=initialState,action) {
@@ -13,6 +14,11 @@ export default function (state=initialState,action) {
                 ...state,
                 loading:false,
                 user : action.payload
+            }
+        case UPDATE_USER:
+            return {
+                ...state,
+                update: action.payload
             }
         default:
             return  state

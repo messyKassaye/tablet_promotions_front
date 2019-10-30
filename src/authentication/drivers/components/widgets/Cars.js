@@ -5,15 +5,14 @@ import CardHeader from "@material-ui/core/CardHeader";
 import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Typography from "@material-ui/core/Typography";
-import {green} from "@material-ui/core/colors";
-import Button from "@material-ui/core/Button";
 import carStyle from "../../style/carsStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import CardActions from "@material-ui/core/CardActions";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import {translate} from "react-i18next";
 import AddIcon from '@material-ui/icons/Add'
 import {showCarRegistrationModal} from "../../state/actions/dialogActions";
+import Avatar from "@material-ui/core/Avatar";
 
 class Cars extends React.Component{
 
@@ -34,12 +33,14 @@ openCarsRegistrationDialog = ()=>{
     render() {
         const {show} = this.props
         const {classes} = this.props
+        const {t}= this.props
         return (
             <div>
                 <Card>
                     <CardHeader
                         className={classes.header}
-                        title={this.props.loading?<Skeleton style={{backgroundColor:'white'}} variant='rect' width={250} height={6}/>:'Your cars status' }
+                        title={this.props.loading?<Skeleton style={{backgroundColor:'white'}} variant='rect' width={250} height={6}/>
+                        :t('driver.cars.title') }
                         action={
                             this.props.loading
                             ?
@@ -59,7 +60,7 @@ openCarsRegistrationDialog = ()=>{
                         }
                     />
                     <Divider/>
-                    <CardContent className={classes.container}>
+                    <CardContent>
                         {this.props.loading ? (
                             <React.Fragment>
                                 <Skeleton height={6} />
@@ -67,27 +68,25 @@ openCarsRegistrationDialog = ()=>{
                             </React.Fragment>
                         ) :
                             (
-                               <div className={classes.root}>
+                               <div className={classes.scroll_wrapper}>
                                    {
                                        this.props.user.map(items=>items.relations.cars).length>0
                                        ?
                                            (this.props.user.map(items=>items.relations.cars.map(cars=>(
-                                               <Card key={cars.id} className={classes.inner_card}>
-                                                   <CardContent>
-                                                       <Typography gutterBottom variant="h5" component="h2">
-                                                           {cars.plate_number}
-                                                       </Typography>
-                                                       <Typography variant="body2" color="textSecondary" component="p">
-                                                           Plate number
-                                                       </Typography>
-                                                       <Button variant='contained' color='primary' style={{textTransform:'capitalize'}}>Detail</Button>
-                                                   </CardContent>
-                                                   <CardActions style={{display:'flex',alignItems:'start',justifyContent:'flex-end'}}>
-                                                       <Typography gutterBottom variant="h6" component="h6" component="p" style={{color:green[500]}}>
-                                                           {`= ${cars.adverts.length} adverts`}
-                                                       </Typography>
-                                                   </CardActions>
-                                               </Card>
+                                                   <Card key={cars.id} className={classes.scroll_child}>
+                                                       <CardHeader
+                                                           style={{color:"white"}}
+                                                       title={`${t('driver.cars.plate_number')}: ${cars.plate_number}`}
+                                                       subheader={cars.car_category[0].name}
+                                                       avatar={<Avatar width={40} height={40}>{cars.car_category[0].name[0]}</Avatar>}
+                                                       />
+                                                       <Divider/>
+                                                       <CardContent>
+                                                           <Typography style={{color:"white"}} variant="body2" color="textSecondary" component="p">
+                                                               {`${t('driver.cars.adverts')} = ${cars.adverts.length}`}
+                                                           </Typography>
+                                                       </CardContent>
+                                                   </Card>
                                            ))))
                                        :
                                        (
@@ -114,4 +113,4 @@ const mapStateToProps = state=>(
     }
 )
 
-export default withStyles(carStyle)(connect(mapStateToProps,{showCarRegistrationModal})(Cars))
+export default translate('common')(withStyles(carStyle)(connect(mapStateToProps,{showCarRegistrationModal})(Cars)))

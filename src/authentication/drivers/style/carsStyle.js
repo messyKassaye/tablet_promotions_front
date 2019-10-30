@@ -1,3 +1,4 @@
+import {deepOrange} from "@material-ui/core/colors";
 
 const carStyle = theme=>({
     root:{
@@ -24,6 +25,23 @@ const carStyle = theme=>({
         width:250,
         marginLeft:20,
         marginRight:20
+    },
+    scroll_wrapper:{
+        display:'flex',
+        flexDirection:'row',
+        overflowX:'auto',
+        wrap:'nowrap',
+        paddingBottom: 10
+    },
+    scroll_child:{
+        backgroundColor:deepOrange[500],
+        color:'white',
+        flex:'0 0 auto',
+        marginRight:10,
+        width:'50%',
+        [theme.breakpoints.down('xs')]:{
+            width:'100%'
+        }
     }
 })
 

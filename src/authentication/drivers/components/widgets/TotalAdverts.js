@@ -9,7 +9,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import AreaTinyWidget from "../../../commons/AreaTinyWidget";
+import {translate} from "react-i18next";
 class TotalAdverts extends React.Component{
 
     constructor(props) {
@@ -40,6 +40,7 @@ class TotalAdverts extends React.Component{
 
     render() {
         const  {classes} = this.props
+        const {t} = this.props
         return (
           <div>
               {
@@ -58,13 +59,13 @@ class TotalAdverts extends React.Component{
                                   </Typography>
                               }
                               <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                  Total adverts
+                                  {t('driver.total_advert.title')}
                               </Typography>
 
                           </CardContent>
                           <CardActions className={classes.cardActions}>
                               <Button onClick={()=>this.more.bind(this,this.props.user.map(items=>items.relations.cars))} style={{color:'white',textTransform:'capitalize'}}>
-                                  <span>More</span><ChevronRightIcon/>
+                                  <span>{t('driver.more')}</span><ChevronRightIcon/>
                               </Button>
                           </CardActions>
                       </Card>)
@@ -83,4 +84,4 @@ const mapStateToProps = state=>({
     loading:state.userData.loading
 })
 
-export default withStyles(authstyle)(connect(mapStateToProps)(TotalAdverts))
+export default translate('common')(withStyles(authstyle)(connect(mapStateToProps)(TotalAdverts)))

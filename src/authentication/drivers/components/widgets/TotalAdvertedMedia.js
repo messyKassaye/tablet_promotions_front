@@ -9,6 +9,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CardActions from "@material-ui/core/CardActions";
 import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
+import {translate} from "react-i18next";
 class TotalAdvertedMedia extends React.Component{
 
     constructor(props) {
@@ -29,6 +30,7 @@ class TotalAdvertedMedia extends React.Component{
 
     render() {
         const {classes}= this.props
+        const {t}= this.props
         return (
             <div>
                 {
@@ -44,7 +46,7 @@ class TotalAdvertedMedia extends React.Component{
                                                 {this.sumOfTypes(this.props.user.map(items=>items.relations.cars),'Video')}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                                Video
+                                                {t('driver.total_adverted_media.video')}
                                             </Typography>
                                         </div>
 
@@ -53,7 +55,7 @@ class TotalAdvertedMedia extends React.Component{
                                                 {this.sumOfTypes(this.props.user.map(items=>items.relations.cars),'Audio')}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                                Audio
+                                                {t('driver.total_adverted_media.audio')}
                                             </Typography>
                                         </div>
 
@@ -62,7 +64,7 @@ class TotalAdvertedMedia extends React.Component{
                                                 {this.sumOfTypes(this.props.user.map(items=>items.relations.cars),'Image')}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                                Image
+                                                {t('driver.total_adverted_media.image')}
                                             </Typography>
                                         </div>
 
@@ -70,7 +72,7 @@ class TotalAdvertedMedia extends React.Component{
                                 </CardContent>
                                 <CardActions className={classes.cardActions}>
                                     <Button style={{color:'white',textTransform:'capitalize'}}>
-                                        <span>More</span><ChevronRightIcon/>
+                                        <span>{t('driver.more')}</span><ChevronRightIcon/>
                                     </Button>
                                 </CardActions>
                             </Card>
@@ -90,4 +92,4 @@ const mapStateToProps = state=>(
     }
 )
 
-export default withStyles(authstyle)(connect(mapStateToProps)(TotalAdvertedMedia))
+export default translate('common')(withStyles(authstyle)(connect(mapStateToProps)(TotalAdvertedMedia)))

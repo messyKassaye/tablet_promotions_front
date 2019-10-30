@@ -2,7 +2,6 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -24,12 +23,11 @@ import DrawerProfile from "../../commons/DrawerProfile";
 import Routes from "../routes/routes";
 import {SwipeableDrawer} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import RouteIndicator from "../../commons/RouteIndicator";
 import Dashboard from "./Dashboard";
 import logo_2 from '../../../assets/logo_2.png'
+import AdvertBox from "./widgets/AdvertBox";
 
 
 class DriversDashboard extends React.Component {
@@ -65,7 +63,6 @@ class DriversDashboard extends React.Component {
                 <AppBar style={{position: "relative", backgroundColor: '#1E221E'}}>
                     <Toolbar style={{padding: 5}}>
                         <DrawerProfile/>
-
                     </Toolbar>
                 </AppBar>
 
@@ -85,7 +82,7 @@ class DriversDashboard extends React.Component {
                 </List>
                 <Divider/>
                 <div>
-                    advert box
+                    <AdvertBox/>
                 </div>
             </div>
         )
@@ -114,10 +111,12 @@ class DriversDashboard extends React.Component {
                         <div className={classes.grow}/>
                         <LanguageSetter/>
                         <Notifications/>
-                        <Profile/>
+                        <div className={classes.profile}>
+                            <Profile/>
+                        </div>
                     </Toolbar>
                 </AppBar>
-                <nav className={classes.drawer} aria-label="mailbox folders">
+                <nav className={classes.drawer}>
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                     <Hidden smUp implementation="css">
                         <SwipeableDrawer
@@ -165,4 +164,4 @@ class DriversDashboard extends React.Component {
 
 }
 
-export default translate('common')(withStyles(authstyle)(translate('common')(DriversDashboard)))
+export default withStyles(authstyle)(translate('common')(DriversDashboard))

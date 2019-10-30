@@ -1,0 +1,23 @@
+{
+  "en": {
+    "new_advert": {
+      "title": "New advert registration",
+      "form": {
+        "select_company": "Select for which company you are going to advert",
+        "select_media_type": "Select advertisement media type",
+        "select_place": "Select a place you want to advert",
+        "product_name": "Select product name",
+        "number_of_views": "Add number of views",
+        "minimum_views": "Minimum number of views",
+        "all_over_ethiopia": "All over Ethiopia",
+        "file_preparation": "Have you prepare you advertisement media type. Send us your file",
+        "upload": "Upload",
+        "select_file": "Select file name፡",
+        "send_advert": "Send advert",
+        "advertisement_place": "Advertisement place is set to All over Ethiopia",
+        "back_to_select_place": "Back to place selection",
+        "succeed": "Your advert is saved successfully"
+      }
+    }
+  }
+}

@@ -9,6 +9,64 @@
      "Finance": "ገንዘብ ነክ",
      "Ekub": "እቁብ",
      "Settings": "ማስተካከያ"
-   }
+   },
+   "total_advert": {
+     "title": "ያስተዋውቁት ድምር"
+   },
+   "total_adverted_media": {
+     "video": "ቪድዮ",
+     "audio": "ኦድዮ",
+     "image": "ምስል"
+   },
+   "total_income": {
+     "title": "ጠቅላላ ገቢ"
+   },
+   "payment_and_withdrawal": {
+     "title": "ከፍያ እና ወጭ",
+     "payment": "ክፍያ",
+     "withdraw": "ወጭ"
+   },
+   "cars": {
+     "title": "መኪኖችዎ",
+     "my_cars": "የእኔ መኪኖች",
+     "cars_rule_and_regulation": "የመኪኖች ህግ እና ደንብ",
+     "plate_number": "ታርጋ ቁጥር",
+     "adverts": "የሰራው ማስታዎቂያ ብዛት"
+   },
+   "top_adverted_companies": {
+     "title": "ያስተዋወቁላቸው ድርጅቶች",
+     "company_name": "የድርጅቱ ስም",
+     "total_advert": "የማስታዎቂያ ብዛት"
+   },
+   "adverts": {
+     "today": {
+       "title": "የዛሬ ማስታዎቂያዎች",
+       "plate_number": "ታርጋ ቁጥር",
+       "total_advert": "ጠቅላላ ድምር ማስታዎቂያ",
+       "media": "Media",
+       "video": "ቪድዮ",
+       "audio": "ኦድዮ",
+       "image": "ምስል"
+     },
+     "week": {
+       "title": "የዚህ ሳምንት ማስታዎቂያዎች",
+       "plate_number": "ታርጋ ቁጥር",
+       "total_advert": "ጠቅላላ ድምር ማስታዎቂያ",
+       "media": "Media",
+       "video": "ቪድዮ",
+       "audio": "ኦድዮ",
+       "image": "ምስል"
+     },
+     "total": {
+       "title": "ጠቅላላ ድምር ማስታዎቂያዎች",
+       "plate_number": "ታርጋ ቁጥር",
+       "total_advert": "ጠቅላላ ድምር ማስታዎቂያ",
+       "media": "Media",
+       "video": "ቪድዮ",
+       "audio": "ኦድዮ",
+       "image": "ምስል"
+     }
+   },
+   "more": "ተጨማሪ"
  }
 }

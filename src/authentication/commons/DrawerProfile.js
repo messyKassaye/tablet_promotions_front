@@ -16,8 +16,7 @@ import {logout} from "../../TokenService";
 import AppConsumer from "../../context/AppConsumer";
 class DrawerProfile extends React.Component{
      constructor(props) {
-         super(props);
-
+         super(props)
          this.state = {
              anchorEl:null
          }
@@ -57,9 +56,11 @@ class DrawerProfile extends React.Component{
                       :this.props.user.map(items=>(
                          <div key={items.type} className={classes.avatarLayout}>
                              {
-                                 items.attribute.avator==='letter'?
-                                     <Avatar className={classes.avatarImage}>{items.attribute.first_name[0]}</Avatar>:
-                                     <Avatar className={classes.avatarImage} alt='profile image' src={`${items.attribute.avator}`}>TP</Avatar>
+                                 items.attribute.avator==='letter'
+                                     ?
+                                     <Avatar className={classes.avatarImage} alt='profile image' >{items.attribute.first_name[0]}</Avatar>
+                                     :<Avatar className={classes.avatarImage} src={`${items.attribute.avator}`}></Avatar>
+
 
                              }
                              {

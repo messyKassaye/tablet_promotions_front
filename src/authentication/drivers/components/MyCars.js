@@ -22,7 +22,7 @@ import {showCarRegistrationModal} from "../state/actions/dialogActions";
 import {sentDialogValue} from "../state/actions/dialogActions";
 import Cars from "./widgets/Cars";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import {translate} from "react-i18next";
 class MyCars extends React.Component {
 
     constructor(props) {
@@ -76,12 +76,9 @@ class MyCars extends React.Component {
         this.props.categoriesFetch()
     }
 
-    addIconHandler = (child)=>{
-        console.log('items')
-    }
-
     render() {
         const {classes} = this.props
+        const {t} = this.props
         return (
             <div className={classes.root}>
 
@@ -90,8 +87,8 @@ class MyCars extends React.Component {
 
                         value={this.state.value}
                         onChange={this.handleChange}>
-                        <Tab className={classes.tabs} label='My Cars' {...this.a11yProps(0)} />
-                        <Tab className={classes.tabs} label='Cars rule and regulations' {...this.a11yProps(1)} />
+                        <Tab className={classes.tabs} label={`${t('driver.cars.my_cars')}`} {...this.a11yProps(0)} />
+                        <Tab className={classes.tabs} label={`${t('driver.cars.cars_rule_and_regulation')}`} {...this.a11yProps(1)} />
                     </Tabs>
                 </Card>
                 <this.TabPanel value={this.state.value} index={0}>
@@ -136,10 +133,10 @@ class MyCars extends React.Component {
                                         />
                                     </Card>
                                     {
-                                        <Grid container wrap='wrap' spacing={3} className={classes.root_grid}>
+                                        <Grid container  spacing={3}>
                                             {
                                                 items.child.map(child => (
-                                                    <Grid key={child.id} item md={6} sm={12} className={classes.child_grid}>
+                                                    <Grid key={child.id} item md={6} xs={12}>
                                                         <Card>
                                                             <CardHeader
                                                                 avatar={
@@ -181,4 +178,5 @@ const mapStateToProps = state => ({
     loading: state.authReducer.driversReducers.categoriesData.loading,
 })
 
-export default withStyles(myCarStyle)(connect(mapStateToProps, {categoriesFetch,showCarRegistrationModal,sentDialogValue})(MyCars))
+export default translate('common')
+(withStyles(myCarStyle)(connect(mapStateToProps, {categoriesFetch,showCarRegistrationModal,sentDialogValue})(MyCars)))

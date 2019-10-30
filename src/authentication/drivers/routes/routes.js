@@ -7,7 +7,7 @@ import Setting from "../../commons/Setting";
 import Finances from "../components/Finances";
 import Adverts from "../components/widgets/Adverts";
 import {Redirect} from 'react-router-dom'
-import Ekub from "../../commons/ekub/ekubDashboard";
+import Ekub from "../components/Ekub";
 class Routes extends React.Component{
     constructor(props) {
         super(props);

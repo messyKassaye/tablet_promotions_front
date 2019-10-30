@@ -7,9 +7,6 @@ const dialogStyle = theme=>({
     },
     dialog_title:{
       display: 'flex',
-      [theme.breakpoints.down('xs')]:{
-          display:'none'
-      }
     },
     appBar:{
         display:'none',
@@ -19,7 +16,7 @@ const dialogStyle = theme=>({
     },
     content:{
         [theme.breakpoints.down('xs')]:{
-            padding: 50
+            padding: 20
         }
     },
     form:{

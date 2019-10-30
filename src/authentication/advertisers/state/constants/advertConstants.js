@@ -1,0 +1,2 @@
+export const STORE_ADVERT="STORE_ADVERT"
+export const ADVERT_STATUS="ADVERT_STATUS"

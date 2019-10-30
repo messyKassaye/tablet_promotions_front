@@ -5,10 +5,11 @@ import CardHeader from "@material-ui/core/CardHeader";
 import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import {green} from "@material-ui/core/colors";
-import historyStyle from "../../style/historyStyle";
+import topAdvertedCompaniesStyle from "../../style/topadvertedCompaniesStyle";
+import {translate} from "react-i18next";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
 class TopAdvertedCompanies extends React.Component{
 
     constructor(props) {
@@ -38,13 +39,27 @@ class TopAdvertedCompanies extends React.Component{
         return obj
     }
 
+    filterAdvertNumbers = (data,company_name)=>{
+        let length =0;
+        data.map(items=>items.map(items=>{
+            return items.adverts.filter(advert=>{return advert.detail.company.name===company_name})
+        })).map(items=>items.map(advert=>{
+            length += advert.length
+        }))
+        return length
+    }
+
     render() {
         const {classes} = this.props
+        const {t} = this.props
         return (
             <div>
                 <Card >
                     <CardHeader
-                     title={this.props.loading?<Skeleton variant='rect' width={250} height={6}/>:'Top adverted companies'}
+                        className={classes.header}
+                     title={this.props.loading?
+                         <Skeleton style={{backgroundColor:'white'}} variant='rect' width={250} height={6}/>
+                     :t('driver.top_adverted_companies.title')}
                     />
                     <CardContent>
                         {this.props.loading ? (
@@ -54,11 +69,25 @@ class TopAdvertedCompanies extends React.Component{
                                 </React.Fragment>
                             ) :
                             (
-                                <div className={classes.root}>
+                                <div className={classes.scroll_wrapper}>
                                     {
                                         this.filterCompanies(this.props.user.map(items=>items.relations.cars))
                                             .map(items=>(
-                                                <div key={items['0']} className={classes.inner_card}>
+                                                <Card key={items[1]} className={classes.scroll_child}>
+                                                    <CardHeader
+                                                    title={items[0]}
+                                                    avatar={<Avatar>{items[0][0]}</Avatar>}
+                                                    />
+                                                    <Divider/>
+                                                    <CardContent>
+                                                        {
+                                                            <Typography style={{color:"white"}} variant="body2" color="textSecondary" component="p">
+                                                                {`${t('driver.top_adverted_companies.total_advert')} : ${this.filterAdvertNumbers(this.props.user.map(items=>items.relations.cars),items[0])}`}
+                                                            </Typography>
+                                                        }
+                                                    </CardContent>
+                                                </Card>
+                                                /*<div key={items['0']} className={classes.inner_card}>
                                                     <div>
                                                         <div style={{display:'flex',flexDirection:'row'}}>
                                                             <Typography style={{display:'flex',alignItems:'center',marginRight:5}} variant="body2" color="textSecondary" component="p">
@@ -78,7 +107,7 @@ class TopAdvertedCompanies extends React.Component{
                                                         </div>
                                                         <Button variant='contained' color='primary' style={{textTransform:'capitalize'}}>About</Button>
                                                     </div>
-                                                </div>
+                                                </div>*/
                                             ))
                                     }
                                 </div>
@@ -101,4 +130,4 @@ const mapStateToProps = state=>(
 )
 
 
-export default withStyles(historyStyle)(connect(mapStateToProps)(TopAdvertedCompanies))
+export default translate('common')(withStyles(topAdvertedCompaniesStyle)(connect(mapStateToProps)(TopAdvertedCompanies)))

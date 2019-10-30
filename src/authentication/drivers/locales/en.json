@@ -9,6 +9,64 @@
        "Finance": "Finance",
        "Ekub": "Ekub",
        "Settings": "Settings"
-     }
+     },
+     "total_advert": {
+       "title": "Total adverts"
+     },
+     "total_adverted_media": {
+       "video": "Video",
+       "audio": "Audio",
+       "image": "Image"
+     },
+     "total_income": {
+       "title": "Total income"
+     },
+     "payment_and_withdrawal": {
+       "title": "Payment and withdraw",
+       "payment": "Payment",
+       "withdraw": "Withdraw"
+     },
+     "cars": {
+       "title": "Your cars",
+       "my_cars": "My cars",
+       "cars_rule_and_regulation": "Cars rule and regulations",
+       "plate_number": "Plate number",
+       "adverts": "Adverts"
+     },
+     "top_adverted_companies": {
+       "title": "Top adverted companies",
+       "company_name": "Company name",
+       "total_advert": "Total adverts"
+     },
+     "adverts": {
+       "today": {
+         "title": "Today's advert",
+         "plate_number": "Plate number",
+         "total_advert": "Total ads",
+         "media": "Media",
+         "video": "Video",
+         "audio": "Audio",
+         "image": "Image"
+       },
+       "week": {
+         "title": "This week ads",
+         "plate_number": "Plate number",
+         "total_advert": "Total ads",
+         "media": "Media",
+         "video": "Video",
+         "audio": "Audio",
+         "image": "Image"
+       },
+       "total": {
+         "title": "Total ads",
+         "plate_number": "Plate number",
+         "total_advert": "Total ads",
+         "media": "Media",
+         "video": "Video",
+         "audio": "Audio",
+         "image": "Image"
+       }
+     },
+     "more": "More"
    }
 }

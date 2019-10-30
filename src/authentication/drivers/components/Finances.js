@@ -9,7 +9,7 @@ import Tab from "@material-ui/core/Tab";
 import myCarStyle from "../style/myCarsStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import FinanceDashboard from "./widgets/financeDashboard";
-import FinanceCredit from "./widgets/financeCredit";
+import FinancePayments from "./widgets/financePayments";
 import FinanceWithdrawal from "./widgets/financeWithdrawal";
 import CardContent from "@material-ui/core/CardContent";
 class Finances extends React.Component{
@@ -78,7 +78,7 @@ class Finances extends React.Component{
                                         value={this.state.value}
                                         onChange={this.handleChange}>
                                         <Tab className={classes.tabs} label='Dashboard' {...this.a11yProps(0)} />
-                                        <Tab className={classes.tabs}  label='Credit' {...this.a11yProps(1)} />
+                                        <Tab className={classes.tabs}  label='Payments' {...this.a11yProps(1)} />
                                         <Tab className={classes.tabs}  label='Withdrawal' {...this.a11yProps(2)} />
 
                                     </Tabs>
@@ -90,7 +90,7 @@ class Finances extends React.Component{
                                         </this.TabPanel>
 
                                         <this.TabPanel value={this.state.value} index={1}>
-                                            <FinanceCredit/>
+                                            <FinancePayments/>
                                         </this.TabPanel>
 
                                         <this.TabPanel value={this.state.value} index={2}>

@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CardActions from "@material-ui/core/CardActions";
 import {connect} from "react-redux";
-import {financeFetch} from "../../state/actions/financeActions";
+import {translate} from "react-i18next";
 import {depositFetch} from "../../state/actions/depositActions";
 import Skeleton from "@material-ui/lab/Skeleton";
 class TotalIncomes extends React.Component{
@@ -24,6 +24,7 @@ class TotalIncomes extends React.Component{
 
     render() {
         const {classes} = this.props
+        const {t} = this.props
         return (
             <div>
                 {
@@ -41,12 +42,12 @@ class TotalIncomes extends React.Component{
                                         </Typography>
                                     }
                                     <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                        total income
+                                        {t('driver.total_income.title')}
                                     </Typography>
                                 </CardContent>
                                 <CardActions className={classes.cardActions}>
                                     <Button style={{color:'white',textTransform:'capitalize'}}>
-                                        <span>More</span><ChevronRightIcon/>
+                                        <span>{t('driver.more')}</span><ChevronRightIcon/>
                                     </Button>
                                 </CardActions>
                             </Card>
@@ -64,4 +65,4 @@ const mapStateToProps = state=>({
     loading:state.authReducer.driversReducers.depositData.loading
 })
 
-export default withStyles(authstyle)(connect(mapStateToProps,{depositFetch})(TotalIncomes))
+export default translate('common')(withStyles(authstyle)(connect(mapStateToProps,{depositFetch})(TotalIncomes)))

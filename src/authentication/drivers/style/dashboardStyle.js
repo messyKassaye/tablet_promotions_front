@@ -15,6 +15,12 @@ const dashboardStyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             flexDirection: 'column'
         }
+    },
+    small_device:{
+        display:'flex',
+        [theme.breakpoints.down('xs')]:{
+            display:'none'
+        }
     }
 })
 

@@ -7,7 +7,8 @@ import Cars from "./widgets/Cars";
 import dashboardStyle from "../style/dashboardStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TopAdvertedCompanies from "./widgets/TopAdvertedCompanies";
-import CreditAndWithdrawal from "./widgets/CreditAndWithdrawal";
+import PaymentAndWithdrawal from "./widgets/PaymentAndWithdrawal";
+import AdvertInTable from "./widgets/advertInTable";
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -32,7 +33,7 @@ class Dashboard extends React.Component{
                     </Grid>
 
                     <Grid item md={3} sm={12}>
-                        <CreditAndWithdrawal/>
+                        <PaymentAndWithdrawal/>
                     </Grid>
                 </Grid>
 
@@ -47,6 +48,11 @@ class Dashboard extends React.Component{
                         <TopAdvertedCompanies/>
                     </Grid>
 
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item md={12} className={classes.small_device}>
+                     <AdvertInTable/>
+                    </Grid>
                 </Grid>
             </div>
         );

@@ -51,6 +51,7 @@ const  authstyle = theme=>({
     },
     menuButton: {
         marginRight: theme.spacing(2),
+        display:'flex',
         [theme.breakpoints.up('sm')]: {
             display: 'none',
         },
@@ -117,6 +118,22 @@ const  authstyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             marginLeft:-20
         }
+    },
+    profile:{
+        display:'flex',
+        [theme.breakpoints.down('xs')]:{
+            display:'none'
+        }
+    },
+    circleAvator:{
+        width:100,
+        height: 100,
+        borderRadius:'50%',
+        backgroundColor:deepOrange[500],
+        alignItems:'center',
+        color:'white',
+        fontSize:'2.5em',
+        justifyContent:'center'
     }
 })
 
