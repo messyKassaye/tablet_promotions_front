@@ -1,4 +1,4 @@
-import {ME, UPDATE_USER} from "../authConstants/authConstants";
+import {DELETE_ADVERT_LOCALLY, ME, STORE_NEW_ADVERT_LOCALLY, UPDATE_USER} from "../authConstants/authConstants";
 import axios from 'axios'
 import {API_AUTH_URL, API_URL} from "../../../constants/constants";
 
@@ -24,4 +24,18 @@ export const userUpdate = (data,id)=>dispatch=>{
             type: UPDATE_USER,
             payload: res.data
         }))
+}
+
+export const storeNewAdvertLocally = (advert)=>dispatch=>{
+    dispatch({
+        type:STORE_NEW_ADVERT_LOCALLY,
+        payload:advert
+    })
+}
+
+export const deleteAdvertLocally = (id)=>dispatch=>{
+    dispatch({
+        type: DELETE_ADVERT_LOCALLY,
+        payload:id
+    })
 }

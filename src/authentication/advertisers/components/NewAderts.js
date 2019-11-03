@@ -21,6 +21,8 @@ import {translate} from "react-i18next";
 import ReactDOM from 'react-dom'
 import {withRouter} from 'react-router-dom'
 import {storeAdvert} from "../state/action/advertAction";
+import {storeNewAdvertLocally} from "../../state/actions/usersActions";
+import {green} from "@material-ui/core/colors";
 
 class NewAderts extends React.Component {
     constructor(props) {
@@ -184,7 +186,9 @@ class NewAderts extends React.Component {
     }
    componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.props.status){
-            this.props.history.push('/bank_transaction')
+            setTimeout(()=>{
+                this.props.history.push(`/bankTransaction/${this.props.advert.id}`)
+            },2000)
         }
    }
 
@@ -234,6 +238,14 @@ class NewAderts extends React.Component {
                                                         className={classes.form}
                                                         onSubmit={this.handleSubmit}
                                                     >
+                                                        {
+                                                            this.props.status
+                                                            ?
+                                                                (
+                                                                    <Typography style={{color:green[500]}}>Your advert saved successfully</Typography>
+                                                                )
+                                                            :''
+                                                        }
                                                         <FormControl className={classes.formControl}>
                                                             <InputLabel
                                                                 htmlFor="demo-controlled-open-select">{t('advertiser.new_advert.form.select_company')}</InputLabel>
@@ -275,7 +287,7 @@ class NewAderts extends React.Component {
                                                         </FormControl>
 
                                                         <Grid container>
-                                                            <Grid item md={8} xs={12}>
+                                                            <Grid item md={12} xs={12}>
                                                                 {
                                                                     this.state.showAllOver
                                                                         ?
@@ -319,34 +331,6 @@ class NewAderts extends React.Component {
                                                                 }
                                                             </Grid>
 
-                                                            <Grid item md={4} xs={12}>
-                                                                <div className={classes.button}>
-                                                                    {
-                                                                        this.state.showAllOver
-                                                                            ?
-                                                                            (
-                                                                                <Button
-                                                                                    onClick={this.allOverEthiopia()}
-                                                                                    color='secondary'
-                                                                                    variant='outlined'>
-                                                                                    {t('advertiser.new_advert.form.back_to_select_place')}
-                                                                                </Button>
-                                                                            )
-                                                                            :
-                                                                            (
-                                                                                <Button
-                                                                                    variant='outlined'
-                                                                                    color='secondary'
-                                                                                    onClick={this.allOverEthiopia()}
-                                                                                >
-                                                                                    {
-                                                                                        t('advertiser.new_advert.form.all_over_ethiopia')
-                                                                                    }
-                                                                                </Button>
-                                                                            )
-                                                                    }
-                                                                </div>
-                                                            </Grid>
                                                         </Grid>
 
                                                         <TextValidator
@@ -443,11 +427,12 @@ const mapStateToProps = state => (
         advertisementMediaType: state.authReducer.advertisementMediaType.mediaTypes,
         mediaLoading: state.authReducer.advertisementMediaType.loading,
         places: state.authReducer.placeReducer.places,
-        advert: state.authReducer.advertiserReducer.advert,
-        status:state.authReducer.advertiserReducer.status
-
+        advert:state.authReducer.advertisersReducers.advertData.advert,
+        status:state.authReducer.advertisersReducers.advertData.status
     }
 )
 
 export default withStyles(newAdverts)
-(translate('common')(connect(mapStateToProps, {fetchMediaType, fetchPlaces, storeAdvert})(withRouter(NewAderts))))
+(translate('common')
+(connect(mapStateToProps, {fetchMediaType, fetchPlaces, storeAdvert,storeNewAdvertLocally})
+(withRouter(NewAderts))))

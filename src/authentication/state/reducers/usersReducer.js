@@ -1,4 +1,4 @@
-import {ME, UPDATE_USER} from "../authConstants/authConstants";
+import {DELETE_ADVERT_LOCALLY, ME, STORE_NEW_ADVERT_LOCALLY, UPDATE_USER} from "../authConstants/authConstants";
 
 const  initialState = {
     loading:true,
@@ -19,6 +19,11 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 update: action.payload
+            }
+        case STORE_NEW_ADVERT_LOCALLY:
+            return {
+                ...state,
+                user: state.user.map(items=>items.relations.companies.map(company=>company.advert.map(advert=>{advert.push(advert)})))
             }
         default:
             return  state

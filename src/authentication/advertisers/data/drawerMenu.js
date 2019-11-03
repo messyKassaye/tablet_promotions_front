@@ -14,12 +14,12 @@ const drawerMenu = [
     },
     {
         name:'My adverts',
-        route:'/my_adverts',
+        route:'/myAdverts',
         icon: <VideocamIcon/>
     },
     {
         name:'My Companies',
-        route:'/my_companies',
+        route:'/myCompanies',
         icon: <DirectionsCarIcon/>
     },
     {

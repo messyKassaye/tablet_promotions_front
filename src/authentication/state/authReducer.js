@@ -5,11 +5,12 @@ import bankAccountReducer from "./reducers/bankAccountReducer";
 import advertismentMediaTypeReducer from "./reducers/advertismentMediaTypeReducer";
 import placesReducer from "./reducers/placesReducer";
 import advertReducer from "../advertisers/state/reducer/advertReducer";
+import advertiserReducer from "../advertisers/state/advertiserReducer";
 
 
 export default combineReducers({
     driversReducers: driversReducer,
-    advertiserReducer:advertReducer,
+    advertisersReducers:advertiserReducer,
     banksReducer:banksReducer,
     bankAccountReducer:bankAccountReducer,
     advertisementMediaType:advertismentMediaTypeReducer,

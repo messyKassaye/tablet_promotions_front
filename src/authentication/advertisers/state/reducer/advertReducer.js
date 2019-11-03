@@ -1,9 +1,11 @@
-import {STORE_ADVERT} from "../constants/advertConstants";
+import {DELETE_ADVERT, SHOW_ADVERT, STORE_ADVERT} from "../constants/advertConstants";
 
 const initialState = {
     loading:true,
+    showLoading:true,
     advert:{},
     status:false,
+    deleteResponseMessage:''
 }
 
 export default function (state=initialState,action) {
@@ -14,6 +16,18 @@ export default function (state=initialState,action) {
                 loading: false,
                 status:true,
                 advert: action.payload
+            }
+        case SHOW_ADVERT:
+            return {
+                ...state,
+                showLoading: false,
+                advert: action.payload
+            }
+        case DELETE_ADVERT:
+            return {
+                ...state,
+                deleteResponseMessage: action.payload.message
+
             }
         default:
             return  state

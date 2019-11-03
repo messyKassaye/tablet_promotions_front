@@ -5,6 +5,8 @@ import {BrowserRouter as Router} from "react-router-dom";
 import RegisterCarsDialog from "./drivers/dialogs/registerCarsDialog";
 import BankRegistrationDialog from "./drivers/dialogs/bankRegistrationDialog";
 import WithdrawalRequestDialog from "./drivers/dialogs/withdrawalRequestDialog";
+import AdvertPaymentConfirmDialog from "./advertisers/dialogs/advertPaymentConfirmdialog";
+import DeleteAdvertDialog from "./advertisers/dialogs/deleteAdvertConfirmDialog";
 
 let Component = null
 class Authenticated extends React.Component{
@@ -31,6 +33,8 @@ class Authenticated extends React.Component{
                 <RegisterCarsDialog/>
                 <BankRegistrationDialog/>
                 <WithdrawalRequestDialog/>
+                <AdvertPaymentConfirmDialog/>
+                <DeleteAdvertDialog/>
                 <Router>
                     <Component/>
                 </Router>

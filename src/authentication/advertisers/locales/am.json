@@ -23,7 +23,14 @@
       "title": "የክፍያ መፈጸሚያ",
       "upload_succeed": "ማስታዎቂያዎ በትክክል ተመዝግቧል። ክፍያዎን ይፈጽሙ እና ",
       "be": "በ",
-      "last": "በሁሉም ቦታ ማስተዋወቅ እንጀምራለን"
+      "last": "በሁሉም ቦታ ማስተዋወቅ እንጀምራለን",
+      "unit_price": "የአንዱ ዋጋ፡",
+      "number_of_views": "የሚታየው ብዛት፡",
+      "total_payment": "ጠቅላላ ክፍያ፡"
+    },
+    "my_adverts": {
+      "title": "የማስታዎቂያዎች ዝርዝር",
+      "new_advert_registration_button": "አድስ ማስታዎቂያ መዝግብ"
     }
   }
 }

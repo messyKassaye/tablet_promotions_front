@@ -1,6 +1,4 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core";
-import {translate} from "react-i18next";
 import {me} from "../../state/actions/usersActions";
 import {connect} from "react-redux";
 import CommonDashboards from "../../commons/CommonDashboards";

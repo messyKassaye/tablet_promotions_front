@@ -18,6 +18,16 @@
         "back_to_select_place": "Back to place selection",
         "succeed": "Your advert is saved successfully"
       }
+    },
+    "bank_transaction": {
+      "title": "Payment status",
+      "upload_succeed": "Your advert information is uploaded successfully. after payment your product ",
+      "be": "will be advertised by all places of ",
+      "last": ""
+    },
+    "my_adverts": {
+      "title": "የማስታዎቂያዎች ዝርዝር",
+      "new_advert_registration_button": "አድስ ማስታዎቂያ መዝግብ"
     }
   }
 }
