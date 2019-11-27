@@ -6,6 +6,7 @@ import MyAdverts from "./MyAdverts";
 import NewAderts from "./NewAderts";
 import BankTransactions from "./widgets/bankTransactions";
 import NewCompany from "./NewCompany";
+import Setting from "../../commons/Setting";
 class NestedRoute extends React.Component{
 
     constructor(props) {
@@ -23,6 +24,7 @@ class NestedRoute extends React.Component{
                     <Route path='/newAdverts' component={NewAderts}/>
                     <Route path='/bankTransaction/:id' component={BankTransactions}/>
                     <Route path='/companyRegistration' component={NewCompany}/>
+                    <Route path='/settings' component={Setting}/>
                 </Switch>
             </div>
         );

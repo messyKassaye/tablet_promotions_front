@@ -31,6 +31,17 @@
     "my_adverts": {
       "title": "የማስታዎቂያዎች ዝርዝር",
       "new_advert_registration_button": "አድስ ማስታዎቂያ መዝግብ"
+    },
+    "new_company": {
+      "title": "ድርጅቶች ",
+      "register_new_company": "አድስ ድርጅት መዝግብ",
+      "form": {
+        "title": "አድስ ድርጅት መመዝገቢያ",
+        "company_name": "የድርጅቱ ስም",
+        "phone": "የድርጅቱ ስልክ ቁጥር",
+        "website": "የድርጅቱ ድህረ ገጽ",
+        "register_btn": "መዝግብ"
+      }
     }
   }
 }

@@ -28,6 +28,9 @@ import RouteIndicator from "../../commons/RouteIndicator";
 import Dashboard from "./Dashboard";
 import logo_2 from '../../../assets/logo_2.png'
 import AdvertBox from "./widgets/AdvertBox";
+import {grey} from "@material-ui/core/colors";
+import {connect} from "react-redux";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 
 class DriversDashboard extends React.Component {
@@ -41,7 +44,6 @@ class DriversDashboard extends React.Component {
         this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
 
     }
-
 
     handleDrawerToggle = (value,page) => event=>{
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -66,20 +68,38 @@ class DriversDashboard extends React.Component {
                     </Toolbar>
                 </AppBar>
 
-                <List>
-                    {driverMenu.map((item) => (
-                        <ListItem
-                            button
-                            component={Link}
-                            to={item.route}
-                            key={item.name}
-                            onClick={this.handleDrawerToggle(false,item.name)}
-                            className={classes.parent}>
-                            <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                            <ListItemText primary={t(`driver.drawer_menu.${item.name}`)}/>
-                        </ListItem>
-                    ))}
-                </List>
+                <div>
+                    {
+                        this.props.loading
+                        ?
+                            (<Skeleton variant='rect'
+                                       style={{marginLeft:20,marginTop:20,backgroundColor:'white',borderRadius:5}} width={100} height={15}/>)
+                        :
+                            (
+
+                                <Typography style={{paddingLeft:20,paddingTop:20,color:grey[500]}}>
+                                    {this.props.user.map(items=>{
+                                        return items.relations.role[0].name
+                                    })
+                                    }
+                                </Typography>
+                            )
+                    }
+                    <List>
+                        {driverMenu.map((item) => (
+                            <ListItem
+                                button
+                                component={Link}
+                                to={item.route}
+                                key={item.name}
+                                onClick={this.handleDrawerToggle(false,item.name)}
+                                className={classes.parent}>
+                                <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
+                                <ListItemText primary={t(`driver.drawer_menu.${item.name}`)}/>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
                 <Divider/>
                 <div>
                     <AdvertBox/>
@@ -164,4 +184,10 @@ class DriversDashboard extends React.Component {
 
 }
 
-export default withStyles(authstyle)(translate('common')(DriversDashboard))
+const mapStateToProps = state=>({
+    user: state.userData.user,
+    loading:state.userData.loading
+})
+
+export default withStyles(authstyle)(translate('common')
+(connect(mapStateToProps)(DriversDashboard)))

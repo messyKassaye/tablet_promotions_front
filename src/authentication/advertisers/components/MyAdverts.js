@@ -12,12 +12,11 @@ import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import Grid from "@material-ui/core/Grid";
 import FourByFourSkeleton from "./widgets/customSkeleton";
-import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Avatar from "@material-ui/core/Avatar";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreHorizVert from '@material-ui/icons/MoreVert';
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import {grey} from "@material-ui/core/colors";
@@ -61,17 +60,24 @@ class MyAdverts extends React.Component{
                 <Card>
                     <CardHeader
                         className={classes.header}
-                        title={t('advertiser.my_adverts.title')}
+                        title={
+                            this.props.loading
+                                ?<Skeleton variant='rect' width={200} height={15} style={{backgroundColor:'white',borderRadius:5}}/>
+                                :t('advertiser.my_adverts.title')}
                         action={
                             <div>
-                                <Button
-                                    component={Link}
-                                    to='/newAdverts'
-                                    color='inherit'
-                                    variant='outlined'
-                                    className={classes.new_advert_button} >
-                                    {t('advertiser.my_adverts.new_advert_registration_button')}
-                                </Button>
+                                {
+                                    this.props.loading
+                                        ?<Skeleton variant='rect' width={150} height={20} style={{backgroundColor:'white',borderRadius:5}}/>
+                                        :<Button
+                                        component={Link}
+                                        to='/newAdverts'
+                                        color='inherit'
+                                        variant='outlined'
+                                        className={classes.new_advert_button} >
+                                        {t('advertiser.my_adverts.new_advert_registration_button')}
+                                    </Button>
+                                }
                                 <IconButton
                                     component={Link}
                                     to='/new_adverts'
@@ -100,68 +106,86 @@ class MyAdverts extends React.Component{
                                        {
                                            this.props.user.map(items=>items.relations.companies.map(company=>(
                                                <Grid item md={12} xs={12} key={company.id}>
-                                                   <Paper elevation={0}>
-                                                       <Typography variant={'h6'} color={"textPrimary"}>
-                                                           {`List of adverts for company ${company.name}`}
-                                                       </Typography>
-                                                       <Grid container spacing={2}>
-                                                           {
-                                                               company.adverts.map(advert=>(
-                                                                   <Grid item md={6} xs={12} key={advert.id}>
-                                                                       <Card>
-                                                                           <CardHeader
-                                                                               className={classes.cards}
-                                                                               title={advert.product_name}
-                                                                               subheader={<span style={{color:grey[600]}}>product</span>}
-                                                                               avatar={<Avatar width={40} height={40}>
-                                                                                   {advert.product_name[0]}</Avatar>}
-                                                                           />
-                                                                           <Divider style={{backgroundColor:grey[400]}}/>
+                                                   <Card elevation={0}>
+                                                       <CardHeader
+                                                        title={`List of adverts for company ${company.name}`}
+                                                        action={<IconButton color='inherit'><MoreHorizVert/></IconButton> }
+                                                       />
+                                                       <CardContent>
+                                                           <Grid container spacing={2}>
+                                                               {
+                                                                   company.adverts.length>0
+                                                                       ?
+                                                                       (
+                                                                           company.adverts.map(advert=>(
+                                                                               <Grid item md={6} xs={12} key={advert.id}>
+                                                                                   <Card>
+                                                                                       <CardHeader
+                                                                                           className={classes.cards}
+                                                                                           title={advert.product_name}
+                                                                                           subheader={<span style={{color:grey[600]}}>{`${advert.views.length} views`}</span>}
+                                                                                           avatar={<Avatar width={40} height={40}>
+                                                                                               {advert.product_name[0]}</Avatar>}
+                                                                                       />
+                                                                                       <Divider style={{backgroundColor:grey[400]}}/>
 
-                                                                           <CardContent className={classes.root}>
-                                                                               <GridList className={classes.gridList}>
-                                                                                   <MediaStatus adverts={advert}/>
-                                                                                   <AdvertPlaces adverts={advert}/>
-                                                                                   <AdvertViews adverts={advert}/>
-                                                                                   <AdvertPayment adverts={advert}/>
-                                                                               </GridList>
-                                                                           </CardContent>
-                                                                           <CardActions style={{display:'flex',justifyContent:'space-around'}}>
-                                                                               <Button
-                                                                                   style={{textTransform:'capitalize'}}
-                                                                                   size='small'
-                                                                                   color='primary'
-                                                                                   variant='text'
-                                                                                   onClick={this.handleClick(advert,'edit')}>
-                                                                                   <EditIcon/>
-                                                                                   <span style={{marginLeft:10}}>Edit</span>
-                                                                               </Button>
+                                                                                       <CardContent className={classes.root}>
+                                                                                           <GridList className={classes.gridList}>
+                                                                                               <MediaStatus adverts={advert}/>
+                                                                                               <AdvertPlaces adverts={advert}/>
+                                                                                               <AdvertViews adverts={advert}/>
+                                                                                               <AdvertPayment adverts={advert}/>
+                                                                                           </GridList>
+                                                                                       </CardContent>
+                                                                                       <CardActions style={{display:'flex',justifyContent:'space-around'}}>
+                                                                                           <Button
+                                                                                               style={{textTransform:'capitalize'}}
+                                                                                               size='small'
+                                                                                               color='primary'
+                                                                                               variant='text'
+                                                                                               onClick={this.handleClick(advert,'edit')}>
+                                                                                               <EditIcon/>
+                                                                                               <span style={{marginLeft:10}}>Edit</span>
+                                                                                           </Button>
 
-                                                                               <Button
-                                                                                   style={{textTransform:'capitalize'}}
-                                                                                   size='small'
-                                                                                   color='primary'
-                                                                                   variant='text'
-                                                                                   onClick={this.handleClick(advert,'remove')}>
-                                                                                   <DeleteForeverIcon/>
-                                                                                   <span style={{marginLeft:10}}>Delete</span>
+                                                                                           <Button
+                                                                                               style={{textTransform:'capitalize'}}
+                                                                                               size='small'
+                                                                                               color='primary'
+                                                                                               variant='text'
+                                                                                               onClick={this.handleClick(advert,'remove')}>
+                                                                                               <DeleteForeverIcon/>
+                                                                                               <span style={{marginLeft:10}}>Delete</span>
+                                                                                           </Button>
+                                                                                           <Button
+                                                                                               style={{textTransform:'capitalize'}}
+                                                                                               size='small'
+                                                                                               color='primary'
+                                                                                               variant={'text'}
+                                                                                               onClick={this.handleClick(advert,'show')}>
+                                                                                               <VisibilityIcon/>
+                                                                                               <span style={{marginLeft:10}}>Show details</span>
+                                                                                           </Button>
+                                                                                       </CardActions>
+                                                                                   </Card>
+                                                                               </Grid>
+                                                                           ))
+                                                                       )
+                                                                       :
+                                                                       (
+                                                                           <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:30}}>
+                                                                               <Typography style={{textAlign:'center'}}>
+                                                                                   {`There is no any advert for company ${company.name}. Start advertising  ${company.name} products now and increase your income`}
+                                                                               </Typography>
+                                                                               <Button color='secondary' variant='outlined' style={{textTransform:'capitalize'}}>
+                                                                                   Start now
                                                                                </Button>
-                                                                               <Button
-                                                                                   style={{textTransform:'capitalize'}}
-                                                                                   size='small'
-                                                                                   color='primary'
-                                                                                   variant={'text'}
-                                                                                   onClick={this.handleClick(advert,'show')}>
-                                                                                   <VisibilityIcon/>
-                                                                                   <span style={{marginLeft:10}}>Show details</span>
-                                                                               </Button>
-                                                                           </CardActions>
-                                                                       </Card>
-                                                                   </Grid>
-                                                               ))
-                                                           }
-                                                       </Grid>
-                                                   </Paper>
+                                                                           </div>
+                                                                       )
+                                                               }
+                                                           </Grid>
+                                                       </CardContent>
+                                                   </Card>
                                                    <Divider style={{marginTop:20}}/>
                                                </Grid>
                                            )))

@@ -10,7 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import LoadingButton from "./widgets/LoadingButton";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
-import AppConsumer from "../../context/AppConsumer";
+import { withRouter } from 'react-router-dom'
 import {API_AUTH_URL} from "../../constants/constants";
 import {set, setRole} from "../../TokenService";
 
@@ -55,7 +55,9 @@ class Login extends React.Component {
             .then((response) => {
                 set(response.token)
                 setRole(JSON.stringify(response.role))
-                this.props.go('Authenticated')
+                setTimeout(()=>{
+                    this.props.history.push('/auth')
+                },2000)
             })
             .catch(onerror=>{
                 if(!onerror.status){
@@ -163,4 +165,4 @@ class Login extends React.Component {
     }
 }
 
-export default AppConsumer(withStyles(signup)(translate('common')(Login)))
+export default withRouter(withStyles(signup)(translate('common')(Login)))

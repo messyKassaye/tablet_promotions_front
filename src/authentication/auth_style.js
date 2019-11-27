@@ -1,4 +1,4 @@
-import {deepOrange, deepPurple, green, red} from "@material-ui/core/colors";
+import {deepOrange, deepPurple, green, grey, red} from "@material-ui/core/colors";
 
 const drawerWidth = 240;
 
@@ -134,7 +134,11 @@ const  authstyle = theme=>({
         color:'white',
         fontSize:'2.5em',
         justifyContent:'center'
-    }
+    },
+    sub_menu:{
+        backgroundColor:grey[800],
+        border:'1px solid #2B2B2B'
+    },
 })
 
 export default authstyle

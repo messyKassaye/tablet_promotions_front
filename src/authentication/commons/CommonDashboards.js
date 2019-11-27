@@ -2,11 +2,7 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import DrawerProfile from "./DrawerProfile";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import {Link} from "react-router-dom";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import IconButton from "@material-ui/core/IconButton";
@@ -26,7 +22,7 @@ import {connect} from "react-redux";
 import {me} from "../state/actions/usersActions";
 import Dashboard from "../advertisers/components/Dashboard";
 import NestedRoute from "../advertisers/components/NestedRoute";
-import Paper from "@material-ui/core/Paper";
+import AdminDrawerMenu from "../admin/components/widgets/AdminDrawerMenu";
 
 class CommonDashboards extends React.Component{
 
@@ -61,6 +57,17 @@ class CommonDashboards extends React.Component{
         }
     }
 
+    menus = (menu)=>{
+        if(this.props.type==='Admin'){
+            return this.adminMenu(menu)
+        }
+    }
+
+    adminMenu = (menu)=>{
+
+        return <AdminDrawerMenu menu={menu}/>
+    }
+
 
     render() {
         const {container} = this.props;
@@ -73,21 +80,7 @@ class CommonDashboards extends React.Component{
                         <DrawerProfile/>
                     </Toolbar>
                 </AppBar>
-
-                <List>
-                    {this.props.menu.map((item) => (
-                        <ListItem
-                            button
-                            component={Link}
-                            to={item.route}
-                            key={item.name}
-                            onClick={this.handleDrawerToggle(false,item.name)}
-                            className={classes.parent}>
-                            <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                            <ListItemText primary={t(`common.advertiser_menu.${item.name}`)}/>
-                        </ListItem>
-                    ))}
-                </List>
+                {this.menus(this.props.menu)}
                 <Divider/>
             </div>
         )

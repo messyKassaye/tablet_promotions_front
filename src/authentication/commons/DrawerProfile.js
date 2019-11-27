@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Link,Redirect} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
@@ -13,7 +13,7 @@ import {me} from "../state/actions/usersActions";
 import authstyle from "../auth_style";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {logout} from "../../TokenService";
-import AppConsumer from "../../context/AppConsumer";
+
 class DrawerProfile extends React.Component{
      constructor(props) {
          super(props)
@@ -41,7 +41,10 @@ class DrawerProfile extends React.Component{
 
      logout = ()=>{
          logout()
-         this.props.go('Home')
+        setTimeout(()=>{
+            this.props.history.push('/')
+            window.location.reload()
+        },1000)
      }
 
      render() {
@@ -50,9 +53,11 @@ class DrawerProfile extends React.Component{
              <div>
                  {
                   this.props.loading ?
-                      <React.Fragment>
+                      <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                           <Skeleton variant='circle' style={{backgroundColor:'white'}} width={40} height={40}/>
-                      </React.Fragment>
+                          <Skeleton variant='rect' style={{backgroundColor:'white',marginLeft:10,borderRadius:5}} width={120} height={10} />
+                          <Skeleton variant='circle' style={{backgroundColor:'white',marginLeft:10}} width={10} height={10}/>
+                      </div>
                       :this.props.user.map(items=>(
                          <div key={items.type} className={classes.avatarLayout}>
                              {
@@ -109,4 +114,4 @@ const mapStateToProps = state=> ({
     loading:state.userData.loading
 })
 
- export default AppConsumer(withStyles(authstyle)(connect(mapStateToProps,{me})(DrawerProfile)))
+ export default withRouter(withStyles(authstyle)(connect(mapStateToProps,{me})(DrawerProfile)))

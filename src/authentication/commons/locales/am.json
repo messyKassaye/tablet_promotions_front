@@ -5,6 +5,16 @@
       "My Companies": "ድርጅቶቼ",
       "My adverts": "ማስታዎቂያዎች",
       "Settings": "ማስተካከያ"
+    },
+    "admin_menu": {
+      "Dashboard": "ወደ ዋናው",
+      "Banks": "ባንኮች",
+      "Cars": "መኪኖች",
+      "Medias": "ምስሎች",
+      "Users": "ተጠቃሚዎች",
+      "Advertisers": "አስተዋዋቂዎች",
+      "Drivers": "ሾፌሮች",
+      "Settings": "ማስተካከያ"
     }
   }
 }

@@ -189,7 +189,8 @@ function HomeBar({t}) {
                                 Menus.map((items,index)=>{
                                         if(items.name!=='Home'){
                                             return (
-                                                <Button key={items.name} variant={items.name==='Sign up'?'outlined':'text'} component={Link} to={items.to} className={classes.buttons} color='inherit'>{t(`home.${items.name}`)}</Button>
+                                                <Button key={items.name} variant={items.name==='Sign up'?'outlined':'text'}
+                                                        component={Link} to={items.to} className={classes.buttons} color='inherit'>{t(`home.${items.name}`)}</Button>
                                             )
                                         }
                                     }

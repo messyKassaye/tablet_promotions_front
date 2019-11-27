@@ -5,11 +5,9 @@ import HomeBar from "./components/HomeBar";
 const HomeRoutes = ()=>{
 
     return (
-        <Router>
-            <Switch>
-                <Route path='/' component={HomeBar}/>
-            </Switch>
-        </Router>
+        <div>
+            Home
+        </div>
     )
 }
 

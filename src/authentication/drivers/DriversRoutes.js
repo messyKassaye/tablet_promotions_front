@@ -14,7 +14,7 @@ class  DriverRoute extends React.Component{
         return  (
             <Router>
                 <Switch>
-                    <Route  path='/' component={DriversDashboard}/>
+                    <Route  path='/auth' component={DriversDashboard}/>
                 </Switch>
             </Router>
         )

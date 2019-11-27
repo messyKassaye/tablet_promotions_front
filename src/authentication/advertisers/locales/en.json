@@ -26,8 +26,19 @@
       "last": ""
     },
     "my_adverts": {
-      "title": "የማስታዎቂያዎች ዝርዝር",
-      "new_advert_registration_button": "አድስ ማስታዎቂያ መዝግብ"
+      "title": "List of adverts",
+      "new_advert_registration_button": "Add new advert"
+    },
+    "new_company": {
+      "title": "Companies ",
+      "register_new_company": "Register new company",
+      "form": {
+        "title": "New company registration",
+        "company_name": "Company name",
+        "phone": "Company phone no",
+        "website": "Company website if you have any",
+        "register_btn": "Register"
+      }
     }
   }
 }

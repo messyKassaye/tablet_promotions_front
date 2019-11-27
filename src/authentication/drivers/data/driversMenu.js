@@ -9,37 +9,37 @@ import React from "react";
 const driverMenu = [
     {
         name:'Dashboard',
-        route:'/',
+        route:'/auth',
         icon:<DashboardIcon/>
     },
     {
         name:'Adverts',
-        route:'/adverts',
+        route:'/auth/adverts',
         icon: <VideocamIcon/>
     },
     {
         name:'My cars',
-        route:'/my_cars',
+        route:'/auth/my_cars',
         icon: <DirectionsCarIcon/>
     },
     {
         name:'My tablets',
-        route:'/my_tablets',
+        route:'/auth/my_tablets',
         icon:<TabletIcon/>
     },
     {
         name:'Finance',
-        route:'/finance',
+        route:'/auth/finance',
         icon:<AttachMoneyIcon/>
     },
     {
         name:'Ekub',
-        route:'/ekub',
+        route:'/auth/ekub',
         icon:<EventIcon/>
     },
     {
         name:'Settings',
-        route:'/settings',
+        route:'/auth/settings',
         icon:<SettingIcon/>
     }
 ]

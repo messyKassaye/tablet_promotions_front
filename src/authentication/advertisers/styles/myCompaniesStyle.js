@@ -21,6 +21,22 @@ const myCompanyStyle = theme=>(
             backgroundColor:"#3C4252",
             color: 'white'
         },
+        boxes:{
+            backgroundColor:'#31418F',
+            color:'white'
+        },
+        gridList: {
+            flexWrap: 'nowrap',
+            flexDirection:'row',
+            width: '100%'
+            // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+        },
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'start',
+            backgroundColor: 'transparent',
+        },
     }
 )
 

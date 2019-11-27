@@ -24,6 +24,13 @@ export const setRole = (role)=>{
     localStorage.setItem('role',role)
 }
 
+export  const isAuthenticated = ()=>{
+    if(localStorage.getItem('token')){
+        return true
+    }
+    return  false
+}
+
 export const getRole = ()=>{
     return localStorage.getItem('role')
 }

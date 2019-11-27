@@ -7,7 +7,7 @@ const AdminRoutes =()=>{
     return (
         <Router>
             <Switch>
-                <Route path='/' component={AdminDashboard()}/>
+                <Route path='/' component={AdminDashboard}/>
             </Switch>
         </Router>
     )
