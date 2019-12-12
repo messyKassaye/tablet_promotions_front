@@ -50,7 +50,7 @@ class Dashboard extends React.Component{
 
                 </Grid>
                 <Grid container spacing={2}>
-                    <Grid item md={12} className={classes.small_device}>
+                    <Grid item md={12} xs={12} className={classes.small_device}>
                      <AdvertInTable/>
                     </Grid>
                 </Grid>

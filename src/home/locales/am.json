@@ -27,7 +27,7 @@
           "translation": {
             "Driver": "ሾፌር",
             "Advertiser": "ለማስተዋወቅ",
-            "Advertiser Engineer": "የማስታወቂያ ባለሙያ"
+            "Advertise Engineer": "የማስታወቂያ ባለሙያ"
           }
         },
         "button": "መዝግብ"
@@ -40,7 +40,7 @@
         "isEmail": "እያስገቡ ያሉት ትክክለኛ ኢሜይል አድራሻ አይደለም። ለምሳሌ abebe@organazationname.com መሆን አለበት",
         "password": "እባክዎ የይለፍ ቃልዎን ያስገቡ",
         "passwordNotMatched": "የይለፍ ቃልዎ ቀድመው ካስገቡት ጋር እኩል አይደለም",
-        "networkError": "የተሳሳተ ነገር አለ። እባክዎ ኔትዎርክ መኖሩን ያረጋግጡ",
+        "networkerror": "የተሳሳተ ነገር አለ። እባክዎ ኔትዎርክ መኖሩን ያረጋግጡ",
         "some_one_already_registered_by_this_email_address": "በዚህ ኢሜይል አድራሻ ቀድሞ የተመዘገበ ሰው ስላለ የኢሜይል አድራሻዎን ይቀይሩና ይመዝገቡ",
         "some_one_already_registered_by_this_phone_number": "በዚህ ስልክ ቁጥር የተመዘገበበት ሰው አለ፤ ሌላ ስልክ ቁጥር ይጠቀሙና ይመዝገቡ"
 

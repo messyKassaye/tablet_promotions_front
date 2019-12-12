@@ -7,6 +7,7 @@ import BankRegistrationDialog from "./drivers/dialogs/bankRegistrationDialog";
 import WithdrawalRequestDialog from "./drivers/dialogs/withdrawalRequestDialog";
 import AdvertPaymentConfirmDialog from "./advertisers/dialogs/advertPaymentConfirmdialog";
 import DeleteAdvertDialog from "./advertisers/dialogs/deleteAdvertConfirmDialog";
+import MainDialog from "./admin/dialogs/MainDialog";
 
 let Component = null
 class Authenticated extends React.Component{
@@ -34,6 +35,7 @@ class Authenticated extends React.Component{
                 <BankRegistrationDialog/>
                 <WithdrawalRequestDialog/>
                 <AdvertPaymentConfirmDialog/>
+                <MainDialog/>
                 <DeleteAdvertDialog/>
                 <Router>
                     <Component/>

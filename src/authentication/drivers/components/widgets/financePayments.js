@@ -123,31 +123,41 @@ class FinancePayments extends React.Component{
                                                 </TableHead>
                                                 <TableBody>
                                                     {
-                                                        this.props.payments.map(row=>{
-                                                            return (
-                                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                                                    {columns.map(column => {
-                                                                        const value = row[column.id];
-                                                                        if(column.id==='detail'){
-                                                                            return (
-                                                                                <TableCell key={column.id} align={column.align}>
-                                                                                    {
-                                                                                        <Button color='secondary' variant='outlined'>
-                                                                                            Show
-                                                                                        </Button>
-                                                                                    }
-                                                                                </TableCell>
-                                                                            );
-                                                                        }
-                                                                        return (
-                                                                            <TableCell key={column.id} align={column.align}>
-                                                                                {value}
-                                                                            </TableCell>
-                                                                        );
-                                                                    })}
-                                                                </TableRow>
+                                                        this.props.payments.length>0
+                                                        ?
+                                                            (
+                                                                this.props.payments.map(row=>{
+                                                                    return (
+                                                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                                                            {columns.map(column => {
+                                                                                const value = row[column.id];
+                                                                                if(column.id==='detail'){
+                                                                                    return (
+                                                                                        <TableCell key={column.id} align={column.align}>
+                                                                                            {
+                                                                                                <Button color='secondary' variant='outlined'>
+                                                                                                    Show
+                                                                                                </Button>
+                                                                                            }
+                                                                                        </TableCell>
+                                                                                    );
+                                                                                }
+                                                                                return (
+                                                                                    <TableCell key={column.id} align={column.align}>
+                                                                                        {value}
+                                                                                    </TableCell>
+                                                                                );
+                                                                            })}
+                                                                        </TableRow>
+                                                                    )
+                                                                })
                                                             )
-                                                        })
+                                                        :
+                                                            (
+                                                               <div>
+                                                                   <Typography style={{textAlign:'center'}}>There is no payment data</Typography>
+                                                               </div>
+                                                            )
                                                     }
                                                 </TableBody>
                                             </Table>

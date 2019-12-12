@@ -7,7 +7,7 @@ import NewAderts from "./NewAderts";
 import BankTransactions from "./widgets/bankTransactions";
 import NewCompany from "./NewCompany";
 import Setting from "../../commons/Setting";
-class NestedRoute extends React.Component{
+class AdvertiserNestedRoute extends React.Component{
 
     constructor(props) {
         super(props);
@@ -33,4 +33,4 @@ class NestedRoute extends React.Component{
 
 }
 
-export default NestedRoute
+export default AdvertiserNestedRoute

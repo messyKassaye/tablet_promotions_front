@@ -21,8 +21,12 @@ import {translate} from "react-i18next";
 import {connect} from "react-redux";
 import {me} from "../state/actions/usersActions";
 import Dashboard from "../advertisers/components/Dashboard";
-import NestedRoute from "../advertisers/components/NestedRoute";
+import AdvertiserNestedRoute from "../advertisers/components/AdvertiserNestedRoute";
 import AdminDrawerMenu from "../admin/components/widgets/AdminDrawerMenu";
+import AdminNestedRoute from "../admin/components/AdminNestedRoute";
+import Skeleton from "@material-ui/lab/Skeleton";
+import {grey} from "@material-ui/core/colors";
+import AdvertiserMenu from "../advertisers/components/widgets/AdvertiserMenu";
 
 class CommonDashboards extends React.Component{
 
@@ -53,13 +57,19 @@ class CommonDashboards extends React.Component{
 
     renderComponent = ()=>{
         if(this.props.type==='Advertiser'){
-            return <NestedRoute/>
+            return <AdvertiserNestedRoute/>
+        }
+        if(this.props.type==='Admin'){
+            return <AdminNestedRoute/>
         }
     }
 
     menus = (menu)=>{
         if(this.props.type==='Admin'){
-            return this.adminMenu(menu)
+            return <AdminDrawerMenu menu={menu}/>
+        }
+        if(this.props.type==='Advertiser'){
+            return <AdvertiserMenu menu={menu}/>
         }
     }
 
@@ -80,6 +90,22 @@ class CommonDashboards extends React.Component{
                         <DrawerProfile/>
                     </Toolbar>
                 </AppBar>
+                {
+                    this.props.loading
+                        ?
+                        (<Skeleton variant='rect'
+                                   style={{marginLeft:20,marginTop:20,backgroundColor:'white',borderRadius:5}} width={100} height={15}/>)
+                        :
+                        (
+
+                            <Typography style={{paddingLeft:20,paddingTop:20,color:grey[500]}}>
+                                {this.props.user.map(items=>{
+                                    return items.relations.role[0].name
+                                })
+                                }
+                            </Typography>
+                        )
+                }
                 {this.menus(this.props.menu)}
                 <Divider/>
             </div>

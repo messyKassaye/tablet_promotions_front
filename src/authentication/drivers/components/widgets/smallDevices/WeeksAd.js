@@ -50,18 +50,29 @@ class WeeksAd extends React.Component{
                                         <Divider className={classes.dividers}/>
                                         <CardContent>
                                             {
-                                                <div style={{display:'flex',flexDirection:'column'}}>
-                                                <Typography>{`${t('driver.adverts.week.plate_number')}: ${this.fileterByWeek(car,car.week.week_no).length}`}</Typography>
-                                                <Typography variant='h5' gutterBottom style={{color:'#242424'}}>Media</Typography>
-                                                <div style={{display:'flex',flexDirection:'row',justifyContent:'start'}}>
-                                                <Typography>{`${t('driver.adverts.week.video')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Video')}`}</Typography>
-                                                <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
-                                                <Typography>{`${t('driver.adverts.week.audio')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Audio')}`}</Typography>
-                                                <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
-                                                <Typography>{`${t('driver.adverts.week.image')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Image')}`}</Typography>
+                                                car.week===null
+                                                ?
+                                                    (
+                                                        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                                            <Typography>No adverts in this week.</Typography>
+                                                        </div>
+                                                    )
+                                                :
+                                                    (
+                                                        <div style={{display:'flex',flexDirection:'column'}}>
+                                                            <Typography>{`${t('driver.adverts.week.plate_number')}: ${this.fileterByWeek(car,car.week.week_no).length}`}</Typography>
+                                                            <Typography variant='h5' gutterBottom style={{color:'#242424'}}>Media</Typography>
+                                                            <div style={{display:'flex',flexDirection:'row',justifyContent:'start'}}>
+                                                                <Typography>{`${t('driver.adverts.week.video')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Video')}`}</Typography>
+                                                                <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
+                                                                <Typography>{`${t('driver.adverts.week.audio')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Audio')}`}</Typography>
+                                                                <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
+                                                                <Typography>{`${t('driver.adverts.week.image')}: ${this.mediaType(this.fileterByWeek(car,car.week.week_no),'Image')}`}</Typography>
 
-                                                </div>
-                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+
                                             }
                                         </CardContent>
                                     </Card>

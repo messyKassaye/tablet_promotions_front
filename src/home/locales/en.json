@@ -27,7 +27,7 @@
           "translation": {
             "Driver": "Driver",
             "Advertiser": "Advertiser",
-            "Advertiser Engineer": "Advertiser engineer"
+            "Advertise Engineer": "Advertiser engineer"
           }
         },
         "button": "Sign up"
@@ -40,7 +40,7 @@
         "email": "Please enter email address",
         "isEmail": "Incorrect email address",
         "passwordNotMatched": "password is not matched",
-        "networkError": "Something is not wright.Please check your network",
+        "networkerror": "Something is not wright.Please check your network",
         "some_one_already_registered_by_this_email_address": "Some one already registered by this email address",
         "some_one_already_registered_by_this_phone_number": "Some one already registered by this Phone number. please try another one"
       }

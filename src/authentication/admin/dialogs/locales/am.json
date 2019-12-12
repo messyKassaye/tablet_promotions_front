@@ -1,0 +1,13 @@
+{
+  "am": {
+      "addNewBank": {
+        "Add new bank": "አድስ ባንክ መዝግብ",
+        "bankName": "የባንኩን ስም ያስገቡ",
+        "holderName": "የአካውንቱ ባለቤት ሙሉ ስም",
+        "accountNumber": "ሂሳብ ቁጥር",
+        "addNewBakButton": "መዝግብ",
+        "abbreviation": "የባንኩ ቅጽል ስም",
+        "logo_label": "የባንኩን ሎጎ ያስገቡ"
+      }
+  }
+}

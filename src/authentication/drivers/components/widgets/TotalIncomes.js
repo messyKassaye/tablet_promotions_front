@@ -38,7 +38,17 @@ class TotalIncomes extends React.Component{
 
                                     {
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            {`${this.props.deposit.deposit} ETB`}
+                                            {
+                                                this.props.deposit.deposit > 0
+                                                    ?
+                                                    (
+                                                        `${this.props.deposit.deposit} ETB`
+                                                    )
+                                                    :
+                                                    (
+                                                        `0.00 ETB`
+                                                    )
+                                            }
                                         </Typography>
                                     }
                                     <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>

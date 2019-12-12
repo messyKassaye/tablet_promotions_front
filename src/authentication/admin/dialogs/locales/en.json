@@ -1,0 +1,13 @@
+{
+  "en": {
+    "addNewBank": {
+      "Add new bank": "Add new bank",
+      "bankName": "Bank name",
+      "holderName": "Account holder name",
+      "accountNumber": "Account number",
+      "addNewBakButton": "Register",
+      "abbreviation": "Abbreviation",
+      "logo_label": "Banks logo"
+    }
+  }
+}

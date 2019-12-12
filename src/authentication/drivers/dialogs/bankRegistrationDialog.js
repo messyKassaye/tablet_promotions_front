@@ -169,7 +169,7 @@ class BankRegistrationDialog extends React.Component{
                     onSubmit={this.handleSubmit}
                     >
                         <FormControl  className={classes.formControl}>
-                            <InputLabel htmlFor="demo-controlled-open-select">Select transport Service type</InputLabel>
+                            <InputLabel htmlFor="demo-controlled-open-select">Select your bank</InputLabel>
                             <Select
                                 name='bank_id'
                                 value={this.state.selectValue}

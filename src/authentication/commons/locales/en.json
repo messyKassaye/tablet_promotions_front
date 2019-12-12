@@ -5,6 +5,17 @@
       "My Companies": "My Companies",
       "My adverts": "My adverts",
       "Settings": "Settings"
+    },
+    "admin_menu": {
+      "Dashboard": "Home",
+      "Roles": "Roles",
+      "Banks": "Banks",
+      "Cars": "Cars",
+      "Medias": "Medias",
+      "Users": "Users",
+      "Advertisers": "Advertisers",
+      "Drivers": "Drivers",
+      "Settings": "Settings"
     }
   }
 }

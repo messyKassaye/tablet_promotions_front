@@ -1,17 +1,17 @@
-import React from "react";
+import React, {Component} from 'react';
 import ListItem from "@material-ui/core/ListItem";
 import {Link} from "react-router-dom";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
-import withStyles from "@material-ui/core/styles/withStyles";
-import authstyle from "../../../auth_style";
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import {translate} from "react-i18next";
 import Collapse from "@material-ui/core/Collapse";
-class AdminDrawerMenu extends React.Component{
+import List from "@material-ui/core/List";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import withStyles from "@material-ui/core/styles/withStyles";
+import authstyle from "../../../auth_style";
 
+class AdvertiserMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -35,9 +35,9 @@ class AdminDrawerMenu extends React.Component{
                             button
                             component={Link}
                             key={ subOption.name }>
-                                <ListItemText
-                                    inset
-                                    primary={subOption.name}/>
+                            <ListItemText
+                                inset
+                                primary={subOption.name}/>
                         </ListItem>
                     </div>
                 )
@@ -74,7 +74,7 @@ class AdminDrawerMenu extends React.Component{
             <List>
                 {this.props.menu.map((item) => (
                     item.children
-                    ?
+                        ?
                         (
                             <div key={ item.name }>
                                 <ListItem
@@ -82,7 +82,7 @@ class AdminDrawerMenu extends React.Component{
                                     onClick={ () => this.handleClick( item.name ) }
                                     className={classes.parent}>
                                     <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                                    <ListItemText primary={t(`common.admin_menu.${item.name}`)}/>
+                                    <ListItemText primary={t(`common.advertiser_menu.${item.name}`)}/>
                                     { this.state[ item.name ] ?
                                         <ExpandLess /> :
                                         <ExpandMore />
@@ -98,7 +98,7 @@ class AdminDrawerMenu extends React.Component{
                                 </Collapse>
                             </div>
                         )
-                    :
+                        :
                         (
                             <ListItem
                                 button
@@ -107,7 +107,7 @@ class AdminDrawerMenu extends React.Component{
                                 key={item.name}
                                 className={classes.parent}>
                                 <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                                <ListItemText primary={t(`common.admin_menu.${item.name}`)}/>
+                                <ListItemText primary={t(`common.advertiser_menu.${item.name}`)}/>
                             </ListItem>
                         )
                 ))}
@@ -118,4 +118,4 @@ class AdminDrawerMenu extends React.Component{
 
 }
 
-export default translate('common')(withStyles(authstyle)(AdminDrawerMenu))
+export default translate('common')(withStyles(authstyle)(AdvertiserMenu))
