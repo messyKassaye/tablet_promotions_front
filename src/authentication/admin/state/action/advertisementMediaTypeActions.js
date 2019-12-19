@@ -1,31 +1,35 @@
-import {FETCH_ADMIN_BANKS, STORE_NEW_BANK, UPDATE_BANK} from "../actionConstants/adminActionConstants";
+import {
+    FETCH_ADVERT_MEDIA_TYPE,
+    STORE_ADVERT_MEDIA_TYPE,
+    UPDATE_ADVERT_MEDIA_TYPE
+} from "../actionConstants/adminActionConstants";
 import axios from 'axios'
 import {ADMIN_API_URL} from "../../../../constants/constants";
+const PATH = 'advertisement_media'
 
-const PATH='banks'
-
-export const fetchAdminBanks = ()=>dispatch=>{
+export const fetchAdvertMediaType = ()=>dispatch=>{
     axios.get(`${ADMIN_API_URL}${PATH}`)
         .then(response=>response.data)
         .then(res=>dispatch({
-            type:FETCH_ADMIN_BANKS,
+            type:FETCH_ADVERT_MEDIA_TYPE,
             payload: res.data
         }))
 }
 
-export const updateBank = (data,id)=>dispatch=>{
+export const updateAdvertMedia = (data,id)=>dispatch=>{
     axios.put(`${ADMIN_API_URL}${PATH}/${id}`,data)
         .then(response=>response.data)
         .then(res=>dispatch({
-            type:UPDATE_BANK,
+            type:UPDATE_ADVERT_MEDIA_TYPE,
             payload:res
         }))
 }
-export const storeBank = (data)=>dispatch=>{
+
+export const storeAdvertMedia = data=>dispatch=>{
     axios.post(`${ADMIN_API_URL}${PATH}`,data)
         .then(response=>response.data)
         .then(res=>dispatch({
-            type:STORE_NEW_BANK,
+            type:STORE_ADVERT_MEDIA_TYPE,
             payload:res
         }))
 }

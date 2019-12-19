@@ -1,32 +1,35 @@
 import React, {Component} from 'react';
-import {TextField} from "@material-ui/core";
-import withStyles from "@material-ui/core/styles/withStyles";
-import adminMainDialogStyle from "../styles/mainDialogStyle";
-import LoadingButton from "../../../../home/components/widgets/LoadingButton";
-import {bankAccountStore} from "../../state/action/bankAccountSetterAction";
-import {showMainDialog} from "../../state/action/dialogAction";
 import {connect} from "react-redux";
+import {showMainDialog} from "../../state/action/dialogAction";
+import adminMainDialogStyle from "../styles/mainDialogStyle";
+import withStyles from "@material-ui/core/styles/withStyles";
 import {translate} from "react-i18next";
+import {TextField} from "@material-ui/core";
+import LoadingButton from "../../../../home/components/widgets/LoadingButton";
+import {storeCarCategory,updateCarCategory} from "../../state/action/carCategoryAction";
 import Typography from "@material-ui/core/Typography";
 import {green} from "@material-ui/core/colors";
-class BankAccountSetter extends Component {
+
+class AddNewCarCategory extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             formData:{
-                'bank_id':'',
-                'account_holder_full_name':'',
-                'account_number':''
+                'parent_id':0,
+                'name':'',
+                'number_of_people':0,
+                'description':'',
+                'image':''
             },
             submitted: false,
             loading: false,
             finished: false,
         }
     }
-    
-    handleChange = (event)=>{
+
+    handleChange = event=>{
         const {formData} = this.state
-        formData[event.target.name] =event.target.value
+        formData[event.target.name]=event.target.value
         this.setState(formData)
     }
 
@@ -37,25 +40,34 @@ class BankAccountSetter extends Component {
             loading: true
         })
         const {formData} = this.state
-        this.props.bankAccountStore(formData)
-    }
+        if(this.props.form.type==='Edit'){
+            console.log(formData)
+           this.props.updateCarCategory(formData,this.props.form.data.id)
+        }else {
+            this.props.storeCarCategory(formData)
+        }
 
-    componentDidMount() {
-        const {formData} = this.state
-        formData['bank_id'] = this.props.bank.id
-        this.setState(formData)
 
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.response.status){
             this.setState({
+                loading: false,
+                finished: false,
                 submitted: false,
-                loading: false
             })
             setTimeout(()=>{
                 this.props.showMainDialog({'show':false,'page':null,'title':'',actions:{on:false,path:'',id:''}})
             },2000)
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.form.type==='Edit'){
+            const {formData} = this.state
+            formData['name'] = this.props.form.data.name
+            this.setState(formData)
         }
     }
 
@@ -65,27 +77,18 @@ class BankAccountSetter extends Component {
         const {loading} = this.state;
         const {finished} = this.state
         const setLoading = !finished && loading;
-        const isEnabled = formData.account_holder_full_name.length > 0 && formData.account_number.length > 0
+        const isEnabled = formData.name.length > 0
 
         return (
             <form className={classes.form} onSubmit={this.handleSubmit}>
                 <Typography style={{color:green[500]}}>{this.props.response.message}</Typography>
                 <TextField
-                    className={classes.textInput}
-                    placeholder='Account folder full name'
-                 name='account_holder_full_name'
-                 value={this.state.formData.account_holder_full_name}
+                 placeholder='Category name'
+                 name='name'
+                 value={this.state.formData.name}
                  onChange={this.handleChange}
+                 className={classes.textInput}
                 />
-
-                <TextField
-                    className={classes.textInput}
-                 placeholder='Account number'
-                 name='account_number'
-                 value={this.state.formData.account_number}
-                 onChange={this.handleChange}
-                />
-
                 <LoadingButton
                     color="primary"
                     variant="contained"
@@ -99,15 +102,14 @@ class BankAccountSetter extends Component {
                         t('dialog.addNewBank.addNewBakButton')
                     }
                 </LoadingButton>
-
             </form>
         );
     }
 }
 
 const mapStateToProps = state=>({
-    response: state.authReducer.adminReducers.bankAccountReducer.response
+    response:state.authReducer.adminReducers.categoryReducer.response
 })
 
-export default connect(mapStateToProps,{bankAccountStore,showMainDialog})
-(translate('common')(withStyles(adminMainDialogStyle)(BankAccountSetter)));
+export default connect(mapStateToProps,{showMainDialog,storeCarCategory,updateCarCategory})
+(withStyles(adminMainDialogStyle)(translate('common')(AddNewCarCategory)));

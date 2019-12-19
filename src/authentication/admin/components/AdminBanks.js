@@ -14,6 +14,9 @@ import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from '@material-ui/icons/Edit'
+import AddNewBank from "../dialogs/component/AddNewBank";
+import DeleteMessage from "../dialogs/component/DeleteMessage";
+import BankAccountSetter from "../dialogs/component/BankAccountSetter";
 class AdminBanks extends Component {
 
     constructor(props) {
@@ -22,15 +25,15 @@ class AdminBanks extends Component {
     }
 
     addNewBank = ()=>{
-        this.props.showMainDialog({'show':true,'page':'AddNewBank',title:'Add new bank',actions:{on:false,path:'',id:''}})
+        this.props.showMainDialog({'show':true,'page':<AddNewBank form={{type:'Form',data:null}}/>,title:'Add new bank',actions:{on:false,path:'',id:''}})
     }
 
     componentDidMount() {
             this.props.fetchAdminBanks()
     }
 
-    handleButtonClick = (eventType,titles,bank)=>{
-        this.props.showMainDialog({'show':true,'page':eventType,title: titles,data:bank,actions:{on:false,path:'',id:''}})
+    handleButtonClick = (eventType,titles,action)=>{
+        this.props.showMainDialog({'show':true,'page':eventType,title: titles,actions:action})
     }
 
     render() {
@@ -71,7 +74,7 @@ class AdminBanks extends Component {
                                                                <div style={{display:'flex',alignItems:'center'}}>
                                                                    <Typography>Accounts: </Typography>
                                                                    {
-                                                                       bank.accounts.length>0
+                                                                       bank.accounts !== null
                                                                        ?
                                                                            (
                                                                                <IconButton color='inherit'>
@@ -82,7 +85,7 @@ class AdminBanks extends Component {
                                                                            (
                                                                                <div>
                                                                                    <IconButton
-                                                                                       onClick={()=>this.handleButtonClick('BankSetter',`Set your account`,bank)}
+                                                                                       onClick={()=>this.handleButtonClick(<BankAccountSetter bank={bank}/>,`Set your account for ${bank.bank_name}`,bank)}
                                                                                        color='inherit'>
                                                                                        <AddIcon/>
                                                                                    </IconButton>
@@ -93,12 +96,13 @@ class AdminBanks extends Component {
                                                                </div>
                                                                <div style={{display:'flex',flexDirection:'column'}}>
                                                                    {
-                                                                       bank.accounts.length>0
+                                                                       bank.accounts !==null
                                                                        ?
                                                                            (
-                                                                               bank.accounts.map(item=>(
-                                                                                   <Typography>{`Account holder full name: ${item.account_holder_full_name}`}</Typography>
-                                                                               ))
+                                                                               <div style={{display:'flex',flexDirection:'column'}}>
+                                                                                   <Typography>{`Account holder full name: ${bank.accounts.account_holder_full_name}`}</Typography>
+                                                                                   <Typography>{`Account number: ${bank.accounts.account_number}`}</Typography>
+                                                                               </div>
                                                                            )
                                                                        :
                                                                            (
@@ -111,7 +115,9 @@ class AdminBanks extends Component {
 
                                                                <Button
                                                                    onClick=
-                                                                       {()=>this.handleButtonClick('Remove',`Are you sure you want to remove ${bank.bank_name}`,bank)}
+                                                                       {()=>this.handleButtonClick(
+                                                                           <DeleteMessage message={`Are you sure you want to remove ${bank.bank_name}`}/>,
+                                                                           'Confirmation',{on:true,path:'banks',id:bank.id})}
                                                                    variant='text'
                                                                    color='inherit'
                                                                    style={{textTransform:'capitalize'}}>
@@ -119,7 +125,7 @@ class AdminBanks extends Component {
                                                                </Button>
 
                                                                <Button
-                                                                   onClick={()=>this.handleButtonClick('BankEditor',`Edit ${bank.bank_name}`,bank)}
+                                                                   onClick={()=>this.handleButtonClick(<AddNewBank form={{type:'Edit',data:bank}}/>,`Edit ${bank.bank_name}`,bank)}
                                                                    variant='outlined'
                                                                    color='inherit'
                                                                    style={{textTransform:'capitalize'}}>

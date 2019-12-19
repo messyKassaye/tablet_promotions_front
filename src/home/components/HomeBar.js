@@ -28,6 +28,7 @@ import Flag from 'react-world-flags'
 import i18next from "i18next";
 import {translate} from "react-i18next";
 import NotFound from "../../errors/NotFound";
+import Footer from "./footer";
 
 function HomeBar({t}) {
    const  classes = useStyles();

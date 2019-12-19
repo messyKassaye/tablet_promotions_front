@@ -19,7 +19,7 @@ class Notifications extends React.Component{
             },
         }))(Badge);
         return (
-            <div style={{marginLeft:25}}>
+            <div>
                 <IconButton
                 color='inherit'
                 >

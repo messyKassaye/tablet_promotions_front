@@ -2,9 +2,11 @@ import React from "react";
 import {translate} from "react-i18next";
 import { Fade } from 'react-slideshow-image';
 import slide from "../data/slide";
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const fadeProperties = {
-    duration: 5000,
+    duration: 6000,
     transitionDuration: 500,
     infinite: true,
     arrows:false,
@@ -16,8 +18,19 @@ const Slider =({t})=>{
             <Fade {...fadeProperties}>
                 {
                     slide.map((item,index)=>(
-                        <div key={item.name} className="each-fade">
-                            <h2 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.${item.name}`)}</h2>
+                        <div key={item.name} className="each-fade" style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                            <h1 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.slider.${item.name}`)}</h1>
+                           <div style={{textAlign:'center',display:"flex",justifyContent:'center',flexDirection:'column'}}>
+                               <h3 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.slider.${item.description}`)}</h3>
+                               <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                                   <Button color='inherit' variant='text' style={{marginRight:20}}>
+                                       {t('home.slider.watch_video')}
+                                   </Button>
+                                   <Button component={Link} to='/signup'  variant='outlined' color='inherit'>
+                                       {t('home.slider.start_button')}
+                                   </Button>
+                               </div>
+                           </div>
                         </div>
                     ))
                 }

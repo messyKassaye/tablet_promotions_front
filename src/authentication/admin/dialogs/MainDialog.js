@@ -13,6 +13,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {translate} from "react-i18next";
 import {DialogActions, Typography} from "@material-ui/core";
 import {deleteAction} from "../state/action/deleteAction";
+import {green} from "@material-ui/core/colors";
+import LoadingButton from "../../../home/components/widgets/LoadingButton";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -24,9 +26,11 @@ class MainDialog extends Component {
         this.state = {
             open:false,
             fullScreen: false,
-            submitted:false,
-            loading:false,
-            showStatus:false
+            submitted: false,
+            loading: false,
+            finished: false,
+            showStatus:false,
+            deletingMessage:''
         }
 
 
@@ -42,13 +46,18 @@ class MainDialog extends Component {
     }
 
     deleteItem = (path,id)=>{
+        this.setState({
+            submitted: true,
+            loading: true,
+            deletingMessage:'Deleting on progress'
+        })
       this.props.deleteAction(path,id)
     }
     componentDidMount() {
         let deviceWidth = window.innerWidth;
         if(deviceWidth<=760){
             this.setState({
-                fullScreen:true
+                fullScreen:true,
             })
         }else {
             this.setState({
@@ -59,6 +68,12 @@ class MainDialog extends Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.response.status){
+            this.setState({
+                loading: false,
+                finished: false,
+                submitted: false,
+                deletingMessage:""
+            })
             setTimeout(()=>{
                 this.handleClose()
             },2000)
@@ -67,6 +82,10 @@ class MainDialog extends Component {
 
     render() {
         const {classes,t} = this.props
+        const {finished} = this.state
+        const {loading} = this.state;
+        const setLoading = !finished && loading;
+        const isEnabled = true
         return (
             <Dialog
                 fullScreen={this.state.fullScreen}
@@ -97,14 +116,35 @@ class MainDialog extends Component {
                     ?
                         (
                             <DialogActions>
+                                <div>
+                                    {
+                                        this.props.response.status
+                                        ?
+                                            (
+                                                <Typography style={{color:green[500]}}>
+                                                    Successfully deleted
+                                                </Typography>
+                                            )
+                                        :
+                                            (<Typography>{this.state.deletingMessage}</Typography>)
+                                    }
+                                </div>
 
                                 <Button color='secondary' variant='text' onClick={()=>this.handleClose()}>
                                     No
                                 </Button>
 
-                                <Button color='primary' variant='outlined' onClick={()=>this.deleteItem(this.props.showData.actions.path,this.props.showData.actions.id)}>
+                                <LoadingButton
+                                    color='primary'
+                                    variant='outlined'
+                                    disabled={!isEnabled || this.state.submitted}
+                                    loading={setLoading}
+                                    text={'Yes'}
+                                    done={finished}
+                                    onClick={
+                                        ()=>this.deleteItem(this.props.showData.actions.path,this.props.showData.actions.id)}>
                                     Yes
-                                </Button>
+                                </LoadingButton>
                             </DialogActions>
                         )
                     :

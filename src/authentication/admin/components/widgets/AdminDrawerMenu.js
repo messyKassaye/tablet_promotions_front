@@ -25,7 +25,7 @@ class AdminDrawerMenu extends React.Component{
     }
 
     handler( children ) {
-        const { classes } = this.props
+        const { classes,t } = this.props
         const { state } = this
         return children.map( ( subOption ) => {
             if ( !subOption.children ) {
@@ -34,10 +34,11 @@ class AdminDrawerMenu extends React.Component{
                         <ListItem
                             button
                             component={Link}
+                            to={subOption.route}
                             key={ subOption.name }>
                                 <ListItemText
                                     inset
-                                    primary={subOption.name}/>
+                                    primary={t(`common.admin_menu.${subOption.name}`)}/>
                         </ListItem>
                     </div>
                 )
@@ -49,7 +50,7 @@ class AdminDrawerMenu extends React.Component{
                         onClick={ () => this.handleClick( subOption.name ) }>
                         <ListItemText
                             inset
-                            primary={ subOption.name } />
+                            primary={ t(`common.admin_menu.${subOption.name }`)} />
                         { state[ subOption.name ] ?
                             <ExpandLess /> :
                             <ExpandMore />

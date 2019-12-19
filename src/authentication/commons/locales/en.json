@@ -8,14 +8,17 @@
     },
     "admin_menu": {
       "Dashboard": "Home",
+      "Adverts": "Adverts",
       "Roles": "Roles",
+      "Utilities": "Utilities",
       "Banks": "Banks",
       "Cars": "Cars",
       "Medias": "Medias",
       "Users": "Users",
       "Advertisers": "Advertisers",
       "Drivers": "Drivers",
-      "Settings": "Settings"
+      "Settings": "Settings",
+      "Finances": "Finances"
     }
   }
 }

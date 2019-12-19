@@ -8,6 +8,8 @@
     },
     "admin_menu": {
       "Dashboard": "ወደ ዋናው",
+      "Adverts": "ማስታዎቂያዎች",
+      "Utilities": "መገልገያዎች",
       "Roles": "ሚናዎች",
       "Banks": "ባንኮች",
       "Cars": "መኪኖች",
@@ -15,7 +17,8 @@
       "Users": "ተጠቃሚዎች",
       "Advertisers": "አስተዋዋቂዎች",
       "Drivers": "ሾፌሮች",
-      "Settings": "ማስተካከያ"
+      "Settings": "ማስተካከያ",
+      "Finances": "ገንዘብ ነክ"
     }
   }
 }

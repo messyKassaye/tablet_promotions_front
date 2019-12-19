@@ -1,6 +1,6 @@
 {
   "en": {
-    "app_name": "Tablet Promotions",
+    "app_name": "Tab Adverts",
     "title": "Welcome to table promotions",
     "Home": "Home",
     "About": "About",
@@ -66,6 +66,16 @@
     "what_is_tablet_promotion": {
         "title": "What is Tablet promotions",
         "description_1": ""
+    },
+    "slider": {
+      "advertiser": "Start adverting your product and increase your revenue.",
+      "advertiser_description": "እርስዎ ስራዎን ይስሩ። ማስተዋዎቁን እና ህዝብ ጆሮ ላይ ማድረሱን ለታብሌት ማስታዎቂያ ይተውለት",
+      "driver": "የታክሲ ወይም የአውቶብስ ሾፌር ነዎት እንግዲያውስ የታብሌት ማስታዎቂያ አባል በመሆን ተጨማሪ ገቢ ያግኙ",
+      "driver_description": "መኪናዎ ላይ ማስታዎቂያ ይስሩ እና ተጨማሪ ገቢ ያግኙ",
+      "advertiser_engineer": "አሪፍ ድምጽና ጥሩ የአኒሜሽን ችሎታ አለዎት። ካለዎት ለድርጅቶች ማስታዎቂያ በመስራት ገቢዎን ይጨምሩ",
+      "advertiser_engineer_description": "ማስታዎቂያዎችን ይስሩ፣ ችሎታዎን ለባለሃብቶች ያሳዩ፣ ገቢዎንም ይጨምሩ",
+      "start_button": "ዛሬውን ይጀምሩ",
+      "watch_video": "ቪድዮ ይመልከቱ"
     }
   }
 }

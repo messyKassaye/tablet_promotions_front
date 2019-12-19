@@ -135,9 +135,7 @@ class CommonDashboards extends React.Component{
                         <div className={classes.grow}/>
                         <LanguageSetter/>
                         <Notifications/>
-                        <div className={classes.profile}>
-                            <Profile/>
-                        </div>
+                        <Profile/>
                     </Toolbar>
                 </AppBar>
                 <nav className={classes.drawer}>

@@ -1,32 +1,34 @@
-import {STORE_NEW_BANK, FETCH_ADMIN_BANKS, UPDATE_BANK} from "../actionConstants/adminActionConstants";
+import {CAR_CATEGORY_STORE, FETCH_CARS_CATEGORY, UPDATE_CAR_CATEGORY} from "../actionConstants/adminActionConstants";
 const initialState = {
     response:{
         status:false,
         message:'',
-        data:{}
+        data:[]
     },
-    banks:[],
+    category:[],
     loading:true
 }
 
 export default function (state=initialState,action) {
     switch (action.type) {
-        case FETCH_ADMIN_BANKS:
+        case CAR_CATEGORY_STORE:
             return {
                 ...state,
-                banks: action.payload,
+                response: action.payload
+            }
+        case FETCH_CARS_CATEGORY:
+            return {
+                ...state,
+                category: action.payload,
                 loading: false
             }
-        case STORE_NEW_BANK:
-            return{
-                ...state,
-                response: action.payload
-            }
-        case UPDATE_BANK:
+
+        case UPDATE_CAR_CATEGORY:
             return {
                 ...state,
                 response: action.payload
             }
+
         default:
             return state
 

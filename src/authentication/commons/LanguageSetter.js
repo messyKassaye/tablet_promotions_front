@@ -77,7 +77,7 @@ class LanguageSetter extends React.Component{
                         Languages.map((item,index)=>(
                             <div key={item.name}>
                                 <ListItem button style={{backgroundColor:'transparent'}}>
-                                    <Flag style={{marginRight:20}} code={item.code} height='48' width='48' className={classes.flags}/>
+                                    <Flag code={item.code} height='48' width='48' className={classes.flags}/>
                                     <ListItemText  primary={item.name}/>
                                 </ListItem>
                                 {

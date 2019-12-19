@@ -74,9 +74,13 @@ const  authstyle = theme=>({
         paddingRight: 20
     },
     language: {
+        display:'flex',
         marginRight: 10,
         textAlign: 'center',
-        fontSize: 14
+        fontSize: 14,
+        [theme.breakpoints.down('xs')]:{
+            display:'none'
+        }
     },
     card1:{
         backgroundColor:deepOrange[500],

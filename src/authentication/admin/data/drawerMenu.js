@@ -14,28 +14,49 @@ const drawerMenu = [
         icon:<DashboardIcon/>
     },
     {
-        name:'Roles',
-        route:'/auth/admin/roles',
-        icon:<PersonIcon/>
+      name:'Adverts',
+      route:'/auth/admin/adverts',
+      icon:<VideocamIcon/>
     },
     {
-        name:'Banks',
-        route:'/auth/admin/banks',
-        icon:<AttachMoneyIcon/>
+      name:'Utilities',
+      icon:<AttachMoneyIcon/>,
+        children:[
+            {
+                name:'Roles',
+                route:'/auth/admin/roles',
+                icon:<PersonIcon/>
+            },
+            {
+                name:'Banks',
+                route:'/auth/admin/banks',
+                icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Cars',
+                route:'/auth/admin/cars',
+                icon:<DirectionsCarIcon/>
+            },
+            {
+                name:'Medias',
+                route:'/auth/admin/medias',
+                icon:<MusicNotIcon/>
+            },
+        ]
     },
     {
-        name:'Cars',
-        route:'/auth/admin/cars',
-        icon:<DirectionsCarIcon/>
-    },
-    {
-        name:'Medias',
-        route:'/auth/admin/medias',
-        icon:<MusicNotIcon/>
+        name:'Finances',
+        icon:<AttachMoneyIcon/>,
+        children:[
+            {
+                name:'Currency',
+                route:'/admin/currency',
+                icon:<AttachMoneyIcon/>
+            }
+        ]
     },
     {
         name:'Advertisers',
-        route:'/auth/admin/users',
         icon: <VideocamIcon/>,
         children:[
             {

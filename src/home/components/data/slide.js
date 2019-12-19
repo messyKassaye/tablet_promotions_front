@@ -1,15 +1,18 @@
 const slide = [
       {
           id:1,
-        name: "advertiser"
+        name: "advertiser",
+          description:"advertiser_description"
       },
       {
           id:2,
-        name: "driver"
+        name: "driver",
+          description:"driver_description"
       },
       {
           id:3,
-        name: "advertiser_engineer"
+        name: "advertiser_engineer",
+          description:'advertiser_engineer_description'
       }
     ]
 

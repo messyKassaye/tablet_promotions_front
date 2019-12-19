@@ -1,40 +1,45 @@
 import React, {Component} from 'react';
-import {TextField} from "@material-ui/core";
-import {withStyles} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
+import withStyles from "@material-ui/core/styles/withStyles";
 import adminMainDialogStyle from "../styles/mainDialogStyle";
-import {translate} from "react-i18next";
-import LoadingButton from "../../../../home/components/widgets/LoadingButton";
-import {storeBank,updateBank} from "../../state/action/AdminBankAction";
-import {storeBase64} from "../../state/action/base64Action";
-import {showMainDialog} from "../../state/action/dialogAction";
-import {Button} from "@material-ui/core";
-import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
-import {green} from "@material-ui/core/colors";
+import {storeBase64} from "../../state/action/base64Action";
+import {connect} from "react-redux";
+import LoadingButton from "../../../../home/components/widgets/LoadingButton";
+import {storeCarCategory} from "../../state/action/carCategoryAction";
+import {showMainDialog} from "../../state/action/dialogAction";
 
-class AddNewBank extends Component {
+class AddChildCategory extends Component {
     constructor(props) {
         super(props);
         this.inputFile = React.createRef();
-        this.state = {
-            formData: {
-                'bank_name': '',
-                'logo_path': '',
-                'abbreviation':''
+        this.state= {
+            formData:{
+                parent_id:0,
+                name:'',
+                number_of_people: 0,
+                image:'',
+                description:''
             },
             submitted: false,
             loading: false,
             finished: false,
             selectedFile: null,
         }
-        this.handleFileInput = this.handleFileInput.bind(this)
     }
 
-    handleChange = (event) => {
+    handleChange = event=>{
         const {formData} = this.state
         formData[event.target.name] = event.target.value
         this.setState(formData)
     }
+
+    componentDidMount() {
+        const {formData} = this.state
+        formData['parent_id'] = this.props.category.id;
+        this.setState(formData)
+    }
+
     handleFile = (event) => {
         const file = event.target.files[0]
         const formData = new FormData()
@@ -42,103 +47,95 @@ class AddNewBank extends Component {
         this.props.storeBase64(formData)
     }
 
-    handleFileInput() {
+    handleFileInput = ()=>{
         this.inputFile.current.click();
     }
 
     cancelImage = ()=>{
         const {formData} = this.state
-        formData['logo_path'] = ''
+        formData['image'] = ''
         this.setState({
             selectedFile:null,
             formData
         })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.setState({
-            submitted: true,
-            loading: true
-        })
-        if(this.props.form.type==='Edit'){
-            const {formData} = this.state
-            this.props.updateBank(formData,this.props.form.data.id)
-        }else {
-            const {formData} = this.state
-            this.props.storeBank(formData)
-        }
-    }
-
-
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.base64Response) {
             const {formData} = this.state
-            formData['logo_path'] = nextProps.base64Response.data
+            formData['image'] = nextProps.base64Response.data
             this.setState({
                 selectedFile: nextProps.base64Response.data,
                 formData
             })
-            //console.log(nextProps.base64Response)
         }
 
-        if (nextProps.response.status) {
+        if(nextProps.response.status){
             this.setState({
                 loading: false,
                 finished: false,
                 submitted: false,
             })
-          setTimeout(()=>{
-              this.props.showMainDialog({'show':false,'page':null,'title':'',actions:{on:false,path:'',id:''}})
-          },2000)
+            setTimeout(()=>{
+                this.props.showMainDialog({'show':false,'page':null,'title':'',actions:{on:false,path:'',id:''}})
+            },2000)
         }
     }
 
-    componentDidMount() {
-        if(this.props.form.type==='Edit'){
-            const {formData}= this.state
-            formData['bank_name']= this.props.form.data.bank_name
-            formData['logo_path'] = this.props.form.data.logo_path
-            formData['abbreviation'] = this.props.form.data.abbreviation
-            this.setState(
-                {
-                    formData,
-                    selectedFile: this.props.form.data.logo_path
-                })
-        }
-    }
+    handleSubmit = event=>{
+        event.preventDefault()
+        this.setState({
+            submitted: true,
+            loading: true
+        })
 
+        const {formData} = this.state
+        this.props.storeCarCategory(formData)
+    }
 
     render() {
-        const {classes, t} = this.props
+        const {category,classes} = this.props
         const {formData} = this.state
         const {loading} = this.state;
         const {finished} = this.state
         const setLoading = !finished && loading;
-        const isEnabled = formData.bank_name.length > 0 && formData.logo_path.length > 0&& formData.abbreviation.length>0
+        const isEnabled = formData.name.length > 0 && formData.number_of_people.length > 0&&
+            formData.description.length>0&&formData.image.length>0
+
         return (
             <form className={classes.form} onSubmit={this.handleSubmit}>
-                <Typography style={{color: green[500], textAlign: 'center'}}>{this.props.response.message}</Typography>
+               <TextField
+                name='name'
+                placeholder='Category name'
+                className={classes.textInput}
+                onChange={this.handleChange}
+                value={this.state.formData.name}
+               />
+
                 <TextField
+                    name='number_of_people'
+                    placeholder='Maximum number of people'
                     className={classes.textInput}
                     onChange={this.handleChange}
-                    name='bank_name'
-                    placeholder={t('dialog.addNewBank.bankName')}
-                    value={this.state.formData.bank_name}
+                    value={this.state.formData.number_of_people}
                 />
-                <TextField
-                    className={classes.textInput}
-                    onChange={this.handleChange}
-                    name='abbreviation'
-                    placeholder={t('dialog.addNewBank.abbreviation')}
-                    value={this.state.formData.abbreviation}
-                />
+
+               <TextField
+                name='description'
+                className={classes.textInput}
+                placeholder='add category description'
+                rows={10}
+                cols={15}
+                multiline={true}
+                onChange={this.handleChange}
+                value={this.state.formData.description}
+               />
                 {
                     this.state.selectedFile == null
                         ?
                         (
                             <div className={classes.logo_picker}>
-                                <Typography>{t('dialog.addNewBank.logo_label')}</Typography>
+                                <Typography>Upload category image</Typography>
                                 <input
                                     onChange={this.handleFile}
                                     ref={this.inputFile}
@@ -168,11 +165,11 @@ class AddNewBank extends Component {
                     type="submit"
                     disabled={!isEnabled || this.state.submitted}
                     loading={setLoading}
-                    text={t('dialog.addNewBank.addNewBakButton')}
+                    text={'Add cateogry'}
                     done={finished}
                 >
                     {
-                        t('dialog.addNewBank.addNewBakButton')
+                        'Add category'
                     }
                 </LoadingButton>
             </form>
@@ -181,9 +178,9 @@ class AddNewBank extends Component {
 }
 
 const mapStateToProps = state => ({
-    response: state.authReducer.adminReducers.bankReducer.response,
-    base64Response: state.authReducer.adminReducers.base64.base64Response
+    base64Response: state.authReducer.adminReducers.base64.base64Response,
+    response:state.authReducer.adminReducers.categoryReducer.response
 })
 
-export default connect(mapStateToProps, {storeBank,updateBank,showMainDialog, storeBase64})
-(translate('common')(withStyles(adminMainDialogStyle)(AddNewBank)));
+export default connect(mapStateToProps,{storeBase64,storeCarCategory,showMainDialog})
+(withStyles(adminMainDialogStyle)(AddChildCategory));

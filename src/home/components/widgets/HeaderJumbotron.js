@@ -9,10 +9,7 @@ const HeaderJumbotron = ({t}) =>{
     return (
         <div className={classes.jumbotron}>
 
-            <Slider slide_data='advertiser'/>
-            <Button component={Link} to='/signup'  variant='outlined' color='inherit'>
-                {t('home.start_button')}
-            </Button>
+            <Slider slide_data='advertiser'></Slider>
         </div>
     )
 }
