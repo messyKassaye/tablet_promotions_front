@@ -105,6 +105,7 @@ class MyAdverts extends React.Component{
                          <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
                              <span>Your advert is on Air</span>
                              <Button
+                                 style={{textTransform:'none'}}
                                  variant='outlined'
                                  size='small'
                                  color='inherit'>
@@ -217,7 +218,7 @@ class MyAdverts extends React.Component{
                                                                                                <AdvertPayment adverts={advert}/>
                                                                                            </GridList>
                                                                                        </CardContent>
-                                                                                       <CardActions style={{display:'flex',justifyContent:'space-around'}}>
+                                                                                       <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                                                                                            <Button
                                                                                                style={{textTransform:'capitalize'}}
                                                                                                size='small'
@@ -228,15 +229,6 @@ class MyAdverts extends React.Component{
                                                                                                <span style={{marginLeft:10}}>Edit</span>
                                                                                            </Button>
 
-                                                                                           <Button
-                                                                                               style={{textTransform:'capitalize'}}
-                                                                                               size='small'
-                                                                                               color='primary'
-                                                                                               variant='text'
-                                                                                               onClick={this.handleClick(advert,'remove')}>
-                                                                                               <DeleteForeverIcon/>
-                                                                                               <span style={{marginLeft:10}}>Delete</span>
-                                                                                           </Button>
                                                                                            <Button
                                                                                                style={{textTransform:'capitalize'}}
                                                                                                size='small'

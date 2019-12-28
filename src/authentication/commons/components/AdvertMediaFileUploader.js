@@ -3,6 +3,7 @@ import {green} from "@material-ui/core/colors";
 import Button from "@material-ui/core/Button";
 import axios from 'axios'
 import {LinearProgress} from "@material-ui/core";
+import {API_URL} from "../../../constants/constants";
 class AdvertMediaFileUploader extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +11,8 @@ class AdvertMediaFileUploader extends Component {
         this.state = {
             loaded:0,
             valueBuffer:0,
-            uploadStarted:false
+            uploadStarted:false,
+            fileUploadMessage:'File uploading. We reach 0%'
         }
     }
 
@@ -18,10 +20,30 @@ class AdvertMediaFileUploader extends Component {
     handleFile = (event) => {
         const file = event.target.files[0]
         const formData = new FormData()
+        formData.append('advert_id',this.props.advert.id)
         formData.append('file', file);
         this.setState({
             uploadStarted:true
         })
+        axios.post(`${API_URL}file_uploader`,formData,{
+            onUploadProgress:progressEvent => {
+                this.setState({
+                    loaded:Math.round((progressEvent.loaded * 100) / progressEvent.total),
+                    fileUploadMessage: `File uploading. We reach ${this.state.loaded}%`
+                })
+            }
+        })
+            .then(response=>response.data)
+            .then(res=>{
+                 if (res.status&&this.state.loaded===100){
+                     setTimeout(()=>{
+                         this.setState({
+                             fileUploadMessage:`Uploading done. ${this.state.loaded}%`
+                         })
+                         window.location.reload()
+                     },2000)
+                 }
+            })
     }
 
     handleFileInput = ()=>{
@@ -33,10 +55,10 @@ class AdvertMediaFileUploader extends Component {
             <LinearProgress
                 variant='buffer'
                 color='secondary'
-                valueBuffer={this.state.valueBuffer}
+                valueBuffer={this.state.loaded}
                 value={this.state.loaded}>
             </LinearProgress>
-            <span>{`File is uploading. We reach ${Math.round(this.state.loaded,2)}%`}</span>
+            <span>{this.state.fileUploadMessage}</span>
         </div>
     }
 
@@ -48,7 +70,7 @@ class AdvertMediaFileUploader extends Component {
                     onChange={this.handleFile}
                     ref={this.inputFile}
                     style={{display: 'none'}}
-                    accept="image/video/audio/*"
+                    accept={`${this.props.advert.advert_media_type.name}/*`}
                     id="outlined-button-file"
                     type="file"
                 />

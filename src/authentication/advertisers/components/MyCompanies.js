@@ -85,9 +85,7 @@ class MyCompanies extends React.Component{
                                                            <CardContent className={classes.root}>
                                                                <GridList className={classes.gridList}>
                                                                    <CompanyDetails company={company}/>
-                                                                   <CompanyDetails company={company}/>
                                                                </GridList>
-
                                                            </CardContent>
                                                        </Card>
                                                    </Grid>

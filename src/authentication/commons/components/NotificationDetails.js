@@ -9,23 +9,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import NotificationIcon from '@material-ui/icons/Notifications'
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
+import Chip from "@material-ui/core/Chip";
 class NotificationDetails extends Component {
+    constructor(props) {
+        super(props);
 
-    renderComponent = notification=>{
-        switch (notification.entity.id) {
-            case 1:
-                return this.advertPayedNotification(notification)
-
-        }
     }
 
-    advertPayedNotification = notification=>{
-        return <Card>
-            <Typography style={{color:green[600]}}>
-                {notification.message}
-            </Typography>
-        </Card>
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
     }
+
     render() {
         return (
             <Container>
@@ -50,7 +44,11 @@ class NotificationDetails extends Component {
                                                 <Card>
                                                     <CardHeader
                                                      title={notification.entity.name}
+                                                     action={
+                                                         <Chip color='secondary' size="small" label="New" />
+                                                     }
                                                     />
+                                                    <Divider/>
                                                     <CardContent>
                                                         <Typography>{notification.entity.message}</Typography>
                                                     </CardContent>
