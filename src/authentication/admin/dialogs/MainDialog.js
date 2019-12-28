@@ -88,6 +88,8 @@ class MainDialog extends Component {
         const isEnabled = true
         return (
             <Dialog
+                maxWidth={this.props.showData.maxWidth}
+                style={{top:5}}
                 fullScreen={this.state.fullScreen}
                 disableBackdropClick={true}
                 open={this.props.showData.show}

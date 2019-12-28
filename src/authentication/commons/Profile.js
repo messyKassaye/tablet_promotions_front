@@ -47,16 +47,17 @@ class Profile  extends React.Component{
                                 aria-label='Profile menu'
                                 aria-haspopup='true'
                                 onClick={this.handleMenu}
-                            >
-                                {
-                                    this.props.user.map(user=>{
-                                        if(user.attribute.avator==='letter'){
-                                            return <Avatar key={user.attribute.id} style={{margin:1,width:25,height:25}}>{user.attribute.first_name[0]}</Avatar>
-                                        }else {
-                                           return <Avatar key={user.attribute.id} src={user.attribute.avator} style={{margin:1,width:30,height:30}}></Avatar>
-                                        }
-                                    })
-                                }
+                            >{
+                                this.props.user.attribute.avator==='letter'
+                                ?
+                                    (
+                                        <Avatar  style={{margin:1,width:30,height:30}}>{this.props.user.attribute.first_name[0]}</Avatar>
+                                    )
+                                :
+                                    (
+                                        <Avatar  src={this.props.user.attribute.avator} style={{margin:1,width:30,height:30}}></Avatar>
+                                    )
+                            }
                             </IconButton>
                         )
                 }

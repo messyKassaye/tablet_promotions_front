@@ -99,10 +99,7 @@ class CommonDashboards extends React.Component{
                         (
 
                             <Typography style={{paddingLeft:20,paddingTop:20,color:grey[500]}}>
-                                {this.props.user.map(items=>{
-                                    return items.relations.role[0].name
-                                })
-                                }
+                                {this.props.user.relations.role[0].name}
                             </Typography>
                         )
                 }

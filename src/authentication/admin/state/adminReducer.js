@@ -9,6 +9,8 @@ import carCategoryReducer from "./reducerrs/carCategoryReducer";
 import currencyReducer from "./reducerrs/currencyReducer";
 import advertMediaTypeReducer from "./reducerrs/advertMediaTypeReducer";
 import advertsReducer from "./reducerrs/advertsReducer";
+import adminUserReducer from "./reducerrs/adminUserReducer";
+import adminCompaniesReducer from "./reducerrs/adminCompaniesReducer";
 
 export default combineReducers({
     adminDialog:dialogReducer,
@@ -20,5 +22,7 @@ export default combineReducers({
     categoryReducer:carCategoryReducer,
     currenciesReducer:currencyReducer,
     advertMediaReducer:advertMediaTypeReducer,
-    advertReducer:advertsReducer
+    advertReducer:advertsReducer,
+    adminUsersReducers:adminUserReducer,
+    adminCompanyReducer: adminCompaniesReducer
 })

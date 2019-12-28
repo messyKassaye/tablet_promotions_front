@@ -7,6 +7,7 @@ import NewAderts from "./NewAderts";
 import BankTransactions from "./widgets/bankTransactions";
 import NewCompany from "./NewCompany";
 import Setting from "../../commons/Setting";
+import NotificationDetails from "../../commons/components/NotificationDetails";
 class AdvertiserNestedRoute extends React.Component{
 
     constructor(props) {
@@ -19,12 +20,12 @@ class AdvertiserNestedRoute extends React.Component{
             <div style={{padding:20}}>
                 <Switch>
                     <Route path='/' component={Dashboard} exact/>
-                    <Route path='/myCompanies' component={MyCompanies}/>
-                    <Route path='/myAdverts' component={MyAdverts}/>
-                    <Route path='/newAdverts' component={NewAderts}/>
-                    <Route path='/bankTransaction/:id' component={BankTransactions}/>
-                    <Route path='/companyRegistration' component={NewCompany}/>
-                    <Route path='/settings' component={Setting}/>
+                    <Route path='/auth/advertiser/myCompanies' component={MyCompanies}/>
+                    <Route path='/auth/advertiser/myAdverts' component={MyAdverts}/>
+                    <Route path='/auth/advertiser/newAdverts' component={NewAderts}/>
+                    <Route path='/auth/advertiser/companyRegistration' component={NewCompany}/>
+                    <Route path='/auth/advertiser/notifications' component={NotificationDetails}/>
+                    <Route path='/auth/advertiser/settings' component={Setting}/>
                 </Switch>
             </div>
         );

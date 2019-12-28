@@ -3,6 +3,7 @@ import {SHOW_MAIN_DIALOG} from "../actionConstants/adminActionConstants";
 const initialState = {
     showDialog:{
         show:false,
+        maxWidth:'md',
         page:null,
         title:'',
         actions:{

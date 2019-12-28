@@ -43,7 +43,7 @@ class MyCompanies extends React.Component{
                             <div>
                                 <Button
                                     component={Link}
-                                    to='/companyRegistration'
+                                    to='/auth/advertiser/companyRegistration'
                                     color='inherit'
                                     variant='outlined'
                                     className={classes.new_advert_button} >
@@ -72,7 +72,7 @@ class MyCompanies extends React.Component{
                                 (
                                     <Grid container spacing={2}>
                                         {
-                                            this.props.user.map(items=>items.relations.companies.map(company=>(
+                                           this.props.user.relations.companies.map(company=>(
 
                                                    <Grid item md={4} xs={12}>
                                                        <Card className={classes.boxes}>
@@ -91,7 +91,7 @@ class MyCompanies extends React.Component{
                                                            </CardContent>
                                                        </Card>
                                                    </Grid>
-                                            )))
+                                            ))
                                         }
                                     </Grid>
                                 )

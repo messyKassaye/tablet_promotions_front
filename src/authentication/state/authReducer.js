@@ -6,12 +6,14 @@ import advertismentMediaTypeReducer from "./reducers/advertismentMediaTypeReduce
 import placesReducer from "./reducers/placesReducer";
 import advertiserReducer from "../advertisers/state/advertiserReducer";
 import adminReducer from "../admin/state/adminReducer";
+import commonReducer from "../commons/state/commonReducer";
 
 
 export default combineReducers({
     driversReducers: driversReducer,
     advertisersReducers:advertiserReducer,
     adminReducers:adminReducer,
+    commonReducer:commonReducer,
     banksReducer:banksReducer,
     bankAccountReducer:bankAccountReducer,
     advertisementMediaType:advertismentMediaTypeReducer,

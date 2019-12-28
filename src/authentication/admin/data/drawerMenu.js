@@ -14,6 +14,11 @@ const drawerMenu = [
         icon:<DashboardIcon/>
     },
     {
+        name:'Users',
+        route:'/auth/admin/users',
+        icon:<PersonIcon/>
+    },
+    {
       name:'Adverts',
       route:'/auth/admin/adverts',
       icon:<VideocamIcon/>
@@ -50,7 +55,17 @@ const drawerMenu = [
         children:[
             {
                 name:'Currency',
-                route:'/admin/currency',
+                route:'/auth/admin/currency',
+                icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Total income',
+                route:'/auth/admin/total_income',
+                icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Total withdrawals',
+                route:'/auth/admin/total_withdrawals',
                 icon:<AttachMoneyIcon/>
             }
         ]
@@ -95,7 +110,7 @@ const drawerMenu = [
     },
     {
         name:'Settings',
-        route:'/settings',
+        route:'/auth/admin/settings',
         icon: <SettingIcon/>
     },
 ]

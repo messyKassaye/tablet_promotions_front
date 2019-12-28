@@ -19,7 +19,7 @@ import Avatar from "@material-ui/core/Avatar";
 import MoreHorizVert from '@material-ui/icons/MoreVert';
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import {grey} from "@material-ui/core/colors";
+import {green, grey, red} from "@material-ui/core/colors";
 import MediaStatus from "./widgets/MediaStatus";
 import AdvertPlaces from "./widgets/AdvertPlaces";
 import AdvertViews from "./widgets/AdvertViews";
@@ -29,14 +29,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import {showAdvertConfirmDeleteDialog} from "../state/action/advertiserDialogActions";
 import CardActions from "@material-ui/core/CardActions";
 import VisibilityIcon from '@material-ui/icons/Visibility';
-
+import {showMainDialog} from "../../admin/state/action/dialogAction";
+import AddNewAdvert from "../../commons/components/AddNewAdvert";
+import AdvertPaymentTransaction from "../../commons/components/AdvertPaymentTransaction";
+import AdvertMediaFileUploader from "../../commons/components/AdvertMediaFileUploader";
 class MyAdverts extends React.Component{
 
     constructor(props) {
         super(props);
+
         this.state = {
             anchorEl:null,
-            selectedAdvert:''
+            selectedAdvert:'',
         }
 
     }
@@ -51,6 +55,77 @@ class MyAdverts extends React.Component{
              console.log(advert)
          }
     };
+
+    addNewAdvert = ()=>{
+        this.props.showMainDialog({
+            show: true,
+            title:'Add new Advert',
+            page:<AddNewAdvert company={this.props.user.relations.companies}/>,
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
+    }
+
+    paymentStatus = advert=>{
+        if(advert.payment_status===null&&advert.status==='on_progress'){
+            return <div style={{display:'flex',flexDirection:'column'}}>
+                <span style={{color:red[500]}}>Payment is not done.</span>
+                <Button
+                    onClick={()=>{
+                       this.props.showMainDialog({
+                           show:true,
+                           page: <AdvertPaymentTransaction advert={advert}/>,
+                           title: `Payment for ${advert.product_name}`,
+                           actions:{
+                               on:false,
+                               path: '',
+                               id:''
+                           }
+                       })
+                    }}
+                    color='inherit'
+                    variant='outlined'
+                    size='small' style={{textTransform:"none"}}>
+                    Pay now
+                </Button>
+            </div>
+        }else if(advert.payment_status!==null&&advert.status==='on_advert'){
+            return <div style={{display:'flex',flexDirection:'column'}}>
+                {
+                 advert.media_path==='not_assigned'
+                 ?
+                     (
+                        <AdvertMediaFileUploader advert={advert}/>
+                     )
+                 :
+                     (
+                         <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
+                             <span>Your advert is on Air</span>
+                             <Button
+                                 variant='outlined'
+                                 size='small'
+                                 color='inherit'>
+                                 See views
+                             </Button>
+                         </div>
+                     )
+                }
+            </div>
+        }else if(advert.payment_status!==null&&advert.status==='on_progress'){
+            return <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
+                <span>Payment is done and on process</span>
+                <Button
+                    color='inherit'
+                    variant='outlined'
+                    size='small'style={{textTransform:'none'}}>
+                    Complain
+                </Button>
+            </div>
+        }
+    }
 
     render() {
         const  {classes} = this.props
@@ -70,8 +145,7 @@ class MyAdverts extends React.Component{
                                     this.props.loading
                                         ?<Skeleton variant='rect' width={150} height={20} style={{backgroundColor:'white',borderRadius:5}}/>
                                         :<Button
-                                        component={Link}
-                                        to='/newAdverts'
+                                            onClick={this.addNewAdvert}
                                         color='inherit'
                                         variant='outlined'
                                         className={classes.new_advert_button} >
@@ -79,8 +153,7 @@ class MyAdverts extends React.Component{
                                     </Button>
                                 }
                                 <IconButton
-                                    component={Link}
-                                    to='/new_adverts'
+                                    onClick={this.addNewAdvert}
                                     color='inherit'
                                     variant='outlined'
                                     className={classes.addIcon} >
@@ -104,7 +177,7 @@ class MyAdverts extends React.Component{
                                (
                                    <Grid container spacing={2}>
                                        {
-                                           this.props.user.map(items=>items.relations.companies.map(company=>(
+                                           this.props.user.relations.companies.map(company=>(
                                                <Grid item md={12} xs={12} key={company.id}>
                                                    <Card elevation={0}>
                                                        <CardHeader
@@ -126,6 +199,13 @@ class MyAdverts extends React.Component{
                                                                                            subheader={<span style={{color:grey[600]}}>{`${advert.views.length} views`}</span>}
                                                                                            avatar={<Avatar width={40} height={40}>
                                                                                                {advert.product_name[0]}</Avatar>}
+                                                                                           action={
+                                                                                               <div>
+                                                                                                   {
+                                                                                                      this.paymentStatus(advert)
+                                                                                                   }
+                                                                                               </div>
+                                                                                           }
                                                                                        />
                                                                                        <Divider style={{backgroundColor:grey[400]}}/>
 
@@ -188,7 +268,7 @@ class MyAdverts extends React.Component{
                                                    </Card>
                                                    <Divider style={{marginTop:20}}/>
                                                </Grid>
-                                           )))
+                                           ))
                                        }
                                    </Grid>
                                )
@@ -209,4 +289,5 @@ const mapStateToProps = state=>(
     }
 )
 
-export default translate('common')(connect(mapStateToProps,{showAdvertConfirmDeleteDialog})(withStyles(myAdvertStyle)(MyAdverts)))
+export default translate('common')
+(connect(mapStateToProps,{showAdvertConfirmDeleteDialog,showMainDialog})(withStyles(myAdvertStyle)(MyAdverts)))

@@ -30,6 +30,7 @@ const  authstyle = theme=>({
         flexDirection:'row',
         justifyContent:'start',
         alignItems:"center",
+        height:'100%',
         width:'100%',
     },
     avatarImage: {

@@ -71,24 +71,9 @@ class Setting extends React.Component {
     }
 
 
+
     render() {
         const {classes} = this.props
-        const formData = []
-        const object = {}
-        if (this.props.loading) {
-
-        } else {
-            this.props.user.map(user => {
-                object['id'] = user.attribute.id
-                object['first_name'] = user.attribute.first_name
-                object['last_name'] = user.attribute.last_name
-                object['email'] = user.attribute.email
-                object['phone'] = user.attribute.phone
-                this.state.preview = user.attribute.avator
-            })
-            formData.push(object)
-        }
-
         return (
             <Grid container spacing={2}>
                 <Grid item md={4} sm={12}>
@@ -175,7 +160,7 @@ class Setting extends React.Component {
                                                 type='text'
                                                 onChange={this.handleChange}
                                                 name="first_name"
-                                                value={formData[0].first_name}
+                                                value={this.state.formData.first_name}
                                             />
 
                                             <TextValidator
@@ -184,7 +169,7 @@ class Setting extends React.Component {
                                                 onChange={this.handleChange}
                                                 name="last_name"
                                                 type='text'
-                                                value={formData[0].last_name}
+                                                value={this.state.formData.last_name}
                                             />
                                             <TextValidator
                                                 className={classes.text_input}
@@ -192,7 +177,7 @@ class Setting extends React.Component {
                                                 onChange={this.handleChange}
                                                 name="phone"
                                                 type='number'
-                                                value={formData[0].phone}
+                                                value={this.state.formData.phone}
                                             />
 
                                             <TextValidator
@@ -201,7 +186,7 @@ class Setting extends React.Component {
                                                 onChange={this.handleChange}
                                                 name="email"
                                                 type='email'
-                                                value={formData[0].email}
+                                                value={this.state.formData.email}
                                             />
                                             <Button type='submit' color='primary' variant='contained'>Edit
                                                 profile</Button>

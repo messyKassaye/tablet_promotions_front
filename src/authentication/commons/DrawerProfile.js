@@ -35,10 +35,6 @@ class DrawerProfile extends React.Component{
          })
      }
 
-     componentDidMount() {
-         this.props.me()
-     }
-
      logout = ()=>{
          logout()
         setTimeout(()=>{
@@ -58,51 +54,48 @@ class DrawerProfile extends React.Component{
                           <Skeleton variant='rect' style={{backgroundColor:'white',marginLeft:10,borderRadius:5}} width={120} height={10} />
                           <Skeleton variant='circle' style={{backgroundColor:'white',marginLeft:10}} width={10} height={10}/>
                       </div>
-                      :this.props.user.map(items=>(
-                         <div key={items.type} className={classes.avatarLayout}>
-                             {
-                                 items.attribute.avator==='letter'
-                                     ?
-                                     <Avatar className={classes.avatarImage} alt='profile image' >{items.attribute.first_name[0]}</Avatar>
-                                     :<Avatar className={classes.avatarImage} src={`${items.attribute.avator}`}></Avatar>
+                      :
+                      <div  className={classes.avatarLayout}>
+                          {
+                              this.props.user.attribute.avator==='letter'
+                                  ?
+                                  <Avatar className={classes.avatarImage} alt='profile image' >{this.props.user.attribute.first_name[0]}</Avatar>
+                                  :<Avatar className={classes.avatarImage} src={`${this.props.user.attribute.avator}`}></Avatar>
+                          }
+                          {
+                              <span>{`${this.props.user.attribute.first_name} ${this.props.user.attribute.last_name}`}</span>
+                          }
+                          <div style={{marginLeft:25,margin:0}}>
+                              <IconButton
+                                  aria-controls='setting-profile'
+                                  aria-haspopup='true'
+                                  edge='end'
+                                  onClick={this.handleOpenProfileSetting}
+                                  color='inherit'>
+                                  <ArrowDropDown/>
+                              </IconButton>
+                              <Menu
+                                  id='setting-profile'
+                                  anchorEl={this.state.anchorEl}
+                                  keepMounted
+                                  open={Boolean(this.state.anchorEl)}
+                                  onClose={this.closeMenu}
+                              >
+                                  <List
+                                      component='nav'
+                                      aria-labelledby='nested-menu'
+                                  >
+                                      <ListItem button component={Link} to='/settings'>
+                                          <ListItemText primary='Setting'/>
+                                      </ListItem>
 
-
-                             }
-                             {
-                                 <span>{`${items.attribute.first_name} ${items.attribute.last_name}`}</span>
-                             }
-                             <div style={{marginLeft:25,margin:0}}>
-                                 <IconButton
-                                     aria-controls='setting-profile'
-                                     aria-haspopup='true'
-                                     edge='end'
-                                     onClick={this.handleOpenProfileSetting}
-                                     color='inherit'>
-                                     <ArrowDropDown/>
-                                 </IconButton>
-                                 <Menu
-                                     id='setting-profile'
-                                     anchorEl={this.state.anchorEl}
-                                     keepMounted
-                                     open={Boolean(this.state.anchorEl)}
-                                     onClose={this.closeMenu}
-                                 >
-                                     <List
-                                         component='nav'
-                                         aria-labelledby='nested-menu'
-                                     >
-                                         <ListItem button component={Link} to='/settings'>
-                                             <ListItemText primary='Setting'/>
-                                         </ListItem>
-
-                                         <ListItem button onClick={event=>this.logout(event)} >
-                                             <ListItemText primary='Logout'/>
-                                         </ListItem>
-                                     </List>
-                                 </Menu>
-                             </div>
-                         </div>
-                     ))
+                                      <ListItem button onClick={event=>this.logout(event)} >
+                                          <ListItemText primary='Logout'/>
+                                      </ListItem>
+                                  </List>
+                              </Menu>
+                          </div>
+                      </div>
                  }
              </div>
          );

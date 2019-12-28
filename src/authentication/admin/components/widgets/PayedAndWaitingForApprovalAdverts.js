@@ -44,7 +44,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
 
     render() {
         return (
-        <Card style={{marginTop:25}}>
+        <Card style={{marginBottom:25}}>
             <CardHeader
                 avatar={<VideoCamIcon/>}
                 title={'Payed and waiting for approval adverts '}
@@ -71,7 +71,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                 }
             />
             <Divider/>
-            <CardContent>
+            <CardContent style={{padding:0}}>
                 {
                     this.props.loading
                         ?
@@ -84,7 +84,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                         )
                         :
                         (
-                            <Paper style={{overflow:'auto'}}>
+                            <Paper style={{overflow:'auto',borderRadius:0}}>
                                 <Table>
                                     <TableHead>
                                         <TableRow>
@@ -106,7 +106,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                                                 (
                                                     this.props.adverts.map(advert => (
                                                         <TableRow hover role="checkbox" tabIndex={-1}
-                                                                  key={advert.product_name}>
+                                                                  key={advert.id}>
                                                             <TableCell key='company_name'>
                                                                 {advert.company.name}
                                                             </TableCell>
@@ -128,13 +128,13 @@ class PayedAndWaitingForApprovalAdverts extends Component {
 
                                                             <TableCell key='advert_places' align={columns[1].align}>
                                                                 {
-                                                                    <div style={{maxWidth:'200px',overflowX:'auto'}}>
-                                                                        {
-                                                                            advert.advertisement_places.map(place=>(
-                                                                                <span>{place.city}</span>
-                                                                            ))
-                                                                        }
-                                                                    </div>
+                                                                   advert.advertisement_places.length>0
+                                                                    ?
+                                                                       (<span>{advert.advertisement_places[0].city}</span>)
+                                                                   :
+                                                                       (
+                                                                           <span>{advert.advertisement_places[0].city}</span>
+                                                                       )
                                                                 }
                                                             </TableCell>
 

@@ -8,6 +8,7 @@
     },
     "admin_menu": {
       "Dashboard": "Home",
+      "Users": "Users",
       "Adverts": "Adverts",
       "Roles": "Roles",
       "Utilities": "Utilities",
@@ -18,7 +19,10 @@
       "Advertisers": "Advertisers",
       "Drivers": "Drivers",
       "Settings": "Settings",
-      "Finances": "Finances"
+      "Finances": "Finances",
+      "Currency": "Currency",
+      "Total income": "ጠቅላላ ገቢ",
+      "Total withdrawals": "ጠቅላላ ወጭ"
     }
   }
 }

@@ -72,7 +72,7 @@ class AdminDrawerMenu extends React.Component{
         const {classes} = this.props
         const {t} = this.props
         return (
-            <List>
+            <List style={{overflowY:'auto'}}>
                 {this.props.menu.map((item) => (
                     item.children
                     ?

@@ -9,22 +9,22 @@ import React from "react";
 const drawerMenu = [
     {
         name:'Dashboard',
-        route:'/',
+        route:'/auth',
         icon:<DashboardIcon/>
     },
     {
         name:'My adverts',
-        route:'/myAdverts',
+        route:'/auth/advertiser/myAdverts',
         icon: <VideocamIcon/>
     },
     {
         name:'My Companies',
-        route:'/myCompanies',
+        route:'/auth/advertiser/myCompanies',
         icon: <DirectionsCarIcon/>
     },
     {
         name:'Settings',
-        route:'/settings',
+        route:'/auth/advertiser/settings',
         icon: <SettingIcon/>
     },
 ]

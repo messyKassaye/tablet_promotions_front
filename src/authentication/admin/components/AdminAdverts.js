@@ -13,11 +13,15 @@ import {showMainDialog} from "../state/action/dialogAction";
 import PayedAndWaitingForApprovalAdverts from "./widgets/PayedAndWaitingForApprovalAdverts";
 import NewAndPaymentUnfinishedAdverts from "./widgets/NewAndPaymentUnfinishedAdverts";
 import OnAirAdverts from "./widgets/OnAirAdverts";
+import AddNewAdvert from "../../commons/components/AddNewAdvert";
+import {fetchCompanies} from "../state/action/adminCompaniesAction";
+import {commonFetchAdvertMedia} from "../../commons/state/actions/advertMediaTypeAction";
 
 export const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
         color: theme.palette.common.white,
+        position:'sticky'
     },
     body: {
         fontSize: 14,
@@ -33,6 +37,20 @@ class AdminAdverts extends Component {
 
     componentDidMount() {
         this.props.fetchAdverts()
+        this.props.fetchCompanies()
+    }
+
+    addNewAdvert = ()=>{
+        this.props.showMainDialog({
+            show:true,
+            page:<AddNewAdvert company={this.props.company}/>,
+            title:'Add new advert',
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
     }
 
     unfinishedPaymentAdverts = (data)=>{
@@ -68,24 +86,26 @@ class AdminAdverts extends Component {
                         <CardHeader
                          title='Adverts'
                          action={
-                             <IconButton color='inherit'>
+                             <IconButton color='inherit' onClick={this.addNewAdvert}>
                                  <AddIcon/>
                              </IconButton>
                          }
                         />
                     </Card>
 
+                    {/*payed and waiting for payment adverts*/}
+                    <PayedAndWaitingForApprovalAdverts
+                        adverts={this.payedAndWaitingApprovalAdverts(this.props.adverts)}
+                    />
+
+                    {/*On air adverts*/}
+                    <OnAirAdverts adverts={this.onAirAdverts(this.props.adverts)}/>
+
                   {/*Unfinished payment adverts*/}
                   <NewAndPaymentUnfinishedAdverts
                       adverts={this.unfinishedPaymentAdverts(this.props.adverts)}
                   />
 
-                  {/*payed and waiting for payment adverts*/}
-                  <PayedAndWaitingForApprovalAdverts
-                      adverts={this.payedAndWaitingApprovalAdverts(this.props.adverts)}
-                  />
-                    {/*On air adverts*/}
-                    <OnAirAdverts adverts={this.onAirAdverts(this.props.adverts)}/>
                 </div>
             </Container>
         );
@@ -94,8 +114,9 @@ class AdminAdverts extends Component {
 
 const mapStateToProps = state=>({
     loading:state.authReducer.adminReducers.advertReducer.loading,
-    adverts:state.authReducer.adminReducers.advertReducer.adverts
+    adverts:state.authReducer.adminReducers.advertReducer.adverts,
+    company:state.authReducer.adminReducers.adminCompanyReducer.company,
 })
 
-export default connect(mapStateToProps,{fetchAdverts,showMainDialog})
+export default connect(mapStateToProps,{fetchAdverts,showMainDialog,fetchCompanies})
 (withStyles(adminAdvertStyle)(AdminAdverts));

@@ -18,10 +18,28 @@ import Button from "@material-ui/core/Button";
 import {StyledTableCell} from "../AdminAdverts";
 import {connect} from "react-redux";
 import {Typography} from "@material-ui/core";
+import {showMainDialog} from "../../state/action/dialogAction";
+import DeleteMessage from "../../dialogs/component/DeleteMessage";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+
 class NewAndPaymentUnfinishedAdverts extends Component {
 
     totalPayment = (requiredViews,payment)=>{
         return requiredViews*payment
+    }
+
+    removeAdvert = (advert)=>{
+      this.props.showMainDialog({
+          show:true,
+          page:<DeleteMessage message={`Are you sure you want to delete ${advert.product_name}`}/>,
+          title:'confirm',
+          actions:{
+              on:true,
+              path:'adverts',
+              id:advert.id
+          }
+      })
     }
 
     render() {
@@ -53,7 +71,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                     }
                 />
                 <Divider/>
-                <CardContent>
+                <CardContent style={{padding:0}}>
 
                     {
                         this.props.loading
@@ -67,18 +85,19 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                             )
                             :
                             (
-                                <Paper style={{overflow:'auto'}}>
-                                    <Table>
+                                <Paper style={{overflow:'auto',borderRadius:0,maxHeight:'300px'}}>
+                                    <Table stickyHeader>
                                         <TableHead>
                                             <TableRow>
                                                 {columns.map(column => (
-                                                    <StyledTableCell
+                                                    <TableCell
                                                         key={column.id}
                                                         align={column.align}
-                                                        style={{minWidth: column.minWidth}}
+                                                        style={{minWidth: column.minWidth,position:'sticky',top:0,backgroundColor: '#3C4252',
+                                                            color: 'white',}}
                                                     >
                                                         {column.label}
-                                                    </StyledTableCell>
+                                                    </TableCell>
                                                 ))}
                                             </TableRow>
                                         </TableHead>
@@ -114,7 +133,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                                                                         <div style={{maxWidth:'200px',overflowX:'auto'}}>
                                                                             {
                                                                                 advert.advertisement_places.map(place=>(
-                                                                                    <span>{place.city}</span>
+                                                                                    <span key={place.id}>{`${place.city},`}</span>
                                                                                 ))
                                                                             }
                                                                         </div>
@@ -128,6 +147,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                                                                 <TableCell key={'actions'}>
                                                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                                                                         <Button
+                                                                            onClick={()=>this.removeAdvert(advert)}
                                                                             color='secondary'
                                                                             variant='outlined'
                                                                             style={{textTransform:'none',marginRight:10}}
@@ -172,4 +192,4 @@ const mapStateToProps = state=>({
     loading:state.authReducer.adminReducers.advertReducer.loading,
 })
 
-export default connect(mapStateToProps)(NewAndPaymentUnfinishedAdverts);
+export default connect(mapStateToProps,{showMainDialog})(NewAndPaymentUnfinishedAdverts);

@@ -149,3 +149,43 @@ export const onAirColumns = [
     },
 
 ]
+
+export const usersColumn = [
+    {
+        id: 'full_name',
+        label: 'Full name',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'phone',
+        label: 'Phone',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'email',
+        label: 'Email address',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'address',
+        label: 'Address',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'role',
+        label: 'Roles',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        minWidth: 170,
+        align:'left'
+    },
+
+]

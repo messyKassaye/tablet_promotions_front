@@ -8,6 +8,7 @@
     },
     "admin_menu": {
       "Dashboard": "ወደ ዋናው",
+      "Users": "ተጠቃሚዎች",
       "Adverts": "ማስታዎቂያዎች",
       "Utilities": "መገልገያዎች",
       "Roles": "ሚናዎች",
@@ -18,7 +19,10 @@
       "Advertisers": "አስተዋዋቂዎች",
       "Drivers": "ሾፌሮች",
       "Settings": "ማስተካከያ",
-      "Finances": "ገንዘብ ነክ"
+      "Finances": "ገንዘብ ነክ",
+      "Currency": "Currency",
+      "Total income": "ጠቅላላ ገቢ",
+      "Total withdrawals": "ጠቅላላ ወጭ"
     }
   }
 }

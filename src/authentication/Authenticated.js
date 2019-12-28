@@ -26,7 +26,7 @@ class Authenticated extends React.Component{
             Component = React.lazy(()=> import("./advertisers/AdvertisersRoutes"))
         }else if(roleId===4){
             Component = React.lazy(()=> import("./advertiseEngineer/AdvertiseengineersRoutes"))
-        }else {
+        }else if(roleId===1){
             Component = React.lazy(()=>import("./admin/AdminRoutes"))
         }
         return (

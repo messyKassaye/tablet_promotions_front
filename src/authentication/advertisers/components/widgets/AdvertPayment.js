@@ -50,13 +50,13 @@ class AdvertPayment extends React.Component{
                                     <Typography>
                                         {`Payment : `}
                                     </Typography>
-                                    <span style={{color:deepPurple[500]}}>{this.props.adverts.payment_status.length>0?'Payed':'Not payed yet'}</span>
+                                    <span style={{color:deepPurple[500]}}>{this.props.adverts.payment_status!==null?'Payed':'Not payed yet'}</span>
                                 </div>
                             </div>
                         }
                     </CardContent>
                     {
-                        this.props.adverts.payment_status.length>0
+                        this.props.adverts.payment_status!==null
                         ?
                             ''
                         :
