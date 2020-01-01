@@ -10,6 +10,7 @@ import boxStyle from "../../styles/boxStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions";
+import {Link} from "react-router-dom";
 class AdvertViews extends React.Component{
 
     constructor(props) {
@@ -44,6 +45,8 @@ class AdvertViews extends React.Component{
                     </CardContent>
                     <CardActions style={{display:'flex',justifyContent:'flex-end'}}>
                         <Button
+                            component={Link}
+                            to={`/auth/advertiser/advertViews/${this.props.adverts.id}`}
                             style={{textTransform:'capitalize',marginLeft:5}}
                             size='small'
                             color='secondary'

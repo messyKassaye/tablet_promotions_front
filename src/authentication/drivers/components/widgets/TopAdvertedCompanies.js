@@ -20,9 +20,9 @@ class TopAdvertedCompanies extends React.Component{
 
     filterCompanies = (data)=>{
         let companies = []
-        data.map(cars=>cars.map(car=>car.adverts.filter(items=>{
+        data.map(car=>car.adverts.filter(items=>{
             companies.push(items.detail.company.name)
-        })))
+        }))
         let sumCompaniesEntry = companies.reduce((obj, b)=>{
             obj[b] = ++obj[b] || 1;
             return obj;
@@ -41,9 +41,9 @@ class TopAdvertedCompanies extends React.Component{
 
     filterAdvertNumbers = (data,company_name)=>{
         let length =0;
-        data.map(items=>items.map(items=>{
+        data.map(items=>{
             return items.adverts.filter(advert=>{return advert.detail.company.name===company_name})
-        })).map(items=>items.map(advert=>{
+        }).map(items=>items.map(advert=>{
             length += advert.length
         }))
         return length
@@ -71,7 +71,7 @@ class TopAdvertedCompanies extends React.Component{
                             (
                                 <div className={classes.scroll_wrapper}>
                                     {
-                                        this.filterCompanies(this.props.user.map(items=>items.relations.cars))
+                                        this.filterCompanies(this.props.user.relations.cars)
                                             .map(items=>(
                                                 <Card key={items[1]} className={classes.scroll_child}>
                                                     <CardHeader
@@ -82,7 +82,7 @@ class TopAdvertedCompanies extends React.Component{
                                                     <CardContent>
                                                         {
                                                             <Typography style={{color:"white"}} variant="body2" color="textSecondary" component="p">
-                                                                {`${t('driver.top_adverted_companies.total_advert')} : ${this.filterAdvertNumbers(this.props.user.map(items=>items.relations.cars),items[0])}`}
+                                                                {`${t('driver.top_adverted_companies.total_advert')} : ${this.filterAdvertNumbers(this.props.user.relations.cars,items[0])}`}
                                                             </Typography>
                                                         }
                                                     </CardContent>

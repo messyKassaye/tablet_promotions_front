@@ -31,7 +31,7 @@ import AdvertBox from "./widgets/AdvertBox";
 import {grey} from "@material-ui/core/colors";
 import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
-
+import {me} from "../../state/actions/usersActions";
 
 class DriversDashboard extends React.Component {
 
@@ -53,6 +53,10 @@ class DriversDashboard extends React.Component {
             mobileOpen: value,
             currentPage:page
         })
+    }
+
+    componentDidMount() {
+        this.props.me()
     }
 
 
@@ -78,9 +82,8 @@ class DriversDashboard extends React.Component {
                             (
 
                                 <Typography style={{paddingLeft:20,paddingTop:20,color:grey[500]}}>
-                                    {this.props.user.map(items=>{
-                                        return items.relations.role[0].name
-                                    })
+                                    {
+                                        this.props.user.relations.role[0].name
                                     }
                                 </Typography>
                             )
@@ -190,4 +193,4 @@ const mapStateToProps = state=>({
 })
 
 export default withStyles(authstyle)(translate('common')
-(connect(mapStateToProps)(DriversDashboard)))
+(connect(mapStateToProps,{me})(DriversDashboard)))

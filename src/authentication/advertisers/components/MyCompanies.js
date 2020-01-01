@@ -4,7 +4,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import AddIcon from "@material-ui/icons/Add";
 import CardContent from "@material-ui/core/CardContent";
 import withStyles from "@material-ui/core/styles/withStyles";
 import myCompanyStyle from "../styles/myCompaniesStyle";
@@ -16,18 +16,57 @@ import FourByFourSkeleton from "./widgets/customSkeleton";
 import Avatar from "@material-ui/core/Avatar";
 import {grey} from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
-import GridList from "@material-ui/core/GridList";
-import CompanyDetails from "./widgets/CompanyDetails";
+import Typography from "@material-ui/core/Typography";
+import CardActions from "@material-ui/core/CardActions";
+import {showMainDialog} from "../../admin/state/action/dialogAction"
+import NewCompany from "./NewCompany";
+import AddNewAdvert from "../../commons/components/AddNewAdvert";
 class MyCompanies extends React.Component{
 
     constructor(props) {
         super(props);
-        this.newCompany = this.newCompany.bind(this)
 
     }
 
     newCompany = ()=>{
 
+     this.props.showMainDialog({
+         show:true,
+         page:<NewCompany form={{type:'form',data:null}}/>,
+         title:'Register new company',
+         actions:{
+             on:false,
+             path:'',
+             id:''
+         }
+     })
+
+    }
+
+    advertNow = company=>{
+        this.props.showMainDialog({
+            show:true,
+            page:<AddNewAdvert company={this.props.user.relations.companies} form={{type:'Edit',data:{'company_id':company.id}}}/>,
+            title: 'Add new advert',
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
+    }
+
+    edit = company=>{
+        this.props.showMainDialog({
+            show:true,
+            page:<NewCompany form={{type:'Edit',data:company}}/>,
+            title:`Edit your company`,
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
     }
 
     render() {
@@ -42,8 +81,7 @@ class MyCompanies extends React.Component{
                         action={
                             <div>
                                 <Button
-                                    component={Link}
-                                    to='/auth/advertiser/companyRegistration'
+                                    onClick={this.newCompany}
                                     color='inherit'
                                     variant='outlined'
                                     className={classes.new_advert_button} >
@@ -74,19 +112,66 @@ class MyCompanies extends React.Component{
                                         {
                                            this.props.user.relations.companies.map(company=>(
 
-                                                   <Grid item md={4} xs={12}>
+                                                   <Grid key={company.id} item md={4} xs={12}>
                                                        <Card className={classes.boxes}>
                                                            <CardHeader
                                                             title={company.name}
                                                             subheader={<span style={{color:grey[500]}}>{`${company.adverts.length} adverts`}</span>}
                                                             avatar={<Avatar>{company.name[0]}</Avatar>}
+                                                            action={
+                                                                company.adverts.length<=0
+                                                                ?
+                                                                    (
+                                                                        <Button
+                                                                            onClick={()=>this.advertNow(company)}
+                                                                            color='inherit'
+                                                                            variant='outlined'
+                                                                            style={{textTransform:'none'}}>
+                                                                            Advert now
+                                                                        </Button>
+                                                                    )
+                                                                :
+                                                                    (null)
+                                                            }
                                                            />
                                                            <Divider/>
-                                                           <CardContent className={classes.root}>
-                                                               <GridList className={classes.gridList}>
-                                                                   <CompanyDetails company={company}/>
-                                                               </GridList>
+                                                           <CardContent>
+                                                               {
+                                                                   <Card elevation={0}>
+                                                                       <CardContent>
+                                                                           <Typography>{`Phone : ${company.phone}`}</Typography>
+                                                                           <Typography>Website: <a href={company.website} >{company.website}</a>
+                                                                           </Typography>
+                                                                           <div style={{display:'flex',marginTop:15,flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
+                                                                               <Typography>{`Total adverts: ${company.adverts.length}`}</Typography>
+                                                                               <Button
+                                                                                   color='secondary'
+                                                                                   size='small'
+                                                                                   variant='outlined'
+                                                                                   disabled={company.adverts.length<=0}
+                                                                                   style={{textTransform:'none',marginLeft:10}}>
+                                                                                   show all
+                                                                               </Button>
+                                                                           </div>
+                                                                       </CardContent>
+                                                                   </Card>
+                                                               }
                                                            </CardContent>
+                                                           <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',color:'white'}}>
+                                                               <Button
+                                                                   color='inherit'
+                                                                   variant='text'
+                                                                   style={{textTransform:'none'}}>
+                                                                   Delete
+                                                               </Button>
+                                                               <Button
+                                                                   onClick={()=>this.edit(company)}
+                                                                   color='inherit'
+                                                                   variant='outlined'
+                                                                   style={{textTransform:'none'}}>
+                                                                   Edit
+                                                               </Button>
+                                                           </CardActions>
                                                        </Card>
                                                    </Grid>
                                             ))
@@ -108,5 +193,5 @@ const mapStateToProps = state=>({
     user:state.userData.user
 })
 
-export default connect(mapStateToProps,{})
+export default connect(mapStateToProps,{showMainDialog})
 (translate('common')(withRouter(withStyles(myCompanyStyle)(MyCompanies))))

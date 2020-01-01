@@ -21,18 +21,12 @@ export const unfinishedPaymentColumn = [
         id: 'total_views',
         label: 'Required views',
         align: 'left',
-        minWidth: 170,
+        minWidth: 150,
     },
     {
         id: 'media_name',
-        minWidth: 150,
+        minWidth: 120,
         label: 'Media type',
-        align: 'left',
-    },
-    {
-        id: 'advert_location',
-        label: 'Advert places',
-        minWidth: 170,
         align: 'left',
     },
     {
@@ -75,18 +69,12 @@ export const payedAndNotApprovedAdvertsColumn = [
         id: 'total_views',
         label: 'Required views',
         align: 'left',
-        minWidth: 170,
+        minWidth: 150,
     },
     {
         id: 'media_name',
-        minWidth: 150,
+        minWidth: 120,
         label: 'Media type',
-        align: 'left',
-    },
-    {
-        id: 'advert_location',
-        label: 'Advert places',
-        minWidth: 170,
         align: 'left',
     },
     {
@@ -127,25 +115,25 @@ export const onAirColumns = [
         id: 'total_views',
         label: 'Required views',
         align: 'left',
-        minWidth: 170,
+        minWidth: 120,
     },
     {
         id: 'current_views',
         label: 'Current views',
         align: 'left',
-        minWidth: 170,
+        minWidth: 120,
     },
     {
         id: 'media_name',
-        minWidth: 150,
+        minWidth: 100,
         label: 'Media type',
         align: 'left',
     },
     {
         id: 'advert_location',
         label: 'Total payment',
-        minWidth: 170,
-        align: 'left',
+        minWidth: 200,
+        align: 'center',
     },
 
 ]
@@ -184,7 +172,7 @@ export const usersColumn = [
     {
         id: 'actions',
         label: 'Actions',
-        minWidth: 170,
+        minWidth: 120,
         align:'left'
     },
 

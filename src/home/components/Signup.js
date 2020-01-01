@@ -9,7 +9,7 @@ import {fetchRole} from '../state/action/roleActions'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import withStyles from "@material-ui/core/styles/withStyles";
 import signup from '../../styles/signup_style'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -90,7 +90,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
              .then((response)=> {
                  set(response.token)
                  setRole(JSON.stringify(response.role))
-                 this.props.go('Authenticated')
+                 this.props.history.push('/auth')
              })
              .catch(onerror=>{
                  if(!onerror.status){
@@ -248,4 +248,4 @@ import Skeleton from "@material-ui/lab/Skeleton";
          }
      )
 
-export default  AppConsumer(withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole})(Signup))))
+export default  withRouter(withStyles(signup)(translate('common')(connect(mapStateToProps,{fetchRole})(Signup))))

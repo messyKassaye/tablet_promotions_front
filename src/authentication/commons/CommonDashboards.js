@@ -121,7 +121,7 @@ class CommonDashboards extends React.Component{
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Link to='/' className={classes.logo}>
+                        <Link to='/auth' className={classes.logo}>
                             <img
                                 alt='Tablet Promotions'
                                 src={logo_2}

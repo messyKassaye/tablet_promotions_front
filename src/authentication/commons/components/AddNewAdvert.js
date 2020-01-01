@@ -134,6 +134,21 @@ class AddNewAdvert extends Component {
     componentDidMount() {
         this.props.commonFetchAdvertMedia()
         this.props.commonFetchAdvertPlaces()
+
+        if(this.props.form.type==='Edit'){
+            console.log(this.props.form.data)
+            const {formData} = this.state
+            formData['company_id'] = this.props.form.data.company_id
+            formData['product_name'] = this.props.form.data.product_name
+            formData['required_views_number'] = this.props.form.data.required_views_number
+            formData['advertisement_media_id'] = this.props.form.data.advertisement_media_type_id
+
+            this.setState({
+                formData,
+                mediaTypeValue:this.props.form.data.advertisement_media_type_id,
+                advertPlaces:this.props.form.data.places
+            })
+        }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -205,7 +220,7 @@ class AddNewAdvert extends Component {
                                     placeholder='Expected views of this product'
                                     className={classes.textInput}
                                     onChange={this.handleChange}
-                                    value={this.state.formData.required_number_of_views}
+                                    value={this.state.formData.required_views_number}
                                 />
 
                                 {

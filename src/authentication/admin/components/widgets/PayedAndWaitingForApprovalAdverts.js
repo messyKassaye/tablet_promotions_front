@@ -19,7 +19,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import Button from "@material-ui/core/Button";
 import {StyledTableCell} from "../AdminAdverts";
-import AdvertPaymentStatus from "../../dialogs/component/AdvertPaymentStatus";
+import AdvertPaymentApproval from "../../dialogs/component/AdvertPaymentApproval";
 import {showMainDialog} from "../../state/action/dialogAction";
 import {connect} from "react-redux";
 import {Typography} from "@material-ui/core";
@@ -33,7 +33,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
 
     showPaymentStatus = adverts=>{
         this.props.showMainDialog({show:true,
-            page:<AdvertPaymentStatus advert={adverts}/>,
+            page:<AdvertPaymentApproval advert={adverts}/>,
             title:'Payment status for advert',
             actions:{on:false,path:'',id:''}})
     }
@@ -71,7 +71,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                 }
             />
             <Divider/>
-            <CardContent style={{padding:0}}>
+            <CardContent>
                 {
                     this.props.loading
                         ?
@@ -92,7 +92,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                                                 <StyledTableCell
                                                     key={column.id}
                                                     align={column.align}
-                                                    style={{minWidth: column.minWidth}}
+                                                    style={{minWidth: column.minWidth,position:'sticky',top:0,zIndex:100}}
                                                 >
                                                     {column.label}
                                                 </StyledTableCell>
@@ -124,18 +124,6 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                                                             </TableCell>
                                                             <TableCell key={'media'}>
                                                                 {advert.media.name}
-                                                            </TableCell>
-
-                                                            <TableCell key='advert_places' align={columns[1].align}>
-                                                                {
-                                                                   advert.advertisement_places.length>0
-                                                                    ?
-                                                                       (<span>{advert.advertisement_places[0].city}</span>)
-                                                                   :
-                                                                       (
-                                                                           <span>{advert.advertisement_places[0].city}</span>
-                                                                       )
-                                                                }
                                                             </TableCell>
 
                                                             <TableCell key='total_payment'>

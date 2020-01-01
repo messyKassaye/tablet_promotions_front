@@ -9,7 +9,7 @@ import {showMainDialog} from "../../state/action/dialogAction";
 import {connect} from "react-redux";
 import LoadingButton from "../../../../home/components/widgets/LoadingButton";
 import {green} from "@material-ui/core/colors";
-class AdvertPaymentStatus extends Component {
+class AdvertPaymentApproval extends Component {
 
     constructor(props) {
         super(props);
@@ -129,7 +129,8 @@ class AdvertPaymentStatus extends Component {
 }
 
 const mapStateToProps = state=>({
-    response: state.authReducer.adminReducers.advertReducer.response
+    response: state.authReducer.adminReducers.advertReducer.response,
+    user:state.userData.user
 })
 
-export default connect(mapStateToProps,{updateAdvert,showMainDialog})(AdvertPaymentStatus);
+export default connect(mapStateToProps,{updateAdvert,showMainDialog})(AdvertPaymentApproval);

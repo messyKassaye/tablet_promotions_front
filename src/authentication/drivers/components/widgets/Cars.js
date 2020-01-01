@@ -70,9 +70,9 @@ openCarsRegistrationDialog = ()=>{
                             (
                                <div className={classes.scroll_wrapper}>
                                    {
-                                       this.props.user.map(items=>items.relations.cars).length>0
+                                       this.props.user.relations.cars.length>0
                                        ?
-                                           (this.props.user.map(items=>items.relations.cars.map(cars=>(
+                                           (this.props.user.relations.cars.map(cars=>(
                                                    <Card key={cars.id} className={classes.scroll_child}>
                                                        <CardHeader
                                                            style={{color:"white"}}
@@ -87,7 +87,7 @@ openCarsRegistrationDialog = ()=>{
                                                            </Typography>
                                                        </CardContent>
                                                    </Card>
-                                           ))))
+                                           )))
                                        :
                                        (
                                           <span>Please register your car now and start advertising now</span>

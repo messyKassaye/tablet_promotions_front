@@ -13,6 +13,12 @@ class Notifications extends React.Component{
 
     }
 
+    filterNewNotifications = (notifications)=>{
+        return notifications.filter(notification=>{
+            return notification.status===0;
+        })
+    }
+
     render() {
         const StyledBadge1 = withStyles(theme => ({
             badge: {
@@ -39,10 +45,10 @@ class Notifications extends React.Component{
                                 color='inherit'
                             >
                                 {
-                                    this.props.user.relations.notifications.length>0
+                                    this.filterNewNotifications(this.props.user.relations.notifications).length>0
                                         ?
                                         (
-                                            <StyledBadge1 badgeContent={`${this.props.user.relations.notifications.length}`} color="secondary">
+                                            <StyledBadge1 badgeContent={`${this.filterNewNotifications(this.props.user.relations.notifications).length}`} color="secondary">
                                                 <NotificationIcon/>
                                             </StyledBadge1>
                                         )

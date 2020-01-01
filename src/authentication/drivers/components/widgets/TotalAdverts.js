@@ -24,9 +24,9 @@ class TotalAdverts extends React.Component{
     }
     sum = (cars)=>{
         let result =0
-        cars.map(car=>car.map(item=>{
+        cars.map(item=>{
             result += item.adverts.length
-        }))
+        })
         return result
     }
 
@@ -54,7 +54,7 @@ class TotalAdverts extends React.Component{
                               {
                                   <Typography gutterBottom variant="h5" component="h2">
                                       {
-                                          this.sum(this.props.user.map(items=>items.relations.cars))
+                                          this.sum(this.props.user.relations.cars)
                                       }
                                   </Typography>
                               }
@@ -64,7 +64,7 @@ class TotalAdverts extends React.Component{
 
                           </CardContent>
                           <CardActions className={classes.cardActions}>
-                              <Button onClick={()=>this.more.bind(this,this.props.user.map(items=>items.relations.cars))} style={{color:'white',textTransform:'capitalize'}}>
+                              <Button onClick={()=>this.more.bind(this,this.props.user.relations.cars)} style={{color:'white',textTransform:'capitalize'}}>
                                   <span>{t('driver.more')}</span><ChevronRightIcon/>
                               </Button>
                           </CardActions>

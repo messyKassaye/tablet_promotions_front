@@ -18,12 +18,59 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import LoadingButton from "../../../../home/components/widgets/LoadingButton";
+import {updateAdvert} from "../../state/action/advertsAction";
+
 class OnAirAdverts extends Component {
+    constructor(props) {
+        super(props);
+        this.state  = {
+            advertId:0,
+            submitted: false,
+            loading: false,
+            finished: false,
+            buttonText:'Cancel',
+            formData:{
+                status:''
+            }
+        }
+    }
+
 
     totalPayment = (requiredViews,payment)=>{
         return requiredViews*payment
     }
+
+    cancelPayment = advert=>{
+        this.setState({
+            advertId:advert.id,
+            submitted:true,
+            loading:true,
+            buttonText:'Canceling'
+        })
+        const {formData} = this.state
+        formData['status'] = 'cancel'
+        this.setState(formData)
+        this.props.updateAdvert(formData,advert.id)
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.response.status){
+            this.setState({
+                submitted:false,
+                loading:false,
+                buttonText:'canceled'
+            })
+            setTimeout(()=>{
+                window.location.reload()
+            },1000)
+        }
+    }
+
     render() {
+        const {loading} = this.state;
+        const {finished} = this.state
+        const setLoading = !finished && loading;
         return (
             <Card style={{marginBottom:20}}>
                 <CardHeader
@@ -132,7 +179,23 @@ class OnAirAdverts extends Component {
                                                                 </TableCell>
 
                                                                 <TableCell key='total_payment'>
-                                                                    {`${this.totalPayment(advert.required_views_number,advert.media.per_view_payment).toLocaleString()} ETB`}
+                                                                    <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                                                                        <span>
+                                                                            {`${this.totalPayment(advert.required_views_number,advert.media.per_view_payment).toLocaleString()} ETB`}
+                                                                        </span>
+                                                                        <LoadingButton
+                                                                            onClick={()=>this.cancelPayment(advert)}
+                                                                            color='secondary'
+                                                                            variant='outlined'
+                                                                            disabled={this.state.advertId==advert.id}
+                                                                            loading={this.state.advertId==advert.id}
+                                                                            text={this.state.buttonText}
+                                                                            done={finished}
+                                                                            style={{textTransform:'none',marginLeft:10}}>
+                                                                            {this.state.buttonText}
+                                                                        </LoadingButton>
+                                                                    </div>
+
                                                                 </TableCell>
                                                             </TableRow>
                                                         ))
@@ -161,6 +224,7 @@ class OnAirAdverts extends Component {
 
 const mapStateToProps = state=>({
     loading:state.authReducer.adminReducers.advertReducer.loading,
+    response:state.authReducer.adminReducers.advertReducer.response
 })
 
-export default connect(mapStateToProps)(OnAirAdverts);
+export default connect(mapStateToProps,{updateAdvert})(OnAirAdverts);

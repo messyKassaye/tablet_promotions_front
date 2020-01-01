@@ -95,6 +95,14 @@ class AdvertPaymentTransaction extends Component {
                                 <Table>
                                     <TableBody>
                                         <TableRow>
+                                            <TableCell>Expected play:</TableCell>
+                                            <TableCell>{`${this.props.advert.required_views_number.toLocaleString()}`}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Unit payment:</TableCell>
+                                            <TableCell>{`${this.props.advert.advert_media_type.per_view_payment} ETB`}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
                                             <TableCell>Total Payment:</TableCell>
                                             <TableCell>{`${this.totalPayment(this.props.advert.required_views_number,this.props.advert.advert_media_type.per_view_payment).toLocaleString()} ETB`}</TableCell>
                                         </TableRow>

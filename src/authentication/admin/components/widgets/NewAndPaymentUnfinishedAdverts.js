@@ -71,7 +71,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                     }
                 />
                 <Divider/>
-                <CardContent style={{padding:0}}>
+                <CardContent>
 
                     {
                         this.props.loading
@@ -94,7 +94,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                                                         key={column.id}
                                                         align={column.align}
                                                         style={{minWidth: column.minWidth,position:'sticky',top:0,backgroundColor: '#3C4252',
-                                                            color: 'white',}}
+                                                            color: 'white',zIndex:1000}}
                                                     >
                                                         {column.label}
                                                     </TableCell>
@@ -126,18 +126,6 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                                                                 </TableCell>
                                                                 <TableCell key={'media'}>
                                                                     {advert.media.name}
-                                                                </TableCell>
-
-                                                                <TableCell key='advert_places' align={columns[1].align}>
-                                                                    {
-                                                                        <div style={{maxWidth:'200px',overflowX:'auto'}}>
-                                                                            {
-                                                                                advert.advertisement_places.map(place=>(
-                                                                                    <span key={place.id}>{`${place.city},`}</span>
-                                                                                ))
-                                                                            }
-                                                                        </div>
-                                                                    }
                                                                 </TableCell>
 
                                                                 <TableCell key='total_payment'>

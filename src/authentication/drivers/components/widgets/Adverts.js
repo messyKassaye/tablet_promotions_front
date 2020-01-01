@@ -56,25 +56,20 @@ class Adverts extends React.Component{
                             <Grid container spacing={2}>
                                 <Grid item md={12} xs={12}>
                                     {
-                                        this.props.user.map(items=>(
-                                        <TodaysAdvert key={items.attribute.id} today={items.helpers.today_date} cars={items.relations.cars}/>
-                                        ))
+                                        <TodaysAdvert  today={this.props.user.helpers.today_date} cars={this.props.user.relations.cars}/>
+
                                     }
                                 </Grid>
 
                                 <Grid item md={12} xs={12}>
                                     {
-                                        this.props.user.map(items=>(
-                                            <WeeksAd key={items.attribute.id}  cars={items.relations.cars}/>
-                                        ))
+                                        <WeeksAd cars={this.props.user.relations.cars}/>
                                     }
                                 </Grid>
 
                                 <Grid item md={12} xs={12}>
                                     {
-                                        this.props.user.map(items=>(
-                                            <TotalAds key={items.attribute.id}  cars={items.relations.cars}/>
-                                        ))
+                                        <TotalAds cars={this.props.user.relations.cars}/>
                                     }
                                 </Grid>
 

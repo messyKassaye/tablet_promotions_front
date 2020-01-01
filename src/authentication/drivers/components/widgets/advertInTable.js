@@ -123,7 +123,7 @@ class AdvertInTable extends React.Component {
                                                 </TableHead>
                                                 <TableBody>
                                                     {
-                                                        this.props.user.map(items => items.relations.cars.map(cars => cars.adverts.map(advert => (
+                                                        this.props.user.relations.cars.map(cars => cars.adverts.map(advert => (
                                                             <TableRow hover role="checkbox" tabIndex={-1}
                                                                       key={advert.id}>
                                                                 <TableCell key='company_name'>
@@ -164,7 +164,7 @@ class AdvertInTable extends React.Component {
                                                                     }
                                                                 </TableCell>
                                                             </TableRow>
-                                                        ))))
+                                                        )))
                                                     }
                                                 </TableBody>
                                             </Table>

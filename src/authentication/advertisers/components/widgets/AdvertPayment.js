@@ -12,6 +12,9 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import boxStyle from "../../styles/boxStyle";
 import Divider from "@material-ui/core/Divider";
 import {withRouter} from 'react-router-dom'
+import AdvertPaymentTransaction from "../../../commons/components/AdvertPaymentTransaction";
+import {showMainDialog} from "../../../admin/state/action/dialogAction";
+import {connect} from "react-redux";
 class AdvertPayment extends React.Component{
     constructor(props) {
         super(props);
@@ -25,8 +28,17 @@ class AdvertPayment extends React.Component{
         return expectedViews * paymentPerView
     }
 
-    payNow = (id)=>{
-        this.props.history.push(`/bankTransaction/${id}`)
+    payNow = (advert)=>{
+        this.props.showMainDialog({
+            show:true,
+            page: <AdvertPaymentTransaction advert={advert}/>,
+            title: `Payment for ${advert.product_name}`,
+            actions:{
+                on:false,
+                path: '',
+                id:''
+            }
+        })
     }
 
     render() {
@@ -63,7 +75,7 @@ class AdvertPayment extends React.Component{
                             (
                                 <CardActions style={{display:'flex',justifyContent:'flex-end'}}>
                                     <Button
-                                        onClick={()=>this.payNow(this.props.adverts.id)}
+                                        onClick={()=>this.payNow(this.props.adverts)}
                                         style={{textTransform:'capitalize'}}
                                         color='secondary'
                                         variant='outlined'
@@ -80,4 +92,4 @@ class AdvertPayment extends React.Component{
 
 }
 
-export default withRouter(withStyles(boxStyle)(AdvertPayment))
+export default connect(null,{showMainDialog})(withRouter(withStyles(boxStyle)(AdvertPayment)))

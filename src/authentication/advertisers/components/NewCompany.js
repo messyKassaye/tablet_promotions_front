@@ -7,19 +7,23 @@ import CardContent from "@material-ui/core/CardContent";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import LoadingButton from "../../../home/components/widgets/LoadingButton";
 import {connect} from "react-redux";
-import {storeCompany} from "../state/action/companiesAction";
+import {storeCompany,updateCompany} from "../state/action/companiesAction";
 import {translate} from "react-i18next";
 import {addNewCompanyLocally} from "../../state/actions/usersActions";
+import adminMainDialogStyle from "../../admin/dialogs/styles/mainDialogStyle";
+import Typography from "@material-ui/core/Typography";
+import {green} from "@material-ui/core/colors";
+import {showMainDialog} from "../../admin/state/action/dialogAction";
 
-class NewCompany extends React.Component{
+class NewCompany extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            formData:{
-                'name':'',
-                'phone':'',
-                'website':''
+            formData: {
+                'name': '',
+                'phone': '',
+                'website': ''
             },
             submitted: false,
             loading: false,
@@ -28,110 +32,112 @@ class NewCompany extends React.Component{
 
     }
 
-    handleChange = (event)=>{
-        const {formData} =this.state
+    handleChange = (event) => {
+        const {formData} = this.state
         formData[event.target.name] = event.target.value;
         this.setState(formData)
     }
-    handleSubmit = ()=>{
+    handleSubmit = () => {
         const {formData} = this.state;
         this.setState({
             submitted: true,
             loading: true
         })
-        this.props.storeCompany(formData)
+        if(this.props.form.type==='Edit'){
+            this.props.updateCompany(formData,this.props.form.data.id)
+        }else {
+            this.props.storeCompany(formData)
+        }
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.company){
+        if (nextProps.response.status) {
             this.setState({
                 loading: false,
                 finished: false,
                 submitted: false,
             })
+            setTimeout(()=>{
+                this.props.showMainDialog({
+                    show:false,
+                    page:null,
+                    title:'',
+                    actions:{
+                        on:false,
+                        path:'',
+                        id:''
+                    }
+                })
+            },2000)
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(!this.props.loading){
-            this.props.addNewCompanyLocally(this.props.company)
+    componentDidMount() {
+        if(this.props.form.type==='Edit'){
+            const {formData} = this.state
+            formData['name'] = this.props.form.data.name
+            formData['phone']=this.props.form.data.phone
+            formData['website'] = this.props.form.data.website
+            this.setState(formData)
         }
-
     }
 
     render() {
-        const {classes} =this.props
+        const {classes} = this.props
         const {formData} = this.state
         const {loading} = this.state;
         const finished = false
         const setLoading = !finished && loading;
-        const isEnabled = formData.name.length > 0 && formData.phone.length>0&&formData.website.length>0
+        const isEnabled = formData.name.length > 0 && formData.phone.length > 0 && formData.website.length > 0
         const {t} = this.props
         return (
             <div>
-                <div>
-                    <Card>
-                        <CardHeader
-                            className={classes.header}
-                            title={t('advertiser.new_company.form.title')}
 
-
+                <div className={classes.container}>
+                    <ValidatorForm
+                        className={classes.form}
+                        onSubmit={this.handleSubmit}
+                    >
+                        <Typography style={{color:green[500]}}>{this.props.response.message}</Typography>
+                        <TextValidator
+                            className={classes.textInput}
+                            label={t('advertiser.new_company.form.company_name')}
+                            onChange={this.handleChange}
+                            name="name"
+                            value={this.state.formData.name}
+                            validators={['required']}
+                            errorMessages={['Please enter your company name']}
                         />
-                        <CardContent style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                            <div className={classes.container}>
-                            <ValidatorForm
-                                className={classes.form}
-                                onSubmit={this.handleSubmit}
-                            >
-                                <TextValidator
-                                    className={classes.formControl}
-                                    label={t('advertiser.new_company.form.company_name')}
-                                    onChange={this.handleChange}
-                                    name="name"
-                                    value={this.state.formData.name}
-                                    validators={['required']}
-                                    errorMessages={['Please enter your company name']}
-                                />
 
-                                <TextValidator
-                                    className={classes.formControl}
-                                    label={t('advertiser.new_company.form.phone')}
-                                    onChange={this.handleChange}
-                                    name="phone"
-                                    value={this.state.formData.phone}
-                                    validators={['required']}
-                                    errorMessages={['Please enter your company name']}
-                                />
-                                <TextValidator
-                                    className={classes.formControl}
-                                    label={t('advertiser.new_company.form.website')}
-                                    onChange={this.handleChange}
-                                    name="website"
-                                    value={this.state.formData.website}
-                                />
-                                <div style={{
-                                    display: 'flex',
-                                    width: '100%',
-                                    justifyContent: 'flex-end',
-                                    alignItems: 'end',
-                                    marginTop:10
-                                }}>
-                                    <LoadingButton
-                                        style={{textTransform: 'capitalize'}}
-                                        color="primary"
-                                        variant="contained"
-                                        type="submit"
-                                        disabled={!isEnabled || this.state.submitted}
-                                        loading={setLoading}
-                                        done={finished}
-                                        text={t('advertiser.new_company.form.register_btn')}>
-                                    </LoadingButton>
-                                </div>
-                            </ValidatorForm>
-                            </div>
-                        </CardContent>
-                    </Card>
-            </div>
+                        <TextValidator
+                            className={classes.textInput}
+                            label={t('advertiser.new_company.form.phone')}
+                            onChange={this.handleChange}
+                            name="phone"
+                            value={this.state.formData.phone}
+                            validators={['required']}
+                            errorMessages={['Please enter your company name']}
+                        />
+                        <TextValidator
+                            className={classes.textInput}
+                            label={t('advertiser.new_company.form.website')}
+                            onChange={this.handleChange}
+                            name="website"
+                            value={this.state.formData.website}
+                        />
+                        <LoadingButton
+                            style={{textTransform: 'capitalize'}}
+                            color="primary"
+                            variant="contained"
+                            type="submit"
+                            disabled={!isEnabled || this.state.submitted}
+                            loading={setLoading}
+                            done={finished}
+                            text={t('advertiser.new_company.form.register_btn')}>
+                        </LoadingButton>
+                    </ValidatorForm>
+                </div>
             </div>
         );
     }
@@ -139,10 +145,10 @@ class NewCompany extends React.Component{
 
 }
 
-const mapStateToProps = state=>({
+const mapStateToProps = state => ({
     loading: state.authReducer.advertisersReducers.companyData.loading,
-    company: state.authReducer.advertisersReducers.companyData.company
+    response: state.authReducer.advertisersReducers.companyData.response
 })
 
 export default translate('common')
-(connect(mapStateToProps,{storeCompany,addNewCompanyLocally})(withStyles(newCompanyStyle)(NewCompany)))
+(connect(mapStateToProps, {storeCompany, updateCompany,showMainDialog})(withStyles(adminMainDialogStyle)(NewCompany)))

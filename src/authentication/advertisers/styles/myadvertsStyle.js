@@ -52,6 +52,19 @@ const myAdvertStyle = theme=>({
         width: '100%'
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     },
+    smallDevice:{
+        display:'none',
+        width:'100%',
+        [theme.breakpoints.down('sm')]:{
+            display:'flex'
+        }
+    },
+    bigDevice:{
+        display:'flex',
+        [theme.breakpoints.down('sm')]:{
+            display:'none'
+        }
+    }
 })
 
 export default myAdvertStyle

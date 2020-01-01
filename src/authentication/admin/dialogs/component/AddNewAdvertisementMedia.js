@@ -16,6 +16,7 @@ import {updateAdvertMedia} from "../../state/action/advertisementMediaTypeAction
 import {translate} from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import {green, grey} from "@material-ui/core/colors";
+import Label from "recharts/es6/component/Label";
 class AddNewAdvertisementMedia extends Component {
     constructor(props) {
         super(props);
@@ -125,13 +126,17 @@ class AddNewAdvertisementMedia extends Component {
                     value={this.state.formData.name}
                 />
 
-                <TextField
-                    name='per_view_payment'
-                    className={classes.textInput}
-                    placeholder='Per view payment'
-                    onChange={this.handleChange}
-                    value={this.state.formData.per_view_payment}
-                />
+                <FormControl>
+                    <Label id={'per_view_payment'}>Per view payment</Label>
+                    <TextField
+                        id={'per_view_payment'}
+                        name='per_view_payment'
+                        className={classes.textInput}
+                        placeholder='Per view payment'
+                        onChange={this.handleChange}
+                        value={this.state.formData.per_view_payment}
+                    />
+                </FormControl>
                 {
                     this.props.loading
                     ?
