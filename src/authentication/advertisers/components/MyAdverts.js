@@ -66,7 +66,7 @@ class MyAdverts extends React.Component {
         this.props.showMainDialog({
             show: true,
             title: 'Add new Advert',
-            page: <AddNewAdvert company={this.props.user.relations.companies}/>,
+            page: <AddNewAdvert form={{type:'',data:null}} company={this.props.user.relations.companies}/>,
             actions: {
                 on: false,
                 path: '',

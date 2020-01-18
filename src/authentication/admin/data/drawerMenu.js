@@ -5,7 +5,7 @@ import VideocamIcon from '@material-ui/icons/Videocam'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import MusicNotIcon from '@material-ui/icons/MusicNote'
 import PersonIcon from '@material-ui/icons/Person';
-import SupervisedUserCircleSharpIcon from '@material-ui/icons/SupervisedUserCircleSharp'
+import ExtensionIcon from '@material-ui/icons/Extension';
 import React from "react";
 const drawerMenu = [
     {
@@ -25,8 +25,13 @@ const drawerMenu = [
     },
     {
       name:'Utilities',
-      icon:<AttachMoneyIcon/>,
+      icon:<ExtensionIcon/>,
         children:[
+            {
+                name:'Currency',
+                route:'/auth/admin/currency',
+                icon:<AttachMoneyIcon/>
+            },
             {
                 name:'Roles',
                 route:'/auth/admin/roles',
@@ -47,17 +52,17 @@ const drawerMenu = [
                 route:'/auth/admin/medias',
                 icon:<MusicNotIcon/>
             },
+            {
+                name:'Places',
+                route:'/auth/admin/places',
+                icon:<MusicNotIcon/>
+            },
         ]
     },
     {
         name:'Finances',
         icon:<AttachMoneyIcon/>,
         children:[
-            {
-                name:'Currency',
-                route:'/auth/admin/currency',
-                icon:<AttachMoneyIcon/>
-            },
             {
                 name:'Total income',
                 route:'/auth/admin/total_income',
