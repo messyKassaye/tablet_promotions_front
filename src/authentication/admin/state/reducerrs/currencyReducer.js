@@ -1,8 +1,12 @@
-import {FETCH_CURRENCY} from "../actionConstants/adminActionConstants";
+import {FETCH_CURRENCY, STORE_CURRENCY, UPDATE_CURRENCY} from "../actionConstants/adminActionConstants";
 
 const initialState = {
     currency:[],
-    loading:true
+    loading:true,
+    response:{
+        status:false,
+        message:''
+    }
 }
 
 
@@ -13,6 +17,18 @@ export default function (state=initialState,action) {
                 ...state,
                 currency: action.payload,
                 loading: false
+            }
+
+        case STORE_CURRENCY:
+            return {
+                ...state,
+                response: action.payload
+            }
+
+        case UPDATE_CURRENCY:
+            return {
+                ...state,
+                response: action.payload
             }
 
         default:

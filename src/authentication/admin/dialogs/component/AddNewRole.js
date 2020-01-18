@@ -41,6 +41,8 @@ class AddNewRole extends Component {
             submitted: true,
             loading: true
         })
+
+
         if(this.props.form.type==='Edit'){
            const {formData} = this.state
             this.props.updateRole(this.props.form.data.id,formData)

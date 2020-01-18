@@ -71,44 +71,6 @@ const drawerMenu = [
         ]
     },
     {
-        name:'Advertisers',
-        icon: <VideocamIcon/>,
-        children:[
-            {
-                name:'Advertisers',
-                route:'/admin/advertisers',
-                icon:<VideocamIcon/>
-            },
-            {
-                name:'Drivers',
-                route:'/admin/advertisers',
-                icon:<VideocamIcon/>
-            },
-            {
-                name:'Supporters',
-                route:'/admin/advertisers',
-                icon:<VideocamIcon/>
-            },
-            {
-                name:'Downloader',
-                route:'/admin/advertisers',
-                icon:<VideocamIcon/>
-            }
-        ]
-    },
-    {
-      name:"Drivers",
-      route:'/auth/admin/drivers',
-      icon:<DirectionsCarIcon/>,
-      children:[
-          {
-              name:'payment',
-              route:'/auth/admin/driver/payment',
-              icon:<AttachMoneyIcon/>
-          }
-      ]
-    },
-    {
         name:'Settings',
         route:'/auth/admin/settings',
         icon: <SettingIcon/>

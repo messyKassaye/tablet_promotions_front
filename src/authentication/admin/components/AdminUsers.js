@@ -100,7 +100,9 @@ class AdminUsers extends Component {
                                                                 </TableCell>
                                                                 <TableCell>
                                                                     {
-                                                                        user.role[0].name
+                                                                        user.role.map(role=>(
+                                                                            <span>{role.name}</span>
+                                                                        ))
                                                                     }
                                                                 </TableCell>
                                                                 <TableCell>

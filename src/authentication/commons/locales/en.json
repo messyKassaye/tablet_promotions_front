@@ -8,7 +8,7 @@
     },
     "admin_menu": {
       "Dashboard": "Home",
-      "Users": "Users",
+      "All user": "All Users",
       "Adverts": "Adverts",
       "Roles": "Roles",
       "Utilities": "Utilities",

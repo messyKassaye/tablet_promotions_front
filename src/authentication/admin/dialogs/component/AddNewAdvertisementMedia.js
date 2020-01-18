@@ -13,10 +13,13 @@ import LoadingButton from "../../../../home/components/widgets/LoadingButton";
 import {storeAdvertMedia} from "../../state/action/advertisementMediaTypeActions";
 import {showMainDialog} from "../../state/action/dialogAction";
 import {updateAdvertMedia} from "../../state/action/advertisementMediaTypeActions";
+import {ValidatorForm,TextValidator} from 'react-material-ui-form-validator'
 import {translate} from "react-i18next";
 import Typography from "@material-ui/core/Typography";
 import {green, grey} from "@material-ui/core/colors";
 import Label from "recharts/es6/component/Label";
+import {Button} from "@material-ui/core";
+import AddNewCurrency from "./AddNewCurrency";
 class AddNewAdvertisementMedia extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +37,20 @@ class AddNewAdvertisementMedia extends Component {
             selectValue: '',
         }
     }
+
+    addNewCurrency = ()=>{
+        this.props.showMainDialog({
+            show:true,
+            page:<AddNewCurrency form={{type:'',data:null}}/>,
+            title:'Add new Currency',
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
+    }
+
     handleChange = event=>{
         const {formData} = this.state
         formData[event.target.name] = event.target.value;
@@ -116,23 +133,23 @@ class AddNewAdvertisementMedia extends Component {
             formData.currency_id>0 &&formData.description.length>0
 
         return (
-            <form className={classes.form} onSubmit={this.handleSubmit}>
+            <ValidatorForm className={classes.form} onSubmit={this.handleSubmit}>
                 <Typography style={{color:green[500]}}>{this.props.response.message}</Typography>
-                <TextField
+                <TextValidator
                     name='name'
                     className={classes.textInput}
-                    placeholder='Enter media name E.g video, image, audio'
+                    label='Enter media name E.g video, image, audio'
                     onChange={this.handleChange}
                     value={this.state.formData.name}
                 />
 
                 <FormControl>
-                    <Label id={'per_view_payment'}>Per view payment</Label>
-                    <TextField
+                    <Label id={'per_view_payment'}>Per play payment</Label>
+                    <TextValidator
                         id={'per_view_payment'}
                         name='per_view_payment'
                         className={classes.textInput}
-                        placeholder='Per view payment'
+                        label='Per play payment'
                         onChange={this.handleChange}
                         value={this.state.formData.per_view_payment}
                     />
@@ -143,31 +160,54 @@ class AddNewAdvertisementMedia extends Component {
                         (<Skeleton style={{backgroundColor:grey[500]}} width='100%' height={50} variant='rect'/>)
                     :
                         (
-                            <FormControl className={classes.textInput}>
-                                <InputLabel
-                                    htmlFor="demo-controlled-open-select">{'Select payment currency'}</InputLabel>
-                                <Select
-                                    name='currency_id'
-                                    value={this.state.selectValue}
-                                    open={this.state.isSelectOpened}
-                                    onClose={this.handleSelect}
-                                    onOpen={this.handleSelectOpen}
-                                    onChange={this.handleSelectChange}
-                                >
-                                    {
-                                        this.props.currency.map(items => (
-                                            <MenuItem key={items.name}
-                                                      value={items.id}>{items.name}</MenuItem>
-                                        ))
-                                    }
-                                </Select>
-                            </FormControl>
+                            <div>
+
+                                {
+                                    this.props.currency.length>0
+                                    ?
+                                        (
+                                            <FormControl className={classes.textInput}>
+                                            <InputLabel
+                                                htmlFor="demo-controlled-open-select">{'Select payment currency'}</InputLabel>
+                                            <Select
+                                                name='currency_id'
+                                                value={this.state.selectValue}
+                                                open={this.state.isSelectOpened}
+                                                onClose={this.handleSelect}
+                                                onOpen={this.handleSelectOpen}
+                                                onChange={this.handleSelectChange}
+                                            >
+                                                {
+                                                    this.props.currency.map(items => (
+                                                        <MenuItem key={items.name}
+                                                                  value={items.id}>{items.name}</MenuItem>
+                                                    ))
+                                                }
+                                            </Select>
+                                            </FormControl>
+                                        )
+                                    :
+                                        (
+                                            <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',}}>
+                                                <Typography>There is no registered currency.Please add currency</Typography>
+                                                <Button
+                                                    onClick={this.addNewCurrency}
+                                                    color='primary'
+                                                    variant='outlined'
+                                                    size='small'
+                                                    style={{textTransform:'none',marginLeft:10}}>
+                                                    Add currency
+                                                </Button>
+                                            </div>
+                                        )
+                                }
+                            </div>
                         )
                 }
 
-                <TextField
+                <TextValidator
                     name='description'
-                    placeholder='Description'
+                    label='Description'
                     onChange={this.handleChange}
                     value={this.state.formData.description}
                     rows={10}
@@ -190,7 +230,7 @@ class AddNewAdvertisementMedia extends Component {
                     }
                 </LoadingButton>
 
-            </form>
+            </ValidatorForm>
         );
     }
 }
