@@ -26,7 +26,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth/admin/cars' component={AdminCars}/>
                 <Route path='/auth/admin/medias' component={AdvertMedias}/>
                 <Route path='/auth/admin/notifications' component={NotificationDetails}/>
-                <Route path='/auth/admin/setting' component={Setting}/>
+                <Route path='/auth/admin/settings' component={Setting}/>
             </Switch>
         );
     }

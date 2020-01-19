@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 class Setting extends React.Component {
 
     constructor(props) {
@@ -70,10 +71,76 @@ class Setting extends React.Component {
         })
     }
 
+    editProfile = ()=>{
+        console.log(this.state.formData)
+    }
+
+    loadData = () => {
+        const {classes} = this.props
+        const {formData} = this.state
+        formData['first_name'] = this.props.user.attribute.first_name
+        formData['last_name'] = this.props.user.attribute.last_name
+        formData['email'] = this.props.user.attribute.email
+        formData['phone'] = this.props.user.attribute.phone
+        return (
+            <div>
+                <Typography component='p' className={classes.text}>Edit your
+                    profile</Typography>
+                <ValidatorForm
+                    onSubmit={this.handleSubmit}
+                >
+                    {
+                        <Typography component='p' className={classes.errors}>
+                        </Typography>
+                    }
+                    <TextValidator
+                        className={classes.text_input}
+                        label='First Name'
+                        type='text'
+                        onChange={this.handleChange}
+                        name="first_name"
+                        value={this.state.formData.first_name}
+                    />
+
+                    <TextValidator
+                        className={classes.text_input}
+                        label='Last Name'
+                        onChange={this.handleChange}
+                        name="last_name"
+                        type='text'
+                        value={this.state.formData.last_name}
+                    />
+                    <TextValidator
+                        className={classes.text_input}
+                        label='Phone number'
+                        onChange={this.handleChange}
+                        name="phone"
+                        type='number'
+                        value={this.state.formData.phone}
+                    />
+
+                    <TextValidator
+                        className={classes.text_input}
+                        label='Email address'
+                        onChange={this.handleChange}
+                        name="email"
+                        type='email'
+                        value={this.state.formData.email}
+                    />
+                    <Button onClick={()=>this.editProfile} type='submit' color='primary' variant='contained' style={{textTransform:'none'}}>Edit
+                        profile</Button>
+                </ValidatorForm>
+
+                <Divider style={{marginTop: 20, marginBottom: 20}}/>
+                <Button color='primary' variant='outlined'>Change password</Button>
+            </div>
+        )
+    }
 
 
     render() {
         const {classes} = this.props
+
         return (
             <Grid container spacing={2}>
                 <Grid item md={4} sm={12}>
@@ -144,57 +211,7 @@ class Setting extends React.Component {
                                 )
                                 :
                                 (
-                                    <div>
-                                        <Typography component='p' className={classes.text}>Edit your
-                                            profile</Typography>
-                                        <ValidatorForm
-                                            onSubmit={this.handleSubmit}
-                                        >
-                                            {
-                                                <Typography component='p' className={classes.errors}>
-                                                </Typography>
-                                            }
-                                            <TextValidator
-                                                className={classes.text_input}
-                                                label='First Name'
-                                                type='text'
-                                                onChange={this.handleChange}
-                                                name="first_name"
-                                                value={this.state.formData.first_name}
-                                            />
-
-                                            <TextValidator
-                                                className={classes.text_input}
-                                                label='Last Name'
-                                                onChange={this.handleChange}
-                                                name="last_name"
-                                                type='text'
-                                                value={this.state.formData.last_name}
-                                            />
-                                            <TextValidator
-                                                className={classes.text_input}
-                                                label='Phone number'
-                                                onChange={this.handleChange}
-                                                name="phone"
-                                                type='number'
-                                                value={this.state.formData.phone}
-                                            />
-
-                                            <TextValidator
-                                                className={classes.text_input}
-                                                label='Email address'
-                                                onChange={this.handleChange}
-                                                name="email"
-                                                type='email'
-                                                value={this.state.formData.email}
-                                            />
-                                            <Button type='submit' color='primary' variant='contained'>Edit
-                                                profile</Button>
-                                        </ValidatorForm>
-
-                                        <Divider style={{marginTop:20,marginBottom:20}}/>
-                                        <Button color='primary' variant='outlined'>Change password</Button>
-                                    </div>
+                                    <div>{this.loadData()}</div>
                                 )
                         }
                     </Paper>
