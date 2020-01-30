@@ -23,10 +23,18 @@ const Slider =({t})=>{
                            <div style={{textAlign:'center',display:"flex",justifyContent:'center',flexDirection:'column'}}>
                                <h3 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.slider.${item.description}`)}</h3>
                                <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                                   <Button color='inherit' variant='text' style={{marginRight:20}}>
+                                   <Button
+                                       color='inherit'
+                                       variant='text'
+                                       style={{marginRight:20,textTransform:"none"}}>
                                        {t('home.slider.watch_video')}
                                    </Button>
-                                   <Button component={Link} to='/signup'  variant='outlined' color='inherit'>
+                                   <Button
+                                       component={Link} to='/signup'
+                                       variant='outlined'
+                                       color='inherit'
+                                       style={{textTransform:'none'}}
+                                   >
                                        {t('home.slider.start_button')}
                                    </Button>
                                </div>

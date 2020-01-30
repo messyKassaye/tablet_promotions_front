@@ -20,10 +20,16 @@
       "Advertisers": "Advertisers",
       "Drivers": "Drivers",
       "Settings": "Settings",
+      "Profile Settings": "Profile Settings",
       "Finances": "Finances",
       "Currency": "Currency",
       "Total income": "ጠቅላላ ገቢ",
-      "Total withdrawals": "ጠቅላላ ወጭ"
+      "Total withdrawals": "ጠቅላላ ወጭ",
+      "Company settings": "የድርጅቱ ማስተካከያ",
+      "What is TabAdverts": "What is TabAdverts",
+      "About us": "About us",
+      "pricing": "Pricing",
+      "About cars": "About cars"
     }
   }
 }

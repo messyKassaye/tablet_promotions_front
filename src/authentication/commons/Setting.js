@@ -5,12 +5,15 @@ import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import settingStyle from "../authstyle/settingStyle";
-import {Paper} from "@material-ui/core";
+import {Container, Paper} from "@material-ui/core";
 import {me, userUpdate} from "../state/actions/usersActions";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import ResetPassword from "./components/ResetPassword";
+import {set} from "../../TokenService";
+import LoadingButton from "../../home/components/widgets/LoadingButton";
 
 class Setting extends React.Component {
 
@@ -25,14 +28,18 @@ class Setting extends React.Component {
                 'email': '',
                 'avator': ''
             },
+            submitted: false,
+            loading: false,
+            finished: false,
+            change:false,
             preview: null,
             src,
-            showEditor: false
+            showEditor: false,
+            showChangePassword:false
         }
         this.onCrop = this.onCrop.bind(this)
         this.onClose = this.onClose.bind(this)
         this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
-        this.handleChange = this.handleChange.bind(this)
         this.showEditorPanel = this.showEditorPanel.bind(this)
     }
 
@@ -52,10 +59,13 @@ class Setting extends React.Component {
         ;
     }
 
-    handleChange(e) {
+    handleChange = (e)=>{
         const {formData} = this.state
-        formData[e.target.name] = e.target.defaultValue
-        this.setState(formData)
+        formData[e.target.name] = e.target.value
+        this.setState({
+            formData,
+            change:true
+        })
     }
 
     handleSubmit = (event) => {
@@ -75,6 +85,7 @@ class Setting extends React.Component {
         console.log(this.state.formData)
     }
 
+
     loadData = () => {
         const {classes} = this.props
         const {formData} = this.state
@@ -82,8 +93,12 @@ class Setting extends React.Component {
         formData['last_name'] = this.props.user.attribute.last_name
         formData['email'] = this.props.user.attribute.email
         formData['phone'] = this.props.user.attribute.phone
+
+        const {loading} = this.state;
+        const {finished} = this.state
+        const setLoading = !finished && loading;
         return (
-            <div>
+            <Container maxWidth={'md'}>
                 <Typography component='p' className={classes.text}>Edit your
                     profile</Typography>
                 <ValidatorForm
@@ -99,7 +114,7 @@ class Setting extends React.Component {
                         type='text'
                         onChange={this.handleChange}
                         name="first_name"
-                        value={this.state.formData.first_name}
+                        value={formData.first_name}
                     />
 
                     <TextValidator
@@ -108,7 +123,7 @@ class Setting extends React.Component {
                         onChange={this.handleChange}
                         name="last_name"
                         type='text'
-                        value={this.state.formData.last_name}
+                        value={formData.last_name}
                     />
                     <TextValidator
                         className={classes.text_input}
@@ -127,96 +142,111 @@ class Setting extends React.Component {
                         type='email'
                         value={this.state.formData.email}
                     />
-                    <Button onClick={()=>this.editProfile} type='submit' color='primary' variant='contained' style={{textTransform:'none'}}>Edit
-                        profile</Button>
+                    <LoadingButton
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                        disabled={!this.state.change}
+                        loading={setLoading}
+                        style={{textTransform:'none'}}
+                        text={'Edit profile'}
+                        done={finished}
+                    >
+                        {
+                            'Edit profile'
+                        }
+                    </LoadingButton>
                 </ValidatorForm>
 
                 <Divider style={{marginTop: 20, marginBottom: 20}}/>
-                <Button color='primary' variant='outlined'>Change password</Button>
-            </div>
+                <ResetPassword/>
+            </Container>
         )
     }
-
 
     render() {
         const {classes} = this.props
 
         return (
-            <Grid container spacing={2}>
-                <Grid item md={4} sm={12}>
-                    <Paper className={classes.paper}>
-                        <div>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                            }}>
+            <Container maxWidth='lg'>
+                <Grid container spacing={2}>
+                    <Grid item md={4} sm={12}>
+                        <Paper className={classes.paper}>
+                            <div>
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    {
+                                        this.state.showEditor
+                                            ?
+                                            ''
+                                            :
+                                            (<Button
+                                                color='primary'
+                                                variant='outlined'
+                                                onClick={this.showEditorPanel}
+                                            >
+                                                <span>Change profile </span>
+                                            </Button>)
+                                    }
+                                </div>
                                 {
                                     this.state.showEditor
                                         ?
-                                        ''
-                                        :
-                                        (<Button
-                                            color='primary'
-                                            variant='outlined'
-                                            onClick={this.showEditorPanel}
-                                        >
-                                            <span>Change profile </span>
-                                        </Button>)
+                                        (
+                                            <Avatar
+                                                width={350}
+                                                height={295}
+                                                onCrop={this.onCrop}
+                                                onClose={this.onClose}
+                                                onBeforeFileLoad={this.onBeforeFileLoad}
+                                                src={this.state.src}
+                                            />
+                                        )
+                                        : ''
                                 }
+                                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    {
+                                        this.state.preview === null
+                                            ?
+                                            ('')
+                                            :
+                                            (
+                                                <img src={this.state.preview} alt="Preview"/>
+                                            )
+                                    }
+                                </div>
                             </div>
+                        </Paper>
+                    </Grid>
+                    <Grid item md={8} sm={12}>
+                        <Paper style={{padding: 20}}>
                             {
-                                this.state.showEditor
+                                this.props.loading
                                     ?
                                     (
-                                        <Avatar
-                                            width={350}
-                                            height={295}
-                                            onCrop={this.onCrop}
-                                            onClose={this.onClose}
-                                            onBeforeFileLoad={this.onBeforeFileLoad}
-                                            src={this.state.src}
-                                        />
+                                        <React.Fragment>
+                                            <Skeleton className={classes.skeleton} variant='text' width='40%' height={20}/>
+                                            <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
+                                            <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
+                                            <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
+                                            <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
+                                        </React.Fragment>
                                     )
-                                    : ''
+                                    :
+                                    (
+                                        <div>
+                                            {this.loadData()}
+                                        </div>
+                                    )
                             }
-                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                                {
-                                    this.state.preview === null
-                                        ?
-                                        ('')
-                                        :
-                                        (
-                                            <img src={this.state.preview} alt="Preview"/>
-                                        )
-                                }
-                            </div>
-                        </div>
-                    </Paper>
+                        </Paper>
+                    </Grid>
                 </Grid>
-                <Grid item md={8} sm={12}>
-                    <Paper style={{padding: 20}}>
-                        {
-                            this.props.loading
-                                ?
-                                (
-                                    <React.Fragment>
-                                        <Skeleton className={classes.skeleton} variant='text' width='40%' height={20}/>
-                                        <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
-                                        <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
-                                        <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
-                                        <Skeleton className={classes.skeleton} variant='rect' width='80%' height={20}/>
-                                    </React.Fragment>
-                                )
-                                :
-                                (
-                                    <div>{this.loadData()}</div>
-                                )
-                        }
-                    </Paper>
-                </Grid>
-            </Grid>
+            </Container>
         );
     }
 

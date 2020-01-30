@@ -23,11 +23,9 @@ const  style = {
                      {t('home.what_is_tablet_promotion.title')}
                  </Typography>
                  <Typography component='p' className={classes.descriptions}>
-                     {t('home.what_is_tablet_promotion.description_1')}
+                     {t('home.what_is_tablet_promotion.description')}
                  </Typography>
-                 <Typography component='p' className={classes.descriptions}>
-                     {t('home.what_is_tablet_promotion.description_2')}
-                 </Typography>
+
                  <blockquote>
                      {
                          t('home.what_is_tablet_promotion.slogan')

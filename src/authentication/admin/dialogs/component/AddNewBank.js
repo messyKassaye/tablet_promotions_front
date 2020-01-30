@@ -18,9 +18,9 @@ class AddNewBank extends Component {
         this.inputFile = React.createRef();
         this.state = {
             formData: {
-                'bank_name': '',
-                'logo_path': '',
-                'abbreviation':''
+                bank_name: '',
+                logo_path: '',
+                abbreviation:''
             },
             submitted: false,
             loading: false,
@@ -72,7 +72,7 @@ class AddNewBank extends Component {
 
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.base64Response) {
+        if (nextProps.base64Response.status) {
             const {formData} = this.state
             formData['logo_path'] = nextProps.base64Response.data
             this.setState({
@@ -115,7 +115,7 @@ class AddNewBank extends Component {
         const {loading} = this.state;
         const {finished} = this.state
         const setLoading = !finished && loading;
-        const isEnabled = formData.bank_name.length > 0 && formData.logo_path.length > 0&& formData.abbreviation.length>0
+        const isEnabled = formData.bank_name.length>0 && formData.abbreviation.length>0 && formData.logo_path.length >0
         return (
             <form className={classes.form} onSubmit={this.handleSubmit}>
                 <Typography style={{color: green[500], textAlign: 'center'}}>{this.props.response.message}</Typography>
@@ -123,14 +123,14 @@ class AddNewBank extends Component {
                     className={classes.textInput}
                     onChange={this.handleChange}
                     name='bank_name'
-                    placeholder={t('dialog.addNewBank.bankName')}
+                    placeholder={'Bank name'}
                     value={this.state.formData.bank_name}
                 />
                 <TextField
                     className={classes.textInput}
                     onChange={this.handleChange}
                     name='abbreviation'
-                    placeholder={t('dialog.addNewBank.abbreviation')}
+                    placeholder={'abbreviation'}
                     value={this.state.formData.abbreviation}
                 />
                 {

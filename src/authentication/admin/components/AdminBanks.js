@@ -25,7 +25,7 @@ class AdminBanks extends Component {
     }
 
     addNewBank = ()=>{
-        this.props.showMainDialog({'show':true,'page':<AddNewBank form={{type:'Form',data:null}}/>,title:'Add new bank',actions:{on:false,path:'',id:''}})
+        this.props.showMainDialog({'show':true,'page':<AddNewBank form={{type:'',data:null}}/>,title:'Add new bank',actions:{on:false,path:'',id:''}})
     }
 
     componentDidMount() {

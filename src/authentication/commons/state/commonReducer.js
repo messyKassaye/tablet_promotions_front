@@ -7,6 +7,7 @@ import commonBanksReducer from "./reducer/commonBanksReducer";
 import commonAdvertPaymentTransactionReducer from "./reducer/commonAdvertPaymentTransactionReducer";
 import commonAdvertComplainReducer from "./reducer/commonAdvertComplainReducer";
 import NotificationReducer from "./reducer/NotificationReducer";
+import ResetPasswordReducer from "./reducer/ResetPasswordReducer";
 
 export default combineReducers({
     commonAdvertMediaReducer:advertMediaTypeReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     commonBanks:commonBanksReducer,
     commonAdvertPaymentTransactionReducers:commonAdvertPaymentTransactionReducer,
     commonAdvertsComplainReducer:commonAdvertComplainReducer,
-    commonNotificationsReducer:NotificationReducer
+    commonNotificationsReducer:NotificationReducer,
+    resetPasswordReducer:ResetPasswordReducer
 })

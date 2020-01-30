@@ -5,6 +5,8 @@
     "Home": "Home",
     "About": "About",
     "Contact": "Contact",
+    "Cars": "Cars",
+    "advert medias": "Advert medias",
     "Pricing": "Pricing",
     "Login": "Login",
     "Sign up": "Sign up",
@@ -12,7 +14,7 @@
     "advertiser": "Advertise your companies product and increase your income",
     "driver": "Start Tablet promotion on your taxi or on your bus  & get additional income",
     "advertiser_engineer": "Are you naturally gifted of good voice. Then work as advertise engineer now",
-    "designed_for": "Designed for Organizations, Drivers and Advert engineers.",
+    "designed_for": "Designed for Organizations, Drivers and Advertisers.",
     "signup": {
       "label": {
         "first_name": "First name",
@@ -64,18 +66,19 @@
     },
     "registered": "I'm already registered",
     "what_is_tablet_promotion": {
-        "title": "What is Tablet promotions",
-        "description_1": ""
+        "title": "What is Tablet advertising",
+        "slogan": "Let's work together and change ourselves and our community ",
+        "description": "Tablet advertising is a company that advertises the production of various organizations product through taxi and buses using tablet computers. In this role it is generating more revenue for many taxi and bus drivers as well as vehicle investors. Tablet advertising is an organization registered under the Ethiopian Employment Agency Proclamation No. 0987/2017.",
+        "description_3": "It is a family enterprise with the aim of transforming the lives of many Ethiopians. Join us and change together"
+
     },
     "slider": {
       "advertiser": "Start adverting your product and increase your revenue.",
-      "advertiser_description": "እርስዎ ስራዎን ይስሩ። ማስተዋዎቁን እና ህዝብ ጆሮ ላይ ማድረሱን ለታብሌት ማስታዎቂያ ይተውለት",
-      "driver": "የታክሲ ወይም የአውቶብስ ሾፌር ነዎት እንግዲያውስ የታብሌት ማስታዎቂያ አባል በመሆን ተጨማሪ ገቢ ያግኙ",
-      "driver_description": "መኪናዎ ላይ ማስታዎቂያ ይስሩ እና ተጨማሪ ገቢ ያግኙ",
-      "advertiser_engineer": "አሪፍ ድምጽና ጥሩ የአኒሜሽን ችሎታ አለዎት። ካለዎት ለድርጅቶች ማስታዎቂያ በመስራት ገቢዎን ይጨምሩ",
-      "advertiser_engineer_description": "ማስታዎቂያዎችን ይስሩ፣ ችሎታዎን ለባለሃብቶች ያሳዩ፣ ገቢዎንም ይጨምሩ",
-      "start_button": "ዛሬውን ይጀምሩ",
-      "watch_video": "ቪድዮ ይመልከቱ"
+      "advertiser_description": "Do your work, Leave advertising your product to us",
+      "driver": "Are you a taxi or bus driver, then earn extra income by becoming a member of Tablet Advertising",
+      "driver_description": "Make an ad on your car and earn more money",
+      "start_button": "Start today",
+      "watch_video": "Watch video"
     }
   }
 }

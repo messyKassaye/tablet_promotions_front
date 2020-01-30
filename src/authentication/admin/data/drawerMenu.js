@@ -78,7 +78,7 @@ const drawerMenu = [
     {
         name:'Settings',
         route:'/auth/admin/settings',
-        icon: <SettingIcon/>
+        icon: <SettingIcon/>,
     },
 ]
 

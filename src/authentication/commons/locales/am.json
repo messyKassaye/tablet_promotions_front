@@ -20,10 +20,17 @@
       "Advertisers": "አስተዋዋቂዎች",
       "Drivers": "ሾፌሮች",
       "Settings": "ማስተካከያ",
+      "Profile Settings": "ማስተካከያ",
       "Finances": "ገንዘብ ነክ",
       "Currency": "የገንዘብ አይነቶች",
       "Total income": "ጠቅላላ ገቢ",
-      "Total withdrawals": "ጠቅላላ ወጭ"
+      "Total withdrawals": "ጠቅላላ ወጭ",
+      "Company settings": "የድርጅቱ ማስተካከያ",
+      "What is TabAdverts": "ታብ ማስታዎቂያ ምንድነው",
+      "About us": "ስለ እኛ",
+      "pricing": "ስለ ዋጋ",
+      "About cars": "ስለ መኪኖች"
+
     }
   }
 }
