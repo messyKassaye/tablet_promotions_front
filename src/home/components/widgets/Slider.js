@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 const fadeProperties = {
-    duration: 6000,
-    transitionDuration: 500,
+    duration: 10000,
+    transitionDuration: 1000,
     infinite: true,
     arrows:false,
     indicators: false

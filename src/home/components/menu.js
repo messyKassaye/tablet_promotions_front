@@ -19,18 +19,6 @@ const Menus = [
 
     },
     {
-        name: 'Cars',
-        to: '/cars',
-        component: 'Cars'
-
-    },
-    {
-        name: 'advert medias',
-        to: '/AdvertMedia',
-        component: 'Contact'
-
-    },
-    {
         name: 'Pricing',
         to: '/pricing',
         component: 'Pricing'

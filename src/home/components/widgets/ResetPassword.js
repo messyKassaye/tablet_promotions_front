@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class AdvertMedia extends Component {
+class ResetPassword extends Component {
     render() {
         return (
             <div>
-                media
+                
             </div>
         );
     }
 }
 
-export default AdvertMedia;
+export default ResetPassword;

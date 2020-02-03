@@ -6,6 +6,12 @@ const style = theme=>({
         textAlign:'justify',
         textJustify:'inter-word',
         marginBottom:10
+    },
+    small_card:{
+        display:'none',
+        [theme.breakpoints.up('sm')]:{
+            display: 'block'
+        }
     }
 })
 

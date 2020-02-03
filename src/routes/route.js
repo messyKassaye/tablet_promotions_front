@@ -1,6 +1,5 @@
 import React from "react";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
-import HomeRoutes from "../home/HomeRoutes";
 import PrivateRoutes from "./PrivateRoute";
 import Authenticated from "../authentication/Authenticated";
 import AuthenticatedRoute from "./AuthenticationRoute";

@@ -1,21 +1,20 @@
-import {FETCH_ROLE} from "../stateConstants/actionConstants";
+import {FETCH_CARS} from "../stateConstants/actionConstants";
 const initialState = {
-    roles:[],
     loading:true,
-    role:{}
-
+    categories:[]
 }
 
 export default function (state=initialState,action) {
     switch (action.type) {
-        case FETCH_ROLE:
+        case FETCH_CARS:
             return {
                 ...state,
-                roles: action.payload,
-                loading: false
+                loading: false,
+                categories: action.payload
             }
         default:
             return state
+
     }
 
 }

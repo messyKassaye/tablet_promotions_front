@@ -71,9 +71,18 @@ const useStyles = makeStyles(theme => ({
     },
     router: {
         marginTop: 60,
+        minHeight:'100vh',
         [theme.breakpoints.down('xs')]: {
             marginTop: 55
         }
+    },
+    site_container:{
+      display:'flex',
+      flexDirection:'column',
+      minHeight:'100vh'
+    },
+    site_content:{
+        flex:1
     },
     footer: {
         position: 'absolute',

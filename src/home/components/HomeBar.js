@@ -29,6 +29,7 @@ import i18next from "i18next";
 import {translate} from "react-i18next";
 import NotFound from "../../errors/NotFound";
 import Footer from "./footer";
+import ResetPassword from "./widgets/ResetPassword";
 
 function HomeBar({t}) {
    const  classes = useStyles();
@@ -113,8 +114,8 @@ function HomeBar({t}) {
        </SwipeableDrawer>
    )
     return (
-    <div>
-        <main>
+    <div className={classes.site_container}>
+        <main className={classes.site_content}>
             {<div className={classes.grow}>
                 <AppBar position='fixed' color='primary'>
                     <Toolbar>
@@ -211,12 +212,14 @@ function HomeBar({t}) {
                         <Route path='/pricing' component={Pricing}/>
                         <Route path='/login' component={Login}/>
                         <Route path='/signup' component={Signup}/>
+                        <Route path={'/reset_password'} component={ResetPassword}/>
                         <Route path='*' component={NotFound}/>
                     </Switch>
                 </div>
             </div>
             }
         </main>
+        <Footer/>
     </div>
     )
 }

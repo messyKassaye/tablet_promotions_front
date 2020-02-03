@@ -11,7 +11,7 @@ import LoadingButton from "../../../../home/components/widgets/LoadingButton";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import signup from '../../../../styles/signup_style'
+import signup from '../../../../home/components/styles/signup_style'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {fetchRole} from "../../../../home/state/action/roleActions";
 import Grid from "@material-ui/core/Grid";

@@ -10,12 +10,7 @@ class LazyLoad extends React.Component{
     }
 
     render() {
-        const {navigate} =this.props
-        if (navigate==='Home'){
-            Component = React.lazy(()=>import('./home/HomeRoutes'))
-        }else {
-            Component = React.lazy(()=>import('./authentication/Authenticated'))
-        }
+        Component = React.lazy(()=>import('./authentication/Authenticated'))
         return (
             <Suspense fallback={<Loading/>}>
                 <Component {...this.props}/>

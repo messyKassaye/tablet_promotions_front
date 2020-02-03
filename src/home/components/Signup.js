@@ -8,7 +8,7 @@ import {translate} from "react-i18next";
 import {fetchRole} from '../state/action/roleActions'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import withStyles from "@material-ui/core/styles/withStyles";
-import signup from '../../styles/signup_style'
+import signup from './styles/signup_style'
 import {Link,withRouter} from 'react-router-dom'
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -20,6 +20,7 @@ import axios from "axios";
 import {API_AUTH_URL} from "../../constants/constants";
 import {set, setRole} from "../../TokenService";
 import Skeleton from "@material-ui/lab/Skeleton";
+import {grey} from "@material-ui/core/colors";
  class Signup extends React.Component{
 
      constructor(props){
@@ -180,13 +181,25 @@ import Skeleton from "@material-ui/lab/Skeleton";
                                          name="role_id"
                                          onChange={this.handleRadionButton}>
                                          {
-                                            this.props.roles ?this.props.roles.map(item=>(
-                                                 <FormControlLabel
-                                                     key={item.name}
-                                                     value={item.name}
-                                                     control={<Radio />}
-                                                     label={t(`home.signup.label.register_me_as.translation.${item.name}`)} />
-                                             )):  <Skeleton variant="rect" width='100%' height={100} />
+                                            this.props.loading
+                                                ?
+                                                (
+                                                    <div style={{display:'flex',flexDirection:'row'}}>
+                                                        <Skeleton
+                                                            variant="rect"
+                                                            width={500}
+                                                            height={50}
+                                                            style={{backgroundColor:grey[500],position:'relative'}}/>
+                                                    </div>
+                                                ):
+                                                (this.props.roles.map(item=>(
+                                                    <FormControlLabel
+                                                        key={item.name}
+                                                        value={item.name}
+                                                        control={<Radio />}
+                                                        label={t(`home.signup.label.register_me_as.translation.${item.name}`)} />
+                                                )))
+
 
                                          }
                                      </RadioGroup>
@@ -245,6 +258,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
      const  mapStateToProps = state=>(
          {
              roles:state.role.roles,
+             loading:state.role.loading
          }
      )
 

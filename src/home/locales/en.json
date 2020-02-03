@@ -14,7 +14,7 @@
     "advertiser": "Advertise your companies product and increase your income",
     "driver": "Start Tablet promotion on your taxi or on your bus  & get additional income",
     "advertiser_engineer": "Are you naturally gifted of good voice. Then work as advertise engineer now",
-    "designed_for": "Designed for Organizations, Drivers and Advertisers.",
+    "designed_for": "Designed for Organizations, drivers and advertisers.",
     "signup": {
       "label": {
         "first_name": "First name",
@@ -69,14 +69,18 @@
         "title": "What is Tablet advertising",
         "slogan": "Let's work together and change ourselves and our community ",
         "description": "Tablet advertising is a company that advertises the production of various organizations product through taxi and buses using tablet computers. In this role it is generating more revenue for many taxi and bus drivers as well as vehicle investors. Tablet advertising is an organization registered under the Ethiopian Employment Agency Proclamation No. 0987/2017.",
-        "description_3": "It is a family enterprise with the aim of transforming the lives of many Ethiopians. Join us and change together"
+        "description_3": "It is a family company with the aim of transforming the lives of many Ethiopians. Join us and change together"
 
+    },
+    "how_it_works": {
+      "title": "How it works",
+      "description": ""
     },
     "slider": {
       "advertiser": "Start adverting your product and increase your revenue.",
       "advertiser_description": "Do your work, Leave advertising your product to us",
       "driver": "Are you a taxi or bus driver, then earn extra income by becoming a member of Tablet Advertising",
-      "driver_description": "Make an ad on your car and earn more money",
+      "driver_description": "Make an advert on your car and earn more money",
       "start_button": "Start today",
       "watch_video": "Watch video"
     }

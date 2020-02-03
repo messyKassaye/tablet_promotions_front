@@ -1,2 +1,3 @@
-
+export const FETCH_CARS = 'FETCH_CARS'
+export const FETCH_ADVERT_MEDIA = 'FETCH_ADVERT_MEDIA'
 export const FETCH_ROLE='FETCH_ROLE'

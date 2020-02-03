@@ -2,7 +2,7 @@ import React from 'react'
 import {translate} from "react-i18next";
 import Container from "@material-ui/core/Container";
 import withStyles from "@material-ui/core/styles/withStyles";
-import signup from '../../styles/signup_style'
+import signup from './styles/signup_style'
 import {Card, CardContent} from "@material-ui/core";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import {Link} from "react-router-dom";
@@ -60,7 +60,7 @@ class Login extends React.Component {
                 },2000)
             })
             .catch(onerror=>{
-                if(!onerror.status){
+                if(!onerror.response){
                     this.setState({errorMessage:'networkError'})
                     this.setState({
                         loading: false,
@@ -149,12 +149,12 @@ class Login extends React.Component {
                                             <Divider orientation='vertical'
                                                      style={{height: 20, padding: 1, marginRight: 10}}/>
                                             <Link style={{marginRight: 10}}
-                                                  to='/signup'>{t('home.login.label.forgot_password')}</Link>
+                                                  to='/reset_password'>{t('home.login.label.forgot_password')}</Link>
                                         </div>
                                     </div>
                                 </div>
                                 <div className={classes.smallers}>
-                                    <Link to='/signup'>{t('home.login.label.forgot_password')}</Link>
+                                    <Link to='/reset_password'>{t('home.login.label.forgot_password')}</Link>
                                 </div>
                             </ValidatorForm>
                         </CardContent>
