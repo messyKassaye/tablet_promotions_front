@@ -8,6 +8,8 @@ import homeStyle from "./styles/homeStyle";
 import Categories from "./widgets/Categories";
 import AdvertMedia from "./widgets/AdvertMedia";
 import Footer from "./footer";
+import Partners from "./widgets/Partners";
+import Testimony from "./widgets/Testimony";
 class Home extends React.Component{
 
     render() {
@@ -23,6 +25,10 @@ class Home extends React.Component{
             <Categories/>
 
             <AdvertMedia/>
+
+            <Partners/>
+
+            <Testimony/>
         </div>
     }
 

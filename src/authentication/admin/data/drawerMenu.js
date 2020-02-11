@@ -24,6 +24,22 @@ const drawerMenu = [
       icon:<VideocamIcon/>
     },
     {
+        name:'Finances',
+        icon:<AttachMoneyIcon/>,
+        children:[
+            {
+                name:'Total income',
+                route:'/auth/admin/total_income',
+                icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Total withdrawals',
+                route:'/auth/admin/total_withdrawals',
+                icon:<AttachMoneyIcon/>
+            }
+        ]
+    },
+    {
       name:'Utilities',
       icon:<ExtensionIcon/>,
         children:[
@@ -53,28 +69,23 @@ const drawerMenu = [
                 icon:<MusicNotIcon/>
             },
             {
+                name:'Partners',
+                route:'/auth/admin/partners',
+                icon:<MusicNotIcon/>
+            },
+            {
+                name:'Testimony',
+                route:'/auth/admin/testimonies',
+                icon:<MusicNotIcon/>
+            },
+            {
                 name:'Places',
                 route:'/auth/admin/places',
                 icon:<MusicNotIcon/>
             },
         ]
     },
-    {
-        name:'Finances',
-        icon:<AttachMoneyIcon/>,
-        children:[
-            {
-                name:'Total income',
-                route:'/auth/admin/total_income',
-                icon:<AttachMoneyIcon/>
-            },
-            {
-                name:'Total withdrawals',
-                route:'/auth/admin/total_withdrawals',
-                icon:<AttachMoneyIcon/>
-            }
-        ]
-    },
+
     {
         name:'Settings',
         route:'/auth/admin/settings',
