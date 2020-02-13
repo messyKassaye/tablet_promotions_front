@@ -1,0 +1,2 @@
+export const SET_PLACE= 'SET_PLACE'
+export const FETCH_DOWNLOAD = 'FETCH_DOWNLOAD'

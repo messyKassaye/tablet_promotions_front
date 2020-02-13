@@ -6,6 +6,11 @@
       "My adverts": "My adverts",
       "Settings": "Settings"
     },
+    "downloader_menu": {
+      "Dashboard": "Dashboard",
+      "Downloads": "Downloads",
+      "Settings": "Settings"
+    },
     "admin_menu": {
       "Dashboard": "Home",
       "All user": "All Users",

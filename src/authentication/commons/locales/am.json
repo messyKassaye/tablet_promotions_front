@@ -6,6 +6,11 @@
       "My adverts": "ማስታዎቂያዎች",
       "Settings": "ማስተካከያ"
     },
+    "downloader_menu": {
+      "Dashboard": "ወደ ዋናው",
+      "Downloads": "የወረዱ ማጫዎቻዎች",
+      "Settings": "ማስተካከያ"
+    },
     "admin_menu": {
       "Dashboard": "ወደ ዋናው",
       "All user": "ሁሉም ተጠቃሚዎች",

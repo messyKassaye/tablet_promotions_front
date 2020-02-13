@@ -27,6 +27,8 @@ import AdminNestedRoute from "../admin/components/AdminNestedRoute";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {grey} from "@material-ui/core/colors";
 import AdvertiserMenu from "../advertisers/components/widgets/AdvertiserMenu";
+import DownloaderNestedRoute from "../downloader/components/DownloaderNestedRoute";
+import DownloaderMenu from "../downloader/widgets/DownloaderMenu";
 
 class CommonDashboards extends React.Component{
 
@@ -62,6 +64,10 @@ class CommonDashboards extends React.Component{
         if(this.props.type==='Admin'){
             return <AdminNestedRoute/>
         }
+
+        if(this.props.type==='Down loader'){
+            return <DownloaderNestedRoute/>
+        }
     }
 
     menus = (menu)=>{
@@ -70,6 +76,10 @@ class CommonDashboards extends React.Component{
         }
         if(this.props.type==='Advertiser'){
             return <AdvertiserMenu menu={menu}/>
+        }
+
+        if(this.props.type==='Down loader'){
+            return <DownloaderMenu menu={menu}/>
         }
     }
 
