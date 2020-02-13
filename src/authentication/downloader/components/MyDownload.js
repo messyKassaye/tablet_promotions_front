@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardContent, CardHeader, Container, Grid, Divider, Typography,Button} from "@material-ui/core";
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import {green, grey} from "@material-ui/core/colors";
-import {fetchDownload} from "../state/action/DownloadAction";
-import {connect} from "react-redux";
-import Skeleton from "@material-ui/lab/Skeleton";
+
 import DownloadCard from "../widgets/DownloadCard";
 class MyDownload extends Component {
     constructor(props) {

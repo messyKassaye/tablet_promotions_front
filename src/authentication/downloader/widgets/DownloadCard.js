@@ -4,6 +4,9 @@ import {Button, Card, CardContent, CardHeader, Divider, LinearProgress, Typograp
 import GetAppIcon from "@material-ui/icons/GetApp";
 import axios from "axios";
 import {API_URL} from "../../../constants/constants";
+import {handleFileZipping} from "../state/action/FileHandlerAction";
+import {connect} from "react-redux";
+import LoadingButton from "../../../home/components/widgets/LoadingButton";
 class DownloadCard extends Component {
     constructor(props) {
         super(props);
@@ -12,18 +15,24 @@ class DownloadCard extends Component {
             loaded:0,
             valueBuffer:0,
             uploadStarted:false,
-            fileUploadMessage:'File Downloading. We reach 0%'
+            fileUploadMessage:'File Downloading. We reach 0%',
+
+            submitted: false,
+            loading: false,
+            finished: false,
         }
 
     }
 
     startDownloading = ()=>{
         this.setState({
-            downloading:true,
-
+            submitted:true,
+            loading:true,
+            downloading:true
         })
+       this.props.handleFileZipping();
 
-        axios.post(`${API_URL}download`,null,{
+        /*axios.post(`${API_URL}download`,null,{
             onDownloadProgress:progressEvent => {
                 this.setState({
                     loaded:Math.round((progressEvent.loaded * 100) / progressEvent.total),
@@ -39,10 +48,27 @@ class DownloadCard extends Component {
                         window.location.reload()
                     },2000)
                 }
-            })
+            })*/
 
     }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+      if (nextProps.response.status){
+          this.download(nextProps.response.file_path)
+      }
+    }
+
+    download = filePath=>{
+
+    }
+
     render() {
+
+        const {loading} = this.state;
+        const {finished} = this.state
+        const setLoading = !finished && loading;
+        const isEnabled = true
+
         return (
             <Card style={{backgroundColor:green[500],color:'white'}}>
                 <CardHeader
@@ -73,14 +99,23 @@ class DownloadCard extends Component {
                                     </Typography>
                                 )
                         }
-                        <Button
-                            disabled={this.state.downloading}
-                            onClick={this.startDownloading}
-                            color={"secondary"}
-                            variant={"contained"}
-                            style={{marginTop:25}}>
-                            Download now
-                        </Button>
+                        <div style={{backgroundColor:'white',marginTop:20}}>
+                            <LoadingButton
+                                color='primary'
+                                onClick={this.startDownloading}
+                                variant="contained"
+                                type="submit"
+                                disabled={!isEnabled || this.state.submitted}
+                                loading={setLoading}
+                                text={'Download now'}
+                                done={finished}
+                                style={{borderRadius:0}}
+                            >
+                                {
+                                    'Download now'
+                                }
+                            </LoadingButton>
+                        </div>
                     </div>
                 </CardContent>
             </Card>
@@ -88,5 +123,8 @@ class DownloadCard extends Component {
     }
 }
 
+const mapStateToProps = state=>({
+    response:state.authReducer.downloaderReducers.downloadsReducer.response
+})
 
-export default DownloadCard;
+export default connect(mapStateToProps,{handleFileZipping})(DownloadCard);

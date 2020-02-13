@@ -1,16 +1,17 @@
-import {FETCH_DOWNLOAD} from "../actionConstants/DownloaderConstant";
+import {HANDLE_FILE} from "../actionConstants/DownloaderConstant";
 
 const initialState = {
-    loading:true,
-    response:{}
+    response:{
+        status:false,
+        file_path:''
+    }
 }
 
 export default function (state=initialState,action) {
     switch (action.type) {
-        case FETCH_DOWNLOAD:
+        case HANDLE_FILE:
             return {
                 ...state,
-                loading: false,
                 response: action.payload
             }
 
