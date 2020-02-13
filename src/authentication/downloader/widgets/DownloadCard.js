@@ -15,7 +15,7 @@ class DownloadCard extends Component {
             loaded:0,
             valueBuffer:0,
             uploadStarted:false,
-            fileUploadMessage:'File Downloading. We reach 0%',
+            fileUploadMessage:'We are Zipping your file. Please wait us',
 
             submitted: false,
             loading: false,
@@ -32,34 +32,33 @@ class DownloadCard extends Component {
         })
        this.props.handleFileZipping();
 
-        /*axios.post(`${API_URL}download`,null,{
-            onDownloadProgress:progressEvent => {
-                this.setState({
-                    loaded:Math.round((progressEvent.loaded * 100) / progressEvent.total),
-                    fileUploadMessage: `File downloading. We reach ${this.state.loaded}%`
-                })
-            }
-        }).then(res=>{
-                if (this.state.loaded===100){
-                    setTimeout(()=>{
-                        this.setState({
-                            fileUploadMessage:`Downloading done. ${this.state.loaded}%`
-                        })
-                        window.location.reload()
-                    },2000)
-                }
-            })*/
-
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
       if (nextProps.response.status){
+          this.setState({
+              fileUploadMessage:'Zipping has done. Download started',
+              submitted:false,
+              loading:false,
+          })
           this.download(nextProps.response.file_path)
       }
     }
 
     download = filePath=>{
+      axios.put(`${API_URL}download/${filePath}`,null,{
+          responseType: 'blob',
+      })
+          .then((response) => {
+              var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+              var fileLink = document.createElement('a');
 
+              fileLink.href = fileURL;
+              fileLink.setAttribute('download', filePath);
+              document.body.appendChild(fileLink);
+              fileLink.click();
+              window.location.reload()
+          });
     }
 
     render() {
@@ -83,13 +82,7 @@ class DownloadCard extends Component {
                             ?
                                 (
                                     <div>
-                                        <LinearProgress
-                                            variant='buffer'
-                                            color='secondary'
-                                            valueBuffer={this.state.loaded}
-                                            value={this.state.loaded}>
-                                        </LinearProgress>
-                                        <span>{this.state.fileUploadMessage}</span>
+                                        <Typography>{this.state.fileUploadMessage}</Typography>
                                     </div>
                                 )
                             :
