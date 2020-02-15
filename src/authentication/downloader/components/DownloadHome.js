@@ -8,6 +8,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import downloadHomeStyle from "./styles/downloadHome";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import DownloadCard from "../widgets/DownloadCard";
+import DownloadSize from "./DownloadSize";
+import DownloadHistory from "./DownloadHistory";
 class DownloadHome extends Component {
     render() {
         const {classes} = this.props
@@ -48,6 +52,16 @@ class DownloadHome extends Component {
                             </div>
                         )
                 }
+                <Grid container spacing={2}>
+                    <Grid item md={6} xs={12} sm={12}>
+                        <DownloadCard/>
+                    </Grid>
+
+                    <Grid item md={6} xs={12} sm={12}>
+                        <DownloadSize/>
+                    </Grid>
+                </Grid>
+                <DownloadHistory/>
             </Container>
         );
     }
