@@ -6,7 +6,7 @@ import {Grid} from "@material-ui/core";
 class SingleLoading extends Component {
     render() {
         return (
-            <Grid item md={3} xs={12} sm={12}>
+            <Grid item md={this.props.md} xs={12} sm={12}>
                 <Skeleton variant={"rect"} width={'100%'} height={150} style={{backgroundColor:grey[500]}}/>
             </Grid>
         );

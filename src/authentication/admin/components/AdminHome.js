@@ -32,6 +32,18 @@ class AdminHome extends Component {
         return totalDeposit;
     }
 
+    filterByRole = (data,role)=>{
+        return data.filter(item=>{
+            return item.role[0]['name']=== role
+        }).length
+    }
+
+    sumOfTypes = (data,name)=> {
+       return  data.filter(item=>{
+            return item.advert_media_type.name === name
+        }).length
+    }
+
     render() {
         return (
             <Container maxWidth='lg'>
@@ -40,7 +52,7 @@ class AdminHome extends Component {
                     {
                         this.props.userLoading
                         ?
-                            <SingleLoading/>
+                            <SingleLoading md={3}/>
                         :
                             (
                                 <Grid item md={3} xs={12}>
@@ -61,7 +73,7 @@ class AdminHome extends Component {
                     {
                         this.props.advertLoading
                         ?
-                            <SingleLoading/>
+                            <SingleLoading md={3}/>
                         :
                             (
                                 <Grid item md={3} xs={12}>
@@ -79,7 +91,7 @@ class AdminHome extends Component {
                     {
                         this.props.advertLoading
                         ?
-                            <SingleLoading/>
+                            <SingleLoading md={3}/>
                         :
                             (
                                 <Grid item md={3} xs={12}>
@@ -97,7 +109,7 @@ class AdminHome extends Component {
                     {
                         this.props.loading
                         ?
-                            <SingleLoading/>
+                            <SingleLoading md={3}/>
                         :
                             (
                                 <Grid item md={3} xs={12}>
@@ -124,7 +136,52 @@ class AdminHome extends Component {
                             />
                             <Divider/>
                             <CardContent>
+                                {
+                                    this.props.userLoading
+                                    ?
+                                        (
+                                            <Grid container spacing={2}>
+                                                <SingleLoading md={4}/>
+                                                <SingleLoading md={4}/>
+                                                <SingleLoading md={4}/>
+                                            </Grid>
+                                        )
+                                    :
+                                        (
+                                            <Grid container spacing={2}>
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card elevation={0}>
+                                                        <CardHeader
+                                                            style={{color:green[500]}}
+                                                         title={this.filterByRole(this.props.users,'Advertiser')}
+                                                         subheader={'advertiser'}
+                                                        />
+                                                    </Card>
+                                                </Grid>
 
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card elevation={0}>
+                                                        <CardHeader
+                                                            style={{color:green[500]}}
+                                                            title={this.filterByRole(this.props.users,'Driver')}
+                                                            subheader={'drivers'}
+                                                        />
+                                                    </Card>
+                                                </Grid>
+
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card elevation={0}>
+                                                        <CardHeader
+                                                            style={{color:green[500]}}
+                                                            title={this.filterByRole(this.props.users,'Down loader')}
+                                                            subheader={'downloader'}
+                                                        />
+                                                    </Card>
+                                                </Grid>
+
+                                            </Grid>
+                                        )
+                                }
                             </CardContent>
                         </Card>
 
@@ -138,7 +195,24 @@ class AdminHome extends Component {
                             />
                             <Divider/>
                             <CardContent>
+                                {
+                                 this.props.userLoading
+                                 ?
+                                     (
+                                         <Grid container spacing={2}>
+                                             <SingleLoading md={4}/>
+                                             <SingleLoading md={4}/>
+                                             <SingleLoading md={4}/>
 
+                                         </Grid>
+                                     )
+                                 :
+                                     (
+                                         <Grid container spacing={2}>
+
+                                         </Grid>
+                                     )
+                                }
                             </CardContent>
                         </Card>
 
