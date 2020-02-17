@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {fetchAdminBanks} from "../state/action/AdminBankAction";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";

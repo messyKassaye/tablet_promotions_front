@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Grid} from "@material-ui/core";
-import FourByFourSkeleton from "../../../authentication/advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../../authentication/commons/loading/customSkeleton";
 import {connect} from "react-redux";
 import {fetchCars} from "../../state/action/carsAction";
 import {green} from "@material-ui/core/colors";

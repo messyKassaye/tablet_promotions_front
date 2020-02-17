@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {showMainDialog} from "../state/action/dialogAction";
 import AddNewCurrency from "../dialogs/component/AddNewCurrency";
 import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import DeleteMessage from "../dialogs/component/DeleteMessage";
 import AddNewRole from "../dialogs/component/AddNewRole";
 import {fetchCurrency} from "../state/action/currencyAction";

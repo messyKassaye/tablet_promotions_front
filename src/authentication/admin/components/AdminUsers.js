@@ -16,7 +16,7 @@ import Divider from "@material-ui/core/Divider";
 import {connect} from "react-redux";
 import {fetchUsers} from "../state/action/adminUsersAction";
 import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import TableCell from "@material-ui/core/TableCell";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";

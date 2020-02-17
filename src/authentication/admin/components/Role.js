@@ -8,7 +8,7 @@ import {showMainDialog} from "../state/action/dialogAction";
 import {connect} from "react-redux";
 import {fetchRole} from "../state/action/roleAction";
 import AddNewRole from "../dialogs/component/AddNewRole";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import {deepOrange, green} from "@material-ui/core/colors";
 import DeleteMessage from "../dialogs/component/DeleteMessage";
 class Role extends Component {

@@ -4,6 +4,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 import {chartData as data} from "../../admin/data/chartData";
+import {grey} from "@material-ui/core/colors";
 
 class CommonDashboardCard extends Component {
     render() {
@@ -11,7 +12,7 @@ class CommonDashboardCard extends Component {
             <Card style={{backgroundColor:this.props.cardBackgroundColor,color:this.props.textColor}}>
                 <CardHeader
                  title={this.props.title}
-                 subheader={this.props.subheader}
+                 subheader={<span style={{color:grey[400]}}>{this.props.subheader}</span>}
                 />
                 <CardContent style={{padding:0}}>
                     <AreaChart

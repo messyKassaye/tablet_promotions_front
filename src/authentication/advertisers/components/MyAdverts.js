@@ -11,7 +11,7 @@ import myAdvertStyle from "../styles/myadvertsStyle";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "./widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";

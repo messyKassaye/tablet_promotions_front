@@ -10,7 +10,7 @@ import {showMainDialog} from "../state/action/dialogAction";
 import {connect} from "react-redux";
 import {fetchAdvertMediaType} from "../state/action/advertisementMediaTypeActions";
 import AddNewAdvertisementMedia from "../dialogs/component/AddNewAdvertisementMedia";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import Typography from "@material-ui/core/Typography";
 import {green} from "@material-ui/core/colors";
 import MusicNotIcon from '@material-ui/icons/MusicNote'

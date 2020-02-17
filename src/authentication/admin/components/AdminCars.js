@@ -7,7 +7,7 @@ import {
 import {showMainDialog} from "../state/action/dialogAction";
 import {connect} from "react-redux";
 import AddNewCarCategory from "../dialogs/component/AddNewCarCategory";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import {fetchCarCategory} from "../state/action/carCategoryAction";
 import {deepOrange, green} from "@material-ui/core/colors";
 import DeleteMessage from "../dialogs/component/DeleteMessage";

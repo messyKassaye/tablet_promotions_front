@@ -16,7 +16,7 @@ import {showMainDialog} from "../state/action/dialogAction";
 import {connect} from "react-redux";
 import AddNewPlace from "../dialogs/component/AddNewPlace";
 import {fetchPlaces} from "../state/action/adminPlaceAction";
-import FourByFourSkeleton from "../../advertisers/components/widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import {green} from "@material-ui/core/colors";
 import DeleteMessage from "../dialogs/component/DeleteMessage";
 import AddNewRole from "../dialogs/component/AddNewRole";

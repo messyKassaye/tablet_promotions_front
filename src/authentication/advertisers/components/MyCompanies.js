@@ -12,7 +12,7 @@ import {withRouter} from 'react-router-dom'
 import {translate} from "react-i18next";
 import {connect} from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "./widgets/customSkeleton";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 import Avatar from "@material-ui/core/Avatar";
 import {grey} from "@material-ui/core/colors";
 import Divider from "@material-ui/core/Divider";
