@@ -24,23 +24,31 @@ class AdminHome extends Component {
         this.props.fetchUsers()
     }
 
-    totalAdvertDeposit = (data)=>{
+    totalAdvertDeposit = (data) => {
         let totalDeposit = 0;
-       data.filter(adverts=>{return adverts.status==='on_advert'}).map(advert=>{
-           totalDeposit += advert.advert_media_type.per_view_payment*advert.required_views_number
-       })
+        data.filter(adverts => {
+            return adverts.status === 'on_advert'
+        }).map(advert => {
+            totalDeposit += advert.advert_media_type.per_view_payment * advert.required_views_number
+        })
         return totalDeposit;
     }
 
-    filterByRole = (data,role)=>{
-        return data.filter(item=>{
-            return item.role[0]['name']=== role
+    filterByRole = (data, role) => {
+        return data.filter(item => {
+            return item.role[0]['name'] === role
         }).length
     }
 
-    sumOfTypes = (data,name)=> {
-       return  data.filter(item=>{
+    sumOfTypes = (data, name) => {
+        return data.filter(item => {
             return item.advert_media_type.name === name
+        }).length
+    }
+
+    advertInType = (data,type)=>{
+        return data.filter(item=>{
+            return item.status===type
         }).length
     }
 
@@ -51,9 +59,9 @@ class AdminHome extends Component {
                 <Grid container spacing={2}>
                     {
                         this.props.userLoading
-                        ?
+                            ?
                             <SingleLoading md={3}/>
-                        :
+                            :
                             (
                                 <Grid item md={3} xs={12}>
 
@@ -69,12 +77,11 @@ class AdminHome extends Component {
                     }
 
 
-
                     {
                         this.props.advertLoading
-                        ?
+                            ?
                             <SingleLoading md={3}/>
-                        :
+                            :
                             (
                                 <Grid item md={3} xs={12}>
                                     <CommonDashboardCard
@@ -90,9 +97,9 @@ class AdminHome extends Component {
 
                     {
                         this.props.advertLoading
-                        ?
+                            ?
                             <SingleLoading md={3}/>
-                        :
+                            :
                             (
                                 <Grid item md={3} xs={12}>
                                     <CommonDashboardCard
@@ -108,9 +115,9 @@ class AdminHome extends Component {
 
                     {
                         this.props.loading
-                        ?
+                            ?
                             <SingleLoading md={3}/>
-                        :
+                            :
                             (
                                 <Grid item md={3} xs={12}>
                                     <CommonDashboardCard
@@ -126,19 +133,136 @@ class AdminHome extends Component {
 
                 </Grid>
 
-                <Grid container spacing={2} style={{marginTop:20}}>
+                {/*Adverts */}
+                <Grid container spacing={2}>
+
+                    <Grid item md={6} xs={12} sm={12}>
+                        <Card>
+                            <CardHeader
+                             title={'Adverts'}
+                             avatar={<VideocamIcon/>}
+                            />
+                            <CardContent>
+                                    {
+                                        this.props.advertLoading
+                                        ?
+                                            (
+                                                <Grid container spacing={2}>
+                                                    <SingleLoading md={4}/>
+                                                    <SingleLoading md={4}/>
+                                                    <SingleLoading md={4}/>
+                                                </Grid>
+                                            )
+                                        :
+                                            (
+                                                <Grid container spacing={2}>
+                                                    <Grid item md={4} xs={12} sm={12}>
+                                                        <Card style={{backgroundColor:green[500],color:'white'}}>
+                                                            <CardHeader
+                                                                title={this.advertInType(this.props.adverts,'on_progress')}
+                                                                subheader={<span style={{color:'white'}}>New advert</span>}
+                                                            />
+                                                        </Card>
+                                                    </Grid>
+
+                                                    <Grid item md={4} xs={12} sm={12}>
+                                                        <Card style={{backgroundColor:deepOrange[500],color:'white'}}>
+                                                            <CardHeader
+                                                                title={this.advertInType(this.props.adverts,'on_advert')}
+                                                                subheader={<span style={{color:'white'}}>On air advert</span>}
+                                                            />
+                                                        </Card>
+                                                    </Grid>
+
+                                                    <Grid item md={4} xs={12} sm={12}>
+                                                        <Card style={{backgroundColor:deepPurple[500],color:'white'}}>
+                                                            <CardHeader
+                                                                title={this.advertInType(this.props.adverts,'on_completed')}
+                                                                subheader={<span style={{color:'white'}}>On finish advert</span>}
+                                                            />
+                                                        </Card>
+                                                    </Grid>
+
+
+                                                </Grid>
+
+                                            )
+                                    }
+                            </CardContent>
+                        </Card>
+                    </Grid>
 
                     <Grid item md={6} xs={12}>
                         <Card>
                             <CardHeader
-                             title={'Users in number'}
-                             avatar={<PersonIcon/>}
+                                title={'Adverts in media type'}
+                                avatar={<VideocamIcon/>}
+                            />
+                            <CardContent>
+                                {
+                                    this.props.userLoading
+                                        ?
+                                        (
+                                            <Grid container spacing={2}>
+                                                <SingleLoading md={4}/>
+                                                <SingleLoading md={4}/>
+                                                <SingleLoading md={4}/>
+
+                                            </Grid>
+                                        )
+                                        :
+                                        (
+                                            <Grid container spacing={2}>
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card style={{backgroundColor:'#3C4252',color:'white'}}>
+                                                        <CardHeader
+                                                         title={this.sumOfTypes(this.props.adverts,'Video')}
+                                                         subheader={<span style={{color:'white'}}>Video</span>}
+                                                        />
+                                                    </Card>
+                                                </Grid>
+
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card style={{backgroundColor:deepOrange[600],color:'white'}}>
+                                                        <CardHeader
+                                                            title={this.sumOfTypes(this.props.adverts,'Audio')}
+                                                            subheader={'Audio'}
+                                                        />
+                                                    </Card>
+                                                </Grid>
+
+                                                <Grid item md={4} xs={12} sm={12}>
+                                                    <Card style={{backgroundColor:'#1976d2',color:'white'}}>
+                                                        <CardHeader
+                                                            title={this.sumOfTypes(this.props.adverts,'Image')}
+                                                            subheader={'Image'}
+                                                        />
+                                                    </Card>
+                                                </Grid>
+
+                                            </Grid>
+                                        )
+                                }
+                            </CardContent>
+                        </Card>
+
+                    </Grid>
+
+                </Grid>
+
+                <Grid container spacing={2} style={{marginTop: 20}}>
+
+                    <Grid item md={6} xs={12}>
+                        <Card>
+                            <CardHeader
+                                title={'Users in number'}
+                                avatar={<PersonIcon/>}
                             />
                             <Divider/>
                             <CardContent>
                                 {
                                     this.props.userLoading
-                                    ?
+                                        ?
                                         (
                                             <Grid container spacing={2}>
                                                 <SingleLoading md={4}/>
@@ -146,15 +270,15 @@ class AdminHome extends Component {
                                                 <SingleLoading md={4}/>
                                             </Grid>
                                         )
-                                    :
+                                        :
                                         (
                                             <Grid container spacing={2}>
                                                 <Grid item md={4} xs={12} sm={12}>
                                                     <Card elevation={0}>
                                                         <CardHeader
-                                                            style={{color:green[500]}}
-                                                         title={this.filterByRole(this.props.users,'Advertiser')}
-                                                         subheader={'advertiser'}
+                                                            style={{color: green[500]}}
+                                                            title={this.filterByRole(this.props.users, 'Advertiser')}
+                                                            subheader={'advertiser'}
                                                         />
                                                     </Card>
                                                 </Grid>
@@ -162,8 +286,8 @@ class AdminHome extends Component {
                                                 <Grid item md={4} xs={12} sm={12}>
                                                     <Card elevation={0}>
                                                         <CardHeader
-                                                            style={{color:green[500]}}
-                                                            title={this.filterByRole(this.props.users,'Driver')}
+                                                            style={{color: green[500]}}
+                                                            title={this.filterByRole(this.props.users, 'Driver')}
                                                             subheader={'drivers'}
                                                         />
                                                     </Card>
@@ -172,8 +296,8 @@ class AdminHome extends Component {
                                                 <Grid item md={4} xs={12} sm={12}>
                                                     <Card elevation={0}>
                                                         <CardHeader
-                                                            style={{color:green[500]}}
-                                                            title={this.filterByRole(this.props.users,'Down loader')}
+                                                            style={{color: green[500]}}
+                                                            title={this.filterByRole(this.props.users, 'Down loader')}
                                                             subheader={'downloader'}
                                                         />
                                                     </Card>
@@ -187,37 +311,6 @@ class AdminHome extends Component {
 
                     </Grid>
 
-                    <Grid item md={6} xs={12}>
-                        <Card>
-                            <CardHeader
-                                title={'Adverts in media type'}
-                                avatar={<VideocamIcon/>}
-                            />
-                            <Divider/>
-                            <CardContent>
-                                {
-                                 this.props.userLoading
-                                 ?
-                                     (
-                                         <Grid container spacing={2}>
-                                             <SingleLoading md={4}/>
-                                             <SingleLoading md={4}/>
-                                             <SingleLoading md={4}/>
-
-                                         </Grid>
-                                     )
-                                 :
-                                     (
-                                         <Grid container spacing={2}>
-
-                                         </Grid>
-                                     )
-                                }
-                            </CardContent>
-                        </Card>
-
-                    </Grid>
-
                 </Grid>
             </Container>
         );
@@ -225,13 +318,13 @@ class AdminHome extends Component {
 }
 
 
-const mapStateToProps = state=>({
-    adverts:state.authReducer.adminReducers.advertReducer.adverts,
-    advertLoading:state.authReducer.adminReducers.advertReducer.loading,
-    users:state.authReducer.adminReducers.adminUsersReducers.users,
-    userLoading:state.authReducer.adminReducers.adminUsersReducers.loading,
-    user:state.userData.user,
-    loading:state.userData.loading
+const mapStateToProps = state => ({
+    adverts: state.authReducer.adminReducers.advertReducer.adverts,
+    advertLoading: state.authReducer.adminReducers.advertReducer.loading,
+    users: state.authReducer.adminReducers.adminUsersReducers.users,
+    userLoading: state.authReducer.adminReducers.adminUsersReducers.loading,
+    user: state.userData.user,
+    loading: state.userData.loading
 })
 
-export default connect(mapStateToProps,{fetchUsers,fetchAdverts})(AdminHome);
+export default connect(mapStateToProps, {fetchUsers, fetchAdverts})(AdminHome);
