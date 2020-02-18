@@ -1,55 +1,129 @@
 import React, {Component} from 'react';
-import {Card} from "@material-ui/core";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Divider from "@material-ui/core/Divider";
-import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
+import {Card, Container, Grid} from "@material-ui/core";
+import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import SingleLoading from "../../../commons/loading/SingleLoading";
+import CommonDashboardCard from "../../../commons/components/CommonDashboardCard";
+import {deepOrange, deepPurple, green} from "@material-ui/core/colors";
+import {fetchUsers} from "../../state/action/adminUsersAction";
+import {fetchAdverts} from "../../state/action/advertsAction";
 class AdminCard extends Component {
     constructor(props) {
         super(props);
 
     }
 
-    renderComponent = (type)=>{
-        if(type==='users'){
-            return <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-                    {
-                        this.props.content.map(items=>(
-                            <div style={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'space-evenly'}}>
-                                <div>
-                                    <Typography variant='h5'>{items.name}</Typography>
-                                </div>
-                                <div>
-                                    <Typography>{items.value}</Typography>
-                                </div>
-                            </div>
-                        ))
-                    }
-            </div>
-        }
+    totalAdvertDeposit = (data) => {
+        let totalDeposit = 0;
+        data.filter(adverts => {
+            return adverts.status === 'on_advert'
+        }).map(advert => {
+            totalDeposit += advert.advert_media_type.per_view_payment * advert.required_views_number
+        })
+        return totalDeposit;
+    }
+
+    componentDidMount() {
+        this.props.fetchAdverts()
+        this.props.fetchUsers()
+        this.interval()
+    }
+
+    interval = ()=>{
+        setInterval(()=>{
+            this.props.fetchUsers()
+        },1000)
     }
 
     render() {
         return (
-            <Card style={{backgroundColor:`${this.props.backgroundColor}`,color:'white'}}>
-                <CardHeader
-                 title={this.props.title}
-                />
-                <Divider/>
-                <CardContent>
-                    {this.renderComponent(this.props.type)}
-                </CardContent>
-                <CardActions style={{display:'flex',justifyContent:'flex-end',alignItems:'center'}}>
-                    <Button component={Link} to={this.props.route} variant='text' color='inherit' style={{textTransform:'capitalize'}}>
-                        more
-                    </Button>
-                </CardActions>
-            </Card>
+            <Grid container spacing={2}>
+                {
+                    this.props.userLoading
+                        ?
+                        <SingleLoading md={3} height={150}/>
+                        :
+                        (
+                            <Grid item md={3} xs={12}>
+
+                                <CommonDashboardCard
+                                    chartBackgroundColor={deepOrange[500]}
+                                    cardBackgroundColor={green[500]}
+                                    textColor={'white'}
+                                    title={this.props.users.length.toLocaleString()}
+                                    subheader={'Total users'}
+                                />
+                            </Grid>
+                        )
+                }
+
+
+                {
+                    this.props.advertLoading
+                        ?
+                        <SingleLoading md={3} height={150}/>
+                        :
+                        (
+                            <Grid item md={3} xs={12}>
+                                <CommonDashboardCard
+                                    chartBackgroundColor={green[500]}
+                                    cardBackgroundColor={'#3C4252'}
+                                    textColor={'white'}
+                                    title={this.props.adverts.length.toLocaleString()}
+                                    subheader={'Total adverts'}
+                                />
+                            </Grid>
+                        )
+                }
+
+                {
+                    this.props.advertLoading
+                        ?
+                        <SingleLoading md={3} height={150}/>
+                        :
+                        (
+                            <Grid item md={3} xs={12}>
+                                <CommonDashboardCard
+                                    chartBackgroundColor={green[500]}
+                                    cardBackgroundColor={deepPurple[600]}
+                                    textColor={'white'}
+                                    title={`${this.totalAdvertDeposit(this.props.adverts).toLocaleString()} ETB`}
+                                    subheader={'Total advert deposit'}
+                                />
+                            </Grid>
+                        )
+                }
+
+                {
+                    this.props.loading
+                        ?
+                        <SingleLoading md={3} height={150}/>
+                        :
+                        (
+                            <Grid item md={3} xs={12}>
+                                <CommonDashboardCard
+                                    chartBackgroundColor={deepPurple[500]}
+                                    cardBackgroundColor={'#1976d2'}
+                                    textColor={'white'}
+                                    title={`${this.props.user.relations.balance.toLocaleString()} ETB`}
+                                    subheader={'Total tab adverts income'}
+                                />
+                            </Grid>
+                        )
+                }
+
+            </Grid>
         );
     }
 }
 
-export default AdminCard;
+const mapStateToProps = state => ({
+    adverts: state.authReducer.adminReducers.advertReducer.adverts,
+    advertLoading: state.authReducer.adminReducers.advertReducer.loading,
+    users: state.authReducer.adminReducers.adminUsersReducers.users,
+    userLoading: state.authReducer.adminReducers.adminUsersReducers.loading,
+    user: state.userData.user,
+    loading: state.userData.loading
+})
+
+export default connect(mapStateToProps, {fetchUsers, fetchAdverts})(AdminCard);

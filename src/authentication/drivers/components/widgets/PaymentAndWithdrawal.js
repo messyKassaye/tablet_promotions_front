@@ -53,7 +53,7 @@ class PaymentAndWithdrawal extends React.Component{
                         (
                             <Card className={classes.card4}>
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
+                                    <Typography gutterBottom variant="h6" component="h2">
                                         {t('driver.payment_and_withdrawal.title')}
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row'}}>

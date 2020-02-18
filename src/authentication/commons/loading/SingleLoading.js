@@ -7,7 +7,7 @@ class SingleLoading extends Component {
     render() {
         return (
             <Grid item md={this.props.md} xs={12} sm={12}>
-                <Skeleton variant={"rect"} width={'100%'} height={150} style={{backgroundColor:grey[500]}}/>
+                <Skeleton variant={"rect"} width={'100%'} height={this.props.height} style={{backgroundColor:grey[500]}}/>
             </Grid>
         );
     }
