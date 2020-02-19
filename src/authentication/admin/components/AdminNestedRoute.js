@@ -11,6 +11,7 @@ import AdminUsers from "./AdminUsers";
 import NotificationDetails from "../../commons/components/NotificationDetails";
 import Currency from "./Currency";
 import Places from "./Places";
+import AdminViewedAdverts from "./AdminViewedAdverts";
 
 class AdminNestedRoute extends Component {
     render() {
@@ -19,6 +20,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth' component={AdminHome} exact/>
                 <Route path='/auth/admin/users' component={AdminUsers}/>
                 <Route path={'/auth/admin/adverts'} component={AdminAdverts}/>
+                <Route path={'/auth/admin/adverts_view'} component={AdminViewedAdverts}/>
                 <Route path='/auth/admin/banks' component={AdminBanks}/>
                 <Route path='/auth/admin/currency' component={Currency}/>
                 <Route path='/auth/admin/roles' component={Role}/>

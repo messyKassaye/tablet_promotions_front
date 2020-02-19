@@ -13,6 +13,7 @@ import adminUserReducer from "./reducerrs/adminUserReducer";
 import adminCompaniesReducer from "./reducerrs/adminCompaniesReducer";
 import adminFinanceReducer from "./reducerrs/adminFinanceReducer";
 import adminPlaceReducer from "./reducerrs/adminPlaceReducer";
+import ViewdAdvertsReducer from "./reducerrs/ViewdAdvertsReducer";
 
 export default combineReducers({
     adminDialog:dialogReducer,
@@ -28,5 +29,6 @@ export default combineReducers({
     adminUsersReducers:adminUserReducer,
     adminCompanyReducer: adminCompaniesReducer,
     adminFinancesReducer:adminFinanceReducer,
-    adminPlacesReducer:adminPlaceReducer
+    adminPlacesReducer:adminPlaceReducer,
+    viewedAdvertReducer:ViewdAdvertsReducer
 })

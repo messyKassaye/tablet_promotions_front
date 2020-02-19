@@ -183,3 +183,38 @@ export const usersColumn = [
     },
 
 ]
+
+
+export const viewedAdvertsColumn = [
+    {
+        id: 'product_name',
+        label: 'Product name',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'plate_number',
+        label: 'Car plate number',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'tablet',
+        label: 'Tablet',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'advertising time',
+        label: 'Advert time',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        minWidth: 120,
+        align:'left'
+    },
+
+]
