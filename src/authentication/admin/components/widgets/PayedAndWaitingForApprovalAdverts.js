@@ -44,7 +44,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
 
     render() {
         return (
-        <Card style={{marginBottom:25}}>
+        <Card style={{marginBottom:25,maxWidth:'97%'}}>
             <CardHeader
                 avatar={<VideoCamIcon/>}
                 title={'Payed and waiting for approval adverts '}
@@ -71,7 +71,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                 }
             />
             <Divider/>
-            <CardContent>
+            <CardContent style={{padding:0}}>
                 {
                     this.props.loading
                         ?
@@ -84,7 +84,7 @@ class PayedAndWaitingForApprovalAdverts extends Component {
                         )
                         :
                         (
-                            <Paper style={{overflow:'auto',borderRadius:0}}>
+                            <Paper style={{overflow:'auto',width:'100%',position:'relative',borderRadius:0}}>
                                 <Table>
                                     <TableHead>
                                         <TableRow>

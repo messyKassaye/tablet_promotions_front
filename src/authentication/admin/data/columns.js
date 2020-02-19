@@ -115,17 +115,17 @@ export const onAirColumns = [
         id: 'total_views',
         label: 'Required views',
         align: 'left',
-        minWidth: 120,
+        minWidth: 150,
     },
     {
         id: 'current_views',
         label: 'Current views',
         align: 'left',
-        minWidth: 120,
+        minWidth: 150,
     },
     {
         id: 'media_name',
-        minWidth: 100,
+        minWidth: 120,
         label: 'Media type',
         align: 'left',
     },
@@ -134,6 +134,12 @@ export const onAirColumns = [
         label: 'Total payment',
         minWidth: 200,
         align: 'center',
+    },
+    {
+        id: 'action',
+        label: 'Actions',
+        minWidth: 100,
+        align: 'left',
     },
 
 ]

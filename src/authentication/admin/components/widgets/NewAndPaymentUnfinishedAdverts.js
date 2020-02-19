@@ -44,7 +44,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
 
     render() {
         return (
-            <Card>
+            <Card style={{maxWidth:'97%'}}>
                 <CardHeader
                     avatar={<VideoCamIcon/>}
                     title='New and payment unfinished adverts'
@@ -71,7 +71,7 @@ class NewAndPaymentUnfinishedAdverts extends Component {
                     }
                 />
                 <Divider/>
-                <CardContent>
+                <CardContent style={{padding:0}}>
 
                     {
                         this.props.loading

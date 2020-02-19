@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container} from "@material-ui/core";
+import {Container,Grid,AppBar} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import {fetchAdverts} from "../state/action/advertsAction";
@@ -15,8 +15,11 @@ import NewAndPaymentUnfinishedAdverts from "./widgets/NewAndPaymentUnfinishedAdv
 import OnAirAdverts from "./widgets/OnAirAdverts";
 import AddNewAdvert from "../../commons/components/AddNewAdvert";
 import {fetchCompanies} from "../state/action/adminCompaniesAction";
-import {commonFetchAdvertMedia} from "../../commons/state/actions/advertMediaTypeAction";
-
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 export const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
@@ -32,7 +35,15 @@ const rows = [];
 class AdminAdverts extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            value:0
+        }
 
+    }
+    handleChange = (value)=>{
+        this.setState({
+            value:value
+        })
     }
 
     componentDidMount() {
@@ -79,7 +90,7 @@ class AdminAdverts extends Component {
     render() {
         const {classes,t} = this.props
         return (
-            <Container maxWidth='lg'>
+            <Container maxWidth='md'>
                 <div style={{display:'flex',flexDirection:'column'}}>
 
                     <Card style={{marginBottom:20}}>
@@ -93,18 +104,27 @@ class AdminAdverts extends Component {
                         />
                     </Card>
 
-                    {/*payed and waiting for payment adverts*/}
-                    <PayedAndWaitingForApprovalAdverts
-                        adverts={this.payedAndWaitingApprovalAdverts(this.props.adverts)}
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item md={12} xs={12} sm={12}>
+                            {/*payed and waiting for payment adverts*/}
+                            <PayedAndWaitingForApprovalAdverts
+                                adverts={this.payedAndWaitingApprovalAdverts(this.props.adverts)}
+                            />
+                        </Grid>
 
-                    {/*On air adverts*/}
-                    <OnAirAdverts adverts={this.onAirAdverts(this.props.adverts)}/>
+                        <Grid item md={12} xs={12} sm={12}>
+                            {/*On air adverts*/}
+                            <OnAirAdverts adverts={this.onAirAdverts(this.props.adverts)}/>
+                        </Grid>
 
-                  {/*Unfinished payment adverts*/}
-                  <NewAndPaymentUnfinishedAdverts
-                      adverts={this.unfinishedPaymentAdverts(this.props.adverts)}
-                  />
+                        <Grid item md={12} xs={12} sm={12}>
+                            {/*Unfinished payment adverts*/}
+                            <NewAndPaymentUnfinishedAdverts
+                                adverts={this.unfinishedPaymentAdverts(this.props.adverts)}
+                            />
+                        </Grid>
+
+                    </Grid>
 
                 </div>
             </Container>

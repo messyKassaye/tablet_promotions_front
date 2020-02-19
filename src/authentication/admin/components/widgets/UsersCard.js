@@ -17,7 +17,7 @@ class UsersCard extends Component {
 
     componentDidMount() {
         this.props.fetchUsers()
-        this.interval()
+        //this.interval()
     }
 
     filterByRole = (data, role) => {
@@ -27,14 +27,22 @@ class UsersCard extends Component {
     }
 
     filterTopAdvertedCompanies = (data)=>{
-        return data
+        let response= data.filter(user=>{
+            return user.role[0].name==='Driver'
+        }).filter(user=>{
+            return user.cars.length>0
+        }).map(user=>{
+            return user.cars.sort((a,b)=>{
+                if(a.adverts.length>b.adverts.length){
+                    return -1
+                }else {
+                    return 1
+                }
+            })
+        })
+        return response
     }
 
-    interval = ()=>{
-        setInterval(()=>{
-            this.props.fetchUsers()
-        },1000)
-    }
 
     render() {
         return (
@@ -101,13 +109,13 @@ class UsersCard extends Component {
                 <Grid item md={6} xs={12} sm={12}>
                     <Card>
                         <CardHeader
-                            title={'Top adverted drivers'}
+                            title={'Top adverted cars'}
                             avatar={<VideocamIcon/>}
                         />
                         <Divider/>
                         <CardContent>
                             {
-                                this.props.advertLoading
+                                this.props.userLoading
                                     ?
                                     (
                                         <Grid container spacing={2}>
@@ -119,17 +127,17 @@ class UsersCard extends Component {
                                     (
                                         <Grid container spacing={2}>
                                             {
-                                                this.filterTopAdvertedCompanies(this.props.adverts)
-                                                    .map(advert=>(
-                                                        <Grid item md={12} xs={12} sm={12}>
+                                                this.filterTopAdvertedCompanies(this.props.users)
+                                                    .map(car=>(
+                                                        <Grid item key={car[0].plate_number} md={12} xs={12} sm={12}>
                                                             <Card>
                                                                 <CardHeader
-                                                                    title={advert.product_name}
+                                                                    title={`${car[0].plate_number}`}
                                                                     avatar={<Avatar
                                                                         width={40}
-                                                                        height={40}>{advert.product_name.charAt(0)}</Avatar>
+                                                                        height={40}></Avatar>
                                                                     }
-                                                                    subheader={''}
+                                                                    subheader={`Total adverts: ${car[0].adverts.length}`}
                                                                 />
 
                                                             </Card>
@@ -152,12 +160,8 @@ class UsersCard extends Component {
 
 
 const mapStateToProps = state => ({
-    adverts: state.authReducer.adminReducers.advertReducer.adverts,
-    advertLoading: state.authReducer.adminReducers.advertReducer.loading,
     users: state.authReducer.adminReducers.adminUsersReducers.users,
     userLoading: state.authReducer.adminReducers.adminUsersReducers.loading,
-    user: state.userData.user,
-    loading: state.userData.loading
 })
 
 export default connect(mapStateToProps,{fetchUsers,fetchAdverts})(UsersCard);

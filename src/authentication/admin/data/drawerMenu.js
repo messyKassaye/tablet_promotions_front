@@ -36,6 +36,16 @@ const drawerMenu = [
                 name:'Total withdrawals',
                 route:'/auth/admin/total_withdrawals',
                 icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Withdraw request',
+                route:'/auth/admin/withdrawal_request',
+                icon:<AttachMoneyIcon/>
+            },
+            {
+                name:'Approved withdraw request',
+                route:'/auth/admin/approved_withdraw_request',
+                icon:<AttachMoneyIcon/>
             }
         ]
     },

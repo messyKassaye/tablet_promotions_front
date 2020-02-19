@@ -23,7 +23,8 @@ import Button from "@material-ui/core/Button";
 import {showMainDialog} from "../state/action/dialogAction";
 import UsersMoreInfo from "../dialogs/component/UsersMoreInfo";
 import AddNewUser from "../dialogs/component/AddNewUser";
-
+import Skeleton from "@material-ui/lab/Skeleton";
+import {grey} from "@material-ui/core/colors";
 class AdminUsers extends Component {
 
     componentDidMount() {
@@ -40,7 +41,7 @@ class AdminUsers extends Component {
 
     render() {
         return (
-            <Container>
+            <Container maxWidth={"md"}>
                 <Card>
                     <CardHeader
                      title={'Users'}
@@ -57,7 +58,12 @@ class AdminUsers extends Component {
                             ?
                                 (
                                     <Grid container spacing={2}>
-                                        <FourByFourSkeleton/>
+                                        <Skeleton
+                                            variant={"rect"}
+                                            width={'100%'}
+                                            height={250}
+                                            style={{backgroundColor:grey[500]}}
+                                        />
                                     </Grid>
                                 )
                             :

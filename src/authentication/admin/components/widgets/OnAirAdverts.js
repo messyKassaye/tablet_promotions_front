@@ -72,7 +72,7 @@ class OnAirAdverts extends Component {
         const {finished} = this.state
         const setLoading = !finished && loading;
         return (
-            <Card style={{marginBottom:20}}>
+            <Card style={{marginBottom:20,maxWidth:'97%'}}>
                 <CardHeader
                     avatar={<VideocamIcon/>}
                  title={'On air adverts'}
@@ -99,7 +99,7 @@ class OnAirAdverts extends Component {
                     }
                 />
                 <Divider/>
-                <CardContent>
+                <CardContent style={{padding:0}}>
                     {
                         this.props.loading
                             ?
@@ -112,8 +112,8 @@ class OnAirAdverts extends Component {
                             )
                             :
                             (
-                                <Paper style={{overflow:'auto'}}>
-                                    <Table>
+                                <Paper style={{overflow:'auto',width:'100%',position:'relative',borderRadius:0}}>
+                                    <Table style={{fontSize:12}}>
                                         <TableHead>
                                             <TableRow>
                                                 {columns.map(column => (
@@ -183,19 +183,22 @@ class OnAirAdverts extends Component {
                                                                         <span>
                                                                             {`${this.totalPayment(advert.required_views_number,advert.media.per_view_payment).toLocaleString()} ETB`}
                                                                         </span>
-                                                                        <LoadingButton
-                                                                            onClick={()=>this.cancelPayment(advert)}
-                                                                            color='secondary'
-                                                                            variant='outlined'
-                                                                            disabled={this.state.advertId==advert.id}
-                                                                            loading={this.state.advertId==advert.id}
-                                                                            text={this.state.buttonText}
-                                                                            done={finished}
-                                                                            style={{textTransform:'none',marginLeft:10}}>
-                                                                            {this.state.buttonText}
-                                                                        </LoadingButton>
+
                                                                     </div>
 
+                                                                </TableCell>
+                                                                <TableCell key={'actions'}>
+                                                                    <LoadingButton
+                                                                        onClick={()=>this.cancelPayment(advert)}
+                                                                        color='secondary'
+                                                                        variant='outlined'
+                                                                        disabled={this.state.advertId==advert.id}
+                                                                        loading={this.state.advertId==advert.id}
+                                                                        text={this.state.buttonText}
+                                                                        done={finished}
+                                                                        style={{textTransform:'none',marginLeft:10}}>
+                                                                        {this.state.buttonText}
+                                                                    </LoadingButton>
                                                                 </TableCell>
                                                             </TableRow>
                                                         ))

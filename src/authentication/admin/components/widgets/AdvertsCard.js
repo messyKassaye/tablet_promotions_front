@@ -14,7 +14,6 @@ class AdvertsCard extends Component {
 
     componentDidMount() {
         this.props.fetchAdverts()
-        this.interval()
     }
 
     sumOfTypes = (data, name) => {
@@ -29,11 +28,6 @@ class AdvertsCard extends Component {
         }).length
     }
 
-    interval = ()=>{
-        setInterval(()=>{
-            this.props.fetchAdverts()
-        },1000)
-    }
     render() {
         return (
         <Grid container spacing={2}>
@@ -102,7 +96,7 @@ class AdvertsCard extends Component {
                     />
                     <CardContent>
                         {
-                            this.props.userLoading
+                            this.props.advertLoading
                                 ?
                                 (
                                     <Grid container spacing={2}>

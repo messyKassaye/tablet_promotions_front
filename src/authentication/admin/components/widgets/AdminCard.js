@@ -26,14 +26,8 @@ class AdminCard extends Component {
     componentDidMount() {
         this.props.fetchAdverts()
         this.props.fetchUsers()
-        this.interval()
     }
 
-    interval = ()=>{
-        setInterval(()=>{
-            this.props.fetchUsers()
-        },1000)
-    }
 
     render() {
         return (
