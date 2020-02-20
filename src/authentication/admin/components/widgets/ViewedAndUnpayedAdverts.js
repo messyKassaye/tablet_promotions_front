@@ -17,13 +17,17 @@ import IconButton from "@material-ui/core/IconButton";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import viewedAndUnpayedStyle from "../styles/viewedAndUnpayedStyle";
+import ImageZoomer from "./ImageZoomer";
 
 class ViewedAndUnpayedAdverts extends Component {
     constructor(props) {
         super(props);
         this.state = {
             viewedAdverts: null,
-            showerPayerCard:true,
+            showerPayerCard:false,
+            onProcess:0,
+            status:'primary',
+            showImage:false
         }
 
     }
@@ -31,12 +35,30 @@ class ViewedAndUnpayedAdverts extends Component {
     showDetail = (viewedAdvert) => {
         this.setState({
             viewedAdverts: viewedAdvert,
-            showerPayerCard:true
+            showerPayerCard:true,
+            onProcess:viewedAdvert.id
         })
     }
     closePayerCard = ()=>{
         this.setState({
             showerPayerCard:false
+        })
+    }
+
+    process = (view)=>{
+        let id = this.state.onProcess
+        if(id===0){
+            return 'Show detail'
+        }else if(id===view.id){
+            return 'On process'
+        }else {
+            return 'Show detail'
+        }
+    }
+
+    showImage = ()=>{
+        this.setState({
+            showImage:!this.state.showImage
         })
     }
 
@@ -104,10 +126,20 @@ class ViewedAndUnpayedAdverts extends Component {
 
                                                         <TableCell key={'actions'}>
                                                             <Button
-                                                                variant={"contained"}
-                                                                color={"primary"}
+                                                                variant={"outlined"}
+                                                                color={
+                                                                    this.state.onProcess===viewedAdvert.id
+                                                                    ?
+                                                                        'secondary'
+                                                                    :
+                                                                        'primary'
+                                                                }
                                                                 onClick={() => this.showDetail(viewedAdvert)}
-                                                                style={{textTransform: 'none'}}>Detail</Button>
+                                                                style={{textTransform: 'none'}}>
+                                                                {
+                                                                    this.process(viewedAdvert)
+                                                                }
+                                                            </Button>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))
@@ -134,78 +166,127 @@ class ViewedAndUnpayedAdverts extends Component {
                     this.state.showerPayerCard
                     ?
                         (
-                            <Card className={classes.payerCard}>
-                                <CardHeader
-                                    className={classes.payerCardHeader}
-                                    title={'Advert payment information'}
-                                    avatar={<AttachMoneyIcon/>}
-                                    action={<IconButton onClick={this.closePayerCard} color={"inherit"}><CloseIcon/></IconButton>}
-                                />
-                                <Divider/>
-                                <CardContent style={{padding: 0}}>
-                                    {
-                                        this.state.viewedAdverts === null
-                                            ?
-                                            (
-                                                <div style={{display: 'flex', justifyContent: 'center', padding: 20}}>
-                                                    <Typography>
-                                                        There is no selected advert for payment.
-                                                    </Typography>
-                                                </div>
-                                            )
-                                            :
-                                            (
-                                                <Table>
-                                                    <TableBody>
-                                                        <TableRow>
-                                                            <TableCell>Company name: </TableCell>
-                                                            <TableCell>{this.state.viewedAdverts.advert[0].company.name}</TableCell>
-                                                        </TableRow>
+                            <div style={{display:'flex'}}>
+                                <Card className={classes.payerCard}>
+                                    <CardHeader
+                                        className={classes.payerCardHeader}
+                                        title={'Advert payment information'}
+                                        avatar={<AttachMoneyIcon/>}
+                                        action={<IconButton onClick={this.closePayerCard} color={"inherit"}><CloseIcon/></IconButton>}
+                                    />
+                                    <Divider/>
+                                    <CardContent style={{padding: 0}}>
+                                        {
+                                            this.state.viewedAdverts === null
+                                                ?
+                                                (
+                                                    <div style={{display: 'flex', justifyContent: 'center', padding: 20}}>
+                                                        <Typography>
+                                                            There is no selected advert for payment.
+                                                        </Typography>
+                                                    </div>
+                                                )
+                                                :
+                                                (
+                                                    <Table>
+                                                        <TableBody>
+                                                            <TableRow>
+                                                                <TableCell>Company name: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.advert[0].company.name}</TableCell>
+                                                            </TableRow>
 
-                                                        <TableRow>
-                                                            <TableCell>Product name: </TableCell>
-                                                            <TableCell>{this.state.viewedAdverts.advert[0].product_name}</TableCell>
-                                                        </TableRow>
+                                                            <TableRow>
+                                                                <TableCell>Product name: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.advert[0].product_name}</TableCell>
+                                                            </TableRow>
 
-                                                        <TableRow>
-                                                            <TableCell>Advert time: </TableCell>
-                                                            <TableCell>{this.state.viewedAdverts.advert_time}</TableCell>
-                                                        </TableRow>
-                                                        <TableRow>
-                                                            <TableCell>Number of viewers: </TableCell>
-                                                            <TableCell>{this.state.viewedAdverts.number_of_viewers}</TableCell>
-                                                        </TableRow>
-                                                        <TableRow>
-                                                            <TableCell>
-                                                                <Button
-                                                                    color={"secondary"}
-                                                                    variant={"outlined"}
-                                                                    style={{textTransform:'none'}}
-                                                                >
-                                                                    Payment declined
-                                                                </Button>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <Button
-                                                                    color={"primary"}
-                                                                    variant={"contained"}
-                                                                    style={{
-                                                                        textTransform:'none',
-                                                                        paddingLeft:50,
-                                                                        paddingRight:50
-                                                                    }}
-                                                                >
-                                                                    Pay
-                                                                </Button>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    </TableBody>
-                                                </Table>
+                                                            <TableRow>
+                                                                <TableCell>Car plate number: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.car[0].plate_number}</TableCell>
+                                                            </TableRow>
 
-                                            )
-                                    }
-                                </CardContent>
-                            </Card>
+                                                            <TableRow>
+                                                                <TableCell>Adverted on Tablet: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.car[0].tablet[0].serial_number}</TableCell>
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell>Advert time: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.advert_time}</TableCell>
+                                                            </TableRow>
+                                                            <TableRow>
+                                                                <TableCell>Number of viewers: </TableCell>
+                                                                <TableCell>{this.state.viewedAdverts.number_of_viewers}</TableCell>
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell>Viewers picture: </TableCell>
+                                                                <TableCell>
+                                                                    <Button
+                                                                        color={
+                                                                            this.state.showImage
+                                                                            ?
+                                                                                'secondary'
+                                                                            :
+                                                                                'primary'
+                                                                        }
+                                                                        variant={"outlined"}
+                                                                        size={"small"}
+                                                                        style={{textTransform:'none'}}
+                                                                        onClick={this.showImage}
+                                                                    >
+                                                                        {
+                                                                            this.state.showImage
+                                                                                ?
+                                                                                'Close image'
+                                                                                :
+                                                                                'Show image'
+                                                                        }
+                                                                    </Button>
+                                                                </TableCell>
+                                                            </TableRow>
+
+                                                            <TableRow>
+                                                                <TableCell>
+                                                                    <Button
+                                                                        color={"secondary"}
+                                                                        variant={"outlined"}
+                                                                        style={{textTransform:'none'}}
+                                                                    >
+                                                                        Payment declined
+                                                                    </Button>
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    <Button
+                                                                        color={"primary"}
+                                                                        variant={"contained"}
+                                                                        style={{
+                                                                            textTransform:'none',
+                                                                            paddingLeft:50,
+                                                                            paddingRight:50
+                                                                        }}
+                                                                    >
+                                                                        Pay
+                                                                    </Button>
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        </TableBody>
+                                                    </Table>
+
+                                                )
+                                        }
+                                    </CardContent>
+                                </Card>
+                                {
+                                    this.state.showImage
+                                    ?
+                                        (
+                                            <ImageZoomer show={this.state.showImage} advert={this.state.viewedAdverts}/>
+                                        )
+                                    :
+                                        null
+                                }
+                            </div>
                         )
                     :
                         (
