@@ -62,6 +62,10 @@ class ViewedAndUnpayedAdverts extends Component {
         })
     }
 
+    pay = ()=>{
+       console.log(this.state.viewedAdverts)
+    }
+
     render() {
         const {classes} = this.props
         return (
@@ -149,7 +153,7 @@ class ViewedAndUnpayedAdverts extends Component {
                                                 <TableRow>
                                                     <TableCell colSpan={9} align='center' style={{width: '100%'}}>
                                                         <Typography style={{textAlign: 'left'}}>
-                                                            There is no adverts on air
+                                                            There is no viewed adverts
                                                         </Typography>
                                                     </TableCell>
                                                 </TableRow>
@@ -258,6 +262,7 @@ class ViewedAndUnpayedAdverts extends Component {
                                                                 </TableCell>
                                                                 <TableCell>
                                                                     <Button
+                                                                        onClick={this.pay}
                                                                         color={"primary"}
                                                                         variant={"contained"}
                                                                         style={{

@@ -17,6 +17,18 @@ class AdminViewedAdverts extends Component {
         this.props.fetchViewedAdverts()
     }
 
+    filterOnProcessAdvert = (advert)=>{
+        return advert.filter(advert=>{
+            return advert.status === 'On process';
+        })
+    }
+
+    filterPayedAdverts = (advert)=>{
+        return advert.filter(advert=>{
+            return advert.status === 'Payed';
+        })
+    }
+
     render() {
         return (
             <Container maxWidth={"md"}>
@@ -57,11 +69,11 @@ class AdminViewedAdverts extends Component {
                             <Grid container spacing={2}>
 
                                 <Grid item md={12} xs={12} sm={12}>
-                                    <ViewedAndUnpayedAdverts adverts={this.props.viewedAdverts}/>
+                                    <ViewedAndUnpayedAdverts adverts={this.filterOnProcessAdvert(this.props.viewedAdverts)}/>
                                 </Grid>
 
                                 <Grid item md={12} xs={12} sm={12}>
-                                    <ViewedAndPaymentDone adverts={this.props.viewedAdverts}/>
+                                    <ViewedAndPaymentDone adverts={this.filterPayedAdverts(this.props.viewedAdverts)}/>
                                 </Grid>
 
                                 <Grid item md={12} xs={12} sm={12}>
