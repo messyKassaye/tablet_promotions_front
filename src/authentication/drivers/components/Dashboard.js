@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import TotalAdverts from "./widgets/TotalAdverts";
-import TotalAdvertedCompanies from "./widgets/TotalAdvertedMedia";
 import TotalIncomes from "./widgets/TotalIncomes";
 import Cars from "./widgets/Cars";
 import dashboardStyle from "../style/dashboardStyle";
@@ -9,6 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import TopAdvertedCompanies from "./widgets/TopAdvertedCompanies";
 import PaymentAndWithdrawal from "./widgets/PaymentAndWithdrawal";
 import AdvertInTable from "./widgets/advertInTable";
+import TotalAdvertedMedia from "./widgets/TotalAdvertedMedia";
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -26,7 +26,7 @@ class Dashboard extends React.Component{
                     </Grid>
 
                     <Grid item md={3} sm={12}>
-                        <TotalAdvertedCompanies/>
+                        <TotalAdvertedMedia/>
                     </Grid>
                     <Grid item md={3} sm={12}>
                         <TotalIncomes/>

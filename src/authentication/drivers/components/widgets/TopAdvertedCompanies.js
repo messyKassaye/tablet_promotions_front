@@ -43,9 +43,9 @@ class TopAdvertedCompanies extends React.Component{
         let length =0;
         data.map(items=>{
             return items.adverts.filter(advert=>{return advert.detail.company.name===company_name})
-        }).map(items=>items.map(advert=>{
-            length += advert.length
-        }))
+        }).map(items=>{
+            length += items.length
+        })
         return length
     }
 

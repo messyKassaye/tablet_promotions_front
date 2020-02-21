@@ -21,9 +21,9 @@ class TotalAdvertedMedia extends React.Component{
         let video =0;
      data.map(items=>items.adverts.filter(item=>{
            return item.detail.advert_media_type.name === name
-       })).map(items=>items.map(videoItem=>{
-           video += videoItem.length
-     }))
+       })).map(items=>{
+           video += items.length
+     })
         return video
     }
 
