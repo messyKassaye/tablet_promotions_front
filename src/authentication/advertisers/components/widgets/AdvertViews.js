@@ -36,7 +36,7 @@ class AdvertViews extends React.Component{
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                         <Typography>
-                                            {`Current views :  ${this.props.adverts.views.map(view=>{return view.number_of_view})}`}
+                                            {`Current views :  ${this.props.adverts.car_advert.length}`}
                                         </Typography>
                                     </div>
                             </div>

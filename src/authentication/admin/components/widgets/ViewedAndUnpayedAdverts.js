@@ -18,25 +18,35 @@ import IconButton from "@material-ui/core/IconButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import viewedAndUnpayedStyle from "../styles/viewedAndUnpayedStyle";
 import ImageZoomer from "./ImageZoomer";
-
+import {advertPaymentStore} from "../../state/action/advertPaymentAction";
+import {connect} from "react-redux";
+import LoadingButton from "../../../../home/components/widgets/LoadingButton";
 class ViewedAndUnpayedAdverts extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            formData:{
+                car_advert_id:''
+            },
             viewedAdverts: null,
             showerPayerCard:false,
             onProcess:0,
             status:'primary',
+            upNext:0,
             showImage:false
         }
 
     }
 
     showDetail = (viewedAdvert) => {
+        const {formData} = this.state
+        formData['car_advert_id'] = viewedAdvert.id
         this.setState({
             viewedAdverts: viewedAdvert,
             showerPayerCard:true,
-            onProcess:viewedAdvert.id
+            onProcess:viewedAdvert.id,
+            upNext:viewedAdvert.id+1,
+            formData
         })
     }
     closePayerCard = ()=>{
@@ -63,11 +73,42 @@ class ViewedAndUnpayedAdverts extends Component {
     }
 
     pay = ()=>{
-       console.log(this.state.viewedAdverts)
+        this.setState({
+            submitted:true,
+            loading:true
+        })
+        const {formData} = this.state
+        this.props.advertPaymentStore(formData)
+    }
+
+    upNext = ()=>{
+        let id = this.state.viewedAdverts.id+1;
+        let upNextData = this.props.adverts.filter((advert)=>{
+            return advert.id===id
+        })
+        console.log(upNextData)
+       if (upNextData.length>0){
+           this.showDetail(upNextData[0])
+       }
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.response.status){
+            this.setState({
+                submitted:false,
+                loading:false
+            })
+            this.upNext()
+        }
     }
 
     render() {
         const {classes} = this.props
+        const {formData} = this.state
+        const { loading } = this.state;
+        const finished = false
+        const setLoading = !finished && loading;
+        const isEnabled = formData.car_advert_id
         return (
             <div>
                 <Card>
@@ -141,7 +182,15 @@ class ViewedAndUnpayedAdverts extends Component {
                                                                 onClick={() => this.showDetail(viewedAdvert)}
                                                                 style={{textTransform: 'none'}}>
                                                                 {
-                                                                    this.process(viewedAdvert)
+                                                                    this.state.upNext===viewedAdvert.id
+                                                                    ?
+                                                                        (
+                                                                            'Up next'
+                                                                        )
+                                                                    :
+                                                                        (
+                                                                            this.process(viewedAdvert)
+                                                                        )
                                                                 }
                                                             </Button>
                                                         </TableCell>
@@ -261,18 +310,20 @@ class ViewedAndUnpayedAdverts extends Component {
                                                                     </Button>
                                                                 </TableCell>
                                                                 <TableCell>
-                                                                    <Button
+                                                                    <LoadingButton
+                                                                        style={{width:'100%',marginTop:15}}
+                                                                        color="primary"
+                                                                        variant="contained"
                                                                         onClick={this.pay}
-                                                                        color={"primary"}
-                                                                        variant={"contained"}
-                                                                        style={{
-                                                                            textTransform:'none',
-                                                                            paddingLeft:50,
-                                                                            paddingRight:50
-                                                                        }}
+                                                                        loading={setLoading}
+                                                                        done={finished}
+                                                                        text={'Pay'}
+                                                                        disabled={!isEnabled ||this.state.submitted}
                                                                     >
-                                                                        Pay
-                                                                    </Button>
+                                                                        {
+                                                                           "Pay"
+                                                                        }
+                                                                    </LoadingButton>
                                                                 </TableCell>
                                                             </TableRow>
                                                         </TableBody>
@@ -304,4 +355,9 @@ class ViewedAndUnpayedAdverts extends Component {
     }
 }
 
-export default withStyles(viewedAndUnpayedStyle)(ViewedAndUnpayedAdverts);
+const mapStateToProps = state=>({
+    response:state.authReducer.adminReducers.advertPaymentsReducer.response
+})
+
+export default connect(mapStateToProps,{advertPaymentStore})
+(withStyles(viewedAndUnpayedStyle)(ViewedAndUnpayedAdverts));

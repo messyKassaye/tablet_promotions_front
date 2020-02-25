@@ -99,8 +99,8 @@ class AdminCard extends Component {
                                     chartBackgroundColor={deepPurple[500]}
                                     cardBackgroundColor={'#1976d2'}
                                     textColor={'white'}
-                                    title={`${this.props.user.relations.balance.toLocaleString()} ETB`}
-                                    subheader={'Total tab adverts income'}
+                                    title={`${this.props.user.relations.balance.balance.toLocaleString()} ETB`}
+                                    subheader={'Total balance'}
                                 />
                             </Grid>
                         )

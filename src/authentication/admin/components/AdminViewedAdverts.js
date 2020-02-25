@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardContent, CardHeader, Container,Grid} from "@material-ui/core";
+import {Card, CardHeader, Container,Grid} from "@material-ui/core";
 import {connect} from "react-redux";
 import {fetchViewedAdverts} from "../state/action/ViewedAdvertsAction";
 import ViewedAndUnpayedAdverts from "./widgets/ViewedAndUnpayedAdverts";
@@ -19,7 +19,7 @@ class AdminViewedAdverts extends Component {
 
     filterOnProcessAdvert = (advert)=>{
         return advert.filter(advert=>{
-            return advert.status === 'On process';
+            return advert.status === 'On progress';
         })
     }
 

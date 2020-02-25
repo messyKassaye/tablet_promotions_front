@@ -40,8 +40,8 @@ const drawerMenu = [
         icon:<AttachMoneyIcon/>,
         children:[
             {
-                name:'Total income',
-                route:'/auth/admin/total_income',
+                name:'My payment',
+                route:'/auth/admin/my_payment',
                 icon:<AttachMoneyIcon/>
             },
             {
