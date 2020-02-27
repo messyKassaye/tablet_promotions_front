@@ -29,13 +29,13 @@ const StyledTableCell = withStyles(theme => ({
 const columns = [
     {
         id:'payed_at',
-        minWidth: 170,
+        minWidth: 150,
         label: 'Payed at',
         format: value => value.toLocaleString(),
     },
     {
         id:'amount',
-        minWidth: 170,
+        minWidth: 100,
         label: 'Amount',
         align:'right',
         format: value => value.toLocaleString(),
@@ -49,14 +49,14 @@ const columns = [
     },
     {
         id:'payment_type',
-        minWidth: 170,
+        minWidth: 150,
         label: 'Payment type',
         align:'right',
         format: value => value.toLocaleString(),
     },
     {
         id:'week',
-        minWidth: 170,
+        minWidth: 100,
         label: 'Week',
         align:'right',
         format: value => value.toLocaleString(),
@@ -64,7 +64,7 @@ const columns = [
     {
         id:'detail',
         minWidth: 170,
-        label: 'Detail',
+        label: 'Actions',
         align:'right',
         format: value => value.toLocaleString(),
     },
@@ -105,8 +105,8 @@ class FinancePayments extends React.Component{
                                     <CardHeader
                                         title='Your Payments'
                                     />
-                                    <CardContent>
-                                        <Paper>
+                                    <CardContent style={{overflow:'auto',maxHeight:250}}>
+
                                             <Table>
                                                 <TableHead>
                                                     <TableRow>
@@ -161,7 +161,6 @@ class FinancePayments extends React.Component{
                                                     }
                                                 </TableBody>
                                             </Table>
-                                        </Paper>
                                     </CardContent>
                                 </Card>
                                 </div>

@@ -38,17 +38,7 @@ class TotalIncomes extends React.Component{
 
                                     {
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            {
-                                                this.props.deposit.deposit > 0
-                                                    ?
-                                                    (
-                                                        `${this.props.deposit.deposit} ETB`
-                                                    )
-                                                    :
-                                                    (
-                                                        `0.00 ETB`
-                                                    )
-                                            }
+                                            {`${this.props.user.relations.balance.balance.toLocaleString()} ETB`}
                                         </Typography>
                                     }
                                     <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
@@ -71,8 +61,8 @@ class TotalIncomes extends React.Component{
 }
 
 const mapStateToProps = state=>({
-    deposit:state.authReducer.driversReducers.depositData.deposit,
-    loading:state.authReducer.driversReducers.depositData.loading
+    user: state.userData.user,
+    loading: state.userData.loading
 })
 
 export default translate('common')(withStyles(authstyle)(connect(mapStateToProps,{depositFetch})(TotalIncomes)))

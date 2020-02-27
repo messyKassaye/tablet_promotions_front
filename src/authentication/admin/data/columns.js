@@ -218,3 +218,100 @@ export const viewedAdvertsColumn = [
     },
 
 ]
+
+export const withdrawColumns = [
+    {
+        id: 'request_id',
+        label: 'Requested id',
+        minWidth: 150,
+        align:'left'
+    },
+    {
+        id: 'request_time',
+        label: 'Requested at',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'Full_name',
+        label: 'Full name',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'bank_name',
+        label: 'Bank name',
+        minWidth: 250,
+        align:'left'
+    },
+    {
+        id: 'account_holder_name',
+        label: 'Account holder full name',
+        minWidth: 250,
+        align:'left'
+    },
+    {
+        id: 'account_number',
+        label: 'Account number',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'amount',
+        label: 'Amount',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        minWidth: 200,
+        align:'left'
+    },
+
+]
+
+export const printableWithdrawColumns = [
+    {
+        id: 'request_id',
+        label: 'Requested id',
+        minWidth: 150,
+        align:'left'
+    },
+    {
+        id: 'Full_name',
+        label: 'Full name',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'phone',
+        label: 'Phone number',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'bank_name',
+        label: 'Bank name',
+        minWidth: 250,
+        align:'left'
+    },
+    {
+        id: 'account_holder_name',
+        label: 'Account holder full name',
+        minWidth: 250,
+        align:'left'
+    },
+    {
+        id: 'account_number',
+        label: 'Account number',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'amount',
+        label: 'Amount',
+        minWidth: 170,
+        align:'left'
+    },
+]

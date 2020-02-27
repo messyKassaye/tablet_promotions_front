@@ -1,7 +1,7 @@
 import React from "react";
 import {bankFetch} from "../../state/actions/banksActions";
 import {connect} from "react-redux";
-import {Card, CircularProgress} from "@material-ui/core";
+import {Card, CircularProgress,Container} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Tabs from "@material-ui/core/Tabs";
@@ -71,7 +71,7 @@ class Finances extends React.Component{
                         )
                     :
                         (
-                            <div>
+                            <Container maxWidth={'md'}>
                                 <Card style={{borderRadius: 0, backgroundColor: '#3C4252', color: 'white'}}>
                                     <Tabs
 
@@ -98,7 +98,7 @@ class Finances extends React.Component{
                                         </this.TabPanel>
                                     </CardContent>
                                 </Card>
-                            </div>
+                            </Container>
                         )
                 }
             </div>

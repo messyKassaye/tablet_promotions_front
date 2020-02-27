@@ -123,7 +123,6 @@ class FinanceWithdrawal extends React.Component{
                                     }
                                 />
                                 <CardContent>
-                                   <Paper>
                                        <Table>
                                            <TableHead>
                                                <TableRow>
@@ -178,7 +177,6 @@ class FinanceWithdrawal extends React.Component{
                                                }
                                            </TableBody>
                                        </Table>
-                                   </Paper>
                                 </CardContent>
                             </Card>
                         )
