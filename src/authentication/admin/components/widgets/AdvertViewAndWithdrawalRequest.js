@@ -102,6 +102,9 @@ class AdvertViewAndWithdrawalRequest extends Component {
                                          <Grid item md={6} xs={6}>
                                              <Card style={{backgroundColor:deepPurple[500],color:'white'}}>
                                                  <CardHeader
+                                                     style={{textDecoration:'none',color:'white'}}
+                                                     component={Link}
+                                                     to={'/auth/admin/approved_withdraw_request'}
                                                      title={this.filterPrevousWithdraw(this.props.withdrawals).length}
                                                      subheader={<span style={{color:grey[200]}}>Total withdraw</span>}
                                                  />

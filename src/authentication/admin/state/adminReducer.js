@@ -16,6 +16,7 @@ import adminPlaceReducer from "./reducerrs/adminPlaceReducer";
 import ViewdAdvertsReducer from "./reducerrs/ViewdAdvertsReducer";
 import advertPaymentReducer from "./reducerrs/advertPaymentReducer";
 import WithdrawReducer from "./reducerrs/WithdrawReducer";
+import WithdrawalAssetReducer from "./reducerrs/WithdrawalAssetReducer";
 
 export default combineReducers({
     adminDialog:dialogReducer,
@@ -34,5 +35,6 @@ export default combineReducers({
     adminPlacesReducer:adminPlaceReducer,
     viewedAdvertReducer:ViewdAdvertsReducer,
     advertPaymentsReducer:advertPaymentReducer,
-    withdrawReducer:WithdrawReducer
+    withdrawReducer:WithdrawReducer,
+    withdrawAssetsReducer:WithdrawalAssetReducer
 })

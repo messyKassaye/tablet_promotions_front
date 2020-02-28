@@ -76,7 +76,7 @@ openCarsRegistrationDialog = ()=>{
                                                    <Card key={cars.id} className={classes.scroll_child}>
                                                        <CardHeader
                                                            style={{color:"white"}}
-                                                       title={`${t('driver.cars.plate_number')}: ${cars.plate_number}`}
+                                                       title={`${cars.plate_number}`}
                                                        subheader={cars.car_category[0].name}
                                                        avatar={<Avatar width={40} height={40}>{cars.car_category[0].name[0]}</Avatar>}
                                                        />

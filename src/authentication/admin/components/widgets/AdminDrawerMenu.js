@@ -44,7 +44,7 @@ class AdminDrawerMenu extends React.Component{
                 )
             }
             return (
-                <div key={ subOption.name }>
+                <div key={ subOption.name } style={{height:'100%'}}>
                     <ListItem
                         button
                         onClick={ () => this.handleClick( subOption.name ) }>
@@ -72,7 +72,7 @@ class AdminDrawerMenu extends React.Component{
         const {classes} = this.props
         const {t} = this.props
         return (
-            <List style={{overflowY:'auto'}}>
+            <List style={{overflowY:'auto',backgroundColor:'#2B2B2B'}}>
                 {this.props.menu.map((item) => (
                     item.children
                     ?

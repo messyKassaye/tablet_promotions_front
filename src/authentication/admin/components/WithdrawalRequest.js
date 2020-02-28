@@ -57,6 +57,17 @@ class WithdrawalRequest extends Component {
         })
     }
 
+    handlePrint = ()=>{
+        let divContents = document.getElementById("print_table").innerHTML;
+        let a = window.open('', '', 'height=500, width=500');
+        a.document.write('<html><head><style>.header{border: 1px solid black;}</style></head>');
+        a.document.write('<body > <h1>Div contents are</h1><br>');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+
     render() {
         return (
             <Container maxWidth={"md"}>
@@ -205,6 +216,7 @@ class WithdrawalRequest extends Component {
                                       color={"primary"}
                                       variant={"outlined"}
                                       size={"small"}
+                                      onClick={()=>this.handlePrint()}
                                       style={{textTransform:'none'}}
                                      >
                                          Print
@@ -284,6 +296,25 @@ class WithdrawalRequest extends Component {
                         (
                             <span></span>
                         )
+                }
+
+                {
+                    /* printer table */
+                        <table style={{display:'none'}} id='print_table' border="1" cellPadding="5" >
+                            <tr>
+                                <th className='header'>Request id</th>
+                                <th>Full name</th>
+                                <th>Phone number</th>
+                                <th>Bank name</th>
+                                <th>Account holder name</th>
+                                <th>Account number</th>
+                                <th>Amount</th>
+                            </tr>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                 }
             </Container>
         );

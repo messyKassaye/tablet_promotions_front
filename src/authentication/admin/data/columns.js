@@ -315,3 +315,37 @@ export const printableWithdrawColumns = [
         align:'left'
     },
 ]
+
+export const payedWithdrawRequest = [
+    {
+        id: 'full_name',
+        label: 'Payed for',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'phone',
+        label: 'Payed by',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'email',
+        label: 'Amount',
+        minWidth: 200,
+        align:'left'
+    },
+    {
+        id: 'Payment date',
+        label: 'Payment date',
+        minWidth: 170,
+        align:'left'
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        minWidth: 120,
+        align:'left'
+    },
+
+]

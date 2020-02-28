@@ -8,6 +8,7 @@ import Finances from "../components/Finances";
 import Adverts from "../components/widgets/Adverts";
 import {Redirect} from 'react-router-dom'
 import Ekub from "../components/Ekub";
+import NotificationDetails from "../../commons/components/NotificationDetails";
 class Routes extends React.Component{
     constructor(props) {
         super(props);
@@ -28,6 +29,7 @@ class Routes extends React.Component{
                     <Route path='/auth/finance' component={Finances}/>
                     <Route path='/auth/adverts' component={Adverts}/>
                     <Route path='/auth/ekub' component={Ekub}/>
+                    <Route path={'/auth/driver/notifications'} component={NotificationDetails}/>
                 </Switch>
             </div>
         );

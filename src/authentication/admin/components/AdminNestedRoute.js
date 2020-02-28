@@ -14,6 +14,7 @@ import Places from "./Places";
 import AdminViewedAdverts from "./AdminViewedAdverts";
 import AdvertViewPayment from "../../commons/AdvertViewPayment";
 import WithdrawalRequest from "./WithdrawalRequest";
+import PayedWithdrawRequest from "./PayedWithdrawRequest";
 
 class AdminNestedRoute extends Component {
     render() {
@@ -33,6 +34,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth/admin/settings' component={Setting}/>
                 <Route path={'/auth/admin/my_payment'} component={AdvertViewPayment}/>
                 <Route path={'/auth/admin/withdrawal_request'} component={WithdrawalRequest}/>
+                <Route path={'/auth/admin/approved_withdraw_request'} component={PayedWithdrawRequest}/>
             </Switch>
         );
     }

@@ -71,7 +71,7 @@ class AdvertiserMenu extends Component {
         const {classes} = this.props
         const {t} = this.props
         return (
-            <List>
+            <List style={{backgroundColor:'#2B2B2B'}}>
                 {this.props.menu.map((item) => (
                     item.children
                         ?
