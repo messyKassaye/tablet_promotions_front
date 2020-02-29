@@ -25,7 +25,12 @@ const drawerMenu = [
         children:[
             {
                 name:'All advert',
-                route:'/auth/admin/adverts',
+                route:'/auth/admin/all_adverts',
+                icon:<VideocamIcon/>,
+            },
+            {
+                name:'New advert',
+                route:'/auth/admin/new_adverts',
                 icon:<VideocamIcon/>,
             },
             {

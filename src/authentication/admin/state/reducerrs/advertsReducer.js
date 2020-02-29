@@ -1,7 +1,9 @@
-import {FETCH_ADVERTS, UPDATE_ADVERT} from "../actionConstants/adminActionConstants";
+import {FETCH_ADVERTS, SHOW_ADMIN_ADVERT, UPDATE_ADVERT} from "../actionConstants/adminActionConstants";
 
 const initialState = {
     adverts:[],
+    showAdverts:[],
+    showLoading: true,
     loading:true,
     response:{
         status:false,
@@ -21,6 +23,12 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 response:action.payload
+            }
+        case SHOW_ADMIN_ADVERT:
+            return {
+                ...state,
+                showAdverts: action.payload,
+                showLoading: false
             }
         default:
             return state

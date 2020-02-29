@@ -6,13 +6,13 @@ import {grey} from "@material-ui/core/colors";
 class CardheaderLoading extends Component {
     render() {
         return (
-            <Grid item md={12} xs={12} sm={12}>
+            <Grid item md={6} xs={12} sm={12}>
                     <Card>
                         <CardHeader
                             title={
                                 <Skeleton
                                     variant={"text"}
-                                    width={200}
+                                    width={150}
                                     height={20}
                                     style={{backgroundColor:grey[500]}}
                                 />

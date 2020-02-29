@@ -20,7 +20,7 @@ class AdvertiserNestedRoute extends React.Component{
         return (
             <div style={{padding:20}}>
                 <Switch>
-                    <Route path='/' component={Dashboard} exact/>
+                    <Route path='/auth' component={Dashboard} exact/>
                     <Route path='/auth/advertiser/myCompanies' component={MyCompanies}/>
                     <Route path='/auth/advertiser/myAdverts' component={MyAdverts}/>
                     <Route path={'/auth/advertiser/advert/:id'} component={AdvertViewsDetail}/>

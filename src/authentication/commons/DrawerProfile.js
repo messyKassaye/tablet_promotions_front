@@ -85,7 +85,7 @@ class DrawerProfile extends React.Component{
                                       component='nav'
                                       aria-labelledby='nested-menu'
                                   >
-                                      <ListItem button component={Link} to='/settings'>
+                                      <ListItem button component={Link} to={`/auth/${this.props.user.relations.role[0].name}/settings`}>
                                           <ListItemText primary='Setting'/>
                                       </ListItem>
 

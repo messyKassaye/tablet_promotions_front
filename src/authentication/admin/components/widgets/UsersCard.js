@@ -3,7 +3,7 @@ import {Card, CardContent, CardHeader, Grid,Avatar} from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import Divider from "@material-ui/core/Divider";
 import SingleLoading from "../../../commons/loading/SingleLoading";
-import {green} from "@material-ui/core/colors";
+import {deepOrange, deepPurple, green} from "@material-ui/core/colors";
 import VideocamIcon from '@material-ui/icons/Videocam'
 import {connect} from "react-redux";
 import {fetchUsers} from "../../state/action/adminUsersAction";
@@ -49,13 +49,13 @@ class UsersCard extends Component {
             <Grid container spacing={2} style={{marginTop: 20}}>
 
                 <Grid item md={6} xs={12}>
-                    <Card>
+                    <Card style={{backgroundColor:'#3C4252',color:'white'}}>
                         <CardHeader
                             title={'Users in number'}
                             avatar={<PersonIcon/>}
                         />
                         <Divider/>
-                        <CardContent>
+                        <CardContent style={{padding:12}}>
                             {
                                 this.props.userLoading
                                     ?
@@ -107,7 +107,7 @@ class UsersCard extends Component {
                 </Grid>
 
                 <Grid item md={6} xs={12} sm={12}>
-                    <Card>
+                    <Card style={{backgroundColor:green[500],color:'white'}}>
                         <CardHeader
                             title={'Top adverted cars'}
                             avatar={<VideocamIcon/>}
@@ -129,13 +129,14 @@ class UsersCard extends Component {
                                             {
                                                 this.filterTopAdvertedCompanies(this.props.users)
                                                     .map(car=>(
-                                                        <Grid item key={car[0].plate_number} md={12} xs={12} sm={12}>
+                                                        <Grid item key={car[0].plate_number} md={6} xs={12} sm={12}>
                                                             <Card>
                                                                 <CardHeader
                                                                     title={`${car[0].plate_number}`}
                                                                     avatar={<Avatar
+                                                                        style={{backgroundColor:deepOrange[500],color:'white'}}
                                                                         width={40}
-                                                                        height={40}></Avatar>
+                                                                        height={40}>{car[0].car_category[0].name.charAt(0)}</Avatar>
                                                                     }
                                                                     subheader={`Total adverts: ${car[0].adverts.length}`}
                                                                 />
