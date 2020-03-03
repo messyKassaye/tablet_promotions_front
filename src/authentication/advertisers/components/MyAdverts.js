@@ -1,5 +1,5 @@
 import React from "react";
-import {Card} from "@material-ui/core";
+import {Card, Container} from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
@@ -35,6 +35,7 @@ import AdvertPaymentTransaction from "../../commons/components/AdvertPaymentTran
 import AdvertMediaFileUploader from "../../commons/components/AdvertMediaFileUploader";
 import AdvertPaymentComplain from "../../commons/components/AdvertPaymentComplain";
 import MyAdvertsForPhone from "./phones/MyAdvertsForPhone";
+import VideocamIcon from '@material-ui/icons/Videocam'
 
 class MyAdverts extends React.Component {
 
@@ -150,84 +151,61 @@ class MyAdverts extends React.Component {
         const {classes} = this.props
         const {t} = this.props
         return (
-            <div>
-                <Card style={{margin: 0}}>
-                    <CardHeader
-                        className={classes.header}
-                        title={
-                            this.props.loading
-                                ? <Skeleton variant='rect' width={200} height={15}
-                                            style={{backgroundColor: 'white', borderRadius: 5}}/>
-                                : t('advertiser.my_adverts.title')}
-                        action={
-                            <div>
+            <Container maxWidth={"md"}>
+                <Grid container spacing={2}>
+                    <Grid item md={9} xs={12} sm={12}>
+                        <Card elevation={0}>
+                            <CardHeader
+                             title={'My adverts'}
+                            />
+                            <CardContent>
                                 {
                                     this.props.loading
-                                        ? <Skeleton variant='rect' width={150} height={20}
-                                                    style={{backgroundColor: 'white', borderRadius: 5}}/>
-                                        : <Button
-                                            onClick={this.addNewAdvert}
-                                            color='inherit'
-                                            variant='outlined'
-                                            className={classes.new_advert_button}>
-                                            {t('advertiser.my_adverts.new_advert_registration_button')}
-                                        </Button>
-                                }
-                                <IconButton
-                                    onClick={this.addNewAdvert}
-                                    color='inherit'
-                                    variant='outlined'
-                                    className={classes.addIcon}>
-                                    <AddIcon/>
-                                </IconButton>
-                            </div>
-                        }
+                                    ?
+                                        (
+                                            <Grid container spacing={2}>
 
-                    />
-                    <CardContent>
-                        {
-                            this.props.loading
-                                ?
-                                (
-                                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        <Skeleton variant={'rect'} width={400} height={20} style={{marginBottom: 15}}/>
-                                        <FourByFourSkeleton/>
-                                    </div>
-                                )
-                                :
-                                (
-                                    <Grid container spacing={2}>
-                                        {
-                                            this.props.user.relations.companies.map(company => (
-                                                <Grid item md={12} xs={12} key={company.id}>
+                                                <Grid item md={12} xs={12} sm={12}>
+                                                    <Skeleton variant={"rect"} height={200} style={{backgroundColor:grey[500]}}/>
+                                                </Grid>
 
-                                                    <div className={classes.smallDevice}>
-                                                        <MyAdvertsForPhone company={company}/>
-                                                    </div>
+                                                <Grid item md={12} xs={12} sm={12}>
+                                                    <Skeleton variant={"rect"} height={200} style={{backgroundColor:grey[500]}}/>
+                                                </Grid>
 
-                                                    <div className={classes.bigDevice}>
-                                                        <Card elevation={0} style={{width: '100%'}}>
-                                                            <CardHeader
-                                                                title={`List of adverts for company ${company.name}`}
-                                                                action={<IconButton
-                                                                    color='inherit'><MoreHorizVert/></IconButton>}
-                                                            />
-                                                            <CardContent>
+                                                <Grid item md={12} xs={12} sm={12}>
+                                                    <Skeleton variant={"rect"} height={200} style={{backgroundColor:grey[500]}}/>
+                                                </Grid>
 
-                                                                <Grid container spacing={2}>
+                                                <Grid item md={12} xs={12} sm={12}>
+                                                    <Skeleton variant={"rect"} height={200} style={{backgroundColor:grey[500]}}/>
+                                                </Grid>
+                                            </Grid>
+                                        )
+                                    :
+                                        (
+                                            <Grid container spacing={2}>
+                                                {
+                                                    this.props.user.relations.companies.map(company => (
+                                                        <Grid item md={12} xs={12} sm={12}>
+                                                            <Card elevation={0}>
+                                                                <CardHeader
+                                                                 title={`List fo adverts for company ${company.name}`}
+                                                                 avatar={<VideocamIcon/>}
+                                                                />
+                                                                <CardContent style={{padding:5}}>
                                                                     {
-                                                                        company.adverts.length > 0
+                                                                        company.adverts.length>0
                                                                             ?
                                                                             (
                                                                                 company.adverts.map(advert => (
-                                                                                    <Grid item md={6} xs={12}
+                                                                                    <Grid item md={12} xs={12} sm={12}
                                                                                           key={advert.id}>
                                                                                         <Card>
                                                                                             <CardHeader
-                                                                                                className={classes.cards}
                                                                                                 title={advert.product_name}
                                                                                                 subheader={<span
-                                                                                                    style={{color: grey[600]}}>{`${advert.views.length} views`}</span>}
+                                                                                                >{`${advert.views.length} views`}</span>}
                                                                                                 avatar={<Avatar
                                                                                                     width={40}
                                                                                                     height={40}>
@@ -240,9 +218,6 @@ class MyAdverts extends React.Component {
                                                                                                     </div>
                                                                                                 }
                                                                                             />
-                                                                                            <Divider
-                                                                                                style={{backgroundColor: grey[400]}}/>
-
                                                                                             <CardContent
                                                                                                 className={classes.root}>
                                                                                                 <GridList
@@ -281,52 +256,45 @@ class MyAdverts extends React.Component {
                                                                                                     size='small'
                                                                                                     color='primary'
                                                                                                     variant={'text'}
-                                                                                                    >
+                                                                                                >
                                                                                                     <VisibilityIcon/>
                                                                                                     <span
                                                                                                         style={{marginLeft: 10}}>Show details</span>
                                                                                                 </Button>
                                                                                             </CardActions>
                                                                                         </Card>
+                                                                                        <Divider/>
                                                                                     </Grid>
                                                                                 ))
                                                                             )
                                                                             :
                                                                             (
-                                                                                <div style={{
-                                                                                    display: 'flex',
-                                                                                    flexDirection: 'column',
-                                                                                    justifyContent: 'center',
-                                                                                    alignItems: 'center',
-                                                                                    padding: 30
-                                                                                }}>
-                                                                                    <Typography
-                                                                                        style={{textAlign: 'center'}}>
-                                                                                        {`There is no any advert for company ${company.name}. Start advertising  ${company.name} products now and increase your income`}
-                                                                                    </Typography>
-                                                                                    <Button color='secondary'
-                                                                                            variant='outlined'
-                                                                                            style={{textTransform: 'capitalize'}}>
-                                                                                        Start now
-                                                                                    </Button>
-                                                                                </div>
+                                                                                <Typography></Typography>
                                                                             )
                                                                     }
-                                                                </Grid>
-                                                            </CardContent>
-                                                        </Card>
-                                                        <Divider style={{marginTop: 20}}/>
-                                                    </div>
+                                                                </CardContent>
+                                                            </Card>
+                                                        </Grid>
+                                                    ))
+                                                }
+                                            </Grid>
+                                        )
+                                }
+                            </CardContent>
+                        </Card>
 
-                                                </Grid>
-                                            ))
-                                        }
-                                    </Grid>
-                                )
-                        }
-                    </CardContent>
-                </Card>
-            </div>
+                    </Grid>
+                    <Grid item md={3}>
+                        <Button
+                            onClick={this.addNewAdvert}
+                            color='primary'
+                            style={{textTransform:'none',position:"fixed"}}
+                            variant='outlined'>
+                            {t('advertiser.my_adverts.new_advert_registration_button')}
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Container>
         );
     }
 
