@@ -83,7 +83,7 @@ class MyCompanies extends React.Component{
                              title={t('advertiser.new_company.title')}
                              avatar={<BusinessIcon/>}
                          />
-                         <CardContent style={{padding:5}}>
+                         <CardContent style={{padding:10}}>
                              {
                                  this.props.loading
                                      ?

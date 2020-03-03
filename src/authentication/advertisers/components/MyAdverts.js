@@ -128,7 +128,7 @@ class MyAdverts extends React.Component {
                                 justifyContent: 'center',
                                 alignItems: 'flex-end'
                             }}>
-                                <span>This product is On advert Air</span>
+                                <Typography style={{color:green[500]}}>This product is On advert Air</Typography>
                             </div>
                         )
                 }
@@ -200,7 +200,7 @@ class MyAdverts extends React.Component {
                                                 {
                                                     this.props.user.relations.companies.map(company => (
                                                         <Grid key={company.id} item md={12} xs={12} sm={12}>
-                                                            <Card elevation={0}>
+                                                            <Card elevation={0} >
                                                                 <CardHeader
                                                                  title={`List of adverts for company ${company.name}`}
                                                                  avatar={<VideocamIcon/>}
@@ -213,7 +213,7 @@ class MyAdverts extends React.Component {
                                                                                 company.adverts.map(advert => (
                                                                                     <Grid item md={12} xs={12} sm={12}
                                                                                           key={advert.id}>
-                                                                                        <Card>
+                                                                                        <Card style={{marginTop:20}}>
                                                                                             <CardHeader
                                                                                                 title={advert.product_name}
                                                                                                 subheader={<span
