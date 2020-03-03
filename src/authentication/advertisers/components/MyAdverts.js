@@ -158,7 +158,7 @@ class MyAdverts extends React.Component {
                             <CardHeader
                              title={'My adverts'}
                             />
-                            <CardContent>
+                            <CardContent style={{padding:5}}>
                                 {
                                     this.props.loading
                                     ?
@@ -187,7 +187,7 @@ class MyAdverts extends React.Component {
                                             <Grid container spacing={2}>
                                                 {
                                                     this.props.user.relations.companies.map(company => (
-                                                        <Grid item md={12} xs={12} sm={12}>
+                                                        <Grid key={company.id} item md={12} xs={12} sm={12}>
                                                             <Card elevation={0}>
                                                                 <CardHeader
                                                                  title={`List fo adverts for company ${company.name}`}
@@ -211,7 +211,7 @@ class MyAdverts extends React.Component {
                                                                                                     height={40}>
                                                                                                     {advert.product_name[0]}</Avatar>}
                                                                                                 action={
-                                                                                                    <div>
+                                                                                                    <div className={classes.myAdvertHeader}>
                                                                                                         {
                                                                                                             this.paymentStatus(advert)
                                                                                                         }
@@ -220,6 +220,7 @@ class MyAdverts extends React.Component {
                                                                                             />
                                                                                             <CardContent
                                                                                                 className={classes.root}>
+
                                                                                                 <GridList
                                                                                                     className={classes.gridList}>
                                                                                                     <MediaStatus
