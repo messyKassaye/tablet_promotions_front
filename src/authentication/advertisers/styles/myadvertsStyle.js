@@ -74,6 +74,20 @@ const myAdvertStyle = theme=>({
         [theme.breakpoints.down('sm')]:{
             display:'none'
         }
+    },
+    advertSmallDevice:{
+        display:'none',
+        [theme.breakpoints.down('xs')]:{
+            display:'flex'
+        }
+    },
+    newAdverts:{
+        display:'none',
+        [theme.breakpoints.down('xs')]:{
+            display:'flex',
+            flexDirection:'column',
+            alignItems:'flex-end'
+        }
     }
 })
 

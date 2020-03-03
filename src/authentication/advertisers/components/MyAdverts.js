@@ -106,7 +106,7 @@ class MyAdverts extends React.Component {
                             }
                         })
                     }}
-                    color='inherit'
+                    color='primary'
                     variant='outlined'
                     size='small' style={{textTransform: "none"}}>
                     Pay now
@@ -138,7 +138,7 @@ class MyAdverts extends React.Component {
                 <span>Payment is done and on process</span>
                 <Button
                     onClick={() => this.complain(advert)}
-                    color='inherit'
+                    color='primary'
                     variant='outlined'
                     size='small' style={{textTransform: 'none'}}>
                     Complain
@@ -157,6 +157,18 @@ class MyAdverts extends React.Component {
                         <Card elevation={0}>
                             <CardHeader
                              title={'My adverts'}
+                             action={
+                                 <div className={classes.newAdverts}>
+                                     <Button
+                                         onClick={this.addNewAdvert}
+                                         color='primary'
+                                         style={{textTransform:'none'}}
+                                         size={"small"}
+                                         variant='outlined'>
+                                         {t('advertiser.my_adverts.new_advert_registration_button')}
+                                     </Button>
+                                 </div>
+                             }
                             />
                             <CardContent style={{padding:5}}>
                                 {
@@ -190,7 +202,7 @@ class MyAdverts extends React.Component {
                                                         <Grid key={company.id} item md={12} xs={12} sm={12}>
                                                             <Card elevation={0}>
                                                                 <CardHeader
-                                                                 title={`List fo adverts for company ${company.name}`}
+                                                                 title={`List of adverts for company ${company.name}`}
                                                                  avatar={<VideocamIcon/>}
                                                                 />
                                                                 <CardContent style={{padding:5}}>
@@ -232,6 +244,10 @@ class MyAdverts extends React.Component {
                                                                                                     <AdvertPayment
                                                                                                         adverts={advert}/>
                                                                                                 </GridList>
+
+                                                                                                <div className={classes.advertSmallDevice}>
+                                                                                                    <MyAdvertsForPhone adverts={advert}/>
+                                                                                                </div>
                                                                                             </CardContent>
                                                                                             <CardActions style={{
                                                                                                 display: 'flex',
