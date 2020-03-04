@@ -9,6 +9,7 @@ import AdvertPaymentTransaction from "../../../commons/components/AdvertPaymentT
 import {connect} from "react-redux";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import AdvertMediaFileUploader from "../../../commons/components/AdvertMediaFileUploader";
+import {Link} from "react-router-dom";
 
 class MyAdvertsForPhone extends Component {
 
@@ -68,7 +69,7 @@ class MyAdvertsForPhone extends Component {
                                 justifyContent: 'center',
                                 alignItems: 'flex-end'
                             }}>
-                                <span>This product is On advert Air</span>
+                                <Typography style={{color:green[300]}}>This product is on advert Air</Typography>
                             </div>
                         )
                 }
@@ -134,6 +135,15 @@ class MyAdvertsForPhone extends Component {
                                <Typography>
                                    {`Current views :  ${this.props.adverts.car_advert.length}`}
                                </Typography>
+                               <Button
+                                   component={Link}
+                                   to={`/auth/advertiser/advertViews/${this.props.adverts.id}`}
+                                   style={{textTransform:'capitalize',marginLeft:5}}
+                                   size='small'
+                                   color='secondary'
+                                   variant='outlined'>
+                                   Show detail
+                               </Button>
                            </div>
                        </div>
                        <Divider className={classes.divider}/>

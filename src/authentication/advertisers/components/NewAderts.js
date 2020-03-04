@@ -333,15 +333,7 @@ class NewAderts extends React.Component {
 
                                                         </Grid>
 
-                                                        <TextValidator
-                                                            className={classes.formControl}
-                                                            label={t('advertiser.new_advert.form.product_name')}
-                                                            onChange={this.handleChange}
-                                                            name="product_name"
-                                                            value={this.state.formData.product_name}
-                                                            validators={['required']}
-                                                            errorMessages={['Please add your plate number']}
-                                                        />
+
 
                                                         <TextValidator
                                                             className={classes.formControl}

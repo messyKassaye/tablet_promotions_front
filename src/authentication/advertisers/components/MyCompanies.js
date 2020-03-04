@@ -83,7 +83,7 @@ class MyCompanies extends React.Component{
                              title={t('advertiser.new_company.title')}
                              avatar={<BusinessIcon/>}
                          />
-                         <CardContent style={{padding:10}}>
+                         <CardContent style={{padding:25}}>
                              {
                                  this.props.loading
                                      ?
@@ -111,71 +111,89 @@ class MyCompanies extends React.Component{
                                      (
                                          <Grid container spacing={2}>
                                              {
-                                                 this.props.user.relations.companies.map(company=>(
+                                                 this.props.user.relations.companies.length<=0
+                                                 ?
+                                                     (
+                                                         <Grid item md={12} xs={12} sm={12}>
+                                                             <div
+                                                                 style={{
+                                                                     display:'flex',
+                                                                     flexDirection:'column',
+                                                                     padding:20,
+                                                                     alignItems:'center'}}
+                                                             >
+                                                                 <Typography>
+                                                                     No company is registered by your name.
+                                                                 </Typography>
+                                                                 <Button
+                                                                     onClick={this.newCompany}
+                                                                  color={"primary"}
+                                                                  variant={"contained"}
+                                                                  style={{textTransform:'none',marginTop:20}}
+                                                                 >
+                                                                     Register your company
+                                                                 </Button>
+                                                             </div>
+                                                         </Grid>
+                                                     )
+                                                 :
+                                                     (
+                                                         <Grid container spacing={2}>
+                                                             {
+                                                                 this.props.user.relations.companies.map(company=>(
 
-                                                     <Grid key={company.id} item md={12} xs={12}>
-                                                         <Card>
-                                                             <CardHeader
-                                                                 title={company.name}
-                                                                 subheader={<span style={{color:grey[500]}}>{`${company.adverts.length} adverts`}</span>}
-                                                                 avatar={<Avatar>{company.name[0]}</Avatar>}
-                                                                 action={
-                                                                     company.adverts.length<=0
-                                                                         ?
-                                                                         (
-                                                                             <Button
-                                                                                 onClick={()=>this.advertNow(company)}
-                                                                                 color='inherit'
-                                                                                 variant='outlined'
-                                                                                 style={{textTransform:'none'}}>
-                                                                                 Advert now
-                                                                             </Button>
-                                                                         )
-                                                                         :
-                                                                         (null)
-                                                                 }
-                                                             />
-                                                             <Divider/>
-                                                             <CardContent>
-                                                                 {
-                                                                     <Card elevation={0}>
-                                                                         <CardContent>
-                                                                             <Typography>{`Phone : ${company.phone}`}</Typography>
-                                                                             <Typography>Website: <a href={company.website} >{company.website}</a>
-                                                                             </Typography>
-                                                                             <div style={{display:'flex',marginTop:15,flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
-                                                                                 <Typography>{`Total adverts: ${company.adverts.length}`}</Typography>
+                                                                     <Grid key={company.id} item md={12} xs={12}>
+                                                                         <Card>
+                                                                             <CardHeader
+                                                                                 title={company.name}
+                                                                                 subheader={<span style={{color:grey[500]}}>{`${company.adverts.length} adverts`}</span>}
+                                                                                 avatar={<Avatar>{company.name[0]}</Avatar>}
+                                                                             />
+                                                                             <Divider/>
+                                                                             <CardContent>
+                                                                                 {
+                                                                                     <Card elevation={0}>
+                                                                                         <CardContent>
+                                                                                             <Typography>{`Phone : ${company.phone}`}</Typography>
+                                                                                             <Typography>Website: <a href={company.website} >{company.website}</a>
+                                                                                             </Typography>
+                                                                                             <div style={{display:'flex',marginTop:15,flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
+                                                                                                 <Typography>{`Total adverts: ${company.adverts.length}`}</Typography>
+                                                                                                 <Button
+                                                                                                     color='secondary'
+                                                                                                     size='small'
+                                                                                                     variant='outlined'
+                                                                                                     disabled={company.adverts.length<=0}
+                                                                                                     style={{textTransform:'none',marginLeft:10}}>
+                                                                                                     show all
+                                                                                                 </Button>
+                                                                                             </div>
+                                                                                         </CardContent>
+                                                                                     </Card>
+                                                                                 }
+                                                                             </CardContent>
+                                                                             <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',color:'white'}}>
                                                                                  <Button
                                                                                      color='secondary'
-                                                                                     size='small'
                                                                                      variant='outlined'
-                                                                                     disabled={company.adverts.length<=0}
-                                                                                     style={{textTransform:'none',marginLeft:10}}>
-                                                                                     show all
+                                                                                     style={{textTransform:'none'}}>
+                                                                                     Delete
                                                                                  </Button>
-                                                                             </div>
-                                                                         </CardContent>
-                                                                     </Card>
-                                                                 }
-                                                             </CardContent>
-                                                             <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',color:'white'}}>
-                                                                 <Button
-                                                                     color='inherit'
-                                                                     variant='text'
-                                                                     style={{textTransform:'none'}}>
-                                                                     Delete
-                                                                 </Button>
-                                                                 <Button
-                                                                     onClick={()=>this.edit(company)}
-                                                                     color='inherit'
-                                                                     variant='outlined'
-                                                                     style={{textTransform:'none'}}>
-                                                                     Edit
-                                                                 </Button>
-                                                             </CardActions>
-                                                         </Card>
-                                                     </Grid>
-                                                 ))
+                                                                                 <Button
+                                                                                     onClick={()=>this.edit(company)}
+                                                                                     color='primary'
+                                                                                     variant='contained'
+                                                                                     style={{textTransform:'none'}}>
+                                                                                     Edit
+                                                                                 </Button>
+                                                                             </CardActions>
+                                                                         </Card>
+                                                                     </Grid>
+                                                                 ))
+                                                             }
+                                                         </Grid>
+                                                     )
+
                                              }
                                          </Grid>
                                      )

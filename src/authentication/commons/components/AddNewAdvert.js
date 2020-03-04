@@ -22,9 +22,8 @@ import {commonStoreAdvert} from "../state/actions/commonAdvertAction";
 import Typography from "@material-ui/core/Typography";
 import {showMainDialog} from "../../admin/state/action/dialogAction";
 import AdvertPaymentTransaction from "./AdvertPaymentTransaction";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
+
 
 class AddNewAdvert extends Component {
 
@@ -192,7 +191,7 @@ class AddNewAdvert extends Component {
                         )
                     :
                         (
-                            <form className={classes.form} onSubmit={this.handleSubmit}>
+                            <ValidatorForm className={classes.form} onSubmit={this.handleSubmit}>
                                 <Typography style={{color:green[600]}}>{this.props.response.message}</Typography>
                                 <Autocomplete
                                     className={classes.textInput}
@@ -207,17 +206,17 @@ class AddNewAdvert extends Component {
                                     )}
                                 />
 
-                                <TextField
+                                <TextValidator
                                     name='product_name'
-                                    placeholder='Product name'
+                                    label='Product name'
                                     className={classes.textInput}
                                     onChange={this.handleChange}
                                     value={this.state.formData.product_name}
                                 />
 
-                                <TextField
+                                <TextValidator
                                     name='required_views_number'
-                                    placeholder='Expected views of this product'
+                                    label='Expected play number of this product'
                                     className={classes.textInput}
                                     onChange={this.handleChange}
                                     value={this.state.formData.required_views_number}
@@ -294,7 +293,7 @@ class AddNewAdvert extends Component {
                                         t('dialog.addNewBank.addNewBakButton')
                                     }
                                 </LoadingButton>
-                            </form>
+                            </ValidatorForm>
                         )
                 }
             </div>
