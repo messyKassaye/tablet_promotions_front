@@ -42,6 +42,10 @@
         "website": "የድርጅቱ ድህረ ገጽ",
         "register_btn": "መዝግብ"
       }
+    },
+    "description": {
+      "title": "title",
+      "start_adverting": "ማስተዋወቅ ይጀምሩ"
     }
   }
 }

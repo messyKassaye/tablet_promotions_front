@@ -82,6 +82,15 @@ class MyCompanies extends React.Component{
                          <CardHeader
                              title={t('advertiser.new_company.title')}
                              avatar={<BusinessIcon/>}
+                             action={
+                                 <IconButton
+                                     className={classes.companyHeader}
+                                     onClick={this.newCompany}
+                                     color={"inherit"}
+                                 >
+                                     <AddIcon/>
+                                 </IconButton>
+                             }
                          />
                          <CardContent style={{padding:25}}>
                              {

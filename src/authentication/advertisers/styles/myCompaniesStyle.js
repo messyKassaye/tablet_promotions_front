@@ -37,6 +37,13 @@ const myCompanyStyle = theme=>(
             justifyContent: 'start',
             backgroundColor: 'transparent',
         },
+        companyHeader:{
+            display:'none',
+            [theme.breakpoints.down('xs')]:{
+                display:'flex',
+                textTransform:'none',
+            }
+        }
     }
 )
 

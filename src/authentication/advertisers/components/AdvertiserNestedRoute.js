@@ -1,13 +1,11 @@
 import React from "react";
 import MyCompanies from "./MyCompanies";
-import {Route,Switch} from 'react-router-dom'
+import {Route,Switch,useParams} from 'react-router-dom'
 import Dashboard from "./Dashboard";
 import MyAdverts from "./MyAdverts";
-import NewAderts from "./NewAderts";
 import NewCompany from "./NewCompany";
 import Setting from "../../commons/Setting";
 import NotificationDetails from "../../commons/components/NotificationDetails";
-import CommonAdvertDetails from "../../commons/components/CommonAdvertDetails";
 import AdvertViewsDetail from "../../commons/components/AdvertViewsDetail";
 class AdvertiserNestedRoute extends React.Component{
 

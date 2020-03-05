@@ -39,6 +39,10 @@
         "website": "Company website if you have any",
         "register_btn": "Register"
       }
+    },
+    "description": {
+      "title": "title",
+      "start_adverting": "Start adverting"
     }
   }
 }

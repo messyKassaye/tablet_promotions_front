@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import AdvertMediaFileUploader from "../../../commons/components/AdvertMediaFileUploader";
 import {Link} from "react-router-dom";
+import MediaPlayer from "../../../commons/components/MediaPlayer";
 
 class MyAdvertsForPhone extends Component {
 
@@ -28,6 +29,16 @@ class MyAdvertsForPhone extends Component {
                 id:''
             }
         })
+    }
+
+    identifyMedia = advert=>{
+        if(advert.advert_media_type.name==='Video'){
+            return 'Play video'
+        }else if(advert.advert_media_type.name==='Audio'){
+            return 'Play audio'
+        }else {
+            return 'Show image'
+        }
     }
 
     paymentStatus = advert => {
@@ -70,6 +81,15 @@ class MyAdvertsForPhone extends Component {
                                 alignItems: 'flex-end'
                             }}>
                                 <Typography style={{color:green[300]}}>This product is on advert Air</Typography>
+                                <Button
+                                    variant={"outlined"}
+                                    color={"primary"}
+                                    size={"small"}
+                                    style={{textTransform:'none'}}
+                                    onClick={()=>this.showMedia(advert)}
+                                >
+                                    {this.identifyMedia(advert)}
+                                </Button>
                             </div>
                         )
                 }
@@ -86,6 +106,20 @@ class MyAdvertsForPhone extends Component {
                 </Button>
             </div>
         }
+    }
+
+    showMedia = advert=>{
+        this.props.showMainDialog({
+            show:true,
+            maxWidth:'md',
+            page:<MediaPlayer adverts={advert}/>,
+            title:`Advert media of ${advert.product_name}`,
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
     }
 
 

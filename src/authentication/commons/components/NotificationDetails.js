@@ -52,12 +52,21 @@ class NotificationDetails extends Component {
         switch (notification.entity.id) {
             case 1:
                 return <Button
+                component={Link}
+                to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/${notification.path}`}
+                color='primary'
+                variant='outlined'
+                size='small'>
+                Go to uploading
+            </Button>
+            case 2:
+                return <Button
                     component={Link}
                     to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/${notification.path}`}
                     color='primary'
                     variant='outlined'
                     size='small'>
-                    Go to uploading
+                    show advert
                 </Button>
 
         }

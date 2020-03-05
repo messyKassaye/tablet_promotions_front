@@ -1,11 +1,12 @@
 import React from "react";
 import dashboardStyle from "../styles/dashboardStyle";
-import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyAdverts from "./MyAdverts";
-import {Card, CardContent, Container} from "@material-ui/core";
-import {deepOrange, green} from "@material-ui/core/colors";
+import {Container,Grid} from "@material-ui/core";
 import TabAdvertsDescription from "./widgets/TabAdvertsDescription";
+import AdvertiserCard from "./widgets/AdvertiserCard";
+import {connect} from "react-redux";
+import {me} from "../../state/actions/usersActions";
+import AdvertiserCarAndMedia from "./widgets/AdvertiserCarAndMedia";
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -13,11 +14,14 @@ class Dashboard extends React.Component{
 
     }
 
+
     render() {
         const {classes} = this.props
         return (
-            <Container maxWidth={"md"}>
+            <Container maxWidth={"lg"}>
+                <AdvertiserCard/>
                 <TabAdvertsDescription/>
+                <AdvertiserCarAndMedia/>
             </Container>
         );
     }
@@ -25,4 +29,11 @@ class Dashboard extends React.Component{
 
 }
 
-export default withStyles(dashboardStyle)(Dashboard)
+const mapStateToProps = state => (
+    {
+        user: state.userData.user,
+        loading: state.userData.loading
+    }
+)
+
+export default connect(mapStateToProps,{me})(withStyles(dashboardStyle)(Dashboard))

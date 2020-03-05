@@ -86,7 +86,8 @@ const myAdvertStyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             display:'flex',
             flexDirection:'column',
-            alignItems:'flex-end'
+            alignItems:'flex-end',
+            textTransform:'none',
         }
     },
     button:{

@@ -32,11 +32,11 @@ class AdvertViews extends React.Component{
                         {
                             <div>
                                     <Typography>
-                                        {`Expected view : ${this.props.adverts.required_views_number.toLocaleString()}`}
+                                        {`Expected play : ${this.props.adverts.required_views_number.toLocaleString()}`}
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                         <Typography>
-                                            {`Current views :  ${this.props.adverts.car_advert.length}`}
+                                            {`Current play :  ${this.props.adverts.car_advert.length}`}
                                         </Typography>
                                     </div>
                             </div>

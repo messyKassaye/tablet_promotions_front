@@ -37,6 +37,7 @@ import AdvertPaymentComplain from "../../commons/components/AdvertPaymentComplai
 import MyAdvertsForPhone from "./phones/MyAdvertsForPhone";
 import VideocamIcon from '@material-ui/icons/Videocam'
 import NewCompany from "./NewCompany";
+import MediaPlayer from "../../commons/components/MediaPlayer";
 
 class MyAdverts extends React.Component {
 
@@ -102,6 +103,16 @@ class MyAdverts extends React.Component {
             }
         })
     }
+
+    identifyMedia = advert=>{
+        if(advert.advert_media_type.name==='Video'){
+            return 'Play video'
+        }else if(advert.advert_media_type.name==='Audio'){
+            return 'Play audio'
+        }else {
+            return 'Show image'
+        }
+    }
     paymentStatus = advert => {
         if (advert.payment_status === null && advert.status === 'on_progress') {
             return <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -142,6 +153,15 @@ class MyAdverts extends React.Component {
                                 alignItems: 'flex-end'
                             }}>
                                 <Typography style={{color:green[500]}}>This product is On advert Air</Typography>
+                                <Button
+                                 variant={"outlined"}
+                                 color={"primary"}
+                                 size={"small"}
+                                 style={{textTransform:'none'}}
+                                 onClick={()=>this.showMedia(advert)}
+                                >
+                                    {this.identifyMedia(advert)}
+                                </Button>
                             </div>
                         )
                 }
@@ -160,6 +180,20 @@ class MyAdverts extends React.Component {
         }
     }
 
+    showMedia = advert=>{
+        this.props.showMainDialog({
+            show:true,
+            maxWidth:'md',
+            page:<MediaPlayer adverts={advert}/>,
+            title:`Advert media of ${advert.product_name}`,
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
+        })
+    }
+
     render() {
         const {classes} = this.props
         const {t} = this.props
@@ -175,7 +209,6 @@ class MyAdverts extends React.Component {
                                      <Button
                                          onClick={this.addNewAdvert}
                                          color='primary'
-                                         style={{textTransform:'none'}}
                                          size={"small"}
                                          variant='outlined'>
                                          {t('advertiser.my_adverts.new_advert_registration_button')}
@@ -183,7 +216,7 @@ class MyAdverts extends React.Component {
                                  </div>
                              }
                             />
-                            <CardContent style={{padding:5}}>
+                            <CardContent style={{padding:10}}>
                                 {
                                     this.props.loading
                                     ?

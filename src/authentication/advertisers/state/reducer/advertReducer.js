@@ -4,6 +4,7 @@ const initialState = {
     loading:true,
     showLoading:true,
     advert:{},
+    adverts:{},
     status:false,
     deleteResponseMessage:''
 }
@@ -21,7 +22,7 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 showLoading: false,
-                advert: action.payload
+                adverts: action.payload
             }
         case DELETE_ADVERT:
             return {
