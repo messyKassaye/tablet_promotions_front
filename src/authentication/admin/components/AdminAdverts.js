@@ -75,7 +75,7 @@ class AdminAdverts extends Component {
     addNewAdvert = ()=>{
         this.props.showMainDialog({
             show:true,
-            page:<AddNewAdvert company={this.props.company}/>,
+            page:<AddNewAdvert form={{type:'',data:null}} company={this.props.company}/>,
             title:'Add new advert',
             actions:{
                 on:false,
@@ -162,12 +162,20 @@ class AdminAdverts extends Component {
                                                    (
                                                       <Grid container spacing={2}>
                                                           {
-                                                              this.payedAndWaitingApprovalAdverts(this.props.adverts)
-                                                                  .map(advert=>(
-                                                                      <Grid key={advert.id} item md={12} xs={12} sm={12}>
-                                                                          <AdvertCard advert={advert}/>
-                                                                      </Grid>
-                                                                  ))
+                                                              this.payedAndWaitingApprovalAdverts(this.props.adverts).length>0
+                                                              ?
+                                                                  (
+                                                                      this.payedAndWaitingApprovalAdverts(this.props.adverts)
+                                                                          .map(advert=>(
+                                                                              <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                                  <AdvertCard advert={advert}/>
+                                                                              </Grid>
+                                                                          ))
+                                                                  )
+                                                              :
+                                                                  (
+                                                                      <Typography color={"primary"}>No new advert is found ):</Typography>
+                                                                  )
                                                           }
                                                       </Grid>
                                                    )
@@ -189,14 +197,22 @@ class AdminAdverts extends Component {
                                                (
                                                    <Grid container spacing={2}>
                                                        {
-                                                           this.onAirAdverts(this.props.adverts)
-                                                               .map(advert=>(
-                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
-                                                                       <AdvertCard
-                                                                           advert={advert}
-                                                                           headerAction={<Chip label={'On air'} size={"small"} style={{backgroundColor:green[500],color:'white'}}/>}/>
-                                                                   </Grid>
-                                                               ))
+                                                           this.onAirAdverts(this.props.adverts).length>0
+                                                           ?
+                                                               (
+                                                                   this.onAirAdverts(this.props.adverts)
+                                                                       .map(advert=>(
+                                                                           <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                               <AdvertCard
+                                                                                   advert={advert}
+                                                                                   headerAction={<Chip label={'On air'} size={"small"} style={{backgroundColor:green[500],color:'white'}}/>}/>
+                                                                           </Grid>
+                                                                       ))
+                                                               )
+                                                           :
+                                                               (
+                                                                   <Typography color={"primary"}>We couldn't find adverts on tab advert air</Typography>
+                                                               )
                                                        }
                                                    </Grid>
                                                )

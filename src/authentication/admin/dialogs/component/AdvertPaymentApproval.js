@@ -75,6 +75,7 @@ class AdvertPaymentApproval extends Component {
         const setLoading = !finished && loading;
         const isEnabled = true
         return (
+
             <div style={{display:'flex',flexDirection:'column'}}>
                 <Table>
                     <TableBody>
@@ -110,18 +111,31 @@ class AdvertPaymentApproval extends Component {
                     <img src={this.props.advert.payment.receipt_image}/>
                 </div>
                 <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'center',marginTop:20}}>
-                    <Typography style={{color:`${this.state.messageColor}`,marginRight:10}}>{this.state.message}</Typography>
-                    <LoadingButton
-                        style={{textTransform:'none'}}
-                        color="primary"
-                        variant="contained"
-                        onClick={()=>this.approve(this.props.advert.id)}
-                        disabled={!isEnabled || this.state.submitted}
-                        loading={setLoading}
-                        text={'Approve'}
-                        done={finished}>
-                        Approve
-                    </LoadingButton>
+
+                {
+                    this.props.advert.status!=='on_advert'
+                    ?
+                        (
+                            <div>
+                            <Typography style={{color:`${this.state.messageColor}`,marginRight:10}}>{this.state.message}</Typography>
+                                <LoadingButton
+                                    style={{textTransform:'none'}}
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={()=>this.approve(this.props.advert.id)}
+                                    disabled={!isEnabled || this.state.submitted}
+                                    loading={setLoading}
+                                    text={'Approve'}
+                                    done={finished}>
+                                    Approve
+                                </LoadingButton>
+                            </div>
+                        )
+                    :
+                        (
+                            <Typography color={"primary"}>Payment is approved</Typography>
+                        )
+                }
                 </div>
             </div>
         );
