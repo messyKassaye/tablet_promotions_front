@@ -25,7 +25,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth' component={AdminHome} exact/>
                 <Route path='/auth/admin/users' component={AdminUsers}/>
                 <Route path={'/auth/admin/advert/:id'} component={Adverts}/>
-                <Route path={'/auth/admin/new_adverts'} component={AdminAdverts}/>
+                <Route path={'/auth/admin/adverts'} component={AdminAdverts}/>
                 <Route path={'/auth/admin/all_adverts'} component={AboutAdverts}/>
                 <Route path={'/auth/admin/adverts_view'} component={AdminViewedAdverts}/>
                 <Route path='/auth/admin/banks' component={AdminBanks}/>

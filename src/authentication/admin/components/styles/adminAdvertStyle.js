@@ -4,6 +4,9 @@ const adminAdvertStyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             display:'none'
         }
+    },
+    tabs:{
+        textTransform:'none'
     }
 })
 

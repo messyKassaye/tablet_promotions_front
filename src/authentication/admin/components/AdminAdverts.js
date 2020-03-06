@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {Container,Grid,AppBar} from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+import {Container,Grid,Chip,Box,Typography,IconButton,
+    Card,CardHeader,CardContent,Tab,Tabs,TableCell,Divider} from "@material-ui/core";
 import {fetchAdverts} from "../state/action/advertsAction";
 import {connect} from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
-import TableCell from "@material-ui/core/TableCell";
 import adminAdvertStyle from "./styles/adminAdvertStyle";
-import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add'
 import {showMainDialog} from "../state/action/dialogAction";
 import PayedAndWaitingForApprovalAdverts from "./widgets/PayedAndWaitingForApprovalAdverts";
@@ -15,11 +12,10 @@ import NewAndPaymentUnfinishedAdverts from "./widgets/NewAndPaymentUnfinishedAdv
 import OnAirAdverts from "./widgets/OnAirAdverts";
 import AddNewAdvert from "../../commons/components/AddNewAdvert";
 import {fetchCompanies} from "../state/action/adminCompaniesAction";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+import AdvertCard from "../../commons/components/AdvertCard";
+import SingleLoading from "../../commons/loading/SingleLoading";
+import AdvertsCard from "./widgets/AdvertsCard";
+import {green} from "@material-ui/core/colors";
 export const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
@@ -40,9 +36,9 @@ class AdminAdverts extends Component {
         }
 
     }
-    handleChange = (value)=>{
+    handleChange = (event, newValue) => {
         this.setState({
-            value:value
+            value: newValue
         })
     }
 
@@ -50,6 +46,31 @@ class AdminAdverts extends Component {
         this.props.fetchAdverts()
         this.props.fetchCompanies()
     }
+
+    a11yProps = (index) => {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+
+    TabPanel = (props) => {
+        const {children, value, index, ...other} = props;
+
+        return (
+            <Typography
+                component="div"
+                role="tabpanel"
+                hidden={value !== index}
+                id={`simple-tabpanel-${index}`}
+                aria-labelledby={`simple-tab-${index}`}
+                {...other}
+            >
+                <Box  style={{paddingLeft:0,paddingRight:0}} p={4}>{children}</Box>
+            </Typography>
+        );
+    }
+
 
     addNewAdvert = ()=>{
         this.props.showMainDialog({
@@ -91,42 +112,128 @@ class AdminAdverts extends Component {
         const {classes,t} = this.props
         return (
             <Container maxWidth='md'>
-                <div style={{display:'flex',flexDirection:'column'}}>
+                <Grid container spacing={2}>
 
-                    <Card style={{marginBottom:20}}>
-                        <CardHeader
-                         title='Adverts'
-                         action={
-                             <IconButton color='inherit' onClick={this.addNewAdvert}>
-                                 <AddIcon/>
-                             </IconButton>
-                         }
-                        />
-                    </Card>
+                   <Grid item md={9} xs={12} sm={12}>
+                       <Grid item md={12} xs={12} sm={12}>
+                           <Card style={{marginBottom:20}}>
+                               <CardHeader
+                                   title='Adverts'
+                                   action={
+                                       <IconButton color='inherit' onClick={this.addNewAdvert}>
+                                           <AddIcon/>
+                                       </IconButton>
+                                   }
+                               />
+                           </Card>
+                       </Grid>
 
-                    <Grid container spacing={2}>
-                        <Grid item md={12} xs={12} sm={12}>
-                            {/*payed and waiting for payment adverts*/}
-                            <PayedAndWaitingForApprovalAdverts
-                                adverts={this.payedAndWaitingApprovalAdverts(this.props.adverts)}
-                            />
-                        </Grid>
+                       <Grid item md={12} xs={12} sm={12}>
 
-                        <Grid item md={12} xs={12} sm={12}>
-                            {/*On air adverts*/}
-                            <OnAirAdverts adverts={this.onAirAdverts(this.props.adverts)}/>
-                        </Grid>
+                           <Card style={{borderRadius: 0}} elevation={0}>
+                               <Tabs
+                                   value={this.state.value}
+                                   textColor={"primary"}
+                                   indicatorColor={"primary"}
+                                   scrollButtons={"on"}
+                                   onChange={this.handleChange}>
+                                   <Tab className={classes.tabs} label='New advert' {...this.a11yProps(0)} />
+                                   <Tab className={classes.tabs}  label='On air advert' {...this.a11yProps(1)} />
+                                   <Tab className={classes.tabs}  label='Non-payed advert' {...this.a11yProps(2)} />
+                                   <Tab className={classes.tabs}  label='Completed advert' {...this.a11yProps(2)} />
+                               </Tabs>
+                               <Divider/>
+                           </Card>
 
-                        <Grid item md={12} xs={12} sm={12}>
-                            {/*Unfinished payment adverts*/}
-                            <NewAndPaymentUnfinishedAdverts
-                                adverts={this.unfinishedPaymentAdverts(this.props.adverts)}
-                            />
-                        </Grid>
+                           <Card style={{borderRadius:0}} elevation={0}>
+                               <CardContent>
+                                   <this.TabPanel value={this.state.value} index={0}>
+                                           {
+                                               this.props.loading
+                                               ?
+                                                   (
+                                                       <Grid container spacing={2}>
+                                                           <SingleLoading height={200}/>
+                                                           <SingleLoading height={200}/>
+                                                           <SingleLoading height={200}/>
+                                                       </Grid>
+                                                   )
+                                               :
+                                                   (
+                                                      <Grid container spacing={2}>
+                                                          {
+                                                              this.payedAndWaitingApprovalAdverts(this.props.adverts)
+                                                                  .map(advert=>(
+                                                                      <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                          <AdvertCard advert={advert}/>
+                                                                      </Grid>
+                                                                  ))
+                                                          }
+                                                      </Grid>
+                                                   )
+                                           }
+                                   </this.TabPanel>
 
-                    </Grid>
+                                   <this.TabPanel value={this.state.value} index={1}>
+                                       {
+                                           this.props.loading
+                                           ?
+                                               (
+                                                   <Grid container spacing={2}>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
+                                                   </Grid>
+                                               )
+                                           :
+                                               (
+                                                   <Grid container spacing={2}>
+                                                       {
+                                                           this.onAirAdverts(this.props.adverts)
+                                                               .map(advert=>(
+                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                       <AdvertCard
+                                                                           advert={advert}
+                                                                           headerAction={<Chip label={'On air'} size={"small"} style={{backgroundColor:green[500],color:'white'}}/>}/>
+                                                                   </Grid>
+                                                               ))
+                                                       }
+                                                   </Grid>
+                                               )
+                                       }
+                                   </this.TabPanel>
 
-                </div>
+                                   <this.TabPanel value={this.state.value} index={2}>
+                                       {
+                                           this.props.loading
+                                           ?
+                                               (
+                                                   <Grid container spacing={2}>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
+                                                   </Grid>
+                                               )
+                                           :
+                                               (
+                                                   <Grid container spacing={2}>
+                                                       {
+                                                           this.unfinishedPaymentAdverts(this.props.adverts)
+                                                               .map(advert=>(
+                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                       <AdvertCard advert={advert}/>
+                                                                   </Grid>
+                                                               ))
+                                                       }
+                                                   </Grid>
+                                               )
+                                       }
+                                   </this.TabPanel>
+                               </CardContent>
+                           </Card>
+                       </Grid>
+                   </Grid>
+                   </Grid>
             </Container>
         );
     }

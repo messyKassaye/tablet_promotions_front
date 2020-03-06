@@ -1,8 +1,8 @@
 const mediaPlayerStyle = theme=>({
     video:{
-        width:800,
+        width:600,
         [theme.breakpoints.down('xs')]:{
-            width: 400
+            width: 340
         }
     }
 })
