@@ -1,9 +1,17 @@
-import {DELETE_ADVERT_LOCALLY, ME, STORE_NEW_ADVERT_LOCALLY, UPDATE_USER} from "../authConstants/authConstants";
+import {
+    DELETE_ADVERT_LOCALLY,
+    ME,
+    SHOW_USERS,
+    STORE_NEW_ADVERT_LOCALLY,
+    UPDATE_USER
+} from "../authConstants/authConstants";
 
 const  initialState = {
     loading:true,
     user:{},
-    update:{}
+    update:{},
+    showUser:{},
+    showLoading:true,
 }
 
 export default function (state=initialState,action) {
@@ -14,6 +22,12 @@ export default function (state=initialState,action) {
                 ...state,
                 loading:false,
                 user : action.payload
+            }
+        case SHOW_USERS:
+            return {
+                ...state,
+                showLoading: false,
+                showUser: action.payload
             }
         case UPDATE_USER:
             return {

@@ -7,14 +7,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import adminAdvertStyle from "./styles/adminAdvertStyle";
 import AddIcon from '@material-ui/icons/Add'
 import {showMainDialog} from "../state/action/dialogAction";
-import PayedAndWaitingForApprovalAdverts from "./widgets/PayedAndWaitingForApprovalAdverts";
-import NewAndPaymentUnfinishedAdverts from "./widgets/NewAndPaymentUnfinishedAdverts";
-import OnAirAdverts from "./widgets/OnAirAdverts";
 import AddNewAdvert from "../../commons/components/AddNewAdvert";
 import {fetchCompanies} from "../state/action/adminCompaniesAction";
 import AdvertCard from "../../commons/components/AdvertCard";
 import SingleLoading from "../../commons/loading/SingleLoading";
-import AdvertsCard from "./widgets/AdvertsCard";
 import {green} from "@material-ui/core/colors";
 export const StyledTableCell = withStyles(theme => ({
     head: {
@@ -70,7 +66,6 @@ class AdminAdverts extends Component {
             </Typography>
         );
     }
-
 
     addNewAdvert = ()=>{
         this.props.showMainDialog({
@@ -135,12 +130,12 @@ class AdminAdverts extends Component {
                                    value={this.state.value}
                                    textColor={"primary"}
                                    indicatorColor={"primary"}
-                                   scrollButtons={"on"}
+                                   variant={"scrollable"}
                                    onChange={this.handleChange}>
                                    <Tab className={classes.tabs} label='New advert' {...this.a11yProps(0)} />
                                    <Tab className={classes.tabs}  label='On air advert' {...this.a11yProps(1)} />
                                    <Tab className={classes.tabs}  label='Non-payed advert' {...this.a11yProps(2)} />
-                                   <Tab className={classes.tabs}  label='Completed advert' {...this.a11yProps(2)} />
+                                   <Tab className={classes.tabs}  label='Completed advert' {...this.a11yProps(3)} />
                                </Tabs>
                                <Divider/>
                            </Card>

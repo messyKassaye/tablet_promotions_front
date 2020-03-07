@@ -1,148 +1,181 @@
 import React, {Component} from 'react';
-import {Container} from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
-import AddIcon from '@material-ui/icons/Add'
-import CardContent from "@material-ui/core/CardContent";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import {usersColumn as columns} from "../data/columns";
-import {StyledTableCell} from "./AdminAdverts";
-import TableBody from "@material-ui/core/TableBody";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import {connect} from "react-redux";
+import {
+    Card, CardHeader, CardContent, Divider, Grid, Button
+    , Container, InputBase, Menu, MenuItem, Typography
+} from "@material-ui/core";
 import {fetchUsers} from "../state/action/adminUsersAction";
-import Grid from "@material-ui/core/Grid";
-import FourByFourSkeleton from "../../commons/loading/customSkeleton";
-import TableCell from "@material-ui/core/TableCell";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import {showMainDialog} from "../state/action/dialogAction";
-import UsersMoreInfo from "../dialogs/component/UsersMoreInfo";
 import AddNewUser from "../dialogs/component/AddNewUser";
-import Skeleton from "@material-ui/lab/Skeleton";
-import {grey} from "@material-ui/core/colors";
+import SingleLoading from "../../commons/loading/SingleLoading";
+import withStyles from "@material-ui/core/styles/withStyles";
+import SearchIcon from '@material-ui/icons/Search'
+import UserCard from "../../commons/components/UserCard";
+import userStyle from "../../commons/style/usersStyle";
+import {connect} from "react-redux";
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import UsersLoader from "../../commons/loading/UsersLoader";
+
 class AdminUsers extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            open:false,
+            anchorEl:null,
+            name:'',
+            showing:'all',
+            users:[]
+        }
+    }
 
     componentDidMount() {
         this.props.fetchUsers()
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.users){
+            this.setState({
+                users:nextProps.users
+            })
+        }
+    }
+
+    showUser = type=>{
+        this.setState({
+            users:this.filterUsers(type)
+        })
+    }
+
+    filterUsers = role=>{
+        if(role==='all'){
+            return this.props.users
+        }else{
+            return this.props.users.filter(user=>{
+                return user.role[0].name===role
+            })
+        }
+    }
+
     addNewUser = ()=>{
         this.props.showMainDialog({show:true,page: <AddNewUser/>,title: 'Add new user',actions:{on: false,path:'',id:''}})
     }
-    moreInfo = user=>{
-        this.props.showMainDialog({show:true,maxWidth:'lg',page:<UsersMoreInfo user={user}/>,
-            title:`More information about ${user.first_name} ${user.last_name}`,actions:{on:false,path:'',id:''}})
-    }
+
+     handleClick = event => {
+        this.setState({
+            anchorEl:event.currentTarget,
+            [event.target.name]: event.target.value
+        })
+    };
+
+
+    handleClose = (event) => {
+        this.setState({
+            anchorEl:null,
+            showing:event.target.getAttribute('name')
+        })
+      this.showUser(event.target.getAttribute('name'))
+    };
 
     render() {
+        const {classes} = this.props
         return (
             <Container maxWidth={"md"}>
-                <Card>
-                    <CardHeader
-                     title={'Users'}
-                     action={
-                         <IconButton color='inherit' onClick={this.addNewUser}>
-                             <AddIcon/>
-                         </IconButton>
-                     }
-                    />
-                    <Divider/>
-                <CardContent style={{padding:0}}>
-                        {
-                            this.props.loading
-                            ?
-                                (
-                                    <Grid container spacing={2}>
-                                        <Skeleton
-                                            variant={"rect"}
-                                            width={'100%'}
-                                            height={250}
-                                            style={{backgroundColor:grey[500]}}
-                                        />
-                                    </Grid>
-                                )
-                            :
-                                (
-                                    <Paper style={{overflow:'auto',borderRadius:0}}>
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                                {columns.map(column => (
-                                                    <StyledTableCell
-                                                        key={column.id}
-                                                        align={column.align}
-                                                        style={{minWidth: column.minWidth}}
-                                                    >
-                                                        {column.label}
-                                                    </StyledTableCell>
-                                                ))}
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {
-                                                this.props.users.length>0
-                                                ?
-                                                    (
-                                                        this.props.users.map(user=>(
-                                                            <TableRow key={user.id}>
-                                                                <TableCell align='left'>{`${user.first_name} ${user.last_name}`}</TableCell>
-                                                                <TableCell align='left'>{user.phone}</TableCell>
-                                                                <TableCell>{user.email}</TableCell>
-                                                                <TableCell>
-                                                                    {
-                                                                        user.address===null
-                                                                        ?
-                                                                            (<span>Not included</span>)
-                                                                        :
-                                                                            (
-                                                                                user.address.city
-                                                                            )
-                                                                    }
-                                                                </TableCell>
-                                                                <TableCell>
-                                                                    {
-                                                                        user.role.map(role=>(
-                                                                            <span>{role.name}</span>
-                                                                        ))
-                                                                    }
-                                                                </TableCell>
-                                                                <TableCell>
-                                                                    <div>
-                                                                        <Button
-                                                                            onClick={()=>this.moreInfo(user)}
-                                                                            style={{textTransform:'none'}}
-                                                                            size='small'
-                                                                            color='secondary'
-                                                                            variant='outlined'>
-                                                                            More info
-                                                                        </Button>
+                <Grid container spacing={2}>
+                    <Grid item md={9} xs={12} sm={12}>
+                      <Card elevation={0}>
+                          <CardHeader
+                           title={
+                               <div className={classes.search}>
+                                   <div className={classes.searchIcon}>
+                                       <SearchIcon />
+                                   </div>
+                                   <InputBase
+                                       placeholder="Search…"
+                                       classes={{
+                                           root: classes.inputRoot,
+                                           input: classes.inputInput,
+                                       }}
+                                       inputProps={{ 'aria-label': 'search' }}
+                                   />
+                               </div>
+                           }
+                           action={
+                               <div>
+                                   <Button
+                                       aria-controls="simple-menu"
+                                       color={"primary"}
+                                       variant={"text"}
+                                       aria-haspopup="true"
+                                       style={{textTransform:'none'}}
+                                       onClick={this.handleClick}>
+                                       {`Showing  ${this.state.showing}`}
+                                       <ArrowDropDownIcon color={"inherit"}/>
+                                   </Button>
+                                   <Menu
+                                       id="simple-menu"
+                                       anchorEl={this.state.anchorEl}
+                                       keepMounted
+                                       open={Boolean(this.state.anchorEl)}
+                                       onClose={this.handleClose}
+                                   >
+                                       <MenuItem name={'all'} onClick={this.handleClose}>Show all</MenuItem>
+                                       <MenuItem name={'Advertiser'} onClick={this.handleClose}>Show advertisers</MenuItem>
+                                       <MenuItem name={'Driver'} onClick={this.handleClose}>Show drivers</MenuItem>
+                                       <MenuItem name={'Down loader'} onClick={this.handleClose}>Show downloader</MenuItem>
+                                   </Menu>
+                               </div>
+                           }
+                          />
+                          <Divider/>
+                          <CardContent>
+                              {
+                                  this.props.loading||this.state.users.length<=0
+                                  ?
+                                      (
+                                          <Grid container spacing={2}>
+                                              <Grid item md={12} xs={12} sm={12}>
+                                                  <UsersLoader/>
+                                              </Grid>
+                                              <Grid item md={12} xs={12} sm={12}>
+                                                  <UsersLoader/>
+                                              </Grid>
+                                              <Grid item md={12} xs={12} sm={12}>
+                                                  <UsersLoader/>
+                                              </Grid>
+                                              <Grid item md={12} xs={12} sm={12}>
+                                                  <UsersLoader/>
+                                              </Grid>
+                                          </Grid>
+                                      )
+                                  :
+                                      (
+                                          <Grid container spacing={2}>
+                                              {
+                                                  this.state.users.map(user=>(
+                                                      <Grid key={user.id} item md={12} xs={12} sm={12}>
+                                                          <UserCard user={user}/>
+                                                      </Grid>
+                                                  ))
+                                              }
+                                          </Grid>
+                                      )
+                              }
+                          </CardContent>
+                      </Card>
+                    </Grid>
 
-                                                                    </div>
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        ))
-                                                    )
-                                                :
-                                                    (
-                                                        <TableRow>
-                                                            <TableCell colSpan={5}>
-                                                                <Typography>There is no registered users</Typography>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    )
-                                            }
-                                        </TableBody>
-                                    </Table>
-                                    </Paper>
-                                )
-                        }
-                </CardContent>
-                </Card>
+                    <Grid item md={3} xs={12} sm={12}>
+                        <Button
+                            color={"primary"}
+                            variant={"outlined"}
+                            style={{textTransform:'none',position:'fixed'}}
+                            onClick={this.addNewUser}
+                        >
+                            Add new user
+                        </Button>
+                    </Grid>
+                </Grid>
+
             </Container>
         );
     }
@@ -153,4 +186,5 @@ const mapStateToProps = state=>({
     loading:state.authReducer.adminReducers.adminUsersReducers.loading
 })
 
-export default connect(mapStateToProps,{fetchUsers,showMainDialog})(AdminUsers);
+export default connect(mapStateToProps,{fetchUsers,showMainDialog})
+(withStyles(userStyle)(AdminUsers));

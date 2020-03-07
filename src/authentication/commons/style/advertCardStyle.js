@@ -7,6 +7,13 @@ const advertCardStyle = theme=>({
     customTableCell:{
         border:'none',
         color:green[500]
+    },
+    link:{
+        textDecoration:'none',
+        color:'inherit',
+        "&:hover": {
+            textDecoration: "underline"
+        },
     }
 })
 

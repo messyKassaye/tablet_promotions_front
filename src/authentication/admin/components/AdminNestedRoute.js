@@ -11,12 +11,11 @@ import AdminUsers from "./AdminUsers";
 import NotificationDetails from "../../commons/components/NotificationDetails";
 import Currency from "./Currency";
 import Places from "./Places";
-import AdminViewedAdverts from "./AdminViewedAdverts";
 import AdvertViewPayment from "../../commons/AdvertViewPayment";
 import WithdrawalRequest from "./WithdrawalRequest";
 import PayedWithdrawRequest from "./PayedWithdrawRequest";
-import AboutAdverts from "./AboutAdverts";
 import Adverts from "../../commons/components/Adverts";
+import UserProfile from "../../commons/components/UserProfile";
 
 class AdminNestedRoute extends Component {
     render() {
@@ -24,8 +23,11 @@ class AdminNestedRoute extends Component {
             <Switch>
                 <Route path='/auth' component={AdminHome} exact/>
                 <Route path='/auth/admin/users' component={AdminUsers}/>
-                <Route path={'/auth/admin/advert/:id'} component={Adverts}/>
+                <Route path='/auth/admin/user/:id' component={UserProfile}/>
+
                 <Route path={'/auth/admin/adverts'} component={AdminAdverts}/>
+                <Route path={'/auth/admin/advert/:id'} component={Adverts}/>
+
                 <Route path='/auth/admin/banks' component={AdminBanks}/>
                 <Route path='/auth/admin/currency' component={Currency}/>
                 <Route path='/auth/admin/roles' component={Role}/>

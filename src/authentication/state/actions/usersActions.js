@@ -1,6 +1,6 @@
 import {
     DELETE_ADVERT_LOCALLY,
-    ME, PUSH_NEW_COMPANY_LOCALLY,
+    ME, PUSH_NEW_COMPANY_LOCALLY, SHOW_USERS,
     STORE_NEW_ADVERT_LOCALLY,
     UPDATE_USER
 } from "../authConstants/authConstants";
@@ -28,6 +28,15 @@ export const userUpdate = (data,id)=>dispatch=>{
         .then(res=>dispatch({
             type: UPDATE_USER,
             payload: res.data
+        }))
+}
+
+export const show = id=>dispatch=>{
+    axios.get(`${API_URL}${PATH}/${id}`)
+        .then(response=>response.data)
+        .then(res=>dispatch({
+            type:SHOW_USERS,
+            payload:res.data
         }))
 }
 
