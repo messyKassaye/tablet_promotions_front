@@ -10,6 +10,12 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import {green, grey} from "@material-ui/core/colors";
 import withStyles from "@material-ui/core/styles/withStyles";
 import userStyle from "../style/usersStyle";
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PhoneIcon from '@material-ui/icons/Phone';
+import RoomIcon from '@material-ui/icons/Room';
+import DriverTab from "./widgets/DriverTab";
+import TabLoader from "../loading/TabLoader";
+import AdvertiserTab from "./widgets/AdvertiserTab";
 class UserProfile extends Component {
 
     constructor(props) {
@@ -19,18 +25,6 @@ class UserProfile extends Component {
         }
     }
 
-
-    componentDidMount() {
-        let id = this.props.match.params.id
-        this.props.show(id)
-    }
-
-    handleChange = (event, newValue) => {
-        this.setState({
-            value: newValue
-        })
-    }
-
     a11yProps = (index) => {
         return {
             id: `simple-tab-${index}`,
@@ -38,22 +32,23 @@ class UserProfile extends Component {
         };
     }
 
-    TabPanel = (props) => {
-        const {children, value, index, ...other} = props;
-
-        return (
-            <Typography
-                component="div"
-                role="tabpanel"
-                hidden={value !== index}
-                id={`simple-tabpanel-${index}`}
-                aria-labelledby={`simple-tab-${index}`}
-                {...other}
-            >
-                <Box  style={{paddingLeft:0,paddingRight:0}} p={4}>{children}</Box>
-            </Typography>
-        );
+    componentDidMount() {
+        let id = this.props.match.params.id
+        this.props.show(id)
     }
+
+
+
+    findTabForRole = role=>{
+        if(role==='Driver'){
+            return <DriverTab users={this.props.users}/>
+        }else if(role==='Advertiser'){
+            return <AdvertiserTab users={this.props.users}/>
+        }else if(role==='Down loader'){
+
+        }
+    }
+
 
     render() {
         const {classes} = this.props
@@ -62,20 +57,30 @@ class UserProfile extends Component {
                 <Grid container spacing={2}>
 
                     <Grid item md={3} xs={12} sm={12}>
-                        <Card style={{backgroundColor:'#3C4252',color:'white'}}>
+                        <Card className={classes.profileCard}>
                             <CardContent
-                                style={{display:'flex',flexDirection:'column',alignItems:'center'}}
+                                className={classes.profileCardContent}
                             >
                                 {
                                     this.props.loading
                                     ?
                                         (
-                                            <Skeleton variant={"circle"} width={40} height={40}/>
+                                            <div className={classes.profileCardContent}>
+                                                <Skeleton
+                                                    variant={"circle"}
+                                                    width={40} height={40}
+                                                    style={{backgroundColor:grey[500]}}/>
+                                                <Skeleton
+                                                    variant={"text"} width={80} style={{backgroundColor:grey[500]}}/>
+
+                                                <Skeleton
+                                                    variant={"text"} width={80} style={{backgroundColor:grey[500],marginTop:10}}/>
+                                            </div>
                                         )
                                     :
                                         (
                                             <div
-                                                style={{display:'flex',flexDirection:'column',alignItems:'center'}}
+                                                className={classes.profileCardContent}
                                             >
                                                 {
                                                     this.props.users.attribute.avator==='letter'
@@ -96,49 +101,24 @@ class UserProfile extends Component {
                                         )
                                 }
                             </CardContent>
-                            <CardActions style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
-                                <Button
-                                 color={"inherit"}
-                                 variant={"text"}
-                                 style={{textTransform:'none'}}
-                                >
-                                    Edit profile
-                                </Button>
-                            </CardActions>
                         </Card>
                     </Grid>
 
                     <Grid item md={9} xs={12} sm={12}>
-                        <Card elevation={0} style={{borderRadius: 0}}>
-                            <Tabs
-                                value={this.state.value}
-                                textColor={"primary"}
-                                indicatorColor={"primary"}
-                                variant={"scrollable"}
-                                onChange={this.handleChange}>
-                                <Tab className={classes.tabs} label='Profile' {...this.a11yProps(0)} />
-                                <Tab className={classes.tabs}  label='My adverts' {...this.a11yProps(1)} />
-                                <Tab className={classes.tabs}  label='All adverts' {...this.a11yProps(2)} />
-                                <Tab className={classes.tabs}  label='Cars' {...this.a11yProps(3)} />
-                            </Tabs>
-                            <Divider/>
-                        </Card>
+                        {
+                            this.props.loading
+                            ?
+                                (
+                                    <TabLoader/>
+                                )
+                            :
+                                (
+                                   <div>
+                                       { this.findTabForRole(this.props.users.relations.role[0].name)}
+                                   </div>
+                                )
+                        }
 
-                        <Card style={{borderRadius:0}} elevation={0}>
-                            <CardContent>
-                                <this.TabPanel value={this.state.value} index={0}>
-
-                                </this.TabPanel>
-
-                                <this.TabPanel value={this.state.value} index={1}>
-
-                                </this.TabPanel>
-
-                                <this.TabPanel value={this.state.value} index={2}>
-
-                                </this.TabPanel>
-                            </CardContent>
-                        </Card>
                     </Grid>
 
                 </Grid>
@@ -147,6 +127,7 @@ class UserProfile extends Component {
     }
 }
 const mapStateToProps = state=>({
+    user:state.userData.user,
     users:state.userData.showUser,
     loading:state.userData.showLoading
 })

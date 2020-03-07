@@ -1,5 +1,5 @@
 import {fade} from "@material-ui/core/styles";
-import {green} from "@material-ui/core/colors";
+import {green, grey} from "@material-ui/core/colors";
 
 const userStyle = theme=>({
     search: {
@@ -55,6 +55,38 @@ const userStyle = theme=>({
     },
     tabs:{
         textTransform:'none'
+    },
+    profileCard:{
+        backgroundColor:'#3C4252',
+        color:'white'
+    },
+    profileCardContent:{
+        display:'flex',flexDirection:'column',alignItems:'center'
+    },
+    profileContainer:{
+        display:'flex',flexDirection:'column'
+    },
+    profileRowCard:{
+        display:'flex',
+        flexDirection:'row',
+        marginTop:15
+    },
+    profileRowFirstLabel:{
+        color:grey[700],
+        display:'flex',
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        marginRight:15
+    },
+    profileRowSecondLabel:{
+        color:grey[600],
+    },
+    addressLabel:{
+        display:'flex',
+        flexDirection:"row",
+        justifyContent:"flex-start",
+        color:grey[700]
     }
 })
 

@@ -7,6 +7,14 @@ const adminAdvertStyle = theme=>({
     },
     tabs:{
         textTransform:'none'
+    },
+    newAdvertButton:{
+        textTransform:"none",
+        position:"fixed",
+        display:'flex',
+        [theme.breakpoints.down('xs')]:{
+            display: 'none'
+        }
     }
 })
 

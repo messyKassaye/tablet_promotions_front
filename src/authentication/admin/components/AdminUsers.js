@@ -14,7 +14,8 @@ import userStyle from "../../commons/style/usersStyle";
 import {connect} from "react-redux";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import UsersLoader from "../../commons/loading/UsersLoader";
-
+import Skeleton from "@material-ui/lab/Skeleton";
+import {grey} from "@material-ui/core/colors";
 class AdminUsers extends Component {
 
     constructor(props) {
@@ -128,6 +129,19 @@ class AdminUsers extends Component {
                           />
                           <Divider/>
                           <CardContent>
+                              <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end'}}>
+                                  {
+                                      this.props.loading
+                                      ?
+                                          (
+                                              <Skeleton variant={"text"} width={150} style={{backgroundColor:grey[500]}}/>
+                                          )
+                                      :
+                                          (
+                                              <Typography style={{color:grey[500]}}>{`${this.state.users.length} users`}</Typography>
+                                          )
+                                  }
+                              </div>
                               {
                                   this.props.loading||this.state.users.length<=0
                                   ?

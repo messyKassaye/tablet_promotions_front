@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Container,Grid,Chip,Box,Typography,IconButton,
-    Card,CardHeader,CardContent,Tab,Tabs,TableCell,Divider} from "@material-ui/core";
+    Card,CardHeader,CardContent,Tab,Tabs,TableCell,Divider,Button} from "@material-ui/core";
 import {fetchAdverts} from "../state/action/advertsAction";
 import {connect} from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -110,19 +110,6 @@ class AdminAdverts extends Component {
                 <Grid container spacing={2}>
 
                    <Grid item md={9} xs={12} sm={12}>
-                       <Grid item md={12} xs={12} sm={12}>
-                           <Card style={{marginBottom:20}}>
-                               <CardHeader
-                                   title='Adverts'
-                                   action={
-                                       <IconButton color='inherit' onClick={this.addNewAdvert}>
-                                           <AddIcon/>
-                                       </IconButton>
-                                   }
-                               />
-                           </Card>
-                       </Grid>
-
                        <Grid item md={12} xs={12} sm={12}>
 
                            <Card style={{borderRadius: 0}} elevation={0}>
@@ -244,6 +231,17 @@ class AdminAdverts extends Component {
                            </Card>
                        </Grid>
                    </Grid>
+
+                    <Grid item md={3}>
+                        <Button
+                            color={"primary"}
+                            variant={"outlined"}
+                            className={classes.newAdvertButton}
+                            onClick={this.addNewAdvert}
+                        >
+                            Add new advert
+                        </Button>
+                    </Grid>
                    </Grid>
             </Container>
         );

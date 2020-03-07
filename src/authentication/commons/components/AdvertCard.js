@@ -47,9 +47,9 @@ class AdvertCard extends Component {
     }
 
     identifyMedia = advert => {
-        if (advert.media.name === 'Video') {
+        if (advert.advert_media_type.name === 'Video') {
             return 'Play video'
-        } else if (advert.media.name === 'Audio') {
+        } else if (advert.advert_media_type.name === 'Audio') {
             return 'Play audio'
         } else {
             return 'Show image'
@@ -74,7 +74,7 @@ class AdvertCard extends Component {
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Media type</TableCell>
                                 <TableCell
-                                    className={classes.customTableCell}>{this.props.advert.media.name}</TableCell>
+                                    className={classes.customTableCell}>{this.props.advert.advert_media_type.name}</TableCell>
                             </TableRow>
 
 
@@ -87,7 +87,7 @@ class AdvertCard extends Component {
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Total payment</TableCell>
                                 <TableCell className={classes.customTableCell}>
-                                    {`${this.calculatePayment(this.props.advert.required_views_number, this.props.advert.media.per_view_payment).toLocaleString()} ETB`}
+                                    {`${this.calculatePayment(this.props.advert.required_views_number, this.props.advert.advert_media_type.per_view_payment).toLocaleString()} ETB`}
                                 </TableCell>
                             </TableRow>
 
