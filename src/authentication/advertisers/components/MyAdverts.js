@@ -136,7 +136,7 @@ class MyAdverts extends React.Component {
                     Pay now
                 </Button>
             </div>
-        } else if (advert.payment_status !== null && advert.status === 'on_advert') {
+        } else if (advert.payment_status.approved_by !==null && advert.status === 'on_progress') {
             return <div style={{display: 'flex', flexDirection: 'column'}}>
                 {
                     advert.media_path === 'not_assigned'

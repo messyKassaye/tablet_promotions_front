@@ -12,6 +12,7 @@ import {fetchCompanies} from "../state/action/adminCompaniesAction";
 import AdvertCard from "../../commons/components/AdvertCard";
 import SingleLoading from "../../commons/loading/SingleLoading";
 import {green} from "@material-ui/core/colors";
+import LoadingButton from "../../../home/components/widgets/LoadingButton";
 export const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
@@ -28,7 +29,10 @@ class AdminAdverts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value:0
+            value:0,
+            submitted: false,
+            loading: false,
+            finished: false,
         }
 
     }
@@ -89,7 +93,7 @@ class AdminAdverts extends Component {
 
     payedAndWaitingApprovalAdverts = (data)=>{
         const payedAndWaitingForApprovalAdverts = data.filter(advert=>{
-            return advert.payment !== null && advert.status==='on_progress'
+            return advert.payment !== null && advert.status==='on_progress' && advert.media_path!=='not_asigned'
         })
         return payedAndWaitingForApprovalAdverts
     }
@@ -105,6 +109,7 @@ class AdminAdverts extends Component {
 
     render() {
         const {classes,t} = this.props
+
         return (
             <Container maxWidth='md'>
                 <Grid container spacing={2}>
@@ -119,7 +124,7 @@ class AdminAdverts extends Component {
                                    indicatorColor={"primary"}
                                    variant={"scrollable"}
                                    onChange={this.handleChange}>
-                                   <Tab className={classes.tabs} label='New advert' {...this.a11yProps(0)} />
+                                   <Tab className={classes.tabs} label='Payed adverts' {...this.a11yProps(0)} />
                                    <Tab className={classes.tabs}  label='On air advert' {...this.a11yProps(1)} />
                                    <Tab className={classes.tabs}  label='Non-payed advert' {...this.a11yProps(2)} />
                                    <Tab className={classes.tabs}  label='Completed advert' {...this.a11yProps(3)} />
@@ -150,7 +155,7 @@ class AdminAdverts extends Component {
                                                                       this.payedAndWaitingApprovalAdverts(this.props.adverts)
                                                                           .map(advert=>(
                                                                               <Grid key={advert.id} item md={12} xs={12} sm={12}>
-                                                                                  <AdvertCard advert={advert}/>
+                                                                                  <AdvertCard advert={advert} action={true}/>
                                                                               </Grid>
                                                                           ))
                                                                   )
@@ -159,6 +164,7 @@ class AdminAdverts extends Component {
                                                                       <Typography color={"primary"}>No new advert is found ):</Typography>
                                                                   )
                                                           }
+
                                                       </Grid>
                                                    )
                                            }

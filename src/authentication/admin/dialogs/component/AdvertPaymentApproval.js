@@ -5,24 +5,17 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import {updateAdvert} from "../../state/action/advertsAction";
+import {updateAdvertPaymentTransaction} from "../../state/action/advertPaymentTransactionAction";
 import {showMainDialog} from "../../state/action/dialogAction";
 import {connect} from "react-redux";
 import LoadingButton from "../../../../home/components/widgets/LoadingButton";
-import {green} from "@material-ui/core/colors";
+import {green, grey} from "@material-ui/core/colors";
 class AdvertPaymentApproval extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            formData:{
-              'company_id':0,
-              'product_name':'',
-              'advertisement_media_type_id':0,
-                'is_all_over_ethiopia':0,
-                'media_path':'',
-                'status':'',
-                'require_views_number':0,
-            },
+
             submitted: false,
             loading: false,
             finished: false,
@@ -52,7 +45,7 @@ class AdvertPaymentApproval extends Component {
         formData['media_path']=this.props.advert.media_path
         formData['required_views_number']=this.props.advert.required_views_number
         this.setState(formData)
-        this.props.updateAdvert(formData,this.props.advert.id)
+        this.props.updateAdvertPaymentTransaction(this.props.advert.payment.id)
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.response.status) {
@@ -113,7 +106,7 @@ class AdvertPaymentApproval extends Component {
                 <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'center',marginTop:20}}>
 
                 {
-                    this.props.advert.status!=='on_advert'
+                    this.props.advert.payment.approved_by===null
                     ?
                         (
                             <div>
@@ -133,7 +126,14 @@ class AdvertPaymentApproval extends Component {
                         )
                     :
                         (
-                            <Typography color={"primary"}>Payment is approved</Typography>
+                            <div style={{display:'flex',flexDirection:'row'}}>
+                                <Typography color={"primary"}>
+                                    {`Payment is approved by: `}
+                                </Typography>
+                                <Typography style={{color:grey[500],marginLeft:15}}>
+                                    {`${this.props.advert.payment.approved_by.first_name} ${this.props.advert.payment.approved_by.last_name}`}
+                                </Typography>
+                            </div>
                         )
                 }
                 </div>
@@ -147,4 +147,4 @@ const mapStateToProps = state=>({
     user:state.userData.user
 })
 
-export default connect(mapStateToProps,{updateAdvert,showMainDialog})(AdvertPaymentApproval);
+export default connect(mapStateToProps,{updateAdvertPaymentTransaction,showMainDialog})(AdvertPaymentApproval);

@@ -69,6 +69,7 @@ class WithdrawalRequest extends Component {
     }
 
     render() {
+        const {withdraws} = this.props
         return (
             <Container maxWidth={"md"}>
                 <Card>

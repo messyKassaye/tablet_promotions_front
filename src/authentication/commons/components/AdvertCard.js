@@ -18,15 +18,32 @@ import {showMainDialog} from "../../admin/state/action/dialogAction";
 import {connect} from "react-redux";
 import MediaPlayer from "./MediaPlayer";
 import {Link} from "react-router-dom";
+import {me} from "../../state/actions/usersActions";
+import Skeleton from "@material-ui/lab/Skeleton";
+import LoadingButton from "../../../home/components/widgets/LoadingButton";
+import {updateAdvert} from "../../admin/state/action/advertsAction";
 
 class AdvertCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            play: false
+            play: false,
+            formData:{
+                'company_id':0,
+                'product_name':'',
+                'advertisement_media_type_id':0,
+                'is_all_over_ethiopia':0,
+                'media_path':'',
+                'status':'',
+                'require_views_number':0,
+            },
+            moveText:'Move to advert air',
+            moveVariant: 'contained'
         }
     }
-
+componentDidMount() {
+        this.props.me()
+}
 
     play = () => {
         this.setState({
@@ -56,15 +73,84 @@ class AdvertCard extends Component {
         }
     }
 
+    moveToAdvertAir = ()=>{
+        this.setState({
+            submitted:true,
+            loading:true
+        })
+        const {formData} = this.state
+        formData['status']='on_advert'
+        this.setState(formData)
+        console.log(formData)
+        this.props.updateAdvert(formData,this.props.advert.id)
+    }
+
+    mediaActions = ()=>{
+        const {loading} = this.state;
+        const {finished} = this.state
+        const setLoading = !finished && loading;
+        const isEnabled = true
+        return <div style={{display:'flex',flexDirection:'row'}}>
+            <Button
+                color={"secondary"}
+                variant={"outlined"}
+                style={{textTransform:'none'}}
+                size={"small"}
+            >
+                Cancel
+            </Button>
+            <LoadingButton
+                color="primary"
+                variant={this.state.moveVariant}
+                onClick={this.moveToAdvertAir}
+                disabled={!isEnabled || this.state.submitted}
+                loading={setLoading}
+                text={this.state.moveText}
+                done={finished}
+                size={'small'}
+                style={{textTransform:'none',marginLeft:15}}
+            >
+                {this.state.moveText}
+            </LoadingButton>
+        </div>
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.response.status){
+            this.setState({
+                submitted:false,
+                loading:false,
+                moveText:'Moved to advert air',
+                moveVariant:'outlined'
+            })
+        }
+    }
+
+
     render() {
         const {classes} = this.props
         return (
             <Card>
                 <CardHeader
-                    title={this.props.advert.product_name}
-                    subheader={<Typography component={Link}
-                                           style={{textDecoration: 'none', color: grey[500], fontSize: 14}}
-                                           to={`/auth/company/${this.props.advert.company.id}`}>{this.props.advert.company.name}</Typography>}
+                    title={
+                        <Typography
+                            className={classes.link}
+                            component={Link}
+                            to={
+                                this.props.loading
+                                ?
+                                    (<Skeleton variant={"text"} width={100} style={{backgroundColor:grey[500]}}/>)
+                                :
+                                    (
+                                        `/auth/${this.props.users.
+                                            relations.role[0].name.toLowerCase()}/advert/${this.props.advert.id}`
+                                    )
+                            }
+                        >
+                            {this.props.advert.product_name}
+                        </Typography>
+                    }
+                    subheader={<span>{this.props.advert.company.name}</span>}
                     avatar={<Avatar>{this.props.advert.product_name.charAt(0)}</Avatar>}
                     action={this.props.headerAction}
                 />
@@ -164,10 +250,29 @@ class AdvertCard extends Component {
                     }
 
 
+                    <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                        {
+                            this.state.play
+                            ?
+                                (
+                                    this.props.action
+                                    ?
+                                        (this.mediaActions())
+                                    :
+                                        (null)
+                                )
+                            :
+                                (null)
+                        }
+                    </CardActions>
                 </CardContent>
             </Card>
         );
     }
 }
-
-export default connect(null, {showMainDialog})(withStyles(advertCardStyle)(AdvertCard));
+const mapStateToProps = state=>({
+    users:state.userData.user,
+    loading:state.userData.loading,
+    response:state.authReducer.adminReducers.advertReducer.response
+})
+export default connect(mapStateToProps, {showMainDialog,me,updateAdvert})(withStyles(advertCardStyle)(AdvertCard));

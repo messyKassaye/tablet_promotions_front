@@ -2,7 +2,7 @@ import {COMMON_STORE_ADVERT_PAYMENT_TRANSACTION} from "../actionConstant/commonC
 import axios from 'axios'
 import {API_URL} from "../../../../constants/constants";
 
-const PATH = 'bank_transaction'
+const PATH = 'advert_payment_transaction'
 
 export const commonStoreBankTransaction = (data)=>dispatch=>{
     axios.post(`${API_URL}${PATH}`,data)

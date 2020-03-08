@@ -14,8 +14,8 @@ import Places from "./Places";
 import AdvertViewPayment from "../../commons/AdvertViewPayment";
 import WithdrawalRequest from "./WithdrawalRequest";
 import PayedWithdrawRequest from "./PayedWithdrawRequest";
-import Adverts from "../../commons/components/Adverts";
 import UserProfile from "../../commons/components/UserProfile";
+import AdvertProfile from "../../commons/components/AdvertProfile";
 
 class AdminNestedRoute extends Component {
     render() {
@@ -26,7 +26,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth/admin/user/:id' component={UserProfile}/>
 
                 <Route path={'/auth/admin/adverts'} component={AdminAdverts}/>
-                <Route path={'/auth/admin/advert/:id'} component={Adverts}/>
+                <Route path={'/auth/admin/advert/:id'} component={AdvertProfile}/>
 
                 <Route path='/auth/admin/banks' component={AdminBanks}/>
                 <Route path='/auth/admin/currency' component={Currency}/>
