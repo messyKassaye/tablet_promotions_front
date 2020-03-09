@@ -80,33 +80,33 @@ class AdvertPaymentApproval extends Component {
 
                         <TableRow>
                             <TableCell>Total payment</TableCell>
-                            <TableCell>{`${this.totalPayment(this.props.advert.required_views_number,this.props.advert.media.per_view_payment).toLocaleString()} ETB`}</TableCell>
+                            <TableCell>{`${this.totalPayment(this.props.advert.required_views_number,this.props.advert.advert_media_type.per_view_payment).toLocaleString()} ETB`}</TableCell>
                         </TableRow>
 
                         <TableRow>
                             <TableCell>Payed via:</TableCell>
-                            <TableCell>{this.props.advert.payment.bank.bank_name}</TableCell>
+                            <TableCell>{this.props.advert.payment_status.bank.bank_name}</TableCell>
                         </TableRow>
 
                         <TableRow>
                             <TableCell>Payer name:</TableCell>
-                            <TableCell>{this.props.advert.payment.deposited_by_name}</TableCell>
+                            <TableCell>{this.props.advert.payment_status.deposited_by_name}</TableCell>
                         </TableRow>
 
                         <TableRow>
                             <TableCell>Transaction ref number</TableCell>
-                            <TableCell>{this.props.advert.payment.transaction_ref_number}</TableCell>
+                            <TableCell>{this.props.advert.payment_status.transaction_ref_number}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
                 <div style={{display:'flex',flexDirection:'column',justifyContent:'center'}}>
                     <Typography>Receipt image</Typography>
-                    <img src={this.props.advert.payment.receipt_image}/>
+                    <img src={this.props.advert.payment_status.receipt_image}/>
                 </div>
                 <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'center',marginTop:20}}>
 
                 {
-                    this.props.advert.payment.approved_by===null
+                    this.props.advert.payment_status.approved_by===null
                     ?
                         (
                             <div>
@@ -131,7 +131,7 @@ class AdvertPaymentApproval extends Component {
                                     {`Payment is approved by: `}
                                 </Typography>
                                 <Typography style={{color:grey[500],marginLeft:15}}>
-                                    {`${this.props.advert.payment.approved_by.first_name} ${this.props.advert.payment.approved_by.last_name}`}
+                                    {`${this.props.advert.payment_status.approved_by.first_name} ${this.props.advert.payment_status.approved_by.last_name}`}
                                 </Typography>
                             </div>
                         )

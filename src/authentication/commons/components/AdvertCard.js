@@ -73,15 +73,14 @@ componentDidMount() {
         }
     }
 
-    moveToAdvertAir = ()=>{
+    moveToAdvertAir = (status)=>{
         this.setState({
             submitted:true,
             loading:true
         })
         const {formData} = this.state
-        formData['status']='on_advert'
+        formData['status']=status
         this.setState(formData)
-        console.log(formData)
         this.props.updateAdvert(formData,this.props.advert.id)
     }
 
@@ -102,7 +101,7 @@ componentDidMount() {
             <LoadingButton
                 color="primary"
                 variant={this.state.moveVariant}
-                onClick={this.moveToAdvertAir}
+                onClick={()=>this.moveToAdvertAir('on_advert')}
                 disabled={!isEnabled || this.state.submitted}
                 loading={setLoading}
                 text={this.state.moveText}
@@ -114,6 +113,26 @@ componentDidMount() {
             </LoadingButton>
         </div>
     }
+    cancelAction = ()=>{
+        const {loading} = this.state;
+        const {finished} = this.state
+        const setLoading = !finished && loading;
+        const isEnabled = true
+
+     return   <LoadingButton
+            color="secondary"
+            variant={'outlined'}
+            onClick={()=>this.moveToAdvertAir('cancel')}
+            disabled={!isEnabled || this.state.submitted}
+            loading={setLoading}
+            text={'Cancel'}
+            done={finished}
+            size={'small'}
+            style={{textTransform:'none',marginLeft:15}}
+        >
+            Cancel
+        </LoadingButton>
+    }
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.response.status){
@@ -123,6 +142,7 @@ componentDidMount() {
                 moveText:'Moved to advert air',
                 moveVariant:'outlined'
             })
+            window.location.reload()
         }
     }
 
@@ -160,27 +180,39 @@ componentDidMount() {
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Media type</TableCell>
                                 <TableCell
-                                    className={classes.customTableCell}>{this.props.advert.advert_media_type.name}</TableCell>
+                                    className={classes.customTableCell}>
+                                    <Typography color={"primary"}>
+                                        {this.props.advert.advert_media_type.name}
+                                    </Typography>
+                                </TableCell>
                             </TableRow>
 
 
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Expected play</TableCell>
-                                <TableCell
-                                    className={classes.customTableCell}>{this.props.advert.required_views_number.toLocaleString()}</TableCell>
+                                <TableCell className={classes.customTableCell}>
+                                    <Typography color={"primary"}>
+                                        {this.props.advert.required_views_number.toLocaleString()}
+                                    </Typography>
+                                </TableCell>
                             </TableRow>
 
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Total payment</TableCell>
                                 <TableCell className={classes.customTableCell}>
-                                    {`${this.calculatePayment(this.props.advert.required_views_number, this.props.advert.advert_media_type.per_view_payment).toLocaleString()} ETB`}
+                                    <Typography color={"primary"}>
+                                        {`${this.calculatePayment(this.props.advert.required_views_number, this.props.advert.advert_media_type.per_view_payment).toLocaleString()} ETB`}
+                                    </Typography>
                                 </TableCell>
                             </TableRow>
 
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Current views</TableCell>
-                                <TableCell
-                                    className={classes.customTableCell}>{this.props.advert.views.length}</TableCell>
+                                <TableCell className={classes.customTableCell}>
+                                    <Typography color={"primary"}>
+                                        {this.props.advert.views.toLocaleString()}
+                                    </Typography>
+                                </TableCell>
                             </TableRow>
 
                             <TableRow>
@@ -252,17 +284,27 @@ componentDidMount() {
 
                     <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                         {
-                            this.state.play
+                            this.state.play && this.props.action
                             ?
                                 (
-                                    this.props.action
-                                    ?
-                                        (this.mediaActions())
-                                    :
-                                        (null)
+                                    this.mediaActions()
                                 )
                             :
-                                (null)
+                                (
+                                    null
+                                )
+                        }
+
+                        {
+                            this.state.play && this.props.cancelAction
+                                ?
+                                (
+                                    this.cancelAction()
+                                )
+                                :
+                                (
+                                    null
+                                )
                         }
                     </CardActions>
                 </CardContent>

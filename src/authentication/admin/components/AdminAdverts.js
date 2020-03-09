@@ -193,7 +193,12 @@ class AdminAdverts extends Component {
                                                                            <Grid key={advert.id} item md={12} xs={12} sm={12}>
                                                                                <AdvertCard
                                                                                    advert={advert}
-                                                                                   headerAction={<Chip label={'On air'} size={"small"} style={{backgroundColor:green[500],color:'white'}}/>}/>
+                                                                                   cancelAction={true}
+                                                                                   headerAction={<Chip
+                                                                                       label={'On air'}size={"small"}
+                                                                                       style={{backgroundColor:green[500],
+                                                                                           color:'white'}}/>
+                                                                                   }/>
                                                                            </Grid>
                                                                        ))
                                                                )

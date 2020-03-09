@@ -11,22 +11,16 @@ import {
     Tabs,
     Typography
 } from "@material-ui/core";
-import VideocamIcon from '@material-ui/icons/Videocam'
 import {connect} from "react-redux";
-import SingleLoading from "../loading/SingleLoading";
-import AdvertCard from "./AdvertCard";
-import {show} from "../../advertisers/state/action/advertAction";
-import DriverTab from "./widgets/DriverTab";
-import AdvertiserTab from "./widgets/AdvertiserTab";
 import withStyles from "@material-ui/core/styles/withStyles";
 import userStyle from "../style/usersStyle";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {grey} from "@material-ui/core/colors";
-import default_avator from "../../../assets/default_avator.jpg";
 import TabLoader from "../loading/TabLoader";
-import ProfileTab from "./widgets/ProfileTab";
-import CompanyCard from "./CompanyCard";
-import ActionTab from "./widgets/ActionTab";
+import AdvertProfileTab from "./widgets/AdvertProfileTab";
+import AdvertViewTab from "./widgets/advertViewTab";
+import {commonShowAdvert} from "../state/actions/commonAdvertAction";
+
 class AdvertProfile extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +32,7 @@ class AdvertProfile extends Component {
 
     componentDidMount() {
         let id = this.props.match.params.id
-        this.props.show(id)
+        this.props.commonShowAdvert(id)
     }
 
     handleChange = (event, newValue) => {
@@ -138,10 +132,11 @@ class AdvertProfile extends Component {
                                           <Card style={{borderRadius:0}} elevation={0}>
                                               <CardContent>
                                                   <this.TabPanel value={this.state.value} index={0}>
+                                                   <AdvertProfileTab advert={this.props.adverts}/>
                                                   </this.TabPanel>
 
                                                   <this.TabPanel value={this.state.value} index={1}>
-
+                                                    <AdvertViewTab advert={this.props.adverts}/>
                                                   </this.TabPanel>
 
                                                   <this.TabPanel value={this.state.value} index={2}>
@@ -162,9 +157,9 @@ class AdvertProfile extends Component {
 }
 
 const mapStateToProps = state=>({
-    adverts: state.authReducer.advertisersReducers.advertData.adverts,
-    loading: state.authReducer.advertisersReducers.advertData.showLoading
+    adverts: state.authReducer.commonReducer.commonAdvertsReducer.advert,
+    loading: state.authReducer.commonReducer.commonAdvertsReducer.loading
 })
 
-export default connect(mapStateToProps,{show})
+export default connect(mapStateToProps,{commonShowAdvert})
 (withStyles(userStyle)(AdvertProfile));

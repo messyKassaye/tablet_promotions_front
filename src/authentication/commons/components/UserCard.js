@@ -56,12 +56,20 @@ class UserCard extends Component {
                         <TableBody>
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Email</TableCell>
-                                <TableCell className={classes.customTableCell}>{this.props.user.email}</TableCell>
+                                <TableCell className={classes.customTableCell}>
+                                   <Typography color={"primary"}>
+                                       {this.props.user.email}
+                                   </Typography>
+                                </TableCell>
                             </TableRow>
 
                             <TableRow>
                                 <TableCell className={classes.tableCell}>Phone</TableCell>
-                                <TableCell className={classes.customTableCell}>{this.props.user.phone}</TableCell>
+                                <TableCell className={classes.customTableCell}>
+                                    <Typography color={"primary"}>
+                                        {this.props.user.phone}
+                                    </Typography>
+                                </TableCell>
                             </TableRow>
 
                         </TableBody>

@@ -1,10 +1,12 @@
-import {COMMON_STORE_ADVERT} from "../actionConstant/commonConstatnts";
+import {COMMON_SHOW_ADVERT, COMMON_STORE_ADVERT} from "../actionConstant/commonConstatnts";
 
 const initialState = {
+    advert:{},
+    loading:true,
     response:{
         status:false,
         message:'',
-        data:{}
+        data:{},
     }
 }
 
@@ -14,6 +16,12 @@ export default function (state=initialState,action) {
             return{
                 ...state,
                 response: action.payload
+            }
+        case COMMON_SHOW_ADVERT:
+            return {
+                ...state,
+                loading:false,
+                advert:action.payload
             }
 
         default:
