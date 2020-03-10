@@ -90,7 +90,7 @@ class MainDialog extends Component {
             <Dialog
                 maxWidth={this.props.showData.maxWidth}
                 style={{top:5}}
-                fullScreen={this.state.fullScreen}
+                fullScreen={this.state.fullScreen||this.props.showData.fullScreen}
                 disableBackdropClick={true}
                 open={this.props.showData.show}
                 scroll='paper'
