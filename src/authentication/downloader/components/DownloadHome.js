@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {setPlace} from "../state/action/PivotAction";
+import {setPlace} from "../state/action/AddressAction";
 import {Card, CardContent, Container, Typography} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {green} from "@material-ui/core/colors";
@@ -34,7 +34,7 @@ class DownloadHome extends Component {
                                         )
                                     :
                                         (
-                                            <Card style={{backgroundColor:green[500],color:'white'}}>
+                                            <Card style={{backgroundColor:green[500],color:'white',marginBottom:20}}>
                                                 <CardContent className={classes.setPlace}>
                                                     <Typography>{`Hello, ${this.props.user.attribute.first_name}
                                                      ${this.props.user.attribute.last_name} Welcome to Tablet advertising. You are registered as File downloader and we appreciate that but, before starting download of our file first you have to set your locations or where you leave`}

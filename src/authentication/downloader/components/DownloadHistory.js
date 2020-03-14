@@ -8,8 +8,7 @@ class DownloadHistory extends Component {
            <Card style={{marginTop:20}}>
                     <CardHeader
                      title={'Your download history'}
-                     avatar={<GetAppIcon/>}
-                     style={{backgroundColor:'#3C4252',color:'white'}}
+                     avatar={<GetAppIcon color={"inherit"}/>}
                     />
                     <Divider/>
                     <CardContent>

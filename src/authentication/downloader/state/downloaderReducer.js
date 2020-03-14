@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import PivotReducer from "./reducer/PivotReducer";
 import DownloadReducer from "./reducer/FileHandlerReducer";
+import AddressReducer from "./reducer/AddressReducer";
 
 export default combineReducers({
-    pivotsReducer:PivotReducer,
+    addressReducers:AddressReducer,
     downloadsReducer:DownloadReducer
 })

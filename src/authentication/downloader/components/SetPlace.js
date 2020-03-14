@@ -12,7 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import SetPlaceStyle from "./styles/setPlaceStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import {setPlace} from "../state/action/PivotAction";
+import {setPlace} from "../state/action/AddressAction";
 import {commonFetchAdvertPlaces} from "../../commons/state/actions/commonAdvertPlacesAction";
 import {green, grey} from "@material-ui/core/colors";
 import LoadingButton from "../../../home/components/widgets/LoadingButton";
@@ -167,7 +167,7 @@ class SetPlace extends Component {
 const mapStateToProps = state=>({
     places:state.authReducer.commonReducer.commonAdvertPlacesReducer.advertPlaces,
     loading:state.authReducer.commonReducer.commonAdvertPlacesReducer.loading,
-    response:state.authReducer.downloaderReducers.pivotsReducer.response
+    response:state.authReducer.downloaderReducers.addressReducers.response
 })
 
 export default connect(mapStateToProps,{commonFetchAdvertPlaces,setPlace})(withStyles(SetPlaceStyle)(SetPlace));

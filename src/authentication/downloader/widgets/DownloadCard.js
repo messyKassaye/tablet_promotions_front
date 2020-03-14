@@ -69,7 +69,7 @@ class DownloadCard extends Component {
         const isEnabled = true
 
         return (
-            <Card style={{backgroundColor:green[500],color:'white'}}>
+            <Card style={{backgroundColor:'#3C4252',color:'white'}}>
                 <CardHeader
                     title={'New download'}
                     avatar={<GetAppIcon/>}
