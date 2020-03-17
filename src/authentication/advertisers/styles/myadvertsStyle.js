@@ -97,6 +97,13 @@ const myAdvertStyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             display:'none'
         }
+    },
+    link:{
+        textDecoration:'none',
+        color:'inherit',
+        "&:hover": {
+            textDecoration: "underline"
+        },
     }
 })
 

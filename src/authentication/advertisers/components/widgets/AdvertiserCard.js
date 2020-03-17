@@ -51,15 +51,11 @@ class AdvertiserCard extends Component {
 
     totalAdvertDeposit = (data) => {
         let totalDeposit = 0;
-      data.filter(adverts => {
-          return adverts.status === 'on_advert'
-      }).map(company=>{
-            company.adverts.map(advert=>{
-                totalDeposit += advert.advert_media_type.per_view_payment * advert.required_views_number
-            })
-        })
-        return totalDeposit
+     data.map(company=>company.adverts.map(advert=>{
+         totalDeposit += advert.advert_media_type.per_view_payment * advert.required_views_number
+     }))
 
+       return totalDeposit
     }
     render() {
         return (
@@ -110,7 +106,8 @@ class AdvertiserCard extends Component {
                                         chartBackgroundColor={green[500]}
                                         cardBackgroundColor={deepPurple[600]}
                                         textColor={'white'}
-                                        title={`${this.totalAdvertDeposit(this.props.user.relations.companies).toLocaleString()} ETB`}
+                                        title={`${this.totalAdvertDeposit(this.props.user.relations.companies)
+                                            .toLocaleString()} ETB`}
                                         subheader={'Total advert budget'}
                                     />
                                 </Grid>

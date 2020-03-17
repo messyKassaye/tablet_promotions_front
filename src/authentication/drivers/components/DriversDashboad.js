@@ -27,7 +27,6 @@ import Typography from "@material-ui/core/Typography";
 import RouteIndicator from "../../commons/RouteIndicator";
 import Dashboard from "./Dashboard";
 import logo_2 from '../../../assets/logo_2.png'
-import AdvertBox from "./widgets/AdvertBox";
 import {grey} from "@material-ui/core/colors";
 import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -104,9 +103,6 @@ class DriversDashboard extends React.Component {
                     </List>
                 </div>
                 <Divider/>
-                <div>
-                    <AdvertBox/>
-                </div>
             </div>
         )
         return (

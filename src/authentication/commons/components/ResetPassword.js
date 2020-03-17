@@ -92,6 +92,7 @@ class ResetPassword extends Component {
                                     label={'New password'}
                                     value={this.state.formData.password}
                                     onChange={this.handleChange}
+                                    type={'password'}
                                     className={classes.textInput}
                                 />
 
@@ -100,6 +101,7 @@ class ResetPassword extends Component {
                                     label={'Confirm password'}
                                     value={this.state.formData.password_confirmation}
                                     onChange={this.handleChange}
+                                    type={'password'}
                                     className={classes.textInput}
                                 />
 
@@ -110,6 +112,7 @@ class ResetPassword extends Component {
                                     disabled={!isEnabled || this.state.submitted}
                                     loading={setLoading}
                                     text={'Change password'}
+                                    style={{textTransform:'none'}}
                                     done={finished}
                                 >
                                     {

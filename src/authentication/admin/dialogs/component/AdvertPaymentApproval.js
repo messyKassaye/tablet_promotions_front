@@ -20,7 +20,10 @@ class AdvertPaymentApproval extends Component {
             loading: false,
             finished: false,
             message:'',
-            messageColor:'black'
+            messageColor:'black',
+            formData:{
+                status:''
+            }
         }
     }
 
@@ -37,15 +40,9 @@ class AdvertPaymentApproval extends Component {
         })
 
         const {formData} = this.state
-        formData['company_id'] = this.props.advert.company_id
         formData['status']='on_advert'
-        formData['product_name']=this.props.advert.product_name
-        formData['advertisement_media_type_id'] = this.props.advert.advertisement_media_type_id
-        formData['is_all_over_ethiopia']=this.props.advert.is_all_over_ethiopia
-        formData['media_path']=this.props.advert.media_path
-        formData['required_views_number']=this.props.advert.required_views_number
         this.setState(formData)
-        this.props.updateAdvertPaymentTransaction(this.props.advert.payment.id)
+        this.props.updateAdvertPaymentTransaction(this.props.advert.payment_status.id)
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.response.status) {

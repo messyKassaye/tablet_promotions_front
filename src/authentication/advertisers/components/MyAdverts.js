@@ -293,7 +293,15 @@ class MyAdverts extends React.Component {
                                                                                                           key={advert.id}>
                                                                                                         <Card style={{marginTop:20}}>
                                                                                                             <CardHeader
-                                                                                                                title={advert.product_name}
+                                                                                                                title={
+                                                                                                                    <Typography
+                                                                                                                        className={classes.link}
+                                                                                                                     component={Link}
+                                                                                                                     to={`/auth/${this.props.user.relations.role[0].name}/advert/${advert.id}`}
+                                                                                                                    >
+                                                                                                                        {advert.product_name}
+                                                                                                                    </Typography>
+                                                                                                                }
                                                                                                                 subheader={<span
                                                                                                                 >{`${advert.views.length} views`}</span>}
                                                                                                                 avatar={<Avatar

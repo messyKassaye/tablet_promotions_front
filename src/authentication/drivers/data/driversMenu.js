@@ -33,11 +33,6 @@ const driverMenu = [
         icon:<AttachMoneyIcon/>
     },
     {
-        name:'Ekub',
-        route:'/auth/ekub',
-        icon:<EventIcon/>
-    },
-    {
         name:'Settings',
         route:'/auth/settings',
         icon:<SettingIcon/>

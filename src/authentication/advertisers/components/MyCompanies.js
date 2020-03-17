@@ -23,6 +23,7 @@ import NewCompany from "./NewCompany";
 import AddNewAdvert from "../../commons/components/AddNewAdvert";
 import Skeleton from "@material-ui/lab/Skeleton";
 import BusinessIcon from '@material-ui/icons/Business';
+import CompanyCard from "./widgets/CompanyCard";
 class MyCompanies extends React.Component{
 
     constructor(props) {
@@ -159,26 +160,9 @@ class MyCompanies extends React.Component{
                                                                                  avatar={<Avatar>{company.name[0]}</Avatar>}
                                                                              />
                                                                              <Divider/>
-                                                                             <CardContent>
+                                                                             <CardContent style={{padding:0}}>
                                                                                  {
-                                                                                     <Card elevation={0}>
-                                                                                         <CardContent>
-                                                                                             <Typography>{`Phone : ${company.phone}`}</Typography>
-                                                                                             <Typography>Website: <a href={company.website} >{company.website}</a>
-                                                                                             </Typography>
-                                                                                             <div style={{display:'flex',marginTop:15,flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
-                                                                                                 <Typography>{`Total adverts: ${company.adverts.length}`}</Typography>
-                                                                                                 <Button
-                                                                                                     color='secondary'
-                                                                                                     size='small'
-                                                                                                     variant='outlined'
-                                                                                                     disabled={company.adverts.length<=0}
-                                                                                                     style={{textTransform:'none',marginLeft:10}}>
-                                                                                                     show all
-                                                                                                 </Button>
-                                                                                             </div>
-                                                                                         </CardContent>
-                                                                                     </Card>
+                                                                                     <CompanyCard company={company}/>
                                                                                  }
                                                                              </CardContent>
                                                                              <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',color:'white'}}>
