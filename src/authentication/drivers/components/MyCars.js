@@ -23,6 +23,8 @@ import {sentDialogValue} from "../state/actions/dialogActions";
 import Cars from "./widgets/Cars";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {translate} from "react-i18next";
+import DirectionsCarIcon from '@material-ui/icons/DirectionsCar'
+
 class MyCars extends React.Component {
 
     constructor(props) {
@@ -122,45 +124,58 @@ class MyCars extends React.Component {
                 <this.TabPanel value={this.state.value} index={1}>
                     {
                         this.props.loading ?
-                            (<Skeleton variant='rect' width={200} height={100}/>)
+                            (<Skeleton variant='rect' width={200} height={200}/>)
                             :
                            ( this.props.categories.map(items => (
                                 <div key={items.id} className={classes.root}>
-                                    <Card>
+                                    <Card style={{borderRadius:0,marginBottom:20}}>
                                         <CardHeader
-                                            style={{backgroundColor:deepOrange[500],color:"white"}}
                                             title={items.name}
+                                            avatar={<DirectionsCarIcon/>}
                                         />
                                     </Card>
                                     {
-                                        <Grid container  spacing={3}>
-                                            {
-                                                items.child.map(child => (
-                                                    <Grid key={child.id} item md={6} xs={12}>
-                                                        <Card>
-                                                            <CardHeader
-                                                                avatar={
-                                                                    <Avatar style={{backgroundColor: red[500]}}>
-                                                                        {child.name[0]}
-                                                                    </Avatar>
-                                                                }
-                                                                title={child.name}
-                                                                subheader={items.name}
-                                                            />
-                                                            <CardMedia style={{height: 10, paddingTop: '56%'}}
-                                                                       image={child.image}
-                                                            />
-                                                            <CardContent>
-                                                                <Typography variant="body2" color="textSecondary"
-                                                                            component="p">
-                                                                    {child.description}
-                                                                </Typography>
-                                                            </CardContent>
-                                                        </Card>
-                                                    </Grid>
-                                                ))
-                                            }
-                                        </Grid>
+                                        items.child.length>0
+                                        ?
+                                            (
+                                                <Grid container  spacing={3}>
+                                                    {
+                                                        items.child.map(child => (
+
+                                                            <Grid key={child.id} item md={6} xs={12}>
+                                                                <Card>
+                                                                    <CardHeader
+                                                                        avatar={
+                                                                            <Avatar style={{backgroundColor: red[500]}}>
+                                                                                {child.name[0]}
+                                                                            </Avatar>
+                                                                        }
+                                                                        title={child.name}
+                                                                        subheader={items.name}
+                                                                    />
+                                                                    <CardMedia style={{height: 10, paddingTop: '56%'}}
+                                                                               image={child.image}
+                                                                    />
+                                                                    <CardContent>
+                                                                        <Typography variant="body2" color="textSecondary"
+                                                                                    component="p">
+                                                                            {child.description}
+                                                                        </Typography>
+                                                                    </CardContent>
+                                                                </Card>
+                                                            </Grid>
+                                                        ))
+                                                    }
+                                                </Grid>
+                                            )
+                                        :
+                                            (
+                                               <div style={{display:"flex",flexDirection:'column',alignItems:'center'}}>
+                                                   <Typography color={"primary"}>
+                                                       {`There is now registered car under ${items.name}`}
+                                                   </Typography>
+                                               </div>
+                                            )
                                     }
                                 </div>
                             )))
