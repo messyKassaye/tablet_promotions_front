@@ -6,6 +6,7 @@ import {deepOrange, deepPurple, green} from "@material-ui/core/colors";
 import {connect} from "react-redux";
 import {fetchUsers} from "../../state/action/adminUsersAction";
 import {fetchAdverts} from "../../state/action/advertsAction";
+import {Link} from "react-router-dom";
 class AdvertsCard extends Component {
     constructor(props) {
         super(props);
@@ -52,9 +53,15 @@ class AdvertsCard extends Component {
                                 :
                                 (
                                     <Grid container spacing={2}>
-                                        <Grid item md={4} xs={12} sm={12}>
+                                        <Grid
+                                            component={Link}
+                                            to={`/auth/admin/adverts`}
+                                            style={{textDecoration:'none'}}
+                                            item
+                                            md={4} xs={12} sm={12}>
                                             <Card style={{backgroundColor:green[500],color:'white'}}>
                                                 <CardHeader
+
                                                     title={this.advertInType(this.props.adverts,'on_progress')}
                                                     subheader={<span style={{color:'white'}}>New advert</span>}
                                                 />

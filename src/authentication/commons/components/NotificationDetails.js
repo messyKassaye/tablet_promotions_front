@@ -56,8 +56,9 @@ class NotificationDetails extends Component {
                 to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/${notification.path}`}
                 color='primary'
                 variant='outlined'
+                style={{textTransform:'none'}}
                 size='small'>
-                Go to uploading
+                Go to advert
             </Button>
             case 2:
                 return <Button
@@ -65,6 +66,7 @@ class NotificationDetails extends Component {
                     to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/${notification.path}`}
                     color='primary'
                     variant='outlined'
+                    style={{textTransform:'none'}}
                     size='small'>
                     show advert
                 </Button>
