@@ -16,6 +16,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import finacePayment from "../../style/financePayment";
 import Payment from "./smallDevices/Payment";
+import {translate} from "react-i18next";
 const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
@@ -35,7 +36,7 @@ const columns = [
     },
     {
         id:'amount',
-        minWidth: 100,
+        minWidth: 150,
         label: 'Amount',
         align:'right',
         format: value => value.toLocaleString(),
@@ -56,13 +57,13 @@ const columns = [
     },
     {
         id:'week',
-        minWidth: 100,
+        minWidth: 150,
         label: 'Week',
         align:'right',
         format: value => value.toLocaleString(),
     },
     {
-        id:'detail',
+        id:'action',
         minWidth: 170,
         label: 'Actions',
         align:'right',
@@ -81,7 +82,7 @@ class FinancePayments extends React.Component{
     }
 
     render() {
-        const {classes} = this.props
+        const {classes,t} = this.props
         return (
             <div>
                 {
@@ -103,7 +104,7 @@ class FinancePayments extends React.Component{
                             <div className={classes.big_device}>
                                 <Card elevation={0}>
                                     <CardHeader
-                                        title='Your Payments'
+                                        title={`${t('driver.finance.payments.title')}`}
                                     />
                                     <CardContent style={{overflow:'auto',maxHeight:250}}>
 
@@ -116,7 +117,7 @@ class FinancePayments extends React.Component{
                                                                 align={column.align}
                                                                 style={{ minWidth: column.minWidth }}
                                                             >
-                                                                {column.label}
+                                                                {`${t(`driver.finance.payments.table.${column.id}`)}`}
                                                             </StyledTableCell>
                                                         ))}
                                                     </TableRow>
@@ -181,4 +182,5 @@ const mapStateToProps = state=>(
     }
 )
 
-export default connect(mapStateToProps,{paymentFetch})(withStyles(finacePayment)(FinancePayments))
+export default translate("common")
+(connect(mapStateToProps,{paymentFetch})(withStyles(finacePayment)(FinancePayments)))

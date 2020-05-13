@@ -36,7 +36,7 @@ class TotalAds extends React.Component{
                         {
                             cars.map(car=>(
                                 <Grid key={car.id} item md={6} xs={12}>
-                                    <Card className={classes.card}>
+                                    <Card>
                                         <CardHeader
                                          title={`${t('driver.adverts.total.plate_number')}: ${car.plate_number}`}
                                         />

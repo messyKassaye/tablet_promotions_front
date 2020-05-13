@@ -18,7 +18,7 @@ import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import {showBankAccountSetterModal} from "../../state/actions/dialogActions";
 import {showWithdrawalRequestDialog} from "../../state/actions/dialogActions";
-
+import {translate} from "react-i18next";
 const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',
@@ -94,7 +94,7 @@ class FinanceWithdrawal extends React.Component{
     }
 
     render() {
-        const {classes} = this.props
+        const {classes,t} = this.props
         return (
             <div>
                 {
@@ -111,14 +111,14 @@ class FinanceWithdrawal extends React.Component{
                         (
                             <Card elevation={0}>
                                 <CardHeader
-                                    title='Your withdrawal request'
+                                    title={`${t('driver.finance.withdraws.title')}`}
                                     action={
                                         <Button
                                             onClick={this.showWithdrawalDialog}
                                             variant='contained'
                                             color='primary'
                                             style={{textTransform:'capitalize'}}>
-                                            New request
+                                            {`${t('driver.finance.withdraws.new_request')}`}
                                         </Button>
                                     }
                                 />
@@ -132,7 +132,7 @@ class FinanceWithdrawal extends React.Component{
                                                            align={column.align}
                                                            style={{ minWidth: column.minWidth }}
                                                        >
-                                                           {column.label}
+                                                           {`${t(`driver.finance.withdraws.table.${column.id}`)}`}
                                                        </StyledTableCell>
                                                    ))}
                                                </TableRow>
@@ -195,5 +195,6 @@ const mapStateToProps = state=>({
 
 })
 
-export default withStyles(financeWithdrawalStyle)
-(connect(mapStateToProps,{withdrawalFetch,showWithdrawalRequestDialog,showBankAccountSetterModal})(FinanceWithdrawal))
+export default translate('common')
+(withStyles(financeWithdrawalStyle)
+(connect(mapStateToProps,{withdrawalFetch,showWithdrawalRequestDialog,showBankAccountSetterModal})(FinanceWithdrawal)))

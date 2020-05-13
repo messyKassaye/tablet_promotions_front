@@ -12,6 +12,7 @@ import FinanceDashboard from "./widgets/financeDashboard";
 import FinancePayments from "./widgets/financePayments";
 import FinanceWithdrawal from "./widgets/financeWithdrawal";
 import CardContent from "@material-ui/core/CardContent";
+import {translate} from "react-i18next";
 class Finances extends React.Component{
 
     constructor(props) {
@@ -58,7 +59,7 @@ class Finances extends React.Component{
     }
 
     render() {
-        const {classes} = this.props
+        const {classes,t} = this.props
         return (
             <div>
                 {
@@ -77,9 +78,9 @@ class Finances extends React.Component{
 
                                         value={this.state.value}
                                         onChange={this.handleChange}>
-                                        <Tab className={classes.tabs} label='Dashboard' {...this.a11yProps(0)} />
-                                        <Tab className={classes.tabs}  label='Payments' {...this.a11yProps(1)} />
-                                        <Tab className={classes.tabs}  label='Withdrawal' {...this.a11yProps(2)} />
+                                        <Tab className={classes.tabs} label={`${t('driver.finance.dashboard')}`} {...this.a11yProps(0)} />
+                                        <Tab className={classes.tabs}  label={`${t('driver.finance.payment')}`} {...this.a11yProps(1)} />
+                                        <Tab className={classes.tabs}  label={`${t('driver.finance.withdraw')}`} {...this.a11yProps(2)} />
 
                                     </Tabs>
                                 </Card>
@@ -113,4 +114,5 @@ const mapStateToProps = state=>({
     loading: state.authReducer.banksReducer.loading
 })
 
-export default withStyles(myCarStyle)(connect(mapStateToProps,{bankFetch})(Finances))
+export default translate('common')
+(withStyles(myCarStyle)(connect(mapStateToProps,{bankFetch})(Finances)))

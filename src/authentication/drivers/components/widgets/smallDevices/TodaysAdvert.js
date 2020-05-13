@@ -60,11 +60,11 @@ class TodaysAdvert extends React.Component{
                         {
                            cars.map(items=>(
                                <Grid item md={6} xs={12} key={items.plate_number}>
-                                   <Card style={{backgroundColor:'#31418F',color:'white'}}>
+                                   <Card>
                                        <CardHeader
                                            title={<Typography variant='h6' gutterBottom>{`${t('driver.adverts.today.plate_number')}: ${items.plate_number}`}</Typography>}
                                        />
-                                       <Divider style= {{backgroundColor:'#31228F'}}/>
+                                       <Divider/>
                                        <CardContent>
                                            {
                                                items.adverts.length<=0

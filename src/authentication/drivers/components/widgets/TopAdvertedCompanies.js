@@ -81,33 +81,13 @@ class TopAdvertedCompanies extends React.Component{
                                                     <Divider/>
                                                     <CardContent>
                                                         {
-                                                            <Typography style={{color:"white"}} variant="body2" color="textSecondary" component="p">
-                                                                {`${t('driver.top_adverted_companies.total_advert')} : ${this.filterAdvertNumbers(this.props.user.relations.cars,items[0])}`}
+                                                            <Typography>
+                                                                ${`Total advert: ${this.filterAdvertNumbers(this.props.user.relations.cars,items[0])}`}}
                                                             </Typography>
                                                         }
                                                     </CardContent>
                                                 </Card>
-                                                /*<div key={items['0']} className={classes.inner_card}>
-                                                    <div>
-                                                        <div style={{display:'flex',flexDirection:'row'}}>
-                                                            <Typography style={{display:'flex',alignItems:'center',marginRight:5}} variant="body2" color="textSecondary" component="p">
-                                                                name :
-                                                            </Typography>
-                                                            <Typography gutterBottom variant="h5" component="h2">
-                                                                {items['0']}
-                                                            </Typography>
-                                                        </div>
-                                                        <div style={{display:'flex',flexDirection:'row'}}>
-                                                            <Typography style={{display:'flex',alignItems:'center',marginRight:5}} variant="body2" color="textSecondary" component="p">
-                                                                adverts :
-                                                            </Typography>
-                                                            <Typography gutterBottom variant="h5" component="h2">
-                                                                {items['1']}
-                                                            </Typography>
-                                                        </div>
-                                                        <Button variant='contained' color='primary' style={{textTransform:'capitalize'}}>About</Button>
-                                                    </div>
-                                                </div>*/
+
                                             ))
                                     }
                                 </div>

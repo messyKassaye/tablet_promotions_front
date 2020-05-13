@@ -3,13 +3,14 @@ import {Card, CardContent, CardHeader, Container, Grid, Button, Typography} from
 import withStyles from "@material-ui/core/styles/withStyles";
 import tabAdvertsDescriptionStyle from "../../styles/tabAdvertDescription";
 import {translate} from "react-i18next";
+import {connect} from "react-redux";
 class TabAdvertsDescription extends Component {
     render() {
         const {classes,t} = this.props
         return (
             <Grid container spacing={2}>
 
-                    <Grid item md={9} xs={12} sm={12}>
+                    <Grid item md={8} xs={12} sm={12}>
                         <Card>
                             <CardContent>
                                 <Typography>
@@ -19,7 +20,7 @@ class TabAdvertsDescription extends Component {
                         </Card>
                     </Grid>
 
-                    <Grid item md={3} xs={12} sm={12}>
+                    <Grid item md={4} xs={12} sm={12}>
                         <Card className={classes.smallCard}>
                             <CardContent style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
                                 <Button
@@ -36,6 +37,12 @@ class TabAdvertsDescription extends Component {
         );
     }
 }
-
-export default translate('common')
-(withStyles(tabAdvertsDescriptionStyle)(TabAdvertsDescription));
+const mapStateToProps = state => (
+    {
+        user: state.userData.user,
+        loading: state.userData.loading
+    }
+)
+export default connect(mapStateToProps)
+(translate('common')
+(withStyles(tabAdvertsDescriptionStyle)(TabAdvertsDescription)));

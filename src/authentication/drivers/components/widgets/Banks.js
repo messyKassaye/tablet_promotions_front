@@ -7,7 +7,6 @@ import ChevronRightIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import {CardContent, Menu} from "@material-ui/core";
@@ -17,7 +16,7 @@ import Avatar from "@material-ui/core/Avatar";
 import {red} from "@material-ui/core/colors";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import {Link} from "react-router-dom";
+import {translate} from "react-i18next";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const selectedBankAccount = {}
@@ -69,6 +68,7 @@ class Banks extends React.Component{
     }
 
     render() {
+        const {t} = this.props
         return (
             <div>
                 {
@@ -172,9 +172,15 @@ class Banks extends React.Component{
                                 :
                                 (
                                     <div style={{display:'flex',flexDirection:'column',justifyContent:'start',alignItems:'start'}}>
-                                        <span style={{marginBottom:20}}>You haven't set you bank account before.please set your account now.</span>
-                                        <Button color='primary' variant='contained' onClick={this.setAccount}>
-                                            <span style={{marginRight:10}}>Set account</span>
+                                        <span style={{marginBottom:20}}>
+                                            {`${t('driver.finance.account_not_created.title')}`}
+                                        </span>
+                                        <Button color='primary'
+                                                variant='contained'
+                                                onClick={this.setAccount}>
+                                            <span style={{marginRight:10,textTransform:'none'}}>
+                                                {`${t('driver.finance.account_not_created.create_account')}`}
+                                            </span>
                                             <ChevronRightIcon/>
                                         </Button>
                                     </div>
@@ -193,4 +199,5 @@ const mapStateToProps = state=>({
     loading:state.authReducer.bankAccountReducer.loading
 })
 
-export default connect(mapStateToProps,{bankAccountFetch,showBankAccountSetterModal})(Banks)
+export default translate('common')
+(connect(mapStateToProps,{bankAccountFetch,showBankAccountSetterModal})(Banks))

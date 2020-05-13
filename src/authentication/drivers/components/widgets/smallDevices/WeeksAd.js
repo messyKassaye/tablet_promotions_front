@@ -43,11 +43,11 @@ class WeeksAd extends React.Component{
                         {
                             cars.map(car=>(
                                 <Grid key={car.id} item md={6} xs={12}>
-                                    <Card className={classes.cards}>
+                                    <Card>
                                         <CardHeader
                                         title={`${t('driver.adverts.week.plate_number')}: ${car.plate_number}`}
                                         />
-                                        <Divider className={classes.dividers}/>
+                                        <Divider/>
                                         <CardContent>
                                             {
                                                 car.week===null

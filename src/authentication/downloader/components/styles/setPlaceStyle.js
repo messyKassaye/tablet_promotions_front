@@ -12,6 +12,7 @@ const SetPlaceStyle = theme=>({
     text_input:{
         width:'100%',
         position:'relative',
+        marginTop:20,
         marginBottom:20
     }
 })

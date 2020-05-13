@@ -67,6 +67,79 @@
        "image": "ምስል"
      }
    },
-   "more": "ተጨማሪ"
+   "more": "ተጨማሪ",
+   "work_place": {
+     "title": "የስራ ቦታ",
+     "not_assigned": "የስራ ቦታ አልተጻፈም",
+     "button_text": "መዝግብ"
+   },
+   "working_tablet": {
+     "title": "የሚሰራበት ታብሌት",
+     "not_assigned": "የሚሰራበት ታብሌት አልተሰጠውም",
+     "how_to_assign": "እንዴት መስጠት ይቻላል",
+     "dialogTitle": "ታብሌት እንዴት መመዝገብ ይቻላል",
+     "how_to_add": "በመጀመሪያ ሊሰሩበት ያሰቡትን ታብሌት ይግዙ።ታብሌትዎን ከገዙ በኋላ Google play store ላይ የታብሌት ማስታዎቂያ መተገብሪያዎን ያውርዱ እና ይጫኑ። ከጫኑ በኋላ ኢሜይልዎን እና የይለፍ ቃልዎን አስገብትዎ በመግባት about this tablet የሚለዎን በመንካት የገዙትን ታብሌት ለሚፈልጉት መኪና ያስመዝግቡት"
+
+   },
+   "register_car": {
+     "info": "መኪናዎ በትክክል ተመዝግቧል። አሁን መኪናዎ የሚሰራበትን ቦታ ወይም ከተማ ያስመዝግቡ",
+     "label": "መኪናዎ የሚሰራበትን ከተማ ይምረጡ",
+     "button_text": "መዝግብ"
+   },
+   "no_car": {
+     "info": "በስምዎ የተመዘገብ ምንም መኪና የለም። መኪናዎን ይመዝግቡ እና ጥሩ ገቢ ያግኙ",
+     "button_text": "መኪና መመዝገቢያ"
+   },
+   "tablet": {
+     "title": "ታብሌቶች",
+     "working_car": "የሚሰራበት መኪና",
+     "total_advert": "ጠቅላላ የሰራው ማስታዎቂያ",
+     "no_tablet": {
+       "title": "በስምዎ የተመዘገበ ታብሌት የለም።"
+     }
+   },
+   "finance": {
+     "dashboard": "ወደ ዋናው",
+     "payment": "ክፍያዎች",
+     "withdraw": "ወጭዎች",
+     "account_not_created": {
+       "title": "የገንዘብ መቀበያ ባንክዎን አላስገቡም። የባንክ አካውንትዎን ያስተካከሉ",
+       "create_account": "የባንክ ማስተካከያ ፎርም"
+     },
+     "payments": {
+       "title": "እስካሁን የተከፈለዎት ክፍያ",
+       "table": {
+         "payed_at": "የተከፈለበት ቀን",
+         "amount": "ጠቅላላ ክፍያ",
+         "description": "ገለጻ",
+         "payment_type": "የክፈያው አይነት",
+         "week": "የክፍያ ሳምንት",
+         "action": "ድርጊቶች"
+       }
+     },
+     "withdraws": {
+       "title": "ጠቅላላ ያወጡት ገንዘብ",
+       "new_request": "አድስ ወጭ መጠየቂያ",
+       "table": {
+         "requested_at": "የተጠየቀበት ቀን",
+         "bank_account": "የባንኩ ስም",
+         "amount": "የገንዘቡ መጠን",
+         "description": "ገለጻ",
+         "status": "status",
+         "processing": "የክፍያው ሂደት"
+       }
+     },
+     "set_account": {
+       "title": "የባንክ አካውንት ማስተካከያ",
+       "select_bank": "የባንኩን ስም ይምረጡ",
+       "add_account_number": "የአካውንት ቁጥርዎን ያስገቡ",
+       "account_holder_name": "የሂሳቡ ባለቤት ሙሉ ስም ያስገቡ",
+       "button_text": "መዝግብ",
+       "error": {
+         "account_number_error": "Please enter your account number",
+         "account_holder_error": ""
+       }
+     }
+   }
  }
 }

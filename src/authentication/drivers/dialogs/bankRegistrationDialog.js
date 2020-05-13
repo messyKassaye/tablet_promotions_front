@@ -20,6 +20,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {storeBank} from "../../state/actions/bankAccountAction";
 import {Typography} from "@material-ui/core";
 import {green, red} from "@material-ui/core/colors";
+import {translate} from "react-i18next";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -115,7 +116,7 @@ class BankRegistrationDialog extends React.Component{
 
     render() {
 
-        const {classes} = this.props
+        const {classes,t} = this.props
         const { loading } = this.state;
         const finished = false
         const setLoading = !finished && loading;
@@ -134,7 +135,7 @@ class BankRegistrationDialog extends React.Component{
                 onClose={this.handleClose}
             >
                 <DialogTitle  id="customized-dialog-title" onClose={this.handleClose}>
-                    Setting your bank account.
+                    {`${t('driver.finance.set_account.title')}`}
                     <IconButton
                         className={classes.closeButton}
                         color='inherit'
@@ -169,7 +170,9 @@ class BankRegistrationDialog extends React.Component{
                     onSubmit={this.handleSubmit}
                     >
                         <FormControl  className={classes.formControl}>
-                            <InputLabel htmlFor="demo-controlled-open-select">Select your bank</InputLabel>
+                            <InputLabel htmlFor="demo-controlled-open-select">
+                                {`${t('driver.finance.set_account.select_bank')}`}
+                            </InputLabel>
                             <Select
                                 name='bank_id'
                                 value={this.state.selectValue}
@@ -189,38 +192,38 @@ class BankRegistrationDialog extends React.Component{
 
                         <TextValidator
                             className={classes.text_input}
-                            label='Account number'
+                            label={`${t('driver.finance.set_account.add_account_number')}`}
                             onChange={this.handleChange}
                             name="account_number"
                             type='number'
                             value={this.state.formData.account_number}
                             validators={['required']}
-                            errorMessages={['Please enter your account number']}
+                            errorMessages={[`${t('driver.finance.set_account.error.account_number_error')}`]}
                         />
 
                         <TextValidator
                             className={classes.text_input}
-                            label='Account holder full name'
+                            label={`${t("driver.finance.set_account.account_holder_name")}`}
                             onChange={this.handleChange}
                             name="account_holder_full_name"
                             type='text'
                             value={this.state.formData.account_holder_full_name}
                             validators={['required']}
-                            errorMessages={['Please enter account holder name']}
+                            errorMessages={[`${t('driver.finance.set_account.error.account_holder_error')}`]}
                         />
                     </ValidatorForm>
                 </DialogContent>
                 <DialogActions>
                     <LoadingButton
                         color="primary"
+                        style={{textTransform:'none'}}
                         variant="contained"
                         type="submit"
                         loading={setLoading}
                         done={finished}
-                        text='Register'
+                        text={`${t('driver.finance.set_account.button_text')}`}
                         disabled={!isEnabled ||this.state.submitted}
                         onClick={this.handleSubmit}>
-                        Save car
                     </LoadingButton>
                 </DialogActions>
             </Dialog>
@@ -236,5 +239,5 @@ const mapStateToProps = state=>({
     response: state.authReducer.banksReducer.response
 })
 
-export default withStyles(bankDialogstyle)
-(connect(mapStateToProps,{showBankAccountSetterModal,storeBank})(BankRegistrationDialog))
+export default translate("common")(withStyles(bankDialogstyle)
+(connect(mapStateToProps,{showBankAccountSetterModal,storeBank})(BankRegistrationDialog)))

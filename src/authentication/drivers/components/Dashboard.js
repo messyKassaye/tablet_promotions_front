@@ -40,11 +40,11 @@ class Dashboard extends React.Component{
 
                 <Grid container spacing={2} className={classes.status}>
 
-                    <Grid item md={6} sm={12}>
+                    <Grid item md={12} sm={12}>
                         <Cars show={false}/>
                     </Grid>
 
-                    <Grid item md={6} sm={12}>
+                    <Grid item md={12} sm={12}>
                         <TopAdvertedCompanies/>
                     </Grid>
 
