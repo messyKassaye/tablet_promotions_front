@@ -27,8 +27,7 @@ class Home extends React.Component{
             <AdvertMedia/>
 
             <Partners/>
-
-            <Testimony/>
+            
         </div>
     }
 
