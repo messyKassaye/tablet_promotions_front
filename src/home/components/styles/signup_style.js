@@ -39,9 +39,14 @@ const style = theme=>(
         submit_division:{
             display:'flex',
             flexDirection: 'row',
+            [theme.breakpoints.down('xs')]:{
+                flexDirection:'column'
+            }
         },
         signup_button:{
-            marginRight: 25,
+            textTransform:'none',
+            marginBottom:10,
+            marginRight:20
         },
         registered:{
             display:"flex",

@@ -17,7 +17,7 @@ class CommonDashboardCard extends React.Component {
                 />
                 <CardContent style={{padding:0}}>
                     <AreaChart
-                        width={395}
+                        width={400}
                         height={50}
                         data={data}
                         style={{position:'relative'}}

@@ -1,12 +1,15 @@
 import React from "react";
 import dashboardStyle from "../styles/dashboardStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Container,Grid} from "@material-ui/core";
-import TabAdvertsDescription from "./widgets/TabAdvertsDescription";
+import {Container,Grid,Divider} from "@material-ui/core";
 import AdvertiserCard from "./widgets/AdvertiserCard";
 import {connect} from "react-redux";
 import {me} from "../../state/actions/usersActions";
 import AdvertiserCarAndMedia from "./widgets/AdvertiserCarAndMedia";
+import DashboardAdverts from "./widgets/DashboardAdverts";
+import UnpaidAdverts from "./widgets/UnpaidAdverts";
+import WaitingApprovalAdverts from "./widgets/WaitingApprovalAdverts";
+import NewsAndNotifications from "./widgets/NewsAndNotifications";
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -20,8 +23,27 @@ class Dashboard extends React.Component{
         return (
             <Container maxWidth={"lg"}>
                 <AdvertiserCard/>
-                <TabAdvertsDescription/>
-                <AdvertiserCarAndMedia/>
+                <Divider style={{margin:20}}/>
+                <Grid container spacing={2}>
+                    <Grid item md={8} sm={12} xs={12}>
+                        <DashboardAdverts/>
+                        <AdvertiserCarAndMedia/>
+                    </Grid>
+
+                    <Grid item md={4} sm={12} xs={12}>
+                        <Grid container spacing={2}>
+                            <Grid item md={12} xs={12} sm={12}>
+                                <NewsAndNotifications/>
+                            </Grid>
+                            <Grid item md={12} xs={12} sm={12}>
+                                <WaitingApprovalAdverts/>
+                            </Grid>
+                            <Grid item md={12} xs={12} sm={12}>
+                                <UnpaidAdverts/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Container>
         );
     }

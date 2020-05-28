@@ -67,9 +67,9 @@ function HomeBar({t}) {
             onClick={handleToggle(false)}
             onKeyDown={handleToggle(false)}
         >
-            <AppBar style={{'position':'relative'}}>
+            <AppBar style={{'position':'relative','paddingLeft':"30px",'paddingRight':'30px'}}>
                 <Toolbar color='primary'>
-                    <h2>Tablet Promotions</h2>
+                    <h2>{'    Ride ads   '}</h2>
                 </Toolbar>
             </AppBar>
 
@@ -85,7 +85,7 @@ function HomeBar({t}) {
                                     variant='contained'
                                     component={Link}
                                     to={items.to}
-                                    style={{margin:'10px','width':'50%','position':'relative'}}
+                                    style={{margin:'10px','width':'50%','position':'relative','textTransform':"none"}}
                                     >{t(`home.${items.name}`)}</Button>
                                 </div>
                             )
@@ -121,7 +121,7 @@ function HomeBar({t}) {
                     <Toolbar>
                         <Link to='/'>
                             <img
-                                alt='Tablet Promotions'
+                                alt='Ride ads'
                                 src={logo}
                                 width='62' height='55'
                                 className={classes.brandIcon}/>

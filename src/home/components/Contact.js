@@ -12,8 +12,8 @@ class Contact extends Component {
                     <h1>{t('home.contact_us.contact_message')}</h1>
                 </div>
 
-                <Container maxWidth={"lg"} className={classes.card}>
-                    <Card>
+                <Container maxWidth={"md"}>
+                    <Card className={classes.card}>
                         <CardContent>
 
                         </CardContent>

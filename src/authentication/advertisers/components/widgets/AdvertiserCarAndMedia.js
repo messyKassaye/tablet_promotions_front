@@ -21,7 +21,7 @@ class AdvertiserCarAndMedia extends Component {
         return (
             <Grid container spacing={2}>
 
-                <Grid item md={4} xs={12} sm={12}>
+                <Grid item md={6} xs={12} sm={12}>
                     <Card style={{minHeight: 400, overflowY: 'auto'}}>
                         <CardHeader
                             style={{padding: 0}}
@@ -98,7 +98,7 @@ class AdvertiserCarAndMedia extends Component {
 
                 </Grid>
 
-                <Grid item md={8} xs={12} sm={12}>
+                <Grid item md={6} xs={12} sm={12}>
                     <Card style={{minHeight: 400, overflowY: 'auto'}}>
                         <CardHeader
                             title={'Advertisement media types'}

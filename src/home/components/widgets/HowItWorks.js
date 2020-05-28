@@ -80,14 +80,7 @@ class HowItWorks extends React.Component{
                                             this.state.showOrganizations
                                                 ?
                                                 (
-                                                    <div style={{
-                                                        display:'flex',
-                                                        paddingBottom:22,
-                                                        textAlign:'justify',
-                                                        flexDirection:'column',
-                                                        height:450,
-                                                        overflowY:'auto',
-                                                        alignItems:'start'}}>
+                                                    <div className={classes.bigCards}>
                                                         <Typography className={classes.description}>
                                                             {t('home.how_it_works.organizations_description')}
                                                         </Typography>
@@ -151,13 +144,7 @@ class HowItWorks extends React.Component{
                                             this.state.showDrivers
                                                 ?
                                                 (
-                                                    <div style={{
-                                                        display:'flex',
-                                                        textAlign:'justify',
-                                                        flexDirection:'column',
-                                                        height:450,
-                                                        overflowY:'auto',
-                                                        alignItems:'start'}}>
+                                                    <div className={classes.bigCards}>
                                                         <Typography className={classes.description}>
                                                             {t('home.how_it_works.drivers_description')}
                                                         </Typography>
@@ -222,13 +209,7 @@ class HowItWorks extends React.Component{
                                             this.state.showDownloader
                                                 ?
                                                 (
-                                                    <div style={{
-                                                        display:'flex',
-                                                        textAlign:'justify',
-                                                        flexDirection:'column',
-                                                        height:450,
-                                                        overflowY:'auto',
-                                                        alignItems:'start'}}>
+                                                    <div className={classes.bigCards}>
                                                         <Typography className={classes.description}>
                                                             {t('home.how_it_works.downloader_description')}
                                                         </Typography>

@@ -15,8 +15,22 @@ const homeStyle = theme=>({
     },
     cards:{
         backgroundColor:'#3C4252',
-        color:'white'
+        color:'white',
     },
+    bigCards:{
+        backgroundColor:'#3C4252',
+        color:'white',
+        display:'flex',
+        paddingBottom:22,
+        textAlign:'justify',
+        flexDirection:'column',
+        height:'auto',
+        alignItems:'start',
+        [theme.breakpoints.down('xs')]:{
+            height:'auto',
+            alignItems:'start',
+        }
+    }
 
 })
 

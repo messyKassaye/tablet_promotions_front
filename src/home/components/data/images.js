@@ -1,4 +1,3 @@
-import go from '../../../assets/go_strait.PNG'
 const images = [
     {
         id:1,

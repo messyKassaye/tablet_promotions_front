@@ -7,9 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import homeStyle from "./styles/homeStyle";
 import Categories from "./widgets/Categories";
 import AdvertMedia from "./widgets/AdvertMedia";
-import Footer from "./footer";
 import Partners from "./widgets/Partners";
-import Testimony from "./widgets/Testimony";
 class Home extends React.Component{
 
     render() {
@@ -17,7 +15,7 @@ class Home extends React.Component{
         return <div>
             <HeaderJumbotron></HeaderJumbotron>
             <div className={classes.designed_for}>
-                <span>{t('home.designed_for')}</span>
+                <span style={{textAlign:'center'}}>{t('home.designed_for')}</span>
             </div>
             <Whatistabletpromotion/>
             <HowItWorks/>

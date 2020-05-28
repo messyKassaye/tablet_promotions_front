@@ -1,7 +1,7 @@
 {
   "en": {
-    "app_name": "Tab Adverts",
-    "title": "Welcome to table promotions",
+    "app_name": "Ride ads",
+    "title": "Welcome to Ride ads",
     "Home": "Home",
     "About": "About",
     "Contact": "Contact",
@@ -10,9 +10,10 @@
     "Pricing": "Pricing",
     "Login": "Login",
     "Sign up": "Sign up",
+    "register": "Register now",
     "start_button": "Start now!",
     "advertiser": "Advertise your companies product and increase your income",
-    "driver": "Start Tablet promotion on your taxi or on your bus  & get additional income",
+    "driver": "Start using Ride ads on your taxi or on your bus  & get additional income",
     "advertiser_engineer": "Are you naturally gifted of good voice. Then work as advertise engineer now",
     "designed_for": "Designed for Organizations, drivers and advertisers.",
     "signup": {
@@ -66,20 +67,44 @@
     },
     "registered": "I'm already registered",
     "what_is_tablet_promotion": {
-        "title": "What is Tablet advertising",
+        "title": "What is Ride ads",
         "slogan": "Let's work together and change ourselves and our community ",
-        "description": "Tablet advertising is a company that advertises the production of various organizations product through taxi and buses using tablet computers. In this role it is generating more revenue for many taxi and bus drivers as well as vehicle investors. Tablet advertising is an organization registered under the Ethiopian Employment Agency Proclamation No. 0987/2017.",
+        "description": "Ride ads is a company that advertises the product of various organizations through taxi and buses using tablet computers. In this role it is generating more revenue for many taxi and bus drivers as well as vehicle investors. Tablet advertising is an organization registered under the Ethiopian Employment Agency Proclamation No. 0987/2017.",
         "description_3": "It is a family company with the aim of transforming the lives of many Ethiopians. Join us and change together"
 
     },
     "how_it_works": {
       "title": "How it works",
-      "description": ""
+      "description": "Ride ads is an Internet-based organization dedicated to working on cars.",
+      "organizations": "Advertisers",
+      "drivers": "Drivers and car owners",
+      "downloader": "Downloader",
+      "organizations_description": "According to Ride Advertising, investors are individuals or individuals who are willing to promote the product of their company. Any investor or organization wishing to advertise may choose to advertise on the registration form or become a member of Ride ads. Once the registration is completed, it means that it will start promoting the products of the organization using the app designed for investors",
+      "organizations_span": "According to Ride Advertising, investors are individuals or individuals who are willing to promote the product of their company. Any investor or organization that wants to advertise...",
+      "organizations_description_2": "As you know, advertising works by video, audio, and image. Ride ads uses all three advertising tools. All three payment rates vary according to the order. When the video contains the highest payment amount, the audio occupies the middle and image last",
+      "organizations_final": "Sign up today and promote your product throughout Ethiopia",
+
+      "drivers_description": "According to Ride Advertisement, driver and car owners are any cars that provide public transport services. Examples include taxis, Lada and meter taxis from the taxi sector. The biggest share of taxis is to start advertising on their taxis by downloading a promotional video or audio using the application created for them from our server. By doing so, they will be paid 60% of the advertising fee.",
+      "drivers_span": "According to Ride Advertisement, driver and car owners are any cars that provide public transport services. Examples include taxis, Lada and meter taxis from the taxi sector.....",
+      "drivers_description_2": "For example, if a video ad fee is 1 ETB and a taxi plays this video 10 times a day in the taxi, it will cost 6 ETB. Currently more and more ads are coming to us so taxis can earn a lot of extra revenue because they can make multiple ads in one day",
+      "drivers_final": "Sign up today and earn more",
+      "downloader_description": "As we all know, Internet fares in Ethiopia are a bit slow and the pace is worrying. So this issue will be a big challenge for drivers and car owners. So Ride ads created a member of advert video downloader",
+      "downloader_span": "As we all know, Internet fares in Ethiopia are a bit slow and the pace is worrying. So this problem is going to be a big challenge for taxis and make their money...",
+      "downloader_description_2": "A large part of the convention would be to download advertising videos or videos by itself and sell them to taxi driver and car owners. The amount of sales will be based on the scale of the announcement of the Ride ads.",
+      "downloader_final": "Sign up today and earn more",
+      "see_more": "To read it all",
+      "show_less": "Show in small"
+    },
+    "categories": {
+      "title": "About cars"
+    },
+    "advert_media": {
+      "title": "About advert medias"
     },
     "slider": {
       "advertiser": "Start adverting your product and increase your revenue.",
       "advertiser_description": "Do your work, Leave advertising your product to us",
-      "driver": "Are you a taxi or bus driver, then earn extra income by becoming a member of Tablet Advertising",
+      "driver": "Are you a taxi or bus driver, then earn extra income by becoming a member of Ride ads",
       "driver_description": "Make an advert on your car and earn more money",
       "start_button": "Start today",
       "watch_video": "Watch video"

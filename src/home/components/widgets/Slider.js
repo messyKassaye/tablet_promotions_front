@@ -19,9 +19,9 @@ const Slider =({t})=>{
                 {
                     slide.map((item,index)=>(
                         <div key={item.name} className="each-fade" style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                            <h1 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.slider.${item.name}`)}</h1>
+                            <h1 style={{textAlign:'center'}}>{t(`home.slider.${item.name}`)}</h1>
                            <div style={{textAlign:'center',display:"flex",justifyContent:'center',flexDirection:'column'}}>
-                               <h3 style={{textAlign:'justify', textJustify:'inter-word'}}>{t(`home.slider.${item.description}`)}</h3>
+                               <h3 style={{textAlign:'center'}}>{t(`home.slider.${item.description}`)}</h3>
                                <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                                    <Button
                                        color='inherit'
