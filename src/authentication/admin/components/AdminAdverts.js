@@ -5,14 +5,12 @@ import {fetchAdverts} from "../state/action/advertsAction";
 import {connect} from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import adminAdvertStyle from "./styles/adminAdvertStyle";
-import AddIcon from '@material-ui/icons/Add'
 import {showMainDialog} from "../state/action/dialogAction";
 import AddNewAdvert from "../../commons/components/AddNewAdvert";
 import {fetchCompanies} from "../state/action/adminCompaniesAction";
 import AdvertCard from "../../commons/components/AdvertCard";
 import SingleLoading from "../../commons/loading/SingleLoading";
 import {green} from "@material-ui/core/colors";
-import LoadingButton from "../../../home/components/widgets/LoadingButton";
 export const StyledTableCell = withStyles(theme => ({
     head: {
         backgroundColor: '#3C4252',

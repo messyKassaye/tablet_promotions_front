@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Card, CardHeader, CardContent, Grid} from "@material-ui/core";
+import {Card, CardHeader, CardContent, Grid,Divider} from "@material-ui/core";
 import {me} from "../../../state/actions/usersActions";
 import {connect} from "react-redux";
-import {green, grey} from "@material-ui/core/colors";
+import {deepOrange, green, grey} from "@material-ui/core/colors";
 import Skeleton from "@material-ui/lab/Skeleton";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import SingleAdvertCard from "../../../commons/components/widgets/SingleAdvertCard";
@@ -32,14 +32,15 @@ class WaitingApprovalAdverts extends Component {
                 <CardHeader
                 title={'Payed and waiting approval adverts'}
                 avatar={<AttachMoneyIcon/>}
-                style={{backgroundColor:green[500],color:'white'}}/>
+                style={{backgroundColor:deepOrange[500],color:'white'}}/>
+                <Divider/>
                 <CardContent>
                     {
                         this.props.loading
                         ?
                             (
                                 <Grid container spacing={2}>
-                                    <Grid item md={12} xs={12} sm={12}>
+                                    <Grid item md={4} xs={12} sm={12}>
                                         <Skeleton variant={"rect"} height={150} style={{backgroundColor:grey[500]}}/>
                                     </Grid>
                                 </Grid>
@@ -53,7 +54,7 @@ class WaitingApprovalAdverts extends Component {
                                             (
                                                 this.findPayedAds(this.props.user.relations.companies)
                                                     .map(advert=>(
-                                                        <Grid item md={12} xs={12} sm={12}>
+                                                        <Grid item md={4} xs={12} sm={12}>
                                                             <SingleAdvertCard advert={advert}/>
                                                         </Grid>
                                                     ))

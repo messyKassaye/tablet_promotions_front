@@ -62,9 +62,9 @@ class Categories extends Component {
                                                                             category.child.map(child=>(
                                                                                 <Grid item md={4} xs={12} sm={12} key={child.id}>
                                                                                     <Card>
-                                                                                        <CardContent>
+                                                                                        <CardContent style={{height:320,overflowY:"auto"}}>
                                                                                             <div className={classes.carsHeader}>
-                                                                                                <Avatar className={classes.large} variant='rounded' src={child.image}></Avatar>
+                                                                                                <Avatar className={classes.large} variant='circle' src={child.image}></Avatar>
                                                                                                 <Typography style={{marginTop:10}}>{child.name}</Typography>
                                                                                             </div>
                                                                                             <div className={classes.description}>

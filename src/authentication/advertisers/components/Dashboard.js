@@ -35,12 +35,6 @@ class Dashboard extends React.Component{
                             <Grid item md={12} xs={12} sm={12}>
                                 <NewsAndNotifications/>
                             </Grid>
-                            <Grid item md={12} xs={12} sm={12}>
-                                <WaitingApprovalAdverts/>
-                            </Grid>
-                            <Grid item md={12} xs={12} sm={12}>
-                                <UnpaidAdverts/>
-                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

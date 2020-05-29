@@ -4,7 +4,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import {updateAdvert} from "../../state/action/advertsAction";
 import {updateAdvertPaymentTransaction} from "../../state/action/advertPaymentTransactionAction";
 import {showMainDialog} from "../../state/action/dialogAction";
 import {connect} from "react-redux";
@@ -55,6 +54,7 @@ class AdvertPaymentApproval extends Component {
             })
             setTimeout(()=>{
                 this.props.showMainDialog({'show':false,'page':null,'title':'',actions:{on:false,path:'',id:''}})
+                window.location.reload();
             },2000)
         }
     }
@@ -140,7 +140,7 @@ class AdvertPaymentApproval extends Component {
 }
 
 const mapStateToProps = state=>({
-    response: state.authReducer.adminReducers.advertReducer.response,
+    response: state.authReducer.adminReducers.advertPaymentTransactionApproval.response,
     user:state.userData.user
 })
 

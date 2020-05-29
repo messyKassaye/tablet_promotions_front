@@ -3,7 +3,7 @@ import {Avatar, Card, CardContent, CardHeader, Grid,Button,Divider} from "@mater
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';import {connect} from "react-redux";
 import {me} from "../../../state/actions/usersActions";
 import Skeleton from "@material-ui/lab/Skeleton";
-import {deepOrange, grey} from "@material-ui/core/colors";
+import {deepOrange, green, grey} from "@material-ui/core/colors";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import SingleAdvertCard from "../../../commons/components/widgets/SingleAdvertCard";
 
@@ -32,7 +32,7 @@ class UnpaidAdverts extends Component {
                 <CardHeader
                 title={'Unpaid adverts'}
                 avatar={<MoneyOffIcon/>}
-                style={{backgroundColor:deepOrange[500],color:'white'}}
+                style={{backgroundColor:green[500],color:'white'}}
                 />
                 <Divider/>
                 <CardContent>
@@ -41,7 +41,13 @@ class UnpaidAdverts extends Component {
                             ?
                             (
                                 <Grid container spacing={2}>
-                                    <Grid item md={12} xs={12} sm={12}>
+                                    <Grid item md={4} xs={12} sm={12}>
+                                        <Skeleton variant={"rect"} height={150} style={{backgroundColor:grey[500]}}/>
+                                    </Grid>
+                                    <Grid item md={4} xs={12} sm={12}>
+                                        <Skeleton variant={"rect"} height={150} style={{backgroundColor:grey[500]}}/>
+                                    </Grid>
+                                    <Grid item md={4} xs={12} sm={12}>
                                         <Skeleton variant={"rect"} height={150} style={{backgroundColor:grey[500]}}/>
                                     </Grid>
                                 </Grid>
@@ -55,7 +61,7 @@ class UnpaidAdverts extends Component {
                                             (
                                                 this.findAds(this.props.user.relations.companies)
                                                     .map(advert=>(
-                                                        <Grid item md={12} xs={12} sm={12}>
+                                                        <Grid item md={4} xs={12} sm={12}>
                                                             <SingleAdvertCard advert={advert}/>
                                                         </Grid>
                                                     ))

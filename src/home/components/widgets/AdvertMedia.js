@@ -57,7 +57,7 @@ class AdvertMedia extends Component {
                                                             <Avatar style={{backgroundColor:'white',color:'#3C4252',marginBottom:10}}>{media.name.charAt(0)}</Avatar>
                                                             <Typography>{media.name}</Typography>
                                                         </div>
-                                                        <CardContent style={{height:400,overflowY:"auto"}}>
+                                                        <CardContent style={{height:250,overflowY:"auto"}}>
                                                             <Divider/>
                                                             <div style={{textAlign:'justify'}}>
                                                                 <Typography>{media.description}</Typography>
