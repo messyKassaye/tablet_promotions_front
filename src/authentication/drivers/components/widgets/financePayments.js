@@ -155,9 +155,9 @@ class FinancePayments extends React.Component{
                                                             )
                                                         :
                                                             (
-                                                               <div>
-                                                                   <Typography style={{textAlign:'center'}}>There is no payment data</Typography>
-                                                               </div>
+                                                               <TableRow>
+                                                                   <TableCell style={{textAlign:'center'}}>There is no payment data</TableCell>
+                                                               </TableRow>
                                                             )
                                                     }
                                                 </TableBody>

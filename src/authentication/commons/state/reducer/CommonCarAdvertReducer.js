@@ -1,4 +1,4 @@
-import {COMMON_CAR_ADVERT_SHOW} from "../actionConstant/commonConstatnts";
+import {COMMON_CAR_ADVERT_SHOW, COMMON_CAR_ADVERT_UPDATE} from "../actionConstant/commonConstatnts";
 
 const initialState = {
     carAdverts:{
@@ -12,7 +12,8 @@ const initialState = {
         prev_page_url:'',
         to:''
     },
-    loading:true
+    loading:true,
+    response:{}
 }
 
 export default function (state=initialState,action) {
@@ -22,6 +23,12 @@ export default function (state=initialState,action) {
                ...state,
                loading: false,
                carAdverts: action.payload
+           }
+
+       case COMMON_CAR_ADVERT_UPDATE:
+           return {
+               ...state,
+               response: action.payload
            }
 
        default:

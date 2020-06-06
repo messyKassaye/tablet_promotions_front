@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import withStyles from "@material-ui/core/styles/withStyles";
 import dialogStyle from "../style/registerCarsDialogStyle";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -23,8 +24,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import {carsStore} from "../state/actions/carsActions";
 import {green, red} from "@material-ui/core/colors";
 import LoadingButton from "../../../home/components/widgets/LoadingButton";
-import SetPlace from "../../downloader/components/SetPlace";
 import AddressCard from "../../commons/components/widgets/AddressCard";
+import {categoriesFetch} from "../state/actions/categoriesActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -103,6 +104,7 @@ class RegisterCarsDialog extends React.Component{
     }
 
     componentDidMount() {
+        this.props.categoriesFetch()
         let deviceWidth = window.innerWidth;
         if(deviceWidth<=760){
             this.setState({
@@ -180,116 +182,127 @@ class RegisterCarsDialog extends React.Component{
 
                 <DialogContent dividers className={classes.content}>
                     {
-                        this.state.registerCarAddress
+                        this.props.categoriesLoading
                         ?
-                            (
-                                <AddressCard
-                                    info={'Your car is registered to our system. Now we need your car work place/city'}
-                                    element={this.state.element}
-                                    type={'cars'}
-                                    id={this.state.element.id}
-                                    label={'Select on which city your car is working on now.'}
-                                    btnText={'Set my car place'}
-                                />
-                            )
+                            (<CircularProgress/>)
                         :
                             (
                                 <div>
-                                {
-                                    this.props.response.status?
-                                        (
-                                            <Typography
-                                                component='h6'
-                                                variant='body2' style={{color:green[500]}}>
-                                                {this.props.response.message}
-                                            </Typography>
-                                        )
-                                        :
-                                        (
-                                            <Typography
-                                                component='h6'
-                                                variant='body2' style={{color:red[500]}}>
-                                                {this.props.response.message}
-                                            </Typography>
-                                        )
-                                }
-                        <div>
-                        <ValidatorForm
-                        className={classes.form}
-                        onSubmit={this.handleSubmit}
-                        >
-                        <FormControl  className={classes.formControl}>
-                        <InputLabel htmlFor="demo-controlled-open-select">Select transport Service type</InputLabel>
-                        <Select
-                        name='parent'
-                        value={this.state.selectValue}
-                        open={this.state.isSelectOpened}
-                        onClose={this.handleSelect}
-                        onOpen={this.handleSelectOpen}
-                        onChange={this.handleSelectChange}
-                        >
-                        {
-                            this.props.categories.map(items=>(
-                                <MenuItem key={items.name} value={items.id}>{items.name}</MenuItem>
-                            ))
-                        }
-                        </Select>
-                        </FormControl>
+                                    {
+                                        this.state.registerCarAddress
+                                            ?
+                                            (
+                                                <AddressCard
+                                                    info={'Your car is registered to our system. Now we need your car work place/city'}
+                                                    element={this.state.element}
+                                                    type={'cars'}
+                                                    id={this.state.element.id}
+                                                    label={'Select on which city your car is working on now.'}
+                                                    btnText={'Set my car place'}
+                                                />
+                                            )
+                                            :
+                                            (
+                                                <div>
+                                                    {
+                                                        this.props.response.status?
+                                                            (
+                                                                <Typography
+                                                                    component='h6'
+                                                                    variant='body2' style={{color:green[500]}}>
+                                                                    {this.props.response.message}
+                                                                </Typography>
+                                                            )
+                                                            :
+                                                            (
+                                                                <Typography
+                                                                    component='h6'
+                                                                    variant='body2' style={{color:red[500]}}>
+                                                                    {this.props.response.message}
+                                                                </Typography>
+                                                            )
+                                                    }
+                                                    <div>
+                                                        <ValidatorForm
+                                                            className={classes.form}
+                                                            onSubmit={this.handleSubmit}
+                                                        >
+                                                            <FormControl  className={classes.formControl}>
+                                                                <InputLabel htmlFor="demo-controlled-open-select">Select transport Service type</InputLabel>
+                                                                <Select
+                                                                    name='parent'
+                                                                    value={this.state.selectValue}
+                                                                    open={this.state.isSelectOpened}
+                                                                    onClose={this.handleSelect}
+                                                                    onOpen={this.handleSelectOpen}
+                                                                    onChange={this.handleSelectChange}
+                                                                >
+                                                                    {
+                                                                        this.props.categories.map(items=>(
+                                                                            <MenuItem key={items.name} value={items.id}>{items.name}</MenuItem>
+                                                                        ))
+                                                                    }
+                                                                </Select>
+                                                            </FormControl>
 
-                        {
+                                                            {
 
-                            carsData.length>0?
-                                (
-                                    <FormControl className={classes.formControl} >
-                                        <InputLabel htmlFor="demo-controlled-open-select">Select your car type</InputLabel>
-                                        <Select
-                                            name='category_id'
-                                            value={this.state.carValue}
-                                            open={this.state.isCarSelected}
-                                            onClose={this.handleCarSelectClose}
-                                            onOpen={this.handleCarSelectOpen}
-                                            onChange={this.handleCarSelectChange}
-                                        >
-                                            {
-                                                carsData.map(items=>items.child.map(child=>(
-                                                    <MenuItem key={child.id} value={child.id}>{child.name}</MenuItem>
-                                                )))
-                                            }
-                                        </Select>
-                                    </FormControl>
-                                )
-                                :<span></span>
-                        }
+                                                                carsData.length>0?
+                                                                    (
+                                                                        <FormControl className={classes.formControl} >
+                                                                            <InputLabel htmlFor="demo-controlled-open-select">Select your car type</InputLabel>
+                                                                            <Select
+                                                                                name='category_id'
+                                                                                value={this.state.carValue}
+                                                                                open={this.state.isCarSelected}
+                                                                                onClose={this.handleCarSelectClose}
+                                                                                onOpen={this.handleCarSelectOpen}
+                                                                                onChange={this.handleCarSelectChange}
+                                                                            >
+                                                                                {
+                                                                                    carsData.map(items=>items.child.map(child=>(
+                                                                                        <MenuItem key={child.id} value={child.id}>{child.name}</MenuItem>
+                                                                                    )))
+                                                                                }
+                                                                            </Select>
+                                                                        </FormControl>
+                                                                    )
+                                                                    :<span></span>
+                                                            }
 
-                        {
-                            this.state.showPlate?
-                                <TextValidator
-                                    className={classes.formControl}
-                                    label='Add plate number'
-                                    onChange={this.handlePlateChange}
-                                    name="plate_number"
-                                    value={this.state.formData.plate_number}
-                                    validators={['required']}
-                                    errorMessages={['Please add your plate number']}
-                                />
-                                :(<span></span>)
-                        }
-                            <LoadingButton
-                                color="primary"
-                                variant="contained"
-                                type="submit"
-                                loading={setLoading}
-                                style={{textTransform:'none',marginTop:20}}
-                                done={finished}
-                                text='Register'
-                                disabled={!isEnabled ||this.state.submitted}
-                                onClick={this.handleSubmit}>
-                                Register
-                            </LoadingButton>
-                        </ValidatorForm>
-                        </div>
-                        </div>
+                                                            {
+                                                                this.state.showPlate?
+                                                                    <TextValidator
+                                                                        className={classes.formControl}
+                                                                        label='Add plate number'
+                                                                        onChange={this.handlePlateChange}
+                                                                        name="plate_number"
+                                                                        value={this.state.formData.plate_number}
+                                                                        validators={['required']}
+                                                                        errorMessages={['Please add your plate number']}
+                                                                    />
+                                                                    :(<span></span>)
+                                                            }
+                                                            <LoadingButton
+                                                                color="primary"
+                                                                variant="contained"
+                                                                type="submit"
+                                                                loading={setLoading}
+                                                                style={{textTransform:'none',marginTop:20}}
+                                                                done={finished}
+                                                                text='Register'
+                                                                disabled={!isEnabled ||this.state.submitted}
+                                                                onClick={this.handleSubmit}>
+                                                                Register
+                                                            </LoadingButton>
+                                                        </ValidatorForm>
+                                                    </div>
+                                                </div>
 
+                                            )
+                                    }
+
+                                </div>
                             )
                     }
                 </DialogContent>
@@ -303,6 +316,7 @@ class RegisterCarsDialog extends React.Component{
 const mapStateToProps = state=>({
     show:state.authReducer.driversReducers.dialogsData.show,
     categories:state.authReducer.driversReducers.categoriesData.categories,
+    categoriesLoading:state.authReducer.driversReducers.categoriesData.loading,
     response:state.authReducer.driversReducers.carsData.responseStatus,
     loading: state.authReducer.driversReducers.carsData.loading,
 
@@ -310,4 +324,4 @@ const mapStateToProps = state=>({
     PlacesLoading:state.authReducer.commonReducer.commonAdvertPlacesReducer.loading,
 })
 
-export default withStyles(dialogStyle)(connect(mapStateToProps,{showCarRegistrationModal,carsStore})(RegisterCarsDialog))
+export default withStyles(dialogStyle)(connect(mapStateToProps,{categoriesFetch,showCarRegistrationModal,carsStore})(RegisterCarsDialog))

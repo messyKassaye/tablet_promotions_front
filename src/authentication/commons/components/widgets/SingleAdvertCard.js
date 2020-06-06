@@ -87,7 +87,7 @@ class SingleAdvertCard extends Component {
             </div>
         } else if (advert.payment_status !== null && advert.status === 'on_progress') {
             return <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}}>
-                <span>Payment is done and on process</span>
+                <span>Payment is not done and on process</span>
                 <Button
                     onClick={() => this.complain(advert)}
                     color='primary'

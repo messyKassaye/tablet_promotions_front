@@ -69,6 +69,7 @@ class NewCompany extends React.Component {
                         id:''
                     }
                 })
+                window.location.reload()
             },2000)
         }
     }

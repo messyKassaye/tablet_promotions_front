@@ -123,7 +123,7 @@ function HomeBar({t}) {
                             <img
                                 alt='Ride ads'
                                 src={logo}
-                                width='62' height='55'
+                                width='62' height='45'
                                 className={classes.brandIcon}/>
                         </Link>
                         <div>

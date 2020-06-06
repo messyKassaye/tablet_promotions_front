@@ -13,6 +13,7 @@ class ViewImageCard extends Component {
             loading:false,
             submitted:false,
             finished:false,
+            approved_not_real:false,
             formData:{
                 status:''
             }
@@ -51,7 +52,8 @@ class ViewImageCard extends Component {
         if(nextProps.response.status){
             this.setState({
                 submitted:false,
-                loading:false
+                loading:false,
+                approved_not_real:true
             })
         }
     }
@@ -65,11 +67,7 @@ class ViewImageCard extends Component {
         return (
             <Card>
                 <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={carAds.picture}
-                        title={`Advert on ${carAds.advert_time}`}
-                    />
+                    <img src={`data:image/jpg;base64, ${carAds.picture}`} height={200} width={'100%'}/>
                     <CardContent>
 
                         <div style={{display:'flex',flexDirection:'row'}}>
@@ -102,8 +100,8 @@ class ViewImageCard extends Component {
                                                     This advert is approved as not real advert
                                                 </Typography>
                                                 <LoadingButton
-                                                    color={"primary"}
-                                                    variant={"outlined"}
+                                                    color={"secondary"}
+                                                    variant={"contained"}
                                                     style={{textTransform:'none',marginTop:10}}
                                                     disabled={!isEnabled || this.state.submitted}
                                                     loading={setLoading}

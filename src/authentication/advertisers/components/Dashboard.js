@@ -7,16 +7,12 @@ import {connect} from "react-redux";
 import {me} from "../../state/actions/usersActions";
 import AdvertiserCarAndMedia from "./widgets/AdvertiserCarAndMedia";
 import DashboardAdverts from "./widgets/DashboardAdverts";
-import UnpaidAdverts from "./widgets/UnpaidAdverts";
-import WaitingApprovalAdverts from "./widgets/WaitingApprovalAdverts";
 import NewsAndNotifications from "./widgets/NewsAndNotifications";
 class Dashboard extends React.Component{
 
     constructor(props) {
         super(props);
-
     }
-
 
     render() {
         const {classes} = this.props

@@ -25,7 +25,7 @@ class AdvertiserCard extends Component {
         this.props.showMainDialog({
             show: true,
             title: 'Add new Advert',
-            page: <AddNewAdvert form={{type:'',data:null}} company={this.props.user.relations.companies}/>,
+            page: <AddNewAdvert form={{type:'',data:null}} company={this.props.user.relations.companies} from={''}/>,
             actions: {
                 on: false,
                 path: '',

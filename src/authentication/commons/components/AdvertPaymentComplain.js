@@ -62,8 +62,8 @@ class AdvertPaymentComplain extends Component {
                         path:'',
                         id:''
                     }
-                },2000)
-            })
+                })
+            },2000)
         }
     }
 

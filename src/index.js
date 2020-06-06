@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import theme from './themes/app_theme'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import i18n from './i18n'
 import { I18nextProvider } from 'react-i18next';
 import * as serviceWorker from './serviceWorker';

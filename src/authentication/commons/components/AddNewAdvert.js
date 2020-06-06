@@ -23,7 +23,8 @@ import Typography from "@material-ui/core/Typography";
 import {showMainDialog} from "../../admin/state/action/dialogAction";
 import AdvertPaymentTransaction from "./AdvertPaymentTransaction";
 import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
-
+import NewCompany from "../../advertisers/components/NewCompany";
+import {companyIndex} from "../../advertisers/state/action/companiesAction";
 
 class AddNewAdvert extends Component {
 
@@ -49,6 +50,7 @@ class AddNewAdvert extends Component {
             finished: false,
         }
     }
+
 
 
     handleChange = (event,values)=>{
@@ -131,6 +133,7 @@ class AddNewAdvert extends Component {
         this.setState(formData)
     }
     componentDidMount() {
+        this.props.companyIndex()
         this.props.commonFetchAdvertMedia()
         this.props.commonFetchAdvertPlaces()
 
@@ -177,125 +180,162 @@ class AddNewAdvert extends Component {
 
         return (
             <div>
+
                 {
-                    this.state.isAdvertSaved
+                    this.props.companyLoading
                     ?
                         (
-                            <div style={{display:'flex',flexDirection:'column'}}>
-                                <Typography style={{color:green[600]}}>
-                                    Thank you for advertising your product on our company.
-                                    The last step is finishing your payment and uploading your advertisement media data
-                                </Typography>
-                                <AdvertPaymentTransaction advert={this.props.response.data}/>
-                            </div>
+                            <React.Fragment>
+                                <Skeleton width='100%' height={20} style={{backgroundColor:grey[500]}}/>
+                                <Skeleton width='100%' height={20} style={{backgroundColor:grey[500]}}/>
+                                <Skeleton width='100%' height={20} style={{backgroundColor:grey[500]}}/>
+                                <Skeleton width='100%' height={20} style={{backgroundColor:grey[500]}}/>
+                                <Skeleton width='100%' height={20} style={{backgroundColor:grey[500]}}/>
+                            </React.Fragment>
+
                         )
                     :
                         (
-                            <ValidatorForm className={classes.form} onSubmit={this.handleSubmit}>
-                                <Typography style={{color:green[600]}}>{this.props.response.message}</Typography>
-                                <Autocomplete
-                                    className={classes.textInput}
-                                    multiple={true}
-                                    onChange={this.handleAutocompleteChange}
-                                    value={this.state.formData.company}
-                                    id="combo-box-demo"
-                                    options={this.props.company}
-                                    getOptionLabel={option => option.name}
-                                    renderInput={params => (
-                                        <TextField onChange={this.handleChange} {...params} placeholder="Company name" variant="standard" fullWidth />
-                                    )}
-                                />
+                           <div>
+                               {
+                                   this.props.companies.length<=0
+                                   ?
+                                       (
+                                          <div>
+                                              <Typography style={{color:green[500]}}>Before adding your advert please tell us your company name.</Typography>
+                                              <NewCompany form={{type:'',data:''}} from={'new_advert'}/>
+                                          </div>
+                                       )
+                                   :
+                                       (
+                                           <div>
+                                               {
+                                                   this.state.isAdvertSaved
+                                                       ?
+                                                       (
+                                                           <div style={{display:'flex',flexDirection:'column'}}>
+                                                               <Typography style={{color:green[600]}}>
+                                                                   Thank you for advertising your product on our company.
+                                                                   The last step is finishing your payment and uploading your advertisement media data
+                                                               </Typography>
+                                                               <AdvertPaymentTransaction advert={this.props.response.data}/>
+                                                           </div>
+                                                       )
+                                                       :
+                                                       (
+                                                           <ValidatorForm className={classes.form} onSubmit={this.handleSubmit}>
+                                                               <Typography style={{color:green[600]}}>{this.props.response.message}</Typography>
+                                                               <Autocomplete
+                                                                   className={classes.textInput}
+                                                                   multiple={true}
+                                                                   onChange={this.handleAutocompleteChange}
+                                                                   value={this.state.formData.company}
+                                                                   id="combo-box-demo"
+                                                                   options={this.props.company}
+                                                                   getOptionLabel={option => option.name}
+                                                                   renderInput={params => (
+                                                                       <TextField onChange={this.handleChange} {...params} placeholder="Company name" variant="standard" fullWidth />
+                                                                   )}
+                                                               />
 
-                                <TextValidator
-                                    name='product_name'
-                                    label='Product name'
-                                    className={classes.textInput}
-                                    onChange={this.handleChange}
-                                    value={this.state.formData.product_name}
-                                />
+                                                               <TextValidator
+                                                                   name='product_name'
+                                                                   label='Product name'
+                                                                   className={classes.textInput}
+                                                                   onChange={this.handleChange}
+                                                                   value={this.state.formData.product_name}
+                                                               />
 
-                                <TextValidator
-                                    name='required_views_number'
-                                    label='Expected play number of this product'
-                                    className={classes.textInput}
-                                    onChange={this.handleChange}
-                                    value={this.state.formData.required_views_number}
-                                />
+                                                               <TextValidator
+                                                                   name='required_views_number'
+                                                                   label='Expected play number of this product'
+                                                                   className={classes.textInput}
+                                                                   onChange={this.handleChange}
+                                                                   value={this.state.formData.required_views_number}
+                                                               />
 
-                                {
-                                    this.props.loading
-                                        ?
-                                        (
-                                            <Skeleton width='100%' height={50} style={{backgroundColor:grey[500]}}/>
-                                        )
-                                        :
-                                        (
-                                            <FormControl className={classes.formControl}>
-                                                <InputLabel
-                                                    htmlFor="demo-controlled-open-select">{'Select advertisement media type'}</InputLabel>
-                                                <Select
-                                                    name='advertisement_media_id'
-                                                    value={this.state.mediaTypeValue}
-                                                    open={this.state.isMediaSelected}
-                                                    onClose={this.handleMediaSelect}
-                                                    onOpen={this.handleMediaSelectOpen}
-                                                    onChange={this.handleMediaSelectChange}
-                                                >
-                                                    {
-                                                        this.props.media.map(items => (
-                                                            <MenuItem key={items.name} value={items.id}
-                                                                      name={items.name}>{items.name}</MenuItem>
-                                                        ))
-                                                    }
-                                                </Select>
-                                            </FormControl>
-                                        )
-                                }
+                                                               {
+                                                                   this.props.loading
+                                                                       ?
+                                                                       (
+                                                                           <Skeleton width='100%' height={50} style={{backgroundColor:grey[500]}}/>
+                                                                       )
+                                                                       :
+                                                                       (
+                                                                           <FormControl className={classes.formControl}>
+                                                                               <InputLabel
+                                                                                   htmlFor="demo-controlled-open-select">{'Select advertisement media type'}</InputLabel>
+                                                                               <Select
+                                                                                   name='advertisement_media_id'
+                                                                                   value={this.state.mediaTypeValue}
+                                                                                   open={this.state.isMediaSelected}
+                                                                                   onClose={this.handleMediaSelect}
+                                                                                   onOpen={this.handleMediaSelectOpen}
+                                                                                   onChange={this.handleMediaSelectChange}
+                                                                               >
+                                                                                   {
+                                                                                       this.props.media.map(items => (
+                                                                                           <MenuItem key={items.name} value={items.id}
+                                                                                                     name={items.name}>{items.name}</MenuItem>
+                                                                                       ))
+                                                                                   }
+                                                                               </Select>
+                                                                           </FormControl>
+                                                                       )
+                                                               }
 
-                                {
-                                    this.props.advertPlaceLoading
-                                        ?
-                                        (
-                                            <Skeleton width='100%' height={50} style={{backgroundColor:grey[500]}}/>
-                                        )
-                                        :
-                                        (
-                                            <FormControl className={classes.formControl}>
-                                                <InputLabel >Select advertisement places</InputLabel>
-                                                <Select
-                                                    multiple
-                                                    value={this.state.advertPlaceValue}
-                                                    onChange={this.handleAdvertPlacesChange}
-                                                    input={<Input />}
-                                                    renderValue={selected => selected.join(', ')}
-                                                >
-                                                    {this.props.advertPlaces.map(items => (
-                                                        <MenuItem key={items.city} value={items.id}>
-                                                            <Checkbox checked={this.state.advertPlaceValue.indexOf(items.id) > -1} />
-                                                            <ListItemText primary={items.city} />
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </FormControl>
-                                        )
-                                }
+                                                               {
+                                                                   this.props.advertPlaceLoading
+                                                                       ?
+                                                                       (
+                                                                           <Skeleton width='100%' height={50} style={{backgroundColor:grey[500]}}/>
+                                                                       )
+                                                                       :
+                                                                       (
+                                                                           <FormControl className={classes.formControl}>
+                                                                               <InputLabel >Select advertisement places</InputLabel>
+                                                                               <Select
+                                                                                   multiple
+                                                                                   value={this.state.advertPlaceValue}
+                                                                                   onChange={this.handleAdvertPlacesChange}
+                                                                                   input={<Input />}
+                                                                                   renderValue={selected => selected.join(', ')}
+                                                                               >
+                                                                                   {this.props.advertPlaces.map(items => (
+                                                                                       <MenuItem key={items.city} value={items.id}>
+                                                                                           <Checkbox checked={this.state.advertPlaceValue.indexOf(items.id) > -1} />
+                                                                                           <ListItemText primary={items.city} />
+                                                                                       </MenuItem>
+                                                                                   ))}
+                                                                               </Select>
+                                                                           </FormControl>
+                                                                       )
+                                                               }
 
-                                <LoadingButton
-                                    color="primary"
-                                    variant="contained"
-                                    type="submit"
-                                    disabled={!isEnabled || this.state.submitted}
-                                    loading={setLoading}
-                                    text={t('dialog.addNewBank.addNewBakButton')}
-                                    done={finished}
-                                >
-                                    {
-                                        t('dialog.addNewBank.addNewBakButton')
-                                    }
-                                </LoadingButton>
-                            </ValidatorForm>
+                                                               <LoadingButton
+                                                                   color="primary"
+                                                                   variant="contained"
+                                                                   type="submit"
+                                                                   disabled={!isEnabled || this.state.submitted}
+                                                                   loading={setLoading}
+                                                                   text={t('dialog.addNewBank.addNewBakButton')}
+                                                                   done={finished}
+                                                               >
+                                                                   {
+                                                                       t('dialog.addNewBank.addNewBakButton')
+                                                                   }
+                                                               </LoadingButton>
+                                                           </ValidatorForm>
+                                                       )
+                                               }
+                                           </div>
+
+                                       )
+                               }
+                           </div>
                         )
                 }
+
             </div>
 
 
@@ -310,8 +350,10 @@ const mapStateToProps = state=>({
     loading:state.authReducer.commonReducer.commonAdvertMediaReducer.loading,
     advertPlaces:state.authReducer.commonReducer.commonAdvertPlacesReducer.advertPlaces,
     advertPlaceLoading: state.authReducer.commonReducer.commonAdvertPlacesReducer.loading,
-    response:state.authReducer.commonReducer.commonAdvertsReducer.response
+    response:state.authReducer.commonReducer.commonAdvertsReducer.response,
+    companies:state.authReducer.advertisersReducers.companyData.companies,
+    companyLoading:state.authReducer.advertisersReducers.companyData.loading
 })
 export default withStyles(adminMainDialogStyle)
-(connect(mapStateToProps,{commonFetchAdvertMedia,commonFetchAdvertPlaces,commonStoreAdvert,showMainDialog})
+(connect(mapStateToProps,{companyIndex,commonFetchAdvertMedia,commonFetchAdvertPlaces,commonStoreAdvert,showMainDialog})
 (translate('common')(AddNewAdvert)));

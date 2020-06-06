@@ -107,7 +107,7 @@ class Banks extends React.Component{
                                         <Grid container spacing={2}>
                                             {
                                                 this.props.accounts.map(banks=>(
-                                                    <Grid key={banks.id} item md={4} sm={12}>
+                                                    <Grid key={banks.id} item md={6} sm={12}>
                                                         <Card style={{backgroundColor:'#31418F',color:'white'}}>
                                                             <CardHeader
                                                                 avatar={
@@ -159,7 +159,7 @@ class Banks extends React.Component{
                                                                 <Typography variant="body2" component="p">
                                                                   <span style={{fontSize:'1.2em'}}>
                                                                       Account Holder full name:
-                                                                  </span> {banks.account_holder_name}
+                                                                  </span> {banks.account_holder_full_name}
                                                                 </Typography>
                                                             </CardContent>
                                                         </Card>

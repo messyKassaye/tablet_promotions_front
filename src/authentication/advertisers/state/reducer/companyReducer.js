@@ -1,7 +1,8 @@
-import {STORE_COMPANY, UPDATE_COMPANY} from "../constants/advertConstants";
+import {FETCH_COMPANIES, STORE_COMPANY, UPDATE_COMPANY} from "../constants/advertConstants";
 
 const initialState = {
     loading:true,
+    companies:[],
     response:{
         status:false,
         message:'',
@@ -25,6 +26,12 @@ export default function (state=initialState,action) {
             return {
                 ...state,
                 response: action.payload
+            }
+        case FETCH_COMPANIES:
+            return {
+                ...state,
+                companies: action.payload,
+                loading: false
             }
         default:
             return state
