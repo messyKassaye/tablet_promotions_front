@@ -134,7 +134,7 @@ class HowItWorks extends React.Component{
                             <Grid item md={4} xs={12} sm={12}>
                                 <Card className={classes.cards}>
                                     <CardHeader
-                                        title={t('home.how_it_works.drivers')}
+                                        title={t('home.how_it_works.carOwners')}
                                         avatar={<LocalTaxiIcon/>}
                                     />
                                     <Divider/>

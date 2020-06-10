@@ -70,7 +70,7 @@ class AdvertMediaFileUploader extends Component {
                     onChange={this.handleFile}
                     ref={this.inputFile}
                     style={{display: 'none'}}
-                    accept={`${this.props.advert.advert_media_type.name}/*`}
+                    accept={`${this.props.advert.advert_media_type.name}/*,.mkv`}
                     id="outlined-button-file"
                     type="file"
                 />

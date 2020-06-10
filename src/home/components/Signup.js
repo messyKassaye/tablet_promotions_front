@@ -257,8 +257,8 @@ import {grey} from "@material-ui/core/colors";
 
      const  mapStateToProps = state=>(
          {
-             roles:state.role.roles,
-             loading:state.role.loading
+             roles:state.homeReducer.roleReducer.roles,
+             loading:state.homeReducer.roleReducer.loading
          }
      )
 

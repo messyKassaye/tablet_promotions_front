@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import driversReducer from "../drivers/state/driversReducer";
+import driversReducer from "../carOwners/state/driversReducer";
 import banksReducer from "./reducers/banksReducer";
 import bankAccountReducer from "./reducers/bankAccountReducer";
 import advertismentMediaTypeReducer from "./reducers/advertismentMediaTypeReducer";

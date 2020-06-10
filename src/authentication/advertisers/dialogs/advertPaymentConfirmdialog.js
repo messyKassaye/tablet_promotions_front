@@ -9,7 +9,7 @@ import LoadingButton from "../../../home/components/widgets/LoadingButton";
 import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import withStyles from "@material-ui/core/styles/withStyles";
-import bankDialogstyle from "../../drivers/style/dialogs";
+import bankDialogstyle from "../../carOwners/style/dialogs";
 import {showAdvertPaymentConfirmDialog} from "../state/action/advertiserDialogActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FormControl from "@material-ui/core/FormControl";

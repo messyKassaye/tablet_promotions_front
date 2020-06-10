@@ -84,7 +84,7 @@ class UsersCard extends Component {
                                                     <CardHeader
                                                         style={{color: green[500]}}
                                                         title={this.filterByRole(this.props.users, 'Driver')}
-                                                        subheader={'drivers'}
+                                                        subheader={'carOwners'}
                                                     />
                                                 </Card>
                                             </Grid>

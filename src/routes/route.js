@@ -4,6 +4,7 @@ import PrivateRoutes from "./PrivateRoute";
 import Authenticated from "../authentication/Authenticated";
 import AuthenticatedRoute from "./AuthenticationRoute";
 import HomeBar from "../home/components/HomeBar";
+import DriversLink from "../home/components/DriversLink";
 
 class Routes extends React.Component{
 

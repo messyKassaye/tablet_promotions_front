@@ -28,7 +28,7 @@
         "register_me_as": {
           "label": "Register me as:",
           "translation": {
-            "Driver": "Driver",
+            "Car owner": "Car owner",
             "Advertiser": "Advertiser",
             "Down loader": "Downloader"
           }
@@ -77,7 +77,7 @@
       "title": "How it works",
       "description": "Ride ads is an Internet-based organization dedicated to working on cars.",
       "organizations": "Advertisers",
-      "drivers": "Drivers and car owners",
+      "carOwners": "Car owners",
       "downloader": "Downloader",
       "organizations_description": "According to Ride Advertising, investors are individuals or individuals who are willing to promote the product of their company. Any investor or organization wishing to advertise may choose to advertise on the registration form or become a member of Ride ads. Once the registration is completed, it means that it will start promoting the products of the organization using the app designed for investors",
       "organizations_span": "According to Ride Advertising, investors are individuals or individuals who are willing to promote the product of their company. Any investor or organization that wants to advertise...",

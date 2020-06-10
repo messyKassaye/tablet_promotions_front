@@ -12,8 +12,8 @@ import LoadingButton from "../../../../home/components/widgets/LoadingButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SetPlaceStyle from "../../../downloader/components/styles/setPlaceStyle";
 import {commonFetchAdvertPlaces} from "../../state/actions/commonAdvertPlacesAction";
-import {updateCars} from "../../../drivers/state/actions/carsActions";
-import {showCarRegistrationModal} from "../../../drivers/state/actions/dialogActions";
+import {updateCars} from "../../../carOwners/state/actions/carsActions";
+import {showCarRegistrationModal} from "../../../carOwners/state/actions/dialogActions";
 
 class AddressCard extends Component {
     constructor(props) {
