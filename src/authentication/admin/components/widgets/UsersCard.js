@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardContent, CardHeader, Grid,Avatar} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Grid,Avatar,Typography} from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import Divider from "@material-ui/core/Divider";
 import SingleLoading from "../../../commons/loading/SingleLoading";
@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {fetchUsers} from "../../state/action/adminUsersAction";
 import CardheaderLoading from "../../../commons/loading/CardheaderLoading";
 import {fetchAdverts} from "../../state/action/advertsAction";
+import nFormatter from "../../../services/MainServices";
 class UsersCard extends Component {
     constructor(props) {
         super(props);
@@ -17,29 +18,20 @@ class UsersCard extends Component {
 
     componentDidMount() {
         this.props.fetchUsers()
+        this.props.fetchAdverts()
         //this.interval()
     }
 
     filterByRole = (data, role) => {
         return data.filter(item => {
-            return item.role[0]['name'] === role
+            return item.role[0]['id'] === role
         }).length
     }
 
     filterTopAdvertedCompanies = (data)=>{
-        let response= data.filter(user=>{
-            return user.role[0].name==='Driver'
-        }).filter(user=>{
-            return user.cars.length>0
-        }).map(user=>{
-            return user.cars.sort((a,b)=>{
-                if(a.adverts.length>b.adverts.length){
-                    return -1
-                }else {
-                    return 1
-                }
-            })
-        })
+        let response= data.sort((a,b)=>(
+            a.required_views_number<=b.required_views_number
+        ))
         return response
     }
 
@@ -55,7 +47,7 @@ class UsersCard extends Component {
                             avatar={<PersonIcon/>}
                         />
                         <Divider/>
-                        <CardContent style={{padding:12}}>
+                        <CardContent style={{padding:32}}>
                             {
                                 this.props.userLoading
                                     ?
@@ -73,8 +65,8 @@ class UsersCard extends Component {
                                                 <Card elevation={0}>
                                                     <CardHeader
                                                         style={{color: green[500]}}
-                                                        title={this.filterByRole(this.props.users, 'Advertiser')}
-                                                        subheader={'advertiser'}
+                                                        title={this.filterByRole(this.props.users, 3)}
+                                                        subheader={'Advertiser'}
                                                     />
                                                 </Card>
                                             </Grid>
@@ -83,8 +75,8 @@ class UsersCard extends Component {
                                                 <Card elevation={0}>
                                                     <CardHeader
                                                         style={{color: green[500]}}
-                                                        title={this.filterByRole(this.props.users, 'Driver')}
-                                                        subheader={'carOwners'}
+                                                        title={this.filterByRole(this.props.users, 2)}
+                                                        subheader={'Car Owners'}
                                                     />
                                                 </Card>
                                             </Grid>
@@ -93,8 +85,8 @@ class UsersCard extends Component {
                                                 <Card elevation={0}>
                                                     <CardHeader
                                                         style={{color: green[500]}}
-                                                        title={this.filterByRole(this.props.users, 'Down loader')}
-                                                        subheader={'downloader'}
+                                                        title={this.filterByRole(this.props.users, 4)}
+                                                        subheader={'Drivers'}
                                                     />
                                                 </Card>
                                             </Grid>
@@ -109,13 +101,13 @@ class UsersCard extends Component {
                 <Grid item md={6} xs={12} sm={12}>
                     <Card style={{backgroundColor:green[500],color:'white'}}>
                         <CardHeader
-                            title={'Top adverted cars'}
+                            title={'Top adverted companies'}
                             avatar={<VideocamIcon/>}
                         />
                         <Divider/>
                         <CardContent>
                             {
-                                this.props.userLoading
+                                this.props.advertLoading
                                     ?
                                     (
                                         <Grid container spacing={2}>
@@ -127,20 +119,25 @@ class UsersCard extends Component {
                                     (
                                         <Grid container spacing={2}>
                                             {
-                                                this.filterTopAdvertedCompanies(this.props.users)
-                                                    .map(car=>(
-                                                        <Grid item key={car[0].plate_number} md={6} xs={12} sm={12}>
-                                                            <Card>
-                                                                <CardHeader
-                                                                    title={`${car[0].plate_number}`}
-                                                                    avatar={<Avatar
-                                                                        style={{backgroundColor:deepOrange[500],color:'white'}}
-                                                                        width={40}
-                                                                        height={40}>{car[0].car_category[0].name.charAt(0)}</Avatar>
-                                                                    }
-                                                                    subheader={`Total adverts: ${car[0].adverts.length}`}
-                                                                />
-
+                                                this.filterTopAdvertedCompanies(this.props.adverts)
+                                                    .map(advert=>(
+                                                        <Grid item key={advert.id} md={6} xs={12} sm={12}>
+                                                           <Card>
+                                                               <CardHeader
+                                                               title={advert.company.name}
+                                                               subheader={advert.product_name}
+                                                               avatar={<Avatar>{advert.company.name.charAt(0)}</Avatar>}
+                                                               />
+                                                               <CardContent
+                                                                   style={{
+                                                                       padding:0,
+                                                                       display:'flex',
+                                                                       flexDirection:'column',
+                                                                       alignItems:'center'}}>
+                                                                   <Typography gutterBottom variant={"h6"} color={"primary"}>
+                                                                       {`Expected play: ${nFormatter(advert.required_views_number,1)}`}
+                                                                   </Typography>
+                                                               </CardContent>
                                                             </Card>
                                                         </Grid>
                                                     ))
@@ -163,6 +160,8 @@ class UsersCard extends Component {
 const mapStateToProps = state => ({
     users: state.authReducer.adminReducers.adminUsersReducers.users,
     userLoading: state.authReducer.adminReducers.adminUsersReducers.loading,
+    adverts:state.authReducer.adminReducers.advertReducer.adverts,
+    advertLoading:state.authReducer.adminReducers.advertReducer.loading
 })
 
 export default connect(mapStateToProps,{fetchUsers,fetchAdverts})(UsersCard);

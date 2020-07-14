@@ -12,6 +12,8 @@ import {connect} from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
 import {translate} from "react-i18next";
+import {me} from "../../../state/actions/usersActions";
+
 class PaymentAndWithdrawal extends React.Component{
 
     constructor(props) {
@@ -21,11 +23,12 @@ class PaymentAndWithdrawal extends React.Component{
 
     componentDidMount() {
         this.props.financeFetch()
+        this.props.me()
     }
 
     filterWithdrawal = (data)=>{
         let filteredData = data.filter(items=>{
-           return  items.withdrawal >0
+           return  items.status ==='Payed'
         })
         return filteredData
     }
@@ -45,7 +48,8 @@ class PaymentAndWithdrawal extends React.Component{
         return (
             <div>
                 {
-                    this.props.loading?
+                    this.props.loading &&this.props.paymentLoading
+                        ?
                         (
                             <Skeleton variant='rect' width='100%' height={150}/>
                         )
@@ -58,13 +62,19 @@ class PaymentAndWithdrawal extends React.Component{
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row'}}>
                                         <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                            {t('driver.payment_and_withdrawal.payment')}: {`${this.filterCredit(this.props.finance).length}`}
+                                            {t('driver.payment_and_withdrawal.payment')}:
+                                            {
+                                                this.filterCredit(this.props.payments).length
+                                            }
                                         </Typography>
 
                                         <Divider orientation='vertical' style={{height: 20, padding: 1, marginRight: 10,marginLeft:10,backgroundColor:'white'}}/>
 
                                         <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
-                                            <span>{t('driver.payment_and_withdrawal.withdraw')}</span>: {`${this.filterWithdrawal(this.props.finance).length} `}
+                                            <span>{t('driver.payment_and_withdrawal.withdraw')}</span>:
+                                            {
+                                                this.filterWithdrawal(this.props.user.relations.withdraws).length
+                                            }
                                         </Typography>
                                     </div>
                                 </CardContent>
@@ -84,9 +94,11 @@ class PaymentAndWithdrawal extends React.Component{
 }
 
 const mapStateToProps = state=>({
-    finance:state.authReducer.driversReducers.financeData.finance,
-    loading:state.authReducer.driversReducers.financeData.loading,
-
+    user:state.userData.user,
+    loading:state.userData.loading,
+    payments:state.authReducer.driversReducers.paymentsData.payments,
+    paymentLoading:state.authReducer.driversReducers.paymentsData.loading
 })
 
-export default translate('common')(withStyles(authstyle)(connect(mapStateToProps,{financeFetch})(PaymentAndWithdrawal)))
+export default translate('common')
+(withStyles(authstyle)(connect(mapStateToProps,{financeFetch,me})(PaymentAndWithdrawal)))

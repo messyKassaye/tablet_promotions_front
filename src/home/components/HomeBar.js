@@ -16,7 +16,7 @@ import Languages from "./languages";
 import About from './About'
 import Home from './Home'
 import Contact from './Contact'
-import Pricing from './Pricing'
+import Pricing from './Cars'
 import Login from './Login'
 import Signup from './Signup'
 import {Link,Switch,Route} from 'react-router-dom'
@@ -30,6 +30,10 @@ import {translate} from "react-i18next";
 import NotFound from "../../errors/NotFound";
 import Footer from "./footer";
 import ResetPassword from "./widgets/ResetPassword";
+import Cars from "./Cars";
+import AdvertMedia from "./AdvertMedia";
+import VideoPlayer from "./widgets/VideoPlayer";
+import DriverLink from "./DriverLink";
 
 function HomeBar({t}) {
    const  classes = useStyles();
@@ -69,7 +73,7 @@ function HomeBar({t}) {
         >
             <AppBar style={{'position':'relative','paddingLeft':"30px",'paddingRight':'30px'}}>
                 <Toolbar color='primary'>
-                    <h2>{'    Ride ads   '}</h2>
+                    <h2>{'    Gulo ad   '}</h2>
                 </Toolbar>
             </AppBar>
 
@@ -209,9 +213,11 @@ function HomeBar({t}) {
                         <Route path='/' component={Home} exact/>
                         <Route path='/about' component={About}/>
                         <Route path='/contact' component={Contact}/>
-                        <Route path='/pricing' component={Pricing}/>
+                        <Route path='/cars' component={Cars}/>
+                        <Route path={'/advert_media'} component={AdvertMedia}/>
                         <Route path='/login' component={Login}/>
                         <Route path='/signup' component={Signup}/>
+                        <Route path={'/driver_link/:id'} component={DriverLink}/>
                         <Route path={'/reset_password'} component={ResetPassword}/>
                         <Route path='*' component={NotFound}/>
                     </Switch>

@@ -4,11 +4,11 @@ import {me} from "../../../state/actions/usersActions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import advertsStyle from "../../style/adverts";
 import {CircularProgress} from "@material-ui/core";
-import TodaysAdvert from "./smallDevices/TodaysAdvert";
 import Grid from "@material-ui/core/Grid";
 import WeeksAd from "./smallDevices/WeeksAd";
 import TotalAds from "./smallDevices/TotalAds";
 import AdvertInTable from "./advertInTable";
+import AllAdverts from "./AllAdverts";
 
 class Adverts extends React.Component{
 
@@ -56,25 +56,9 @@ class Adverts extends React.Component{
                             <Grid container spacing={2}>
                                 <Grid item md={12} xs={12}>
                                     {
-                                        <TodaysAdvert  today={this.props.user.helpers.today_date} cars={this.props.user.relations.cars}/>
+                                        <AllAdverts  today={this.props.user.helpers.today_date} cars={this.props.user.relations.cars}/>
 
                                     }
-                                </Grid>
-
-                                <Grid item md={12} xs={12}>
-                                    {
-                                        <WeeksAd cars={this.props.user.relations.cars}/>
-                                    }
-                                </Grid>
-
-                                <Grid item md={12} xs={12}>
-                                    {
-                                        <TotalAds cars={this.props.user.relations.cars}/>
-                                    }
-                                </Grid>
-
-                                <Grid item md={12} xs={12} className={classes.big_device}>
-                                        <AdvertInTable/>
                                 </Grid>
                             </Grid>
                         )

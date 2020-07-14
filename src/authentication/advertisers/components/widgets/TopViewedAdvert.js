@@ -6,6 +6,10 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import {deepPurple, grey} from "@material-ui/core/colors";
 import {me} from "../../../state/actions/usersActions";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import withStyles from "@material-ui/core/styles/withStyles";
+import myAdvertStyle from "../../styles/myadvertsStyle";
+import {translate} from "react-i18next";
 class TopViewedAdvert extends Component {
 
     componentDidMount() {
@@ -25,12 +29,13 @@ class TopViewedAdvert extends Component {
     }
 
     render() {
+        const {classes,t} = this.props
         return (
             <Card>
                 <CardHeader
-                    title={'Top viewed adverts'}
+                    title={t('advertiser.dashboard.dashboardAdverts.topViewedAdverts')}
                     avatar={<VisibilityIcon/>}
-                    style={{backgroundColor:deepPurple[500],color:'white'}}/>
+                    style={{backgroundColor:grey[200]}}/>
                 <Divider/>
                 <CardContent>
                     {
@@ -55,10 +60,18 @@ class TopViewedAdvert extends Component {
                                     {
                                         this.myAdverts(this.props.user.relations.companies)
                                             .map(advert => (
-                                                <Grid item md={4} xs={12} sm={12}>
+                                                <Grid key={advert.id} item md={4} xs={12} sm={12}>
                                                     <Card>
                                                         <CardHeader
-                                                            title={advert.product_name}
+                                                            title={
+                                                                <Typography
+                                                                    className={classes.link}
+                                                                    component={Link}
+                                                                    to={`/auth/${this.props.user.relations.role[0].name}/advert/${advert.id}`}
+                                                                >
+                                                                    {advert.product_name}
+                                                                </Typography>
+                                                            }
                                                             subheader={advert.advert_media_type.name}
                                                             avatar={
                                                                 <Avatar>{advert.product_name.charAt(0)}</Avatar>}
@@ -66,10 +79,10 @@ class TopViewedAdvert extends Component {
                                                         <Divider/>
                                                         <CardContent>
                                                             <Typography>
-                                                                {`Expected play: ${advert.required_views_number.toLocaleString()}`}
+                                                                {`${t('advertiser.dashboard.dashboardAdverts.expectedPlay')}: ${advert.required_views_number.toLocaleString()}`}
                                                             </Typography>
                                                             <Typography>
-                                                                {`Total Views: ${advert.views.length}`}
+                                                                {`${t('advertiser.dashboard.dashboardAdverts.currentViews')}: ${advert.views.length}`}
                                                             </Typography>
                                                         </CardContent>
                                                     </Card>
@@ -92,4 +105,5 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps,{me})(TopViewedAdvert);
+export default translate('common')
+(withStyles(myAdvertStyle)(connect(mapStateToProps,{me})(TopViewedAdvert)));

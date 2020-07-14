@@ -46,6 +46,25 @@
     "description": {
       "title": "title",
       "start_adverting": "ማስተዋወቅ ይጀምሩ"
+    },
+    "dashboard": {
+      "myAdverts": "ማስታዎቂያዎች",
+      "myCompanies": "ድርጅት",
+      "totalAdvertBudget": "ጠቅላላ የማስታዎቂያ ወጭ",
+      "dashboardAdverts": {
+        "adverts": "ማስታወቂያዎች",
+        "showAll": "ሁሉንም አሳይ",
+        "topViewedAdverts": "ብዙ የታዩ ማስታዎዊያዎች",
+        "expectedPlay": "የማስታዎቂያው ብዛት",
+        "currentViews":"የተጫወተው ማስታዎቂያ",
+        "payedAndWaitingApprovalAdverts": "የተከፈሉ እና ፍቃድ የሚጠብቁ ማስታዎቂያዎች",
+        "noAdvertIsFound": "ምንም ማስታዎቂያ ማግኘት አልቻልንም ):",
+        "unpaidAdverts": "ያልተከፈሉ ማስታዎቂያዎች"
+      },
+      "advertMediaAndCar": {
+        "carsTitle": "የመኪና አይነቶች",
+        "mediaTitle": "የማስታዎቂያ መሳሪያዎች አይነት"
+      }
     }
   }
 }

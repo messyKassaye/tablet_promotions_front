@@ -34,6 +34,7 @@ class WithdrawalRequestDialog extends React.Component{
             fullScreen: false,
             isSelectOpened:false,
             selectValue:'',
+            showBigAmount:false,
             formData:{
                 bank_id:'',
                 amount:'',
@@ -93,6 +94,7 @@ class WithdrawalRequestDialog extends React.Component{
             if(nextProps.response.status){
                 setTimeout(()=>{
                     this.handleClose()
+                    window.location.reload()
                 },2000)
             }
         }
@@ -106,6 +108,21 @@ class WithdrawalRequestDialog extends React.Component{
 
     openBankSetting = ()=>{
         this.props.showBankAccountSetterModal(true)
+    }
+
+    keyUp = (event)=> {
+        let balance = this.props.user.relations.balance.balance;
+        console.log(`Balance ${balance}`)
+        let value = event.target.value;
+        if (value > balance) {
+            this.setState(
+                {showBigAmount: true}
+            )
+        }else {
+            this.setState(
+                {showBigAmount: false}
+            )
+        }
     }
 
 
@@ -145,11 +162,13 @@ class WithdrawalRequestDialog extends React.Component{
                         this.props.response.status
                             ?
                             (
-                                <Typography
-                                    component='h6'
-                                    variant='body2' style={{color:green[500]}}>
-                                    {this.props.response.message}
-                                </Typography>
+                                <div style={{display:'flex',flexDirection:'column'}}>
+                                    <Typography
+                                        component='h6'
+                                        variant='body2' style={{color:green[500]}}>
+                                        {this.props.response.message}
+                                    </Typography>
+                                </div>
                             )
                             :
                             (
@@ -162,7 +181,7 @@ class WithdrawalRequestDialog extends React.Component{
                     }
 
                     {
-                        this.props.loading
+                        this.props.loading && this.props.userLoading
                         ?
                             (<React.Fragment>
                                 <Skeleton variant='rect' width='80%' height={6}/>
@@ -174,6 +193,16 @@ class WithdrawalRequestDialog extends React.Component{
                                 <ValidatorForm
                                     onSubmit={this.handleSubmit}
                                 >
+                                    {
+                                        this.state.showBigAmount
+                                            ?
+                                            (
+                                                <Typography style={{color:red[500]}}>
+                                                    The amount you are entering is bigger than your balance
+                                                </Typography>
+                                            )
+                                            :(null)
+                                    }
                                     {
                                         this.props.accounts.length>0
                                         ?
@@ -200,6 +229,7 @@ class WithdrawalRequestDialog extends React.Component{
                                                     <TextValidator
                                                         className={classes.text_input}
                                                         label='amount'
+                                                        onKeyUp={this.keyUp}
                                                         onChange={this.handleChange}
                                                         name="amount"
                                                         type='number'
@@ -234,15 +264,16 @@ class WithdrawalRequestDialog extends React.Component{
                 </DialogContent>
                 <DialogActions>
                     <LoadingButton
+                        style={{textTransform:'none'}}
                         color="primary"
                         variant="contained"
                         type="submit"
                         loading={setLoading}
                         done={finished}
-                        text='Register'
-                        disabled={!isEnabled ||this.state.submitted}
+                        text='Send withdraw request'
+                        disabled={!isEnabled ||this.state.submitted||this.state.showBigAmount}
                         onClick={this.handleSubmit}>
-                        Save car
+                        Send withdraw request
                     </LoadingButton>
                 </DialogActions>
             </Dialog>
@@ -257,7 +288,9 @@ const mapStateToProps = state=>(
         show: state.authReducer.driversReducers.dialogsData.showWithdrawalRequest,
         accounts:state.authReducer.bankAccountReducer.accounts,
         loading:state.authReducer.bankAccountReducer.loading,
-        response: state.authReducer.driversReducers.withdrawalsData.response
+        response: state.authReducer.driversReducers.withdrawalsData.response,
+        user:state.userData.user,
+        userLoading:state.userData.loading
     }
 )
 

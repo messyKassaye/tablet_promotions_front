@@ -12,13 +12,12 @@ class About extends React.Component{
                 <div className={classes.jumbotron}>
                     <h1>{t('home.about_us.about_message')}</h1>
                 </div>
-                <Container maxWidth={"lg"} className={classes.card}>
-                    <Card>
+                <Container maxWidth={"md"}>
+                    <Card  className={classes.card}>
                         <CardContent>
 
                         </CardContent>
                     </Card>
-
                 </Container>
             </div>
         )

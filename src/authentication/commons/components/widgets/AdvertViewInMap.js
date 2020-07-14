@@ -37,7 +37,7 @@ class AdvertViewInMap extends Component {
 
     render() {
         return (
-            <div style={{position:"absolute",left:10,top:10,right:10,zIndex:3525252}}>
+            <div>
                 <div>{`Lng: ${this.state.lng} lat: ${this.state.zoom}`}</div>
                 <div style={{height:600,width:'100%'}} ref={el => this.mapContainer = el} className='mapContainer' />
             </div>

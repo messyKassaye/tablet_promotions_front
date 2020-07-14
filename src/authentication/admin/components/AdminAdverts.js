@@ -104,6 +104,12 @@ class AdminAdverts extends Component {
         return onAirAdverts
     }
 
+    findCompletedAds = adverts=>{
+        return adverts.filter(advert=>{
+            return advert.status==='Completed'
+        })
+    }
+
 
     render() {
         const {classes,t} = this.props
@@ -202,7 +208,7 @@ class AdminAdverts extends Component {
                                                                )
                                                            :
                                                                (
-                                                                   <Typography color={"primary"}>We couldn't find adverts on tab advert air</Typography>
+                                                                   <Typography color={"primary"}>We couldn't find adverts on air</Typography>
                                                                )
                                                        }
                                                    </Grid>
@@ -223,16 +229,73 @@ class AdminAdverts extends Component {
                                                )
                                            :
                                                (
-                                                   <Grid container spacing={2}>
+                                                   <div>
                                                        {
-                                                           this.unfinishedPaymentAdverts(this.props.adverts)
-                                                               .map(advert=>(
-                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
-                                                                       <AdvertCard advert={advert}/>
+                                                           this.unfinishedPaymentAdverts(this.props.adverts).length>0
+                                                           ?
+                                                               (
+                                                                   <Grid container spacing={2}>
+                                                                       {
+                                                                           this.unfinishedPaymentAdverts(this.props.adverts)
+                                                                               .map(advert=>(
+                                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                                       <AdvertCard advert={advert}/>
+                                                                                   </Grid>
+                                                                               ))
+                                                                       }
                                                                    </Grid>
-                                                               ))
+                                                               )
+                                                           :
+                                                               (
+                                                                   <Typography color={"primary"}>No advert is found ):</Typography>
+                                                               )
                                                        }
+                                                   </div>
+
+                                               )
+                                       }
+                                   </this.TabPanel>
+
+
+                                   <this.TabPanel value={this.state.value} index={3}>
+                                       {
+                                           this.props.loading
+                                               ?
+                                               (
+                                                   <Grid container spacing={2}>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
+                                                       <SingleLoading height={200}/>
                                                    </Grid>
+                                               )
+                                               :
+                                               (
+                                                   <div>
+                                                       {
+                                                           this.findCompletedAds(this.props.adverts).length>0
+                                                               ?
+                                                               (
+                                                                   <Grid container spacing={2}>
+                                                                       {
+                                                                           this.findCompletedAds(this.props.adverts)
+                                                                               .map(advert=>(
+                                                                                   <Grid key={advert.id} item md={12} xs={12} sm={12}>
+                                                                                       <AdvertCard advert={advert}/>
+                                                                                   </Grid>
+                                                                               ))
+                                                                       }
+                                                                   </Grid>
+
+                                                               )
+                                                               :
+                                                               (
+                                                                   <div>
+                                                                       <span>No completed advert is found yet ):</span>
+                                                                   </div>
+                                                               )
+
+                                                       }
+                                                   </div>
                                                )
                                        }
                                    </this.TabPanel>

@@ -65,7 +65,7 @@ class CommonDashboards extends React.Component{
             return <AdminNestedRoute/>
         }
 
-        if(this.props.type==='Down loader'){
+        if(this.props.type==='Driver'){
             return <DownloaderNestedRoute/>
         }
     }
@@ -78,7 +78,7 @@ class CommonDashboards extends React.Component{
             return <AdvertiserMenu menu={menu}/>
         }
 
-        if(this.props.type==='Down loader'){
+        if(this.props.type==='Driver'){
             return <DownloaderMenu menu={menu}/>
         }
     }

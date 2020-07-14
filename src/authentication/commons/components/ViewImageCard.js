@@ -67,7 +67,7 @@ class ViewImageCard extends Component {
         return (
             <Card>
                 <CardActionArea>
-                    <img src={`data:image/jpg;base64, ${carAds.picture}`} height={200} width={'100%'}/>
+                    <img src={`${carAds.picture}`} height={200} width={'100%'}/>
                     <CardContent>
 
                         <div style={{display:'flex',flexDirection:'row'}}>

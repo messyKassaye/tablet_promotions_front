@@ -7,7 +7,8 @@ const CategoriesStyle = theme=>({
     mainContent:{
         display:'flex',
         flexDirection:'column',
-        color:'white'
+        color:'white',
+        padding:0
     },
     carsHeader:{
         display:'flex',

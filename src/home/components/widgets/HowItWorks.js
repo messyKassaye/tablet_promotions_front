@@ -68,7 +68,7 @@ class HowItWorks extends React.Component{
 
                         <Grid container spacing={2}>
 
-                            <Grid item md={4} xs={12} sm={12}>
+                            <Grid item md={6} xs={12} sm={12}>
                                 <Card className={classes.cards}>
                                     <CardHeader
                                         title={t('home.how_it_works.organizations')}
@@ -131,7 +131,7 @@ class HowItWorks extends React.Component{
                                 </Card>
                             </Grid>
 
-                            <Grid item md={4} xs={12} sm={12}>
+                            <Grid item md={6} xs={12} sm={12}>
                                 <Card className={classes.cards}>
                                     <CardHeader
                                         title={t('home.how_it_works.carOwners')}
@@ -196,70 +196,6 @@ class HowItWorks extends React.Component{
                                 </Card>
                             </Grid>
 
-                            <Grid item md={4} xs={12} sm={12}>
-                                <Card className={classes.cards}>
-                                    <CardHeader
-                                        title={t('home.how_it_works.downloader')}
-                                        avatar={<CloudDownloadIcon/>}
-                                    />
-                                    <Divider/>
-                                    <CardContent>
-
-                                        {
-                                            this.state.showDownloader
-                                                ?
-                                                (
-                                                    <div className={classes.bigCards}>
-                                                        <Typography className={classes.description}>
-                                                            {t('home.how_it_works.downloader_description')}
-                                                        </Typography>
-
-                                                        <Typography style={{marginTop:20}}>
-                                                            {t('home.how_it_works.downloader_description_2')}
-                                                        </Typography>
-
-                                                        <Typography style={{marginTop:20,color:green[500]}}>
-                                                            {t('home.how_it_works.downloader_final')}
-                                                        </Typography>
-
-                                                        <Button component={Link} to={'/signup'} color={"primary"} variant='outlined'
-                                                                style={{textTransform:'none',marginTop:20}}>
-                                                            {t('home.register')}
-                                                        </Button>
-
-                                                        <Button
-                                                            onClick={()=>this.handleLess(false,'Downloader')}
-                                                            color={"primary"}
-                                                            variant={"text"}
-                                                            style={{textTransform:'none',marginTop:25}}>
-                                                            {t('home.how_it_works.show_less')}
-                                                        </Button>
-                                                    </div>
-                                                )
-                                                :
-                                                (
-                                                    <div style={{
-                                                        display:'flex',
-                                                        textAlign:'justify',
-                                                        flexDirection:'column',
-                                                        alignItems:'start'}}>
-                                                        <Typography className={classes.description}>
-                                                            {t('home.how_it_works.downloader_span')}
-                                                        </Typography>
-                                                        <Button
-                                                            onClick={()=>this.handleShowMore(true,"Downloader")}
-                                                            color={"primary"}
-                                                            variant={"text"}
-                                                            style={{textTransform:'none'}}>
-                                                            {t('home.how_it_works.see_more')}
-                                                        </Button>
-                                                    </div>
-                                                )
-                                        }
-
-                                    </CardContent>
-                                </Card>
-                            </Grid>
 
                         </Grid>
 

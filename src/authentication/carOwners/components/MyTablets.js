@@ -48,7 +48,7 @@ class MyTablets extends React.Component{
                                                   {
                                                       this.filterAssignedWorkingTabletCars(this.props.user.relations.cars)
                                                           .map(cars=>(
-                                                              <Grid item md={6} xs={12} sm={12}>
+                                                              <Grid item md={4} xs={12} sm={12}>
                                                                   <Card>
                                                                       <CardHeader
                                                                        title={cars.working_tablet[0].serial_number}

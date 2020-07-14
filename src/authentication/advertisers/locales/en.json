@@ -43,6 +43,25 @@
     "description": {
       "title": "title",
       "start_adverting": "Start adverting"
+    },
+    "dashboard": {
+      "myAdverts": "My adverts",
+      "myCompanies": "My companies",
+      "totalAdvertBudget": "Total advert budget",
+      "dashboardAdverts": {
+        "adverts": "Adverts",
+        "showAll": "Show all",
+        "topViewedAdverts": "Top viewed adverts",
+        "expectedPlay": "Expected play",
+        "currentViews":"Current views",
+        "payedAndWaitingApprovalAdverts": "Payed and waiting approval adverts",
+        "noAdvertIsFound": "We can't find any adverts ):",
+        "unpaidAdverts": "Unpaid adverts"
+      },
+      "advertMediaAndCar": {
+        "carsTitle": "Advertisement car type",
+        "mediaTitle": "Advertisement media types"
+      }
     }
   }
 }

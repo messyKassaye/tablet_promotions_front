@@ -98,7 +98,10 @@ class AdvertPaymentApproval extends Component {
                 </Table>
                 <div style={{display:'flex',flexDirection:'column',justifyContent:'center'}}>
                     <Typography>Receipt image</Typography>
-                    <img src={this.props.advert.payment_status.receipt_image}/>
+                    <img
+                        src={this.props.advert.payment_status.receipt_image}
+                        height={300}
+                    />
                 </div>
                 <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'center',marginTop:20}}>
 

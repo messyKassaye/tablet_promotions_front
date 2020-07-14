@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {Card, CardContent, CardHeader, Container,Avatar} from "@material-ui/core";
+import {Container} from "@material-ui/core";
 import AdvertsCard from "./widgets/AdvertsCard";
 import AdminCard from "./widgets/AdminCard";
 import UsersCard from "./widgets/UsersCard";
 import AdvertViewAndWithdrawalRequest from "./widgets/AdvertViewAndWithdrawalRequest";
+import AdvertsInTable from "./widgets/AdvertsInTable";
+import FinanceCards from "./widgets/FinanceCards";
+import CompaniesCard from "./widgets/CompaniesCard";
 
 
 class AdminHome extends Component {
@@ -20,6 +23,9 @@ class AdminHome extends Component {
                 <AdvertsCard/>
                 <AdvertViewAndWithdrawalRequest/>
                 <UsersCard/>
+                <CompaniesCard/>
+                <FinanceCards/>
+                <AdvertsInTable/>
             </Container>
         );
     }

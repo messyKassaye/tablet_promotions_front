@@ -19,10 +19,15 @@ const Menus = [
 
     },
     {
-        name: 'Pricing',
-        to: '/pricing',
-        component: 'Pricing'
+        name: 'Cars',
+        to: '/cars',
+        component: 'Cars'
 
+    },
+    {
+        name: 'advert medias',
+        to: '/advert_media',
+        component: 'AdvertMedia'
     },
     {
         name: 'Login',

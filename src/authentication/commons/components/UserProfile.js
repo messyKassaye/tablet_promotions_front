@@ -40,11 +40,11 @@ class UserProfile extends Component {
 
 
     findTabForRole = role=>{
-        if(role==='Driver'){
+        if(role===2){
             return <DriverTab users={this.props.users}/>
-        }else if(role==='Advertiser'){
+        }else if(role===3){
             return <AdvertiserTab users={this.props.users}/>
-        }else if(role==='Down loader'){
+        }else if(role===4){
 
         }
     }
@@ -114,7 +114,7 @@ class UserProfile extends Component {
                             :
                                 (
                                    <div>
-                                       { this.findTabForRole(this.props.users.relations.role[0].name)}
+                                       { this.findTabForRole(this.props.users.relations.role[0].id)}
                                    </div>
                                 )
                         }

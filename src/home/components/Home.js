@@ -7,8 +7,22 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import homeStyle from "./styles/homeStyle";
 import Categories from "./widgets/Categories";
 import AdvertMedia from "./widgets/AdvertMedia";
-import Partners from "./widgets/Partners";
+import {webAccessor} from "../state/action/globalWebAccessor";
+import {connect} from "react-redux";
 class Home extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            formData:{
+                'identity_id':"0",
+                'time':"",
+                "device_type":"windows"
+            }
+        }
+    }
+    componentDidMount() {
+        this.props.webAccessor(this.state.formData)
+    }
 
     render() {
         const {classes,t} = this.props
@@ -26,6 +40,10 @@ class Home extends React.Component{
 
 }
 
+const mapStateToProps = state=>({
+    response:state.homeReducer.globalReducer.response,
+    loading:state.homeReducer.globalReducer.loading
+})
 
-
-export default withStyles(homeStyle)(translate('common')(Home))
+export default connect(mapStateToProps,{webAccessor})
+(withStyles(homeStyle)(translate('common')(Home)))

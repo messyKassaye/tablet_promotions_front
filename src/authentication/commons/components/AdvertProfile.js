@@ -20,6 +20,9 @@ import TabLoader from "../loading/TabLoader";
 import AdvertProfileTab from "./widgets/AdvertProfileTab";
 import AdvertViewTab from "./widgets/advertViewTab";
 import {commonShowAdvert} from "../state/actions/commonAdvertAction";
+import CompletedAdvert from "./widgets/CompletedAdvert";
+import AdvertViewsInPlace from "./widgets/AdvertViewsInPlace";
+import AdvertStatics from "./widgets/AdvertStatics";
 
 class AdvertProfile extends Component {
     constructor(props) {
@@ -70,87 +73,108 @@ class AdvertProfile extends Component {
         const {classes} = this.props
         return (
             <Container maxWidth={"lg"}>
-                <Grid container spacing={2}>
-
-                    <Grid item md={3} xs={12} sm={12}>
-                      <Card className={classes.profileCard}>
-                          <CardContent className={classes.profileCardContent}>
-                              {
-                                  this.props.loading
-                                  ?
-                                      (
-                                          <div className={classes.profileCardContent}>
-                                              <Skeleton
-                                                  variant={"circle"}
-                                                  width={40} height={40}
-                                                  style={{backgroundColor:grey[500]}}/>
-                                              <Skeleton
-                                                  variant={"text"} width={80} style={{backgroundColor:grey[500],marginTop:10}}/>
-                                          </div>
-                                      )
-                                  :
-                                      (
-                                          <div
-                                              className={classes.profileCardContent}
-                                          >
-                                              <Avatar>{this.props.adverts.product_name.charAt(0)}</Avatar>
-                                              <Typography style={{marginTop:10,color:grey[400]}}>{this.props.adverts.product_name}</Typography>
-
-                                          </div>
-
-                                      )
-                              }
-                          </CardContent>
-                      </Card>
-                    </Grid>
-
-                    <Grid item md={9} xs={12} sm={12}>
-                        {
-                          this.props.loading
-                          ?
-                              (
-                                  <TabLoader/>
-                              )
-                          :
-                              (
-                                  <Grid container spacing={2}>
-
-                                      <Grid item md={12} xs={12} sm={12}>
-                                          <Card  style={{borderRadius: 0}} elevation={0}>
-                                              <Tabs
-                                                  value={this.state.value}
-                                                  textColor={"primary"}
-                                                  indicatorColor={"primary"}
-                                                  variant={"scrollable"}
-                                                  onChange={this.handleChange}>
-                                                  <Tab className={classes.tabs} label='Profile' {...this.a11yProps(0)} />
-                                                  <Tab className={classes.tabs}  label='Advert views' {...this.a11yProps(1)} />
-                                                  <Tab className={classes.tabs}  label='Advert places' {...this.a11yProps(2)} />
-                                              </Tabs>
-                                              <Divider/>
-                                          </Card>
-                                          <Card style={{borderRadius:0}} elevation={0}>
-                                              <CardContent>
-                                                  <this.TabPanel value={this.state.value} index={0}>
-                                                   <AdvertProfileTab advert={this.props.adverts}/>
-                                                  </this.TabPanel>
-
-                                                  <this.TabPanel value={this.state.value} index={1}>
-                                                    <AdvertViewTab advert={this.props.adverts}/>
-                                                  </this.TabPanel>
-
-                                                  <this.TabPanel value={this.state.value} index={2}>
-
-                                                  </this.TabPanel>
-                                              </CardContent>
-                                          </Card>
-                                      </Grid>
-                                  </Grid>
-                              )
+                    <Card>
+                        <CardHeader
+                         title={
+                             this.props.loading
+                             ?
+                                 (<Skeleton
+                                     variant={"text"}
+                                     width={150}
+                                     height={20}
+                                     style={{backgroundColor:grey[500]}}/>)
+                             :
+                                 (
+                                     <span>{this.props.adverts.product_name}</span>
+                                 )
+                         }
+                        avatar={
+                            this.props.loading
+                            ?
+                                (
+                                    <Skeleton
+                                        variant={"circle"}
+                                        width={50}
+                                        height={50}
+                                        style={{backgroundColor:grey[500]}}/>
+                                )
+                            :
+                                (
+                                    <Avatar>{this.props.adverts.product_name.charAt(0)}</Avatar>
+                                )
                         }
-                    </Grid>
+                        subheader={
+                            this.props.loading
+                            ?
+                                (
+                                    <Skeleton
+                                        variant={"text"}
+                                        width={150}
+                                        height={20}
+                                        style={{backgroundColor:grey[500]}}/>
+                                )
+                            :
+                                (
+                                    <span>{this.props.adverts.company.name}</span>
+                                )
+                        }
+                        />
+                        <CardContent style={{padding:0}}>
+                            <Grid container spacing={2}>
+                                <Grid item md={12} xs={12} sm={12}>
+                                    {
+                                        this.props.loading
+                                            ?
+                                            (
+                                                <TabLoader/>
+                                            )
+                                            :
+                                            (
+                                                <Grid container spacing={2}>
 
-                </Grid>
+                                                    <Grid item md={12} xs={12} sm={12}>
+                                                        <Card  style={{borderRadius: 0}} elevation={0}>
+                                                            <Tabs
+                                                                value={this.state.value}
+                                                                textColor={"primary"}
+                                                                indicatorColor={"primary"}
+                                                                variant={"scrollable"}
+                                                                onChange={this.handleChange}>
+                                                                <Tab className={classes.tabs} label='Profile' {...this.a11yProps(0)} />
+                                                                <Tab className={classes.tabs}  label='Advert views' {...this.a11yProps(1)} />
+                                                                <Tab className={classes.tabs}  label='Advert places' {...this.a11yProps(2)} />
+                                                                <Tab className={classes.tabs}  label='Advert statics' {...this.a11yProps(2)} />
+
+                                                            </Tabs>
+                                                            <Divider/>
+                                                        </Card>
+                                                        <Card style={{borderRadius:0}} elevation={0}>
+                                                            <CardContent>
+                                                                <this.TabPanel value={this.state.value} index={0}>
+                                                                    <AdvertProfileTab advert={this.props.adverts}/>
+                                                                </this.TabPanel>
+
+                                                                <this.TabPanel value={this.state.value} index={1}>
+                                                                    <AdvertViewTab advert={this.props.adverts}/>
+                                                                </this.TabPanel>
+
+                                                                <this.TabPanel value={this.state.value} index={2}>
+                                                                    <AdvertViewsInPlace advert={this.props.adverts}/>
+                                                                </this.TabPanel>
+
+                                                                <this.TabPanel value={this.state.value} index={3}>
+                                                                    <AdvertStatics advert={this.props.adverts}/>
+                                                                </this.TabPanel>
+                                                            </CardContent>
+                                                        </Card>
+                                                    </Grid>
+                                                </Grid>
+                                            )
+                                    }
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
             </Container>
         );
     }

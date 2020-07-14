@@ -349,3 +349,44 @@ export const payedWithdrawRequest = [
     },
 
 ]
+
+export const advertsInTableColumn = [
+    {
+        id: 'company_name',
+        label: 'Company name',
+        align:'left'
+    },
+    {
+        id: 'product_name',
+        label: 'Product name',
+        align: 'left',
+    },
+    {
+        id: 'media_name',
+        label: 'Media type',
+        align: 'left',
+    },
+    {
+        id: 'total_views',
+        label: 'Required views',
+        align: 'left',
+    },
+    {
+        id: 'total_views',
+        label: 'Current views',
+        align: 'left',
+    },
+    {
+        id: 'total_payment',
+        label: 'Total payment',
+        align: 'left',
+    },
+
+    {
+        id: 'Status',
+        label: 'Status',
+        align: 'left',
+    },
+
+];
+

@@ -6,7 +6,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import {deepOrange, green, grey} from "@material-ui/core/colors";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import SingleAdvertCard from "../../../commons/components/widgets/SingleAdvertCard";
-
+import {translate} from "react-i18next";
 class UnpaidAdverts extends Component {
 
     componentDidMount() {
@@ -27,12 +27,13 @@ class UnpaidAdverts extends Component {
     }
 
     render() {
+        const {t} = this.props
         return (
             <Card>
                 <CardHeader
-                title={'Unpaid adverts'}
+                title={t('advertiser.dashboard.dashboardAdverts.unpaidAdverts')}
                 avatar={<MoneyOffIcon/>}
-                style={{backgroundColor:green[500],color:'white'}}
+                style={{backgroundColor:grey[200]}}
                 />
                 <Divider/>
                 <CardContent>
@@ -72,7 +73,7 @@ class UnpaidAdverts extends Component {
                                                     display:'flex',
                                                     flexDirection:'row',
                                                     alignItems:'center'}}>
-                                                    <span>Unpiad advert is not found.</span>
+                                                    <span>{t('advertiser.dashboard.dashboardAdverts.noAdvertIsFound')}</span>
                                                 </div>
                                             )
                                     }
@@ -92,4 +93,5 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps,{me,showMainDialog})(UnpaidAdverts);
+export default translate('common')
+(connect(mapStateToProps,{me,showMainDialog})(UnpaidAdverts));

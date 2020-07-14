@@ -6,7 +6,7 @@ import {deepOrange, green, grey} from "@material-ui/core/colors";
 import Skeleton from "@material-ui/lab/Skeleton";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import SingleAdvertCard from "../../../commons/components/widgets/SingleAdvertCard";
-
+import {translate} from "react-i18next";
 class WaitingApprovalAdverts extends Component {
 
     componentDidMount() {
@@ -27,12 +27,13 @@ class WaitingApprovalAdverts extends Component {
 
 
     render() {
+        const {t} = this.props
         return (
             <Card>
                 <CardHeader
-                title={'Payed and waiting approval adverts'}
+                title={t('advertiser.dashboard.dashboardAdverts.payedAndWaitingApprovalAdverts')}
                 avatar={<AttachMoneyIcon/>}
-                style={{backgroundColor:deepOrange[500],color:'white'}}/>
+                style={{backgroundColor:grey[200]}}/>
                 <Divider/>
                 <CardContent>
                     {
@@ -62,7 +63,7 @@ class WaitingApprovalAdverts extends Component {
                                             :
                                             (
                                                 <div>
-                                                    <span>There is no payed and waiting for approval adverts</span>
+                                                    <span>{t("advertiser.dashboard.dashboardAdverts.noAdvertIsFound")}</span>
                                                 </div>
                                             )
                                     }
@@ -82,4 +83,5 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps,{me})(WaitingApprovalAdverts);
+export default translate('common')
+(connect(mapStateToProps,{me})(WaitingApprovalAdverts));

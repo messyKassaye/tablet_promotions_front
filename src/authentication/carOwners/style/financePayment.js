@@ -7,6 +7,7 @@ const finacePayment = theme=>({
     },
     big_device:{
         display: 'flex',
+        width:'100%',
         [theme.breakpoints.down('xs')]:{
             display:'none'
         }

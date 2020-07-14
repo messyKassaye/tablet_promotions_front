@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import {Card, CardContent, CardHeader, Container, Grid} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Container, Typography,Grid} from "@material-ui/core";
 import VideocamIcon from "@material-ui/icons/Videocam";
+import Skeleton from "@material-ui/lab/Skeleton";
 import SingleLoading from "../../../commons/loading/SingleLoading";
-import {deepOrange, deepPurple, green} from "@material-ui/core/colors";
+import {deepOrange, deepPurple, green, grey} from "@material-ui/core/colors";
 import {connect} from "react-redux";
 import {fetchUsers} from "../../state/action/adminUsersAction";
 import {fetchAdverts} from "../../state/action/advertsAction";
 import {Link} from "react-router-dom";
+import {webAccessIndex} from "../../../../home/state/action/globalWebAccessor";
+import nFormatter from "../../../services/MainServices";
+
 class AdvertsCard extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +19,7 @@ class AdvertsCard extends Component {
 
     componentDidMount() {
         this.props.fetchAdverts()
+        this.props.webAccessIndex()
     }
 
     sumOfTypes = (data, name) => {
@@ -80,8 +85,8 @@ class AdvertsCard extends Component {
                                         <Grid item md={4} xs={12} sm={12}>
                                             <Card style={{backgroundColor:deepPurple[500],color:'white'}}>
                                                 <CardHeader
-                                                    title={this.advertInType(this.props.adverts,'on_completed')}
-                                                    subheader={<span style={{color:'white'}}>On finish advert</span>}
+                                                    title={this.advertInType(this.props.adverts,'Completed')}
+                                                    subheader={<span style={{color:'white'}}>Completed advert</span>}
                                                 />
                                             </Card>
                                         </Grid>
@@ -95,7 +100,7 @@ class AdvertsCard extends Component {
                 </Card>
             </Grid>
 
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
                 <Card>
                     <CardHeader
                         title={'Adverts in media type'}
@@ -148,7 +153,46 @@ class AdvertsCard extends Component {
                         }
                     </CardContent>
                 </Card>
+            </Grid>
 
+            <Grid item md={2} xs={12} sm={12}>
+                <Grid container spacing={2}>
+                    {
+                        this.props.loading
+                        ?
+                            (
+                                <Grid item md={12} xs={12} sm={12}>
+                                    <Skeleton
+                                        variant={"rect"}
+                                        width={'100%'}
+                                        height={200}
+                                        style={{backgroundColor:grey[500]}}/>
+                                </Grid>
+                            )
+                        :
+                            (
+                                <Grid item md={12} xs={12} sm={12}>
+                                    <Card>
+                                        <CardHeader
+                                            title={'Global access'}
+                                            avatar={<VideocamIcon/>}/>
+                                        <CardContent style={{padding:15}}>
+                                            <Card elevation={0}>
+                                                <CardContent>
+                                                    <Typography
+                                                        style={{color:green[500]}}
+                                                        variant={"h3"}>
+                                                        {nFormatter(this.props.webAccessor,1)}
+                                                    </Typography>
+                                                </CardContent>
+                                            </Card>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            )
+                    }
+
+                </Grid>
             </Grid>
 
         </Grid>
@@ -159,6 +203,8 @@ class AdvertsCard extends Component {
 const mapStateToProps = state => ({
     adverts: state.authReducer.adminReducers.advertReducer.adverts,
     advertLoading: state.authReducer.adminReducers.advertReducer.loading,
+    webAccessor:state.homeReducer.globalReducer.webAccessor,
+    loading:state.homeReducer.globalReducer.webAccessorLoading
 })
 
-export default connect(mapStateToProps, {fetchUsers, fetchAdverts})(AdvertsCard);
+export default connect(mapStateToProps, {fetchUsers, fetchAdverts,webAccessIndex})(AdvertsCard);

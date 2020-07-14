@@ -54,7 +54,7 @@ class TotalAdverts extends React.Component{
                               {
                                   <Typography gutterBottom variant="h5" component="h2">
                                       {
-                                          this.sum(this.props.user.relations.cars)
+                                          this.props.user.relations.advert_info.total_advert
                                       }
                                   </Typography>
                               }

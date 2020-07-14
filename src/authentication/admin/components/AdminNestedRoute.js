@@ -16,6 +16,8 @@ import WithdrawalRequest from "./WithdrawalRequest";
 import PayedWithdrawRequest from "./PayedWithdrawRequest";
 import UserProfile from "../../commons/components/UserProfile";
 import AdvertProfile from "../../commons/components/AdvertProfile";
+import financePayments from "../../carOwners/components/widgets/financePayments";
+import Companies from "./Companies";
 
 class AdminNestedRoute extends Component {
     render() {
@@ -27,7 +29,7 @@ class AdminNestedRoute extends Component {
 
                 <Route path={'/auth/admin/adverts'} component={AdminAdverts}/>
                 <Route path={'/auth/admin/advert/:id'} component={AdvertProfile}/>
-
+                <Route path={'/auth/admin/companies'} component={Companies}/>
                 <Route path='/auth/admin/banks' component={AdminBanks}/>
                 <Route path='/auth/admin/currency' component={Currency}/>
                 <Route path='/auth/admin/roles' component={Role}/>
@@ -36,7 +38,7 @@ class AdminNestedRoute extends Component {
                 <Route path='/auth/admin/medias' component={AdvertMedias}/>
                 <Route path='/auth/admin/notifications' component={NotificationDetails}/>
                 <Route path='/auth/admin/settings' component={Setting}/>
-                <Route path={'/auth/admin/my_payment'} component={AdvertViewPayment}/>
+                <Route path={'/auth/admin/my_payment'} component={financePayments}/>
                 <Route path={'/auth/admin/withdrawal_request'} component={WithdrawalRequest}/>
                 <Route path={'/auth/admin/approved_withdraw_request'} component={PayedWithdrawRequest}/>
             </Switch>

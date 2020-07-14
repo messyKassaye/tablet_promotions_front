@@ -8,6 +8,8 @@ import {me} from "../../state/actions/usersActions";
 import AdvertiserCarAndMedia from "./widgets/AdvertiserCarAndMedia";
 import DashboardAdverts from "./widgets/DashboardAdverts";
 import NewsAndNotifications from "./widgets/NewsAndNotifications";
+import TopAdvertedCompanies from "../../commons/components/TopAdvertedCompanies";
+
 class Dashboard extends React.Component{
 
     constructor(props) {
@@ -31,6 +33,11 @@ class Dashboard extends React.Component{
                             <Grid item md={12} xs={12} sm={12}>
                                 <NewsAndNotifications/>
                             </Grid>
+
+                            <Grid item md={12} xs={12} sm={12}>
+                                <TopAdvertedCompanies/>
+                            </Grid>
+
                         </Grid>
                     </Grid>
                 </Grid>

@@ -27,7 +27,7 @@ class Routes extends React.Component{
                     <Route path='/auth/settings' component={Setting}/>
                     <Route path='/auth/finance' component={Finances}/>
                     <Route path='/auth/adverts' component={Adverts}/>
-                    <Route path={'/auth/driver/notifications'} component={NotificationDetails}/>
+                    <Route path={'/auth/car_owner/notifications'} component={NotificationDetails}/>
                 </Switch>
             </div>
         );

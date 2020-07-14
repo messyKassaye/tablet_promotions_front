@@ -1,3 +1,5 @@
+import {red} from "@material-ui/core/colors";
+
 const contactStyle = theme=>({
     jumbotron: {
         backgroundColor: '#1976d2',
@@ -16,8 +18,14 @@ const contactStyle = theme=>({
         paddingRight: 150,
         [theme.breakpoints.down('xs')]:{
             paddingLeft: 0,
+            marginTop: -40,
             paddingRight: 0,
         }
     },
+    advertMediaBox:{
+        [theme.breakpoints.down('xs')]:{
+            padding: 20
+        }
+    }
 })
 export default contactStyle

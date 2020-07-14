@@ -6,14 +6,17 @@
       "My adverts": "My adverts",
       "Settings": "Settings"
     },
-    "downloader_menu": {
+    "driver_menu": {
       "Dashboard": "Dashboard",
       "Downloads": "Downloads",
-      "Settings": "Settings"
+      "Settings": "Settings",
+      "My adverts": "My adverts",
+      "Finance": "Finances"
     },
     "admin_menu": {
       "Dashboard": "Home",
       "All user": "All Users",
+      "Companies": "Companies",
       "Adverts": "Adverts",
       "All advert": "About adverts",
       "My advert": "My advert",
@@ -42,6 +45,7 @@
       "About cars": "About cars",
       "Partners": "Partners",
       "Testimony": "Testimony"
-    }
+    },
+    "topAdvertedCompany": "Top adverted companies"
   }
 }

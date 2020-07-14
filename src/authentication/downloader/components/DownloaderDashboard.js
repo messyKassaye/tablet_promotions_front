@@ -17,7 +17,7 @@ class DownloaderDashboard extends Component {
     render() {
         return (
             <div>
-                <CommonDashboards menu={drawerMenu}  addBar={false} type='Down loader'/>
+                <CommonDashboards menu={drawerMenu}  addBar={false} type='Driver'/>
             </div>
         );
     }

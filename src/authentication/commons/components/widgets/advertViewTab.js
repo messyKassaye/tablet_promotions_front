@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import {Container, Grid, ButtonGroup, Button,
-    Typography,Divider} from "@material-ui/core";
-import withStyles from "@material-ui/core/styles/withStyles";
+import {Card, CardContent, Container, Grid} from "@material-ui/core";
 import {connect} from "react-redux";
 import {showCarAdvert} from "../../state/actions/CommonCarAdvertAction";
-import AdvertViewInImageCard from "./AdvertViewInImageCard";
-import AdvertViewInMap from "./AdvertViewInMap";
-import AdvertViewInGraph from "./AdvertViewInGraph";
+import ViewImageCard from "../ViewImageCard";
 import FourByFourSkeleton from "../../loading/customSkeleton";
 
 class AdvertViewTab extends Component {
@@ -28,77 +24,34 @@ class AdvertViewTab extends Component {
        })
     }
 
-    findView = ()=>{
-        const viewId = this.state.view
-        switch (viewId) {
-            case 1:
-                return <AdvertViewInImageCard carAdvert={this.props.carAdverts}/>
-            case 2:
-                return <AdvertViewInMap carAdvert={this.props.carAdverts}/>
-            case 3:
-                return <AdvertViewInGraph carAdvert={this.props.carAdverts}/>
-            default:
-                return <AdvertViewInImageCard carAdvert={this.props.carAdverts}/>
-
+    findRole = user=>{
+        if (user.relations.role[0].id===1){
+            return true
+        }else {
+            return false
         }
     }
-
     render() {
         return (
             <Container maxWidth={"lg"}>
                 <Grid container spacing={2}>
 
-                    <Grid item md={12} xs={12} sm={12}>
-                        <div
-                            style={{display:"flex",
-                                flexDirection:'row',
-                                alignItems:'center',
-                                justifyContent:'flex-end',
-                                padding:10
-                            }}
-                        >
-                                <Typography color={"primary"} style={{marginRight:25}}>
-                                    Show in
-                                </Typography>
-
-                                <ButtonGroup size="small" aria-label="small outlined button group">
-                                    <Button
-                                        style={{textTransform:'none'}}
-                                        onClick={()=>this.handleClick(1)}
-                                    >
-                                        Image
-                                    </Button>
-                                    <Button
-                                        style={{textTransform:'none'}}
-                                        onClick={()=>this.handleClick(2)}
-                                    >
-                                        Map
-                                    </Button>
-                                    <Button
-                                        style={{textTransform:'none'}}
-                                        onClick={()=>this.handleClick(3)}
-                                    >
-                                        Graph
-                                    </Button>
-                                </ButtonGroup>
-                            </div>
-                        <Divider/>
-                    </Grid>
-                </Grid>
-
-                 {
-                        this.props.loading
+                    {
+                        this.props.loading&&this.props.userLoading
                         ?
                             (
-                                <Grid container spacing={2}>
-                                    <FourByFourSkeleton/>
-                                </Grid>
+                                <FourByFourSkeleton/>
                             )
                         :
                             (
-                                this.findView()
+                                this.props.carAdverts.data.map(carAds=>(
+                                    <Grid key={carAds.id} item md={4} xs={12} sm={12}>
+                                        <ViewImageCard carAds={carAds} action={this.findRole(this.props.user)}/>
+                                    </Grid>
+                                ))
                             )
                     }
+                </Grid>
             </Container>
         );
     }
@@ -106,7 +59,9 @@ class AdvertViewTab extends Component {
 
 const mapStateToProps = state=>({
     carAdverts: state.authReducer.commonReducer.commonCarAdvertsReducer.carAdverts,
-    loading:state.authReducer.commonReducer.commonCarAdvertsReducer.loading
+    loading:state.authReducer.commonReducer.commonCarAdvertsReducer.loading,
+    user:state.userData.user,
+    userLoading:state.userData.loading
 })
 
 export default connect(mapStateToProps,{showCarAdvert})

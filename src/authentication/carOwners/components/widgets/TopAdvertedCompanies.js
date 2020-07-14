@@ -10,6 +10,7 @@ import {translate} from "react-i18next";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
+
 class TopAdvertedCompanies extends React.Component{
 
     constructor(props) {
@@ -70,26 +71,7 @@ class TopAdvertedCompanies extends React.Component{
                             ) :
                             (
                                 <div className={classes.scroll_wrapper}>
-                                    {
-                                        this.filterCompanies(this.props.user.relations.cars)
-                                            .map(items=>(
-                                                <Card key={items[1]} className={classes.scroll_child}>
-                                                    <CardHeader
-                                                    title={items[0]}
-                                                    avatar={<Avatar>{items[0][0]}</Avatar>}
-                                                    />
-                                                    <Divider/>
-                                                    <CardContent>
-                                                        {
-                                                            <Typography>
-                                                                ${`Total advert: ${this.filterAdvertNumbers(this.props.user.relations.cars,items[0])}`}}
-                                                            </Typography>
-                                                        }
-                                                    </CardContent>
-                                                </Card>
 
-                                            ))
-                                    }
                                 </div>
                             )
                         }

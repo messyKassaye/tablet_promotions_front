@@ -19,6 +19,7 @@ import WithdrawReducer from "./reducerrs/WithdrawReducer";
 import WithdrawalAssetReducer from "./reducerrs/WithdrawalAssetReducer";
 import AdminCarAdvertReducer from "./reducerrs/AdminCarAdvertReducer";
 import advertPaymentTransactionReducer from "./reducerrs/advertPaymentTransactionReducer";
+import PaymentPercentageReducers from "./reducerrs/PaymentPercentageReducers";
 
 export default combineReducers({
     adminDialog:dialogReducer,
@@ -40,5 +41,6 @@ export default combineReducers({
     withdrawReducer:WithdrawReducer,
     withdrawAssetsReducer:WithdrawalAssetReducer,
     carAdvertsReducer:AdminCarAdvertReducer,
-    advertPaymentTransactionApproval:advertPaymentTransactionReducer
+    advertPaymentTransactionApproval:advertPaymentTransactionReducer,
+    paymentPercentageReducer:PaymentPercentageReducers
 })

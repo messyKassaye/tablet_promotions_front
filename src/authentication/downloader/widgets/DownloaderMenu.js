@@ -82,7 +82,7 @@ class DownloaderMenu extends Component {
                                     onClick={ () => this.handleClick( item.name ) }
                                     className={classes.parent}>
                                     <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                                    <ListItemText primary={t(`common.downloader_menu.${item.name}`)}/>
+                                    <ListItemText primary={t(`common.driver_menu.${item.name}`)}/>
                                     { this.state[ item.name ] ?
                                         <ExpandLess /> :
                                         <ExpandMore />
@@ -107,7 +107,7 @@ class DownloaderMenu extends Component {
                                 key={item.name}
                                 className={classes.parent}>
                                 <ListItemIcon style={{color: 'white'}}>{item.icon}</ListItemIcon>
-                                <ListItemText primary={t(`common.downloader_menu.${item.name}`)}/>
+                                <ListItemText primary={t(`common.driver_menu.${item.name}`)}/>
                             </ListItem>
                         )
                 ))}

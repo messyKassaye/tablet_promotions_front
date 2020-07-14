@@ -14,19 +14,7 @@ class TotalAdvertedMedia extends React.Component{
 
     constructor(props) {
         super(props);
-     this.sumOfTypes = this.sumOfTypes.bind(this);
     }
-
-    sumOfTypes = (data,name)=> {
-        let video =0;
-     data.map(items=>items.adverts.filter(item=>{
-           return item.detail.advert_media_type.name === name
-       })).map(items=>{
-           video += items.length
-     })
-        return video
-    }
-
 
     render() {
         const {classes}= this.props
@@ -43,7 +31,7 @@ class TotalAdvertedMedia extends React.Component{
                                     <div style={{display:'flex',flexDirection:'row'}}>
                                         <div style={{display:'flex',flexDirection:'column',marginRight:10,alignItems:'center',justifyContent:'center'}}>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                {this.sumOfTypes(this.props.user.relations.cars,'Video')}
+                                                {this.props.user.relations.advert_info.video}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
                                                 {t('driver.total_adverted_media.video')}
@@ -52,7 +40,7 @@ class TotalAdvertedMedia extends React.Component{
 
                                         <div style={{display:'flex',flexDirection:'column',marginRight:10,alignItems:'center',justifyContent:'center'}}>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                {this.sumOfTypes(this.props.user.relations.cars,'Audio')}
+                                                {this.props.user.relations.advert_info.audio}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
                                                 {t('driver.total_adverted_media.audio')}
@@ -61,7 +49,7 @@ class TotalAdvertedMedia extends React.Component{
 
                                         <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
                                             <Typography gutterBottom variant="h5" component="h2">
-                                                {this.sumOfTypes(this.props.user.relations.cars,'Image')}
+                                                {this.props.user.relations.advert_info.image}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary" component="p" style={{color:'white'}}>
                                                 {t('driver.total_adverted_media.image')}

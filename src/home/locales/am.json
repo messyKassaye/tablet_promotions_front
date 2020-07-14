@@ -39,7 +39,8 @@
             "Down loader": "መረጃ አውራጅ"
           }
         },
-        "button": "መዝግብ"
+        "button": "መዝግብ",
+        "driver_form": "መዝግብ"
       },
       "errors": {
         "first_name": "እባክዎ ስምዎን ያስገቡ",
@@ -115,8 +116,14 @@
     "contact_us": {
       "contact_message": "ያግኙን"
     },
-    "pricing": {
-      "pricing_message": "ስለ ዋጋ እና ከፍያ"
-    }
+    "cars": {
+      "cars_message": "ስለ መኪኖች"
+    },
+    "advert_medias": {
+      "advert_medias_message": "ስለ ማስታዎቂያ ማጫዎቻዎች"
+    },
+    "Bajaj": "ባጃጅ",
+    "Mini bus": "ሚኒ ባስ",
+    "Public Transport buses": "የህዝብ ማመላለሻ አውቶብስ"
   }
 }

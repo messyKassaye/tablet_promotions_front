@@ -44,6 +44,10 @@ const userStyle = theme=>({
     },
     customTableCell:{
         border:'none',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
         color:green[500]
     },
     link:{

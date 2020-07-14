@@ -22,7 +22,7 @@ class InnerDashboardNotification extends Component {
         let ads = [];
         companies.map(company=>{
             company.adverts.map(advert=>{
-                if (advert.payment_status!==null && advert.status==='on_progress'&&advert.media_path==='not_assigned'){
+                if (advert.payment_status!==null && advert.status==='on_advert'&&advert.media_path==='not_assigned'){
                     ads.push(advert)
                 }
             })

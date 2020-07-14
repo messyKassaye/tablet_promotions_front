@@ -6,7 +6,7 @@
     "About": "About",
     "Contact": "Contact",
     "Cars": "Cars",
-    "advert medias": "Advert medias",
+    "advert medias": "Advert media",
     "Pricing": "Pricing",
     "Login": "Login",
     "Sign up": "Sign up",
@@ -33,7 +33,8 @@
             "Down loader": "Downloader"
           }
         },
-        "button": "Sign up"
+        "button": "Sign up",
+        "driver_form": "Proceed to next"
       },
       "errors": {
         "first_name": "Please enter  first name",
@@ -108,6 +109,28 @@
       "driver_description": "Make an advert on your car and earn more money",
       "start_button": "Start today",
       "watch_video": "Watch video"
-    }
+    },
+
+    "categories": {
+      "title": "About cars"
+    },
+    "advert_media": {
+      "title": "About advert media"
+    },
+    "about_us": {
+      "about_message": "About us"
+    },
+    "contact_us": {
+      "contact_message": "Contact us"
+    },
+    "cars": {
+      "cars_message": "About taxes"
+    },
+    "advert_medias": {
+      "advert_medias_message": "About advert media"
+    },
+    "Bajaj": "Bajaj",
+    "Mini bus": "Mini bus",
+    "Public Transport buses": "Public transport buses"
   }
 }

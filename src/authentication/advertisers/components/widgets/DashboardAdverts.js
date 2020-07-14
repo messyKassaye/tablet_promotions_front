@@ -54,7 +54,7 @@ class DashboardAdverts extends Component {
                 <Grid item md={12} xs={12} sm={12}>
                     <Card>
                         <CardHeader
-                            title={'Adverts'}
+                            title={t('advertiser.dashboard.dashboardAdverts.adverts')}
                             avatar={<VideocamIcon/>}
                             style={{backgroundColor: '#3C4252', color: 'white'}}
                             action={
@@ -76,7 +76,7 @@ class DashboardAdverts extends Component {
                                             style={{textTransform: 'none', marginTop: 10, color: 'white'}}
                                             variant={"text"}
                                             color={"primary"}>
-                                            Show all
+                                            {t("advertiser.dashboard.dashboardAdverts.showAll")}
                                         </Button>
                                     )
                             }

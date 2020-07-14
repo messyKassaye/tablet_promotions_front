@@ -109,6 +109,7 @@ class BankRegistrationDialog extends React.Component{
             if(nextProps.response.status){
                 setTimeout(()=>{
                     this.handleClose()
+                    window.location.reload()
                 },2000)
             }
         }

@@ -72,6 +72,10 @@ class MyCompanies extends React.Component{
         })
     }
 
+    deleteCompany = id=>{
+
+    }
+
     render() {
         const {classes} = this.props
         const {t} =this.props
@@ -169,6 +173,7 @@ class MyCompanies extends React.Component{
                                                                                  <Button
                                                                                      color='secondary'
                                                                                      variant='outlined'
+                                                                                     onClick={this.deleteCompany(company.id)}
                                                                                      style={{textTransform:'none'}}>
                                                                                      Delete
                                                                                  </Button>

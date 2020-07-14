@@ -15,7 +15,6 @@ import TableRow from "@material-ui/core/TableRow";
 import financeWithdrawalStyle from "../../style/financeWithdrawalStyle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TableBody from "@material-ui/core/TableBody";
-import Paper from "@material-ui/core/Paper";
 import {showBankAccountSetterModal} from "../../state/actions/dialogActions";
 import {showWithdrawalRequestDialog} from "../../state/actions/dialogActions";
 import {translate} from "react-i18next";

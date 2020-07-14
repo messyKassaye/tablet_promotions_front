@@ -1,5 +1,5 @@
 import React from "react";
-import {Table, Typography} from "@material-ui/core";
+import {Table, Typography,Container} from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {paymentFetch} from "../../state/actions/paymentActions";
 import {connect} from "react-redux";
@@ -12,8 +12,6 @@ import Card from "@material-ui/core/Card";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import finacePayment from "../../style/financePayment";
 import Payment from "./smallDevices/Payment";
 import {translate} from "react-i18next";
@@ -29,46 +27,39 @@ const StyledTableCell = withStyles(theme => ({
 
 const columns = [
     {
-        id:'payed_at',
-        minWidth: 150,
-        label: 'Payed at',
+        id:1,
+        minWidth: 250,
+        label: 'Company name',
         format: value => value.toLocaleString(),
     },
     {
-        id:'amount',
-        minWidth: 150,
-        label: 'Amount',
-        align:'right',
+        id:2,
+        minWidth: 250,
+        label: 'Adverted product',
+        align:'left',
         format: value => value.toLocaleString(),
     },
     {
-        id:'description',
+        id:'advert_time',
         minWidth: 170,
-        label: 'Description',
-        align:'right',
+        label: 'Advert time',
+        align:'left',
         format: value => value.toLocaleString(),
     },
     {
-        id:'payment_type',
+        id:'total_payment',
         minWidth: 150,
-        label: 'Payment type',
-        align:'right',
+        label: 'Total payment',
+        align:'left',
         format: value => value.toLocaleString(),
     },
     {
-        id:'week',
+        id:'status',
         minWidth: 150,
-        label: 'Week',
-        align:'right',
+        label: 'Status',
+        align:'left',
         format: value => value.toLocaleString(),
-    },
-    {
-        id:'action',
-        minWidth: 170,
-        label: 'Actions',
-        align:'right',
-        format: value => value.toLocaleString(),
-    },
+    }
 ]
 class FinancePayments extends React.Component{
 
@@ -84,7 +75,7 @@ class FinancePayments extends React.Component{
     render() {
         const {classes,t} = this.props
         return (
-            <div>
+            <Container maxWidth={'md'}>
                 {
                     this.props.loading
                     ?
@@ -106,7 +97,7 @@ class FinancePayments extends React.Component{
                                     <CardHeader
                                         title={`${t('driver.finance.payments.title')}`}
                                     />
-                                    <CardContent style={{overflow:'auto',maxHeight:250}}>
+                                    <CardContent>
 
                                             <Table>
                                                 <TableHead>
@@ -117,7 +108,7 @@ class FinancePayments extends React.Component{
                                                                 align={column.align}
                                                                 style={{ minWidth: column.minWidth }}
                                                             >
-                                                                {`${t(`driver.finance.payments.table.${column.id}`)}`}
+                                                                {column.label}
                                                             </StyledTableCell>
                                                         ))}
                                                     </TableRow>
@@ -130,25 +121,19 @@ class FinancePayments extends React.Component{
                                                                 this.props.payments.map(row=>{
                                                                     return (
                                                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                                                            {columns.map(column => {
-                                                                                const value = row[column.id];
-                                                                                if(column.id==='detail'){
-                                                                                    return (
-                                                                                        <TableCell key={column.id} align={column.align}>
-                                                                                            {
-                                                                                                <Button color='secondary' variant='outlined'>
-                                                                                                    Show
-                                                                                                </Button>
-                                                                                            }
-                                                                                        </TableCell>
-                                                                                    );
-                                                                                }
-                                                                                return (
-                                                                                    <TableCell key={column.id} align={column.align}>
-                                                                                        {value}
-                                                                                    </TableCell>
-                                                                                );
-                                                                            })}
+                                                                            <TableCell align={"left"}>{row.car_advert.map(car=>{
+                                                                                return car.company_name
+                                                                            })}</TableCell>
+                                                                            <TableCell align={"left"}>{row.car_advert.map(car=>{
+                                                                                return car.product_name
+                                                                            })}</TableCell>
+                                                                            <TableCell align={"left"}>{row.car_advert.map(car=>{
+                                                                                return car.advert_time
+                                                                            })}</TableCell>
+                                                                            <TableCell align={"left"}>{row.total_payment}</TableCell>
+                                                                            <TableCell align={"left"}>{row.car_advert.map(car=>{
+                                                                                return car.status
+                                                                            })}</TableCell>
                                                                         </TableRow>
                                                                     )
                                                                 })
@@ -169,7 +154,7 @@ class FinancePayments extends React.Component{
 
                         )
                 }
-            </div>
+            </Container>
         );
     }
 

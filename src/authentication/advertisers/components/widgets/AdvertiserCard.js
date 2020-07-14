@@ -9,8 +9,7 @@ import {connect} from "react-redux";
 import AddNewAdvert from "../../../commons/components/AddNewAdvert";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import NewCompany from "../NewCompany";
-import {Link} from "react-router-dom";
-
+import {translate} from "react-i18next";
 class AdvertiserCard extends Component {
 
     totalAdverts = data=>{
@@ -58,6 +57,7 @@ class AdvertiserCard extends Component {
        return totalDeposit
     }
     render() {
+        const {t} = this.props
         return (
             <div>
                 {
@@ -86,7 +86,7 @@ class AdvertiserCard extends Component {
                                         action={<IconButton onClick={this.addNewAdvert} color={"inherit"}><AddIcon/></IconButton>}
                                         textColor={'white'}
                                         title={this.totalAdverts(this.props.user.relations.companies)}
-                                        subheader={'My adverts'}
+                                        subheader={t('advertiser.dashboard.myAdverts')}
                                     />
                                 </Grid>
 
@@ -97,7 +97,7 @@ class AdvertiserCard extends Component {
                                         action={<IconButton onClick={this.newCompany} color={"inherit"}><AddIcon/></IconButton>}
                                         textColor={'white'}
                                         title={this.props.user.relations.companies.length}
-                                        subheader={'My companies'}
+                                        subheader={t('advertiser.dashboard.myCompanies')}
                                     />
                                 </Grid>
 
@@ -108,7 +108,7 @@ class AdvertiserCard extends Component {
                                         textColor={'white'}
                                         title={`${this.totalAdvertDeposit(this.props.user.relations.companies)
                                             .toLocaleString()} ETB`}
-                                        subheader={'Total advert budget'}
+                                        subheader={t('advertiser.dashboard.totalAdvertBudget')}
                                     />
                                 </Grid>
 
@@ -129,4 +129,5 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps,{showMainDialog})(AdvertiserCard);
+export default translate('common')
+(connect(mapStateToProps,{showMainDialog})(AdvertiserCard));

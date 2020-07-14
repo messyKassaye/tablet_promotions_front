@@ -157,8 +157,7 @@ class MyCars extends React.Component {
                                                                                image={child.image}
                                                                     />
                                                                     <CardContent>
-                                                                        <Typography variant="body2" color="textSecondary"
-                                                                                    component="p">
+                                                                        <Typography variant="body2" color="textSecondary">
                                                                             {child.description}
                                                                         </Typography>
                                                                     </CardContent>

@@ -139,7 +139,7 @@ class Cars extends React.Component {
                                                         <Divider/>
                                                         <CardContent>
                                                             <Typography>
-                                                                {`${t('driver.cars.adverts')} : ${cars.adverts.length}`}
+                                                                {`${t('driver.cars.adverts')} : ${cars.adverts}`}
                                                             </Typography>
 
                                                             <div style={{display: 'flex', flexDirection: 'row',
@@ -268,14 +268,24 @@ class Cars extends React.Component {
                                                                                     cars.driver==null
                                                                                     ?
                                                                                         (
-                                                                                           <Typography
-                                                                                                 style={{
-                                                                                                   display:'flex',
-                                                                                                   flexDirection:'row',
-                                                                                                     color:green[500],
-                                                                                                   marginLeft:10}}>
-                                                                                               Driver link is sent but not registered yet.
-                                                                                           </Typography>
+                                                                                           <div style={{display:'flex',flexDirection:'row'}}>
+                                                                                               <Typography
+                                                                                                   style={{
+                                                                                                       display:'flex',
+                                                                                                       flexDirection:'row',
+                                                                                                       color:green[500],
+                                                                                                       marginLeft:10}}>
+                                                                                                   Driver link is sent but not registered yet.
+                                                                                               </Typography>
+                                                                                               <Button
+                                                                                                   variant={"outlined"}
+                                                                                                   onClick={()=>this.registerCarDriver(cars)}
+                                                                                               color={"primary"}
+                                                                                               style={{textTransform:'none',marginLeft:10}}
+                                                                                               >
+                                                                                                  Resend link
+                                                                                               </Button>
+                                                                                           </div>
                                                                                         )
                                                                                     :
                                                                                         (

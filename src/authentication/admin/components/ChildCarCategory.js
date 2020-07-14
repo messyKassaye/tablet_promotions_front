@@ -32,8 +32,8 @@ class ChildCarCategory extends Component {
                     <Divider/>
                     <CardContent>
                         <Typography>{`Maximum view per people: ${category.number_of_people}`}</Typography>
-                        <div style={{marginTop:20}}>
-                            <Typography>{category.description}</Typography>
+                        <div style={{marginTop:20,width:500,height:'auto'}}>
+                            <Typography component={'span'}>{category.description}</Typography>
                         </div>
                     </CardContent>
                 </Card>

@@ -51,7 +51,7 @@ class AdvertMedia extends Component {
                                     <Grid container spacing={2}>
                                         {
                                             this.props.medias.map(media=>(
-                                                <Grid item md={4} xs={12} sm={12}>
+                                                <Grid key={media.id} item md={4} xs={12} sm={12}>
                                                     <Card style={{backgroundColor:'#3C4252',color:'white'}}>
                                                         <div style={{display:'flex',flexDirection:'column',alignItems:'center',padding:20}}>
                                                             <Avatar style={{backgroundColor:'white',color:'#3C4252',marginBottom:10}}>{media.name.charAt(0)}</Avatar>

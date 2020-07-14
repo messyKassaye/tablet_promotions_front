@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Container,Grid} from "@material-ui/core";
+import {Container, Grid,Divider,Typography ,
+    Card, CardHeader, CardContent, Avatar} from "@material-ui/core";
 import {showAdvertView} from "../state/actions/advertViewAction";
 import {connect} from "react-redux";
 import FourByFourSkeleton from "../loading/customSkeleton";
-import CommonAdvertViewTab from "./widgets/CommonAdvertViewTab";
 import {commonShowAdvert} from "../state/actions/commonAdvertAction";
+import AdvertViewTab from "./widgets/advertViewTab";
 
 class AdvertViewsProfile extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class AdvertViewsProfile extends Component {
 
     render() {
         return (
-            <Container maxWidth={"md"}>
+            <Container maxWidth={"lg"}>
                 {
                     this.props.loading && this.props.advertLoading
                     ?
@@ -30,11 +31,20 @@ class AdvertViewsProfile extends Component {
                         )
                     :
                         (
-                           <Grid container spacing={2}>
-                               {
-                                 <CommonAdvertViewTab advert={this.props.advert} views={this.props.advertView}/>
-                               }
-                           </Grid>
+                               <Card>
+                                   <CardHeader
+                                   title={this.props.advert.product_name}
+                                   avatar={<Avatar>{this.props.advert.product_name.charAt(0)}</Avatar>}
+                                   subheader={this.props.advert.company.name}
+                                   action={<Typography color={"primary"} style={{padding:20}}>All views</Typography>}
+                                   />
+                                   <Divider/>
+                                   <CardContent>
+                                       <Grid container spacing={2}>
+                                           <AdvertViewTab advert={this.props.advert}/>
+                                       </Grid>
+                                   </CardContent>
+                               </Card>
                         )
                 }
             </Container>

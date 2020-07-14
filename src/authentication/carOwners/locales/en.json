@@ -40,7 +40,7 @@
      },
      "adverts": {
        "today": {
-         "title": "Today's advert",
+         "title": "All adverts",
          "plate_number": "Plate number",
          "total_advert": "Total ads",
          "media": "Media",

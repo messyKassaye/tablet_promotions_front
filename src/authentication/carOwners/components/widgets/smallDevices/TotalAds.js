@@ -15,11 +15,6 @@ class TotalAds extends React.Component{
 
     }
 
-    mediaType =(data,name)=>{
-        return  data.filter(item=>{
-            return item.detail.advert_media_type.name === name
-        }).length
-    }
 
     render() {
         const {cars} = this.props
@@ -44,15 +39,15 @@ class TotalAds extends React.Component{
                                         <CardContent>
                                             {
                                                 <div style={{display:'flex',flexDirection:'column'}}>
-                                                    <Typography>{`${t('driver.adverts.total.total_advert')}: ${car.adverts.length}`}</Typography>
+                                                    <Typography>{`${t('driver.adverts.total.total_advert')}: ${car.adverts}`}</Typography>
                                                     <Typography variant='h5' gutterBottom style={{color:'white'}}>Media</Typography>
-                                                    <div style={{display:'flex',flexDirection:'row',justifyContent:'start'}}>
+                                                    {/*<div style={{display:'flex',flexDirection:'row',justifyContent:'start'}}>
                                                         <Typography>{`${t('driver.adverts.total.video')}: ${this.mediaType(car.adverts,'Video')}`}</Typography>
                                                         <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
                                                         <Typography>{`${t('driver.adverts.total.audio')}: ${this.mediaType(car.adverts,'Audio')}`}</Typography>
                                                         <Divider orientation='vertical' style={{display:'flex',justifyContent:'center',alignItems:'end',marginLeft:8,marginRight:8,height:20,backgroundColor:'white'}}/>
                                                         <Typography>{`${t('driver.adverts.total.image')}: ${this.mediaType(car.adverts,'Image')}`}</Typography>
-                                                    </div>
+                                                    </div>*/}
                                                 </div>
                                             }
                                         </CardContent>
