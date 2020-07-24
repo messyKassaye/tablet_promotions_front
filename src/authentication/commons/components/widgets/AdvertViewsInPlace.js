@@ -8,6 +8,12 @@ import {green} from "@material-ui/core/colors";
 import {showCarAdvert} from "../../state/actions/CommonCarAdvertAction";
 
 class AdvertViewsInPlace extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            numberOfViews:0
+        }
+    }
 
     componentDidMount() {
         this.props.commonFetchAdvertPlaces()
@@ -20,12 +26,20 @@ class AdvertViewsInPlace extends Component {
 
     findView = (view,city)=>{
         let places = []
+        let peoplesWatch =0;
+        let response = {
+            places:[],
+            numberOfViews: 0
+        }
         view.data.map(advertView=>{
             if(advertView.car.working_place[0].city===city){
                 places.push(advertView.car.working_place[0])
+                peoplesWatch += advertView.number_of_viewers;
             }
         })
-        return places;
+        response.places = places
+        response.numberOfViews =peoplesWatch
+        return response;
     }
 
     render() {
@@ -39,7 +53,7 @@ class AdvertViewsInPlace extends Component {
                         (
                             <Grid container spacing={2}>
                                 {
-                                    this.findPlace(this.props.places)
+                                    this.findPlace(this.props.advert.advert_places)
                                         .map(place=>(
                                             <Grid item md={3} xs={12} sm={12}>
                                                 <Card style={{
@@ -50,13 +64,24 @@ class AdvertViewsInPlace extends Component {
                                                         avatar={<LocationOnIcon/>}
                                                         title={place.city}
                                                     />
-                                                    <CardContent >
-                                                        <Typography variant={'h2'} style={{color:green[500]}}>
-                                                            {this.findView(this.props.carAdvert,place.city).length}
-                                                        </Typography>
-                                                        <Typography variant={"h4"} style={{color:green[500]}}>
-                                                             views
-                                                        </Typography>
+                                                    <CardContent style={{display:'flex',flexDirection:'column',justifyContent:'center'}} >
+                                                        <div style={{display:'flex',flexDirection:'column',textAlign:'center'}}>
+                                                            <Typography variant={'h2'} style={{color:green[500]}}>
+                                                                {this.findView(this.props.carAdvert,place.city).places.length}
+                                                            </Typography>
+                                                            <Typography style={{color:green[500]}}>
+                                                                Advert plays
+                                                            </Typography>
+                                                        </div>
+
+                                                        <div style={{display:'flex',flexDirection:'column'}}>
+                                                            <Typography variant={'h2'} style={{color:green[500],textAlign:'center'}}>
+                                                                {this.findView(this.props.carAdvert,place.city).numberOfViews}
+                                                            </Typography>
+                                                            <Typography style={{color:green[500]}}>
+                                                                Peoples watch it
+                                                            </Typography>
+                                                        </div>
                                                     </CardContent>
                                                 </Card>
                                             </Grid>

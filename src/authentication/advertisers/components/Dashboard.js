@@ -37,7 +37,6 @@ class Dashboard extends React.Component{
                             <Grid item md={12} xs={12} sm={12}>
                                 <TopAdvertedCompanies/>
                             </Grid>
-
                         </Grid>
                     </Grid>
                 </Grid>

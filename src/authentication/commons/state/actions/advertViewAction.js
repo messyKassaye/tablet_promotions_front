@@ -1,7 +1,7 @@
 import {COMMON_SHOW_ADVERT_VIEW} from "../actionConstant/commonConstatnts";
 import axios from 'axios'
 import {API_URL} from "../../../../constants/constants";
-const PATH = 'advert_view'
+const PATH = 'car_adverts'
 
 export const showAdvertView = id=>dispatch=>{
     axios.get(`${API_URL}${PATH}/${id}`)

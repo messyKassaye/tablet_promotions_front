@@ -56,40 +56,57 @@ class TopViewedAdvert extends Component {
                             )
                             :
                             (
-                                <Grid container spacing={2}>
+                                <div>
                                     {
-                                        this.myAdverts(this.props.user.relations.companies)
-                                            .map(advert => (
-                                                <Grid key={advert.id} item md={4} xs={12} sm={12}>
-                                                    <Card>
-                                                        <CardHeader
-                                                            title={
-                                                                <Typography
-                                                                    className={classes.link}
-                                                                    component={Link}
-                                                                    to={`/auth/${this.props.user.relations.role[0].name}/advert/${advert.id}`}
-                                                                >
-                                                                    {advert.product_name}
-                                                                </Typography>
-                                                            }
-                                                            subheader={advert.advert_media_type.name}
-                                                            avatar={
-                                                                <Avatar>{advert.product_name.charAt(0)}</Avatar>}
-                                                        />
-                                                        <Divider/>
-                                                        <CardContent>
-                                                            <Typography>
-                                                                {`${t('advertiser.dashboard.dashboardAdverts.expectedPlay')}: ${advert.required_views_number.toLocaleString()}`}
-                                                            </Typography>
-                                                            <Typography>
-                                                                {`${t('advertiser.dashboard.dashboardAdverts.currentViews')}: ${advert.views.length}`}
-                                                            </Typography>
-                                                        </CardContent>
-                                                    </Card>
+                                        this.myAdverts(this.props.user.relations.companies).length>0
+                                        ?
+                                            (
+                                               <Grid container spacing={2}>
+                                                   {
+                                                       this.myAdverts(this.props.user.relations.companies)
+                                                           .map(advert => (
+                                                               <Grid key={advert.id} item md={4} xs={12} sm={12}>
+                                                                   <Card>
+                                                                       <CardHeader
+                                                                           title={
+                                                                               <Typography
+                                                                                   className={classes.link}
+                                                                                   component={Link}
+                                                                                   to={`/auth/${this.props.user.relations.role[0].name}/advert/${advert.id}`}
+                                                                               >
+                                                                                   {advert.product_name}
+                                                                               </Typography>
+                                                                           }
+                                                                           subheader={advert.advert_media_type.name}
+                                                                           avatar={
+                                                                               <Avatar>{advert.product_name.charAt(0)}</Avatar>}
+                                                                       />
+                                                                       <Divider/>
+                                                                       <CardContent>
+                                                                           <Typography>
+                                                                               {`${t('advertiser.dashboard.dashboardAdverts.expectedPlay')}: ${advert.required_views_number.toLocaleString()}`}
+                                                                           </Typography>
+                                                                           <Typography>
+                                                                               {`${t('advertiser.dashboard.dashboardAdverts.currentViews')}: ${advert.views.length}`}
+                                                                           </Typography>
+                                                                       </CardContent>
+                                                                   </Card>
+                                                               </Grid>
+                                                           ))
+                                                   }
+                                               </Grid>
+                                            )
+                                        :
+                                            (
+                                                <Grid container spacing={2}>
+                                                    <Grid item md={12} xs={12} sm={12}>
+                                                        <Typography>There is no any advert unitl now ):</Typography>
+                                                    </Grid>
                                                 </Grid>
-                                            ))
+                                            )
+
                                     }
-                                </Grid>
+                                </div>
                             )
                     }
                 </CardContent>

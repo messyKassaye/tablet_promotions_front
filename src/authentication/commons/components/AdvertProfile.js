@@ -9,7 +9,9 @@ import {
     Grid,
     Tab,
     Tabs,
-    Typography
+    Typography,
+    ButtonGroup,
+    Button
 } from "@material-ui/core";
 import {connect} from "react-redux";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -20,15 +22,16 @@ import TabLoader from "../loading/TabLoader";
 import AdvertProfileTab from "./widgets/AdvertProfileTab";
 import AdvertViewTab from "./widgets/advertViewTab";
 import {commonShowAdvert} from "../state/actions/commonAdvertAction";
-import CompletedAdvert from "./widgets/CompletedAdvert";
 import AdvertViewsInPlace from "./widgets/AdvertViewsInPlace";
 import AdvertStatics from "./widgets/AdvertStatics";
+import FourByFourSkeleton from "../loading/customSkeleton";
 
 class AdvertProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value:0
+            selected:1,
+            selectedTitle:'Advert profile',
         }
     }
 
@@ -36,36 +39,27 @@ class AdvertProfile extends Component {
     componentDidMount() {
         let id = this.props.match.params.id
         this.props.commonShowAdvert(id)
+
     }
 
-    handleChange = (event, newValue) => {
+    onSelected = (value,title)=>{
         this.setState({
-            value: newValue
+            selected:value,
+            selectedTitle:title,
         })
     }
 
-    a11yProps = (index) => {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`,
-        };
-    }
-
-    TabPanel = (props) => {
-        const {children, value, index, ...other} = props;
-
-        return (
-            <Typography
-                component="div"
-                role="tabpanel"
-                hidden={value !== index}
-                id={`simple-tabpanel-${index}`}
-                aria-labelledby={`simple-tab-${index}`}
-                {...other}
-            >
-                <Box  style={{paddingLeft:0,paddingRight:0}} p={4}>{children}</Box>
-            </Typography>
-        );
+    renderComponent = ()=>{
+        let selected = this.state.selected
+        if (selected===1){
+            return <AdvertProfileTab advert={this.props.adverts}/>
+        }else if (selected===2){
+            return  <AdvertViewTab advert={this.props.adverts}/>
+        }else if (selected===3){
+            return <AdvertViewsInPlace advert={this.props.adverts}/>
+        }else if (selected===4){
+            return <AdvertStatics advert={this.props.adverts}/>
+        }
     }
 
 
@@ -120,59 +114,67 @@ class AdvertProfile extends Component {
                         }
                         />
                         <CardContent style={{padding:0}}>
-                            <Grid container spacing={2}>
-                                <Grid item md={12} xs={12} sm={12}>
+                            <div style={{display:'flex',flexDirection:'column'}}>
+                                <div style={{display:'flex',flexDirection:'row',padding:10,justifyContent:'space-between'}}>
+                                    <Typography
+                                        color={'secondary'}
+                                        style={{marginLeft:15}}
+                                    >
+                                        {this.state.selectedTitle}
+                                    </Typography>
+                                    <ButtonGroup style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                                        <Button
+                                            color={this.state.selected===1?'secondary':'primary'}
+                                            size={"small"}
+                                            variant={this.state.selected===1?'contained':'outlined'}
+                                            onClick={()=>this.onSelected(1,'Advert profile')}
+                                            style={{textTransform:"none"}}
+
+                                        >
+                                            Profile
+                                        </Button>
+                                        <Button
+                                            color={this.state.selected===2?'secondary':'primary'}
+                                            size={"small"}
+                                            variant={this.state.selected===2?'contained':'outlined'}
+                                            onClick={()=>this.onSelected(2,'Advert views')}
+                                            style={{textTransform:"none"}}>
+                                            Advert views
+                                        </Button>
+                                        <Button
+                                            color={this.state.selected===3?'secondary':'primary'}
+                                            size={"small"}
+                                            variant={this.state.selected===3?'contained':'outlined'}
+                                            onClick={()=>this.onSelected(3,'Advert places')}
+                                            style={{textTransform:"none"}}>
+                                            Advert places
+                                        </Button>
+                                        <Button
+                                            color={this.state.selected===4?'secondary':'primary'}
+                                            size={"small"}
+                                            variant={this.state.selected===4?'contained':'outlined'}
+                                            onClick={()=>this.onSelected(4,'Advert statics')}
+                                            style={{textTransform:"none"}}>
+                                            Advert statics
+                                        </Button>
+                                    </ButtonGroup>
+                                </div>
+                                <Divider/>
+                                <div style={{padding:20}}>
                                     {
                                         this.props.loading
-                                            ?
+                                        ?
+                                            (<FourByFourSkeleton/>)
+                                        :
                                             (
-                                                <TabLoader/>
+                                                <div>
+                                                    {this.renderComponent()}
+                                                </div>
                                             )
-                                            :
-                                            (
-                                                <Grid container spacing={2}>
 
-                                                    <Grid item md={12} xs={12} sm={12}>
-                                                        <Card  style={{borderRadius: 0}} elevation={0}>
-                                                            <Tabs
-                                                                value={this.state.value}
-                                                                textColor={"primary"}
-                                                                indicatorColor={"primary"}
-                                                                variant={"scrollable"}
-                                                                onChange={this.handleChange}>
-                                                                <Tab className={classes.tabs} label='Profile' {...this.a11yProps(0)} />
-                                                                <Tab className={classes.tabs}  label='Advert views' {...this.a11yProps(1)} />
-                                                                <Tab className={classes.tabs}  label='Advert places' {...this.a11yProps(2)} />
-                                                                <Tab className={classes.tabs}  label='Advert statics' {...this.a11yProps(2)} />
-
-                                                            </Tabs>
-                                                            <Divider/>
-                                                        </Card>
-                                                        <Card style={{borderRadius:0}} elevation={0}>
-                                                            <CardContent>
-                                                                <this.TabPanel value={this.state.value} index={0}>
-                                                                    <AdvertProfileTab advert={this.props.adverts}/>
-                                                                </this.TabPanel>
-
-                                                                <this.TabPanel value={this.state.value} index={1}>
-                                                                    <AdvertViewTab advert={this.props.adverts}/>
-                                                                </this.TabPanel>
-
-                                                                <this.TabPanel value={this.state.value} index={2}>
-                                                                    <AdvertViewsInPlace advert={this.props.adverts}/>
-                                                                </this.TabPanel>
-
-                                                                <this.TabPanel value={this.state.value} index={3}>
-                                                                    <AdvertStatics advert={this.props.adverts}/>
-                                                                </this.TabPanel>
-                                                            </CardContent>
-                                                        </Card>
-                                                    </Grid>
-                                                </Grid>
-                                            )
                                     }
-                                </Grid>
-                            </Grid>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
             </Container>

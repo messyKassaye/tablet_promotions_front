@@ -25,25 +25,41 @@ const carsStyle = theme=>({
         display:'flex',
         flexDirection:'row',
         justifyContent: 'flex-start',
-        marginBottom:50
+        marginBottom:50,
+        [theme.breakpoints.down('xs')]:{
+            display:'flex',
+            justifyContent:'center'
+        }
     },
     card:{
         display:'flex',
         flexDirection:'row',
         justifyContent:'center',
-        marginBottom:50
+        marginBottom:50,
+        [theme.breakpoints.down('xs')]:{
+            flexDirection:'column',
+            padding: 5,
+        }
     },
     description:{
         marginRight:10,
         fontSize:'1.25em',
-        textAlign:'justify'
+        textAlign:'justify',
+        [theme.breakpoints.down('xs')]:{
+            marginRight: 0
+        }
     },
     description2:{
         marginLeft:10,
         fontSize:'1.25em'
     },
     definition_card:{
-        display:'flex',flexDirection:'column',width:500
+        display:'flex',
+        flexDirection:'column',
+        width:500,
+        [theme.breakpoints.down('xs')]:{
+            width: 300
+        }
     }
 })
 

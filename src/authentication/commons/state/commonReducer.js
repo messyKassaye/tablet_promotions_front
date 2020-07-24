@@ -12,6 +12,9 @@ import advertViewPaymentReducer from "./reducer/advertViewPaymentReducer";
 import CommonCarAdvertReducer from "./reducer/CommonCarAdvertReducer";
 import advertViewReducers from "./reducer/advertViewReducers";
 import topAdvertedCompanyReducer from "./reducer/topAdvertedCompanyReducer";
+import perPlayAdvertReducer from "./reducer/AdvertCheckerReducer";
+import AdvertCheckerReducer from "./reducer/AdvertCheckerReducer";
+import CarAdvertCheckerReducer from "./reducer/CarAdvertCheckerReducer";
 
 export default combineReducers({
     commonAdvertMediaReducer:advertMediaTypeReducer,
@@ -26,5 +29,7 @@ export default combineReducers({
     paymentReducer:advertViewPaymentReducer,
     commonCarAdvertsReducer:CommonCarAdvertReducer,
     commonAdvertViewReducer:advertViewReducers,
-    commonTopAdvertedCompanies:topAdvertedCompanyReducer
+    commonTopAdvertedCompanies:topAdvertedCompanyReducer,
+    commonAdvertChecker:AdvertCheckerReducer,
+    commonCarAdvertChecker:CarAdvertCheckerReducer
 })

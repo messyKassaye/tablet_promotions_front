@@ -15,6 +15,9 @@ import LocalTaxiIcon from '@material-ui/icons/LocalTaxi';
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import {CardActions} from "@material-ui/core";
 class Categories extends Component {
 
     componentDidMount() {
@@ -61,17 +64,30 @@ class Categories extends Component {
                                                                         {
                                                                             category.child.map(child=>(
                                                                                 <Grid item md={4} xs={12} sm={12} key={child.id}>
-                                                                                    <Card>
-                                                                                        <CardContent style={{height:320,overflowY:"auto"}}>
+                                                                                    <Card style={{height:450}}>
+                                                                                        <CardContent>
                                                                                             <div className={classes.carsHeader}>
                                                                                                 <Avatar className={classes.large} variant='circle' src={child.image}></Avatar>
-                                                                                                <Typography style={{marginTop:10}}>{child.name}</Typography>
+                                                                                                <Typography color={"primary"} style={{marginTop:10}}>{t(`home.${child.name}`)}</Typography>
                                                                                             </div>
                                                                                             <div className={classes.description}>
-                                                                                                <Typography>{child.description}</Typography>
+                                                                                                <Typography>
+                                                                                                    {t(`home.${child.name}_description`)}
+                                                                                                </Typography>
                                                                                             </div>
 
                                                                                         </CardContent>
+                                                                                        <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                                                                                            <Button
+                                                                                                variant={"text"}
+                                                                                                color={"primary"}
+                                                                                                size={"small"}
+                                                                                                style={{textTransform:'none'}}
+                                                                                                component={Link}
+                                                                                                to={'/cars'}>
+                                                                                                Read more
+                                                                                            </Button>
+                                                                                        </CardActions>
                                                                                     </Card>
                                                                                 </Grid>
                                                                             ))

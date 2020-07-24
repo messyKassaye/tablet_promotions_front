@@ -41,15 +41,7 @@ class DownloadHome extends Component {
                     </Grid>
 
                     <Grid item md={12} lg={12} xs={12} sm={12}>
-                        <Grid container spacing={2}>
-                            <Grid item md={6} lg={6} xs={12} sm={12}>
-                                <DriverCar/>
-                            </Grid>
-
-                            <Grid item md={6} lg={6} xs={12} sm={12}>
-                                <AdvertisedCompanies/>
-                            </Grid>
-                        </Grid>
+                        <DriverCar/>
                     </Grid>
                 </Grid>
 

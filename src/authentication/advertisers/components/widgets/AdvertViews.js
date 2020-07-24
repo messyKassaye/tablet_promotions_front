@@ -11,6 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions";
 import {Link} from "react-router-dom";
+import nFormatter from "../../../services/MainServices";
 class AdvertViews extends React.Component{
 
     constructor(props) {
@@ -32,11 +33,11 @@ class AdvertViews extends React.Component{
                         {
                             <div>
                                     <Typography>
-                                        {`Expected play : ${this.props.adverts.required_views_number.toLocaleString()}`}
+                                        {`Expected play : ${nFormatter(this.props.adverts.required_views_number,1)}`}
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                         <Typography>
-                                            {`Current play :  ${this.props.adverts.car_advert.length}`}
+                                            {`Current play :  ${nFormatter(this.props.adverts.car_advert.length,1)}`}
                                         </Typography>
                                     </div>
                             </div>

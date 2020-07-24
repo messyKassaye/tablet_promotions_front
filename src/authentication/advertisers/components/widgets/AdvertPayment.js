@@ -15,6 +15,7 @@ import {withRouter} from 'react-router-dom'
 import AdvertPaymentTransaction from "../../../commons/components/AdvertPaymentTransaction";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 import {connect} from "react-redux";
+import nFormatter from "../../../services/MainServices";
 class AdvertPayment extends React.Component{
     constructor(props) {
         super(props);
@@ -56,7 +57,7 @@ class AdvertPayment extends React.Component{
                             <div>
                                 <Typography>
                                     {`Total payment : 
-                                    ${this.calculatePayment(this.props.adverts.required_views_number,this.props.adverts.advert_media_type.per_view_payment).toLocaleString()} ETB`}
+                                    ${nFormatter(this.calculatePayment(this.props.adverts.required_views_number,this.props.adverts.advert_media_type.per_view_payment),1)} ETB`}
                                 </Typography>
                                 <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                     <Typography>

@@ -27,7 +27,7 @@ class ViewImageCard extends Component {
         this.setState({
             submitted:true,
             loading:true,
-            formData
+            formData,
         })
          this.updateCarAdvert()
     }

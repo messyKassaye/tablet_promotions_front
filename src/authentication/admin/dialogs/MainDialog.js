@@ -110,7 +110,7 @@ class MainDialog extends Component {
                         <CloseIcon/>
                     </IconButton>
                 </DialogTitle>
-                <DialogContent dividers>
+                <DialogContent dividers style={{padding:10}}>
                     {this.renderComponent(this.props.showData.page)}
                 </DialogContent>
                 {

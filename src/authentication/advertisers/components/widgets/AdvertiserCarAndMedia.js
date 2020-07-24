@@ -61,7 +61,7 @@ class AdvertiserCarAndMedia extends Component {
                                                 this.props.categories.map(category => (
                                                     <Card elevation={0}>
                                                         <CardHeader
-                                                            subheader={category.name}
+                                                            subheader={t(`home.${category.name}`)}
                                                             style={{padding: 0}}
                                                             key={category.id}
                                                         />

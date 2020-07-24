@@ -22,9 +22,9 @@ class Slider extends React.Component{
         this.props.showHomeDialog(
             {
                 'show':true,
-                'page':<VideoPlayer/>,
+                'page':<VideoPlayer path={'http://'}/>,
                 showTitle:false,
-                title:'Add new bank',
+                title:'Video player',
                 actions:{on:false,path:'',id:''}
             })
     }

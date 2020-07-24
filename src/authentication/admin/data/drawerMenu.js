@@ -34,6 +34,11 @@ const drawerMenu = [
         icon:<AttachMoneyIcon/>,
         children:[
             {
+                name:'Check advert views',
+                route:'/auth/admin/checking_advert_views',
+                icon:<AttachMoneyIcon/>
+            },
+            {
                 name:'My payment',
                 route:'/auth/admin/my_payment',
                 icon:<AttachMoneyIcon/>

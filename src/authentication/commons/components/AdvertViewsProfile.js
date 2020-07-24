@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Container, Grid,Divider,Typography ,
     Card, CardHeader, CardContent, Avatar} from "@material-ui/core";
-import {showAdvertView} from "../state/actions/advertViewAction";
 import {connect} from "react-redux";
 import FourByFourSkeleton from "../loading/customSkeleton";
 import {commonShowAdvert} from "../state/actions/commonAdvertAction";
-import AdvertViewTab from "./widgets/advertViewTab";
+import {me} from "../../state/actions/usersActions";
+import {showCarAdvert} from "../state/actions/CommonCarAdvertAction";
+import ViewImageCard from "./ViewImageCard";
 
 class AdvertViewsProfile extends Component {
     constructor(props) {
@@ -16,15 +17,24 @@ class AdvertViewsProfile extends Component {
     componentDidMount() {
         let id = this.props.match.params.id
         this.props.commonShowAdvert(id)
-        this.props.showAdvertView(id)
+        this.props.me()
+        this.props.showCarAdvert(id)
 
+    }
+
+    findRole = user=>{
+        if (user.relations.role[0].id===1){
+            return true
+        }else {
+            return false
+        }
     }
 
     render() {
         return (
             <Container maxWidth={"lg"}>
                 {
-                    this.props.loading && this.props.advertLoading
+                    this.props.loading
                     ?
                         (
                             <FourByFourSkeleton/>
@@ -40,9 +50,41 @@ class AdvertViewsProfile extends Component {
                                    />
                                    <Divider/>
                                    <CardContent>
-                                       <Grid container spacing={2}>
-                                           <AdvertViewTab advert={this.props.advert}/>
-                                       </Grid>
+                                       <div>
+                                           {
+                                               this.props.carAdvertsLoading&&this.props.userLoading
+                                               ?
+                                                   (
+                                                       <Grid container spacing={2}>
+                                                           <FourByFourSkeleton/>
+                                                       </Grid>
+                                                   )
+                                               :
+                                                   (
+                                                       <Grid container spacing={2}>
+                                                           {
+                                                               this.props.carAdverts.data.length>0
+                                                                   ?
+                                                                   (
+                                                                       this.props.carAdverts.data.map(carAds=>(
+                                                                           <Grid key={carAds.id} item md={4} xs={12} sm={12}>
+                                                                               <ViewImageCard carAds={carAds} action={this.findRole(this.props.user)}/>
+                                                                           </Grid>
+                                                                       ))
+                                                                   )
+                                                                   :
+                                                                   (
+                                                                       <Grid item md={12} xs={12}>
+                                                                           <Typography color={"primary"}>
+                                                                               There is no advert views ):
+                                                                           </Typography>
+                                                                       </Grid>
+                                                                   )
+                                                           }
+                                                       </Grid>
+                                                   )
+                                           }
+                                       </div>
                                    </CardContent>
                                </Card>
                         )
@@ -53,10 +95,12 @@ class AdvertViewsProfile extends Component {
 }
 
 const mapStateToProps = state=>({
-    advertView:state.authReducer.commonReducer.commonAdvertViewReducer.advertViews,
-    loading:state.authReducer.commonReducer.commonAdvertViewReducer.loading,
     advert:state.authReducer.commonReducer.commonAdvertsReducer.advert,
-    advertLoading:state.authReducer.commonReducer.commonAdvertsReducer.loading
+    loading:state.authReducer.commonReducer.commonAdvertsReducer.loading,
+    user:state.userData.user,
+    userLoading:state.userData.loading,
+    carAdverts: state.authReducer.commonReducer.commonCarAdvertsReducer.carAdverts,
+    carAdvertsLoading:state.authReducer.commonReducer.commonCarAdvertsReducer.loading
 })
 
-export default connect(mapStateToProps,{showAdvertView,commonShowAdvert})(AdvertViewsProfile);
+export default connect(mapStateToProps,{commonShowAdvert,me,showCarAdvert})(AdvertViewsProfile);

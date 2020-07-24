@@ -46,12 +46,12 @@ class AdvertMedia extends Component {
                                                <Grid key={medias.id} item md={12} xs={12}>
                                                    <Card>
                                                        <CardHeader
-                                                           title={medias.name}
+                                                           title={t(`home.${medias.name}`)}
                                                            subheader={`per view payment: ${medias.per_view_payment} ETB`}
                                                            avatar={<Avatar>{medias.name.charAt(0)}</Avatar>}/>
                                                        <Divider/>
                                                        <CardContent>
-                                                           <Typography>{medias.description}</Typography>
+                                                           <Typography>{t(`home.${medias.name}_description`)}</Typography>
                                                        </CardContent>
                                                    </Card>
                                                </Grid>

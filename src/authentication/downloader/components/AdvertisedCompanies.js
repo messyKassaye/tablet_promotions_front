@@ -9,6 +9,7 @@ class AdvertisedCompanies extends Component {
             <Card>
                 <CardHeader
                     title={'Advertised companies'}
+                    style={{backgroundColor:'#3C4252',color:'white'}}
                     avatar={<BusinessIcon/>}/>
                     <Divider/>
                 <CardContent>

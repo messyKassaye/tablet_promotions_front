@@ -43,5 +43,12 @@ export const isExpired = ()=>{
     }else {
         return  false
     }
+}
 
+export const advertProfile = (id,clicked)=>{
+    localStorage.setItem(id,clicked);
+}
+
+export const getAdvertProfile = (id)=>{
+    localStorage.getItem(id);
 }

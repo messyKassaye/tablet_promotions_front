@@ -51,6 +51,7 @@ class Cars extends Component {
                                                 </div>
                                                 <img width={350} height={200} src={car.image}/>
                                             </div>
+
                                         </div>
                                     }else {
                                       return  <div className={classes.innerClasses2}>
@@ -60,7 +61,9 @@ class Cars extends Component {
                                                     <Typography color={"primary"}  variant={"h5"}>
                                                         {t(`home.${car.name}`)}
                                                     </Typography>
-                                                    <span className={classes.description2}>{car.description}</span>
+                                                    <span className={classes.description2}>
+                                                        {t(`home.${car.name}_description`)}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

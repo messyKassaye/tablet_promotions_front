@@ -22,7 +22,7 @@ import {me} from "../../state/actions/usersActions";
 import Skeleton from "@material-ui/lab/Skeleton";
 import LoadingButton from "../../../home/components/widgets/LoadingButton";
 import {updateAdvert} from "../../admin/state/action/advertsAction";
-
+import AddNewAdvert from "./AddNewAdvert";
 class AdvertCard extends Component {
     constructor(props) {
         super(props);
@@ -45,9 +45,16 @@ componentDidMount() {
         this.props.me()
 }
 
-    play = () => {
-        this.setState({
-            play: true
+    play = (advert) => {
+        this.props.showMainDialog({
+            show:true,
+            page:<MediaPlayer adverts={this.props.advert}/>,
+            title:`${advert.product_name} video is playing.`,
+            actions:{
+                on:false,
+                path:'',
+                id:''
+            }
         })
     }
     calculatePayment = (expectedViews, paymentPerView) => {
@@ -57,6 +64,7 @@ componentDidMount() {
     showPaymentStatus = adverts => {
         this.props.showMainDialog({
             show: true,
+            maxWidth:'lg',
             page: <AdvertPaymentApproval advert={adverts}/>,
             title: 'Payment status for advert',
             actions: {on: false, path: '', id: ''}
@@ -73,66 +81,6 @@ componentDidMount() {
         }
     }
 
-    moveToAdvertAir = (status)=>{
-        this.setState({
-            submitted:true,
-            loading:true
-        })
-        const {formData} = this.state
-        formData['status']=status
-        this.setState(formData)
-        this.props.updateAdvert(formData,this.props.advert.id)
-    }
-
-    mediaActions = ()=>{
-        const {loading} = this.state;
-        const {finished} = this.state
-        const setLoading = !finished && loading;
-        const isEnabled = true
-        return <div style={{display:'flex',flexDirection:'row'}}>
-            <Button
-                color={"secondary"}
-                variant={"outlined"}
-                style={{textTransform:'none'}}
-                size={"small"}
-            >
-                Cancel
-            </Button>
-            <LoadingButton
-                color="primary"
-                variant={this.state.moveVariant}
-                onClick={()=>this.moveToAdvertAir('on_advert')}
-                disabled={!isEnabled || this.state.submitted}
-                loading={setLoading}
-                text={this.state.moveText}
-                done={finished}
-                size={'small'}
-                style={{textTransform:'none',marginLeft:15}}
-            >
-                {this.state.moveText}
-            </LoadingButton>
-        </div>
-    }
-    cancelAction = ()=>{
-        const {loading} = this.state;
-        const {finished} = this.state
-        const setLoading = !finished && loading;
-        const isEnabled = true
-
-     return   <LoadingButton
-            color="secondary"
-            variant={'outlined'}
-            onClick={()=>this.moveToAdvertAir('cancel')}
-            disabled={!isEnabled || this.state.submitted}
-            loading={setLoading}
-            text={'Cancel'}
-            done={finished}
-            size={'small'}
-            style={{textTransform:'none',marginLeft:15}}
-        >
-            Cancel
-        </LoadingButton>
-    }
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.response.status){
@@ -266,7 +214,7 @@ componentDidMount() {
                                         variant={"text"}
                                         size={"small"}
                                         style={{textTransform: 'none', marginTop: 10}}
-                                        onClick={this.play}
+                                        onClick={()=>this.play(this.props.advert)}
                                     >
                                         {this.identifyMedia(this.props.advert)}
                                     </Button>
@@ -282,31 +230,7 @@ componentDidMount() {
                     }
 
 
-                    <CardActions style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
-                        {
-                            this.state.play && this.props.action
-                            ?
-                                (
-                                    this.mediaActions()
-                                )
-                            :
-                                (
-                                    null
-                                )
-                        }
 
-                        {
-                            this.state.play && this.props.cancelAction
-                                ?
-                                (
-                                    this.cancelAction()
-                                )
-                                :
-                                (
-                                    null
-                                )
-                        }
-                    </CardActions>
                 </CardContent>
             </Card>
         );
@@ -317,4 +241,4 @@ const mapStateToProps = state=>({
     loading:state.userData.loading,
     response:state.authReducer.adminReducers.advertReducer.response
 })
-export default connect(mapStateToProps, {showMainDialog,me,updateAdvert})(withStyles(advertCardStyle)(AdvertCard));
+export default connect(mapStateToProps, {me,updateAdvert,showMainDialog})(withStyles(advertCardStyle)(AdvertCard));

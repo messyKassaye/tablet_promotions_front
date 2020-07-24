@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardContent, Container, Grid} from "@material-ui/core";
+import {Card, CardContent, Container, Grid,Typography} from "@material-ui/core";
 import {connect} from "react-redux";
 import {showCarAdvert} from "../../state/actions/CommonCarAdvertAction";
 import ViewImageCard from "../ViewImageCard";
@@ -34,8 +34,6 @@ class AdvertViewTab extends Component {
     render() {
         return (
             <Container maxWidth={"lg"}>
-                <Grid container spacing={2}>
-
                     {
                         this.props.loading&&this.props.userLoading
                         ?
@@ -44,14 +42,29 @@ class AdvertViewTab extends Component {
                             )
                         :
                             (
-                                this.props.carAdverts.data.map(carAds=>(
-                                    <Grid key={carAds.id} item md={4} xs={12} sm={12}>
-                                        <ViewImageCard carAds={carAds} action={this.findRole(this.props.user)}/>
-                                    </Grid>
-                                ))
+                                <Grid container spacing={2}>
+                                    {
+                                        this.props.carAdverts.data.length>0
+                                        ?
+                                            (
+                                                this.props.carAdverts.data.map(carAds=>(
+                                                    <Grid key={carAds.id} item md={4} xs={12} sm={12}>
+                                                        <ViewImageCard carAds={carAds} action={this.findRole(this.props.user)}/>
+                                                    </Grid>
+                                                ))
+                                            )
+                                        :
+                                            (
+                                                <Grid item md={12} xs={12}>
+                                                    <Typography color={"primary"}>
+                                                        There is no advert views ):
+                                                    </Typography>
+                                                </Grid>
+                                            )
+                                    }
+                                </Grid>
                             )
                     }
-                </Grid>
             </Container>
         );
     }

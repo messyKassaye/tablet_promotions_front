@@ -55,12 +55,12 @@ class AdvertMedia extends Component {
                                                     <Card style={{backgroundColor:'#3C4252',color:'white'}}>
                                                         <div style={{display:'flex',flexDirection:'column',alignItems:'center',padding:20}}>
                                                             <Avatar style={{backgroundColor:'white',color:'#3C4252',marginBottom:10}}>{media.name.charAt(0)}</Avatar>
-                                                            <Typography>{media.name}</Typography>
+                                                            <Typography>{t(`home.${media.name}`)}</Typography>
                                                         </div>
                                                         <CardContent style={{height:250,overflowY:"auto"}}>
                                                             <Divider/>
                                                             <div style={{textAlign:'justify'}}>
-                                                                <Typography>{media.description}</Typography>
+                                                                <Typography>{t(`home.${media.name}_description`)}</Typography>
                                                             </div>
                                                         </CardContent>
                                                     </Card>

@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import {translate} from "react-i18next";
+import FourByFourSkeleton from "../../commons/loading/customSkeleton";
 class DriverCar extends Component {
     render() {
         const {t} = this.props
@@ -16,6 +17,7 @@ class DriverCar extends Component {
             <Card>
                 <CardHeader
                     title={'My car'}
+                    style={{backgroundColor:'#3C4252',color:'white'}}
                     avatar={<DirectionsCarIcon/>}/>
                     <Divider/>
                 <CardContent>
@@ -23,11 +25,9 @@ class DriverCar extends Component {
                         this.props.loading
                         ?
                             (
-                                <Skeleton
-                                variant={"rect"}
-                                width={'100%'}
-                                height={200}
-                                style={{backgroundColor:grey[500]}}/>
+                                <Grid container spacing={2}>
+                                    <FourByFourSkeleton/>
+                                </Grid>
                             )
                         :
                             (
@@ -36,8 +36,8 @@ class DriverCar extends Component {
                                         this.props.user.relations.driver_car.length > 0
                                             ?
                                             (this.props.user.relations.driver_car.map(cars => (
-                                                <Grid key={cars.id} item md={12} sm={12} xs={12}>
-                                                    <Card elevation={0}>
+                                                <Grid key={cars.id} item md={6} lg={6} sm={12} xs={12}>
+                                                    <Card>
                                                         <CardHeader
                                                             title={`${cars.plate_number}`}
                                                             subheader={cars.car_category[0].name}

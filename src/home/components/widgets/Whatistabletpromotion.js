@@ -40,12 +40,11 @@ import lada from '../../../assets/lada.png'
                      </Grid>
 
                      <Grid item md={3} xs={12} sm={12} className={classes.small_card}>
-                         <Card style={{
-                             backgroundImage:`url('${lada}')`,
-                             backgroundRepeat:"no-repeat",
-                             backgroundSize:"cover",
-                             backgroundColor:green[500],
-                             height:215}}>
+                         <Card>
+                             <CardContent style={{paddingTop:55,paddingBottom:55,textAlign:'center'}}>
+                                 <Typography>Get paid by</Typography>
+                                 <Typography variant={"h3"} color={"primary"}>Per play</Typography>
+                             </CardContent>
                          </Card>
                      </Grid>
                  </Grid>

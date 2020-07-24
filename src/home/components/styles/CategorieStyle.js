@@ -22,6 +22,12 @@ const CategoriesStyle = theme=>({
     description:{
         textAlign:'justify',
         marginTop:10
+    },
+    action:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        alignItems: 'flex-end'
     }
 })
 
