@@ -21,25 +21,38 @@ class AdvertViewsInPlace extends Component {
     }
 
     findPlace = place=>{
-        return place.filter(place=>place.id!==1);
+        if (place.length===1){
+            return this.props.places.filter(place=>place.id!==1)
+        }else {
+            return place.filter(place=>place.id!==1);
+        }
+
     }
 
     findView = (view,city)=>{
+        
         let places = []
-        let peoplesWatch =0;
         let response = {
             places:[],
-            numberOfViews: 0
+            numberOfViews: new Array()
         }
         view.data.map(advertView=>{
             if(advertView.car.working_place[0].city===city){
-                places.push(advertView.car.working_place[0])
-                peoplesWatch += advertView.number_of_viewers;
+                places.push(advertView.car.working_place[0].city)
+                response.numberOfViews.push(advertView.number_of_viewers);
             }
         })
         response.places = places
-        response.numberOfViews =peoplesWatch
         return response;
+    }
+
+    findTotalView = (data)=>{
+        let total = 0;
+        data.map(view=>{
+            return total+=view;
+        })
+
+        return total;
     }
 
     render() {
@@ -76,7 +89,7 @@ class AdvertViewsInPlace extends Component {
 
                                                         <div style={{display:'flex',flexDirection:'column'}}>
                                                             <Typography variant={'h2'} style={{color:green[500],textAlign:'center'}}>
-                                                                {this.findView(this.props.carAdvert,place.city).numberOfViews}
+                                                                {this.findTotalView(this.findView(this.props.carAdvert,place.city).numberOfViews)}
                                                             </Typography>
                                                             <Typography style={{color:green[500]}}>
                                                                 Peoples watch it

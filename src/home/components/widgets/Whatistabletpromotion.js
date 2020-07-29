@@ -17,7 +17,7 @@ import lada from '../../../assets/lada.png'
          const {classes} = this.props
          const {t} = this.props
          return (
-             <Container maxWidth='lg'>
+             <Container maxWidth={'lg'}>
                  <Grid container spacing={2}>
 
                      <Grid item md={9} xs={12} sm={12}>

@@ -29,10 +29,10 @@ class AdvertPlaces extends React.Component{
                         {
                             <div>
                                 <Typography>
-                                    {`Country : ${this.props.adverts.places.map(place=>{return place.country})}`}
+                                    {`Country : ${this.props.adverts.advert_places.map(place=>{return place.country})}`}
                                 </Typography>
                                 <Typography>
-                                    {`City : ${this.props.adverts.places.map(place=>{return place.city})}`}
+                                    {`City : ${this.props.adverts.advert_places.map(place=>{return place.city})}`}
                                 </Typography>
                             </div>
                         }

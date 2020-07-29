@@ -37,7 +37,13 @@ class AdvertViews extends React.Component{
                                     </Typography>
                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                         <Typography>
-                                            {`Current play :  ${nFormatter(this.props.adverts.car_advert.length,1)}`}
+                                            {`Current play :  ${nFormatter(this.props.adverts.views,1)}`}
+                                        </Typography>
+                                    </div>
+
+                                    <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
+                                        <Typography>
+                                            {`Number of viewers :  ${nFormatter(this.props.adverts.peoplesView,1)}`}
                                         </Typography>
                                     </div>
                             </div>

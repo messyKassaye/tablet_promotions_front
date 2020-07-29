@@ -210,7 +210,7 @@ class CompanyAdverts extends Component {
                                             )
                                     }
                                     subheader={<span
-                                    >{`${advert.views.length} views`}</span>}
+                                    >{`${advert.views} views, ${advert.peoplesView} peoples watch it`}</span>}
                                     avatar={<Avatar
                                         width={40}
                                         height={40}>

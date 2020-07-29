@@ -41,7 +41,7 @@ class Notifications extends React.Component{
                         (
                             <IconButton
                                 component={Link}
-                                to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/notifications`}
+                                to={`/auth/${this.props.user.relations.role[0].name}/notifications`}
                                 color='inherit'
                             >
                                 {

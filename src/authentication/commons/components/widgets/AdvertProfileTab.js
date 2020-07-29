@@ -9,6 +9,7 @@ import {green, grey} from "@material-ui/core/colors";
 import BusinessIcon from '@material-ui/icons/Business';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import {Link} from "react-router-dom";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {connect} from "react-redux";
 import {showMainDialog} from "../../../admin/state/action/dialogAction";
 
@@ -65,6 +66,14 @@ class AdvertProfileTab extends Component {
                                 </Typography>
                                 <Typography className={classes.profileRowSecondLabel}>
                                     {advert.views.toLocaleString()}
+                                </Typography>
+                            </div>
+                            <div className={classes.profileRowCard}>
+                                <Typography className={classes.profileRowFirstLabel}>
+                                    <VisibilityIcon color={"primary"} style={{marginRight: 10}}/> Number of viewers:
+                                </Typography>
+                                <Typography className={classes.profileRowSecondLabel}>
+                                    {advert.peoplesView.toLocaleString()}
                                 </Typography>
                             </div>
 

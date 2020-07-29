@@ -158,7 +158,7 @@ componentDidMount() {
                                 <TableCell className={classes.tableCell}>Current views</TableCell>
                                 <TableCell className={classes.customTableCell}>
                                     <Typography color={"primary"}>
-                                        {this.props.advert.views.length.toLocaleString()}
+                                        {this.props.advert.views.toLocaleString()}
                                     </Typography>
                                 </TableCell>
                             </TableRow>

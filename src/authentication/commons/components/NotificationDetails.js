@@ -53,7 +53,7 @@ class NotificationDetails extends Component {
             case 1:
                 return <Button
                 component={Link}
-                to={`/auth/${this.props.user.relations.role[0].name.toLowerCase()}/${notification.path}`}
+                to={`/auth/${this.props.user.relations.role[0].name.toLowerCase().trim()}/${notification.path}`}
                 color='primary'
                 variant='outlined'
                 style={{textTransform:'none'}}

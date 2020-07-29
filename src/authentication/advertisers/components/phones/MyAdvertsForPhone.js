@@ -148,10 +148,10 @@ class MyAdvertsForPhone extends Component {
                        <Typography style={{color:green[500]}}>Advertisement place</Typography>
                        <div>
                            <Typography>
-                               {`Country : ${this.props.adverts.places.map(place=>{return place.country})}`}
+                               {`Country : ${this.props.adverts.advert_places.map(place=>{return place.country})}`}
                            </Typography>
                            <Typography>
-                               {`City : ${this.props.adverts.places.map(place=>{return place.city})}`}
+                               {`City : ${this.props.adverts.advert_places.map(place=>{return place.city})}`}
                            </Typography>
                        </div>
                        <Divider className={classes.divider}/>
@@ -167,7 +167,7 @@ class MyAdvertsForPhone extends Component {
                            </Typography>
                            <div style={{display:'flex',flexDirection:'row',justifyContent:'start',alignItems:"center"}}>
                                <Typography>
-                                   {`Current views :  ${this.props.adverts.car_advert.length}`}
+                                   {`Current views :  ${this.props.adverts.views}`}
                                </Typography>
                                <Button
                                    component={Link}

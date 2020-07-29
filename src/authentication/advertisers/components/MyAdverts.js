@@ -303,7 +303,7 @@ class MyAdverts extends React.Component {
                                                                                                                     </Typography>
                                                                                                                 }
                                                                                                                 subheader={<span
-                                                                                                                >{`${advert.views.length} views`}</span>}
+                                                                                                                >{`${advert.views} play, ${advert.peoplesView} peoples watch it`}</span>}
                                                                                                                 avatar={<Avatar
                                                                                                                     width={40}
                                                                                                                     height={40}>
