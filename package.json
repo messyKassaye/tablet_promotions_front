@@ -13,7 +13,7 @@
     "i18next": "^17.3.1",
     "i18next-browser-languagedetector": "^3.1.1",
     "jodit-react": "^1.0.42",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "mapbox-gl": "^1.10.1",
     "react": "^16.13.1",
